@@ -1,0 +1,20 @@
+image: ubuntu:20.04
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  before_script:
+      - apt update -y && apt install -y gcc make cmake libsdl2-dev
+  script:
+    - echo "Compiling the code..."
+    - make
+
+unit-test:
+  stage: test
+  script:
+    - echo "Not implemented yet"
+
+    
