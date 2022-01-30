@@ -1,10 +1,21 @@
+/**
+ * @file Renderer.cpp
+ * @author arxaqapi (https://github.com/arxaqapi)
+ * @version 0.1
+ * @date 2022-01-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ * @brief
+ */
+
 #include "Renderer.hpp"
 
 #include <iostream>
 
 Renderer::Renderer()
 {
-    std::cout << "rend constr" << std::endl;
+  std::cout << "rend constr" << std::endl;
   SDL_Init(SDL_INIT_VIDEO);
 
   w_ = SDL_CreateWindow("Atari Tempest - Kunze Tarek",
@@ -16,19 +27,23 @@ Renderer::Renderer()
   r_ = SDL_CreateRenderer(w_, -1, 0);
 }
 
-
-void Renderer::clear() {
-    SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
-    SDL_RenderClear(r_);
+void
+Renderer::clear()
+{
+  SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
+  SDL_RenderClear(r_);
 }
 
-void Renderer::draw() {
-    SDL_RenderPresent(r_);
+void
+Renderer::draw()
+{
+  SDL_RenderPresent(r_);
 }
 
-Renderer::~Renderer() {
-    std::cout << "rend destr" << std::endl;
-    SDL_DestroyRenderer(r_);
-    SDL_DestroyWindow(w_);
-    SDL_Quit();
+Renderer::~Renderer()
+{
+  std::cout << "rend destr" << std::endl;
+  SDL_DestroyRenderer(r_);
+  SDL_DestroyWindow(w_);
+  SDL_Quit();
 }

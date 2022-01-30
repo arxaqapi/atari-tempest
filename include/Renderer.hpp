@@ -1,4 +1,15 @@
-#pragma once
+/**
+ * @file Renderer.hpp
+ * @author arxaqapi (https://github.com/arxaqapi)
+ * @version 0.1
+ * @date 2022-01-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ * @brief
+ */
+#ifndef H_TEMPEST_GAME_INC_RENDERER_
+#define H_TEMPEST_GAME_INC_RENDERER_
 
 #include "SDL2/SDL.h"
 
@@ -15,3 +26,5 @@ public:
   void clear();
   void draw();
 };
+
+#endif

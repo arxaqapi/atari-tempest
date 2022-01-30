@@ -23,13 +23,10 @@ main(void)
   cout << "Main.cpp correctly launched" << endl;
   GameObject g = GameObject();
 
-
-  while (g.run != 0)
-  {
+  while (g.run != 0) {
     g.trun();
     g.stop();
   }
-  
 
   g.~GameObject();
   return 0;
