@@ -1,7 +1,7 @@
 #ifndef H_TEMPEST_GAME_INC_HERSHEY_
 #define H_TEMPEST_GAME_INC_HERSHEY_
 
-int simplex[95]
+i32 simplex[95]
            [112] = {
              0,  16, /* Ascii 32 */
              -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,

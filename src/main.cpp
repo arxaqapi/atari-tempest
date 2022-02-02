@@ -32,7 +32,7 @@ main(void)
 
     g.process_events();
     g.clear();
-    g.update_state(0);
+    g.update_state(0.);
     g.render();
 
     timer.artificial_delay();

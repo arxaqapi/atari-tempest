@@ -13,7 +13,7 @@
 #define H_TEMPEST_GAME_INC_GAMEOBJECT_
 
 #include "Renderer.hpp"
-
+#include "types.hpp"
 class GameObject
 {
 private:
@@ -34,7 +34,7 @@ public:
    *
    * @param delta
    */
-  void update_state(double delta);
+  void update_state(f64 delta);
   void render();
 
   bool is_running() { return run_; };
