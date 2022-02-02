@@ -31,7 +31,8 @@ Renderer::Renderer()
 void
 Renderer::clear()
 {
-  assert(SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE) == 0 && SDL_GetError());
+  assert(SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE) == 0 &&
+         SDL_GetError());
   assert(SDL_RenderClear(r_) == 0 && SDL_GetError());
 }
 

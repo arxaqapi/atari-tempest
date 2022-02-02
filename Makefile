@@ -5,7 +5,7 @@ EXE := tempest
 
 
 all: $(BUILD_DIR)
-	cd build && cmake .. && make && cp $(EXE) .. 
+	cd build && cmake .. && make -j 8 && cp $(EXE) .. 
 
 $(BUILD_DIR):
 	mkdir -p $@
