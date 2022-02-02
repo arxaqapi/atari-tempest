@@ -16,7 +16,6 @@
 #include <iostream>
 #include <random>
 
-
 int
 main(void)
 {
@@ -32,23 +31,20 @@ main(void)
 
   g.init();
   while (g.is_running()) {
-    Uint32 start = SDL_GetTicks();
+    timer.start();
     //// SECTION: Loop start
+
     g.process_events();
     g.clear();
     g.update_state(0);
     g.render();
-    SDL_Delay(distribution(generator)); // artificial delay
+    // auto r = distribution(generator);
+    // SDL_Delay(r); // artificial delay
+
     //// !SECTION: Loop end
-    timer.get_FPS();
-
-    Uint32 end = SDL_GetTicks();
-    float ms_elapsed = (end - start);
-
-    SDL_Delay(max_ms_per_frame - ms_elapsed); // delay for exactly 1000 / 30 ms
-    end = SDL_GetTicks();
-    std::cout << "FPS: " << 1. / ((end - start) / 1000.)
-              << std::endl; // fréquence du temps passé en secondes
+    timer.stop();
+    timer.variable_delay(max_ms_per_frame);
+    timer.print();
   }
   return 0;
 }

@@ -30,8 +30,6 @@ private:
   u64 start_;
   u64 stop_;
   timer_type t_;
-  // Fluid time step :: dynamic delta -> fixed FPS
-  // double delta_;
 
 public:
   /**
@@ -53,6 +51,14 @@ public:
 
   double get_FPS();
   void print();
+  /**
+   * @brief resets the internal stop_ counter after the variable delay
+   * has been applied, allows to get the exact delay between 2 frames
+   * for FPS caping 
+   * 
+   * @param max_ms_per_frame the maximum of allowed ms per frame 
+   */
+  void variable_delay(u32 max_ms_per_frame);
 };
 
 #endif
