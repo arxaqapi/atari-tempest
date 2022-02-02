@@ -17,7 +17,7 @@
 #include "types.hpp"
 #include <random>
 
-enum timer_type
+enum class timer_type
 {
   NORMAL,
   PERFORMANCE

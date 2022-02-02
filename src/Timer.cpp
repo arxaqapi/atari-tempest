@@ -14,7 +14,7 @@
 #include <iostream>
 
 Timer::Timer(u32 max_ms_per_frame)
-  : t_(NORMAL)
+  : t_(timer_type::NORMAL)
   , max_ms_per_frame_(max_ms_per_frame)
   , distribution_{ 0, static_cast<int>(max_ms_per_frame) - 4 }
   , start_{ 0 }
@@ -36,9 +36,9 @@ Timer::~Timer() {}
 void
 Timer::start()
 {
-  if (t_ == NORMAL) {
+  if (t_ == timer_type::NORMAL) {
     start_ = SDL_GetTicks();
-  } else if (t_ == PERFORMANCE) {
+  } else if (t_ == timer_type::PERFORMANCE) {
     start_ = SDL_GetPerformanceCounter();
   }
 }
@@ -53,10 +53,10 @@ to_ms(double value)
 double
 Timer::stop()
 {
-  if (t_ == NORMAL) {
+  if (t_ == timer_type::NORMAL) {
     stop_ = SDL_GetTicks();
     return stop_ - start_;
-  } else if (t_ == PERFORMANCE) {
+  } else if (t_ == timer_type::PERFORMANCE) {
     stop_ = SDL_GetPerformanceCounter();
     return to_ms(stop_ - start_);
   }
@@ -66,9 +66,9 @@ Timer::stop()
 double
 Timer::get_FPS()
 {
-  if (t_ == NORMAL) {
+  if (t_ == timer_type::NORMAL) {
     return 1. / ((stop_ - start_) / 1000.);
-  } else if (t_ == PERFORMANCE) {
+  } else if (t_ == timer_type::PERFORMANCE) {
     return 1. / ((to_ms(stop_ - start_) / 1000.));
   }
   return 0.;
@@ -84,9 +84,9 @@ void
 Timer::variable_delay()
 {
   u64 ms_elapsed;
-  if (t_ == NORMAL) {
+  if (t_ == timer_type::NORMAL) {
     ms_elapsed = stop_ - start_;
-  } else if (t_ == PERFORMANCE) {
+  } else if (t_ == timer_type::PERFORMANCE) {
     ms_elapsed = to_ms(stop_ - start_);
   } else {
     throw utils::not_implemented();
