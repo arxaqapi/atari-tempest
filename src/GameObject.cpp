@@ -64,7 +64,7 @@ GameObject::process_events()
 }
 
 void
-GameObject::update_state(double delta)
+GameObject::update_state(f64 delta)
 {}
 
 void

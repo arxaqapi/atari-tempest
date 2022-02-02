@@ -16,7 +16,7 @@
 Timer::Timer(u32 max_ms_per_frame)
   : t_(timer_type::NORMAL)
   , max_ms_per_frame_(max_ms_per_frame)
-  , distribution_{ 0, static_cast<int>(max_ms_per_frame) - 4 }
+  , distribution_{ 0, static_cast<i32>(max_ms_per_frame) - 4 }
   , start_{ 0 }
   , stop_{ 0 }
   , fps_{ 0.0 }
@@ -25,7 +25,7 @@ Timer::Timer(u32 max_ms_per_frame)
 Timer::Timer(u32 max_ms_per_frame, timer_type t)
   : t_(t)
   , max_ms_per_frame_(max_ms_per_frame)
-  , distribution_{ 0, static_cast<int>(max_ms_per_frame) - 4 }
+  , distribution_{ 0, static_cast<i32>(max_ms_per_frame) - 4 }
   , start_{ 0 }
   , stop_{ 0 }
   , fps_{ 0.0 }
@@ -43,14 +43,14 @@ Timer::start()
   }
 }
 
-double
-to_ms(double value)
+f64
+to_ms(f64 value)
 {
-  auto freq_in_ms = static_cast<double>(SDL_GetPerformanceFrequency()) / 1000.;
+  auto freq_in_ms = static_cast<f64>(SDL_GetPerformanceFrequency()) / 1000.;
   return value / freq_in_ms;
 }
 
-double
+f64
 Timer::stop()
 {
   if (t_ == timer_type::NORMAL) {
@@ -63,7 +63,7 @@ Timer::stop()
   return 0.;
 }
 
-double
+f64
 Timer::get_FPS()
 {
   if (t_ == timer_type::NORMAL) {

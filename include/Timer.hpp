@@ -29,11 +29,11 @@ private:
   timer_type t_;
   u32 max_ms_per_frame_;
   std::default_random_engine generator_;
-  std::uniform_int_distribution<int> distribution_;
+  std::uniform_int_distribution<i32> distribution_;
 
   u64 start_;
   u64 stop_;
-  double fps_;
+  f64 fps_;
 
 public:
   /**
@@ -49,11 +49,11 @@ public:
   /**
    * @brief Returns the time passed in ms between start() and stop()
    *
-   * @return double
+   * @return f64
    */
-  double stop();
+  f64 stop();
 
-  double get_FPS();
+  f64 get_FPS();
   void print();
   /**
    * @brief resets the internal stop_ counter after the variable delay
