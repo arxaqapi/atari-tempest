@@ -23,14 +23,16 @@ Renderer::Renderer()
                         960,
                         540,
                         0);
+  assert(w_ != NULL && SDL_GetError());
   r_ = SDL_CreateRenderer(w_, -1, 0);
+  assert(r_ != NULL && SDL_GetError());
 }
 
 void
 Renderer::clear()
 {
-  SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
-  SDL_RenderClear(r_);
+  assert(SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE) == 0 && SDL_GetError());
+  assert(SDL_RenderClear(r_) == 0 && SDL_GetError());
 }
 
 void
