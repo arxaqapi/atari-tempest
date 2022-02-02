@@ -10,13 +10,12 @@
  */
 
 #include "Renderer.hpp"
-
+#include <cassert>
 #include <iostream>
 
 Renderer::Renderer()
 {
   std::cout << "rend constr" << std::endl;
-  SDL_Init(SDL_INIT_VIDEO);
 
   w_ = SDL_CreateWindow("Atari Tempest - Kunze Tarek",
                         SDL_WINDOWPOS_CENTERED,

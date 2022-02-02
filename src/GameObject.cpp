@@ -10,14 +10,11 @@
  */
 
 #include "GameObject.hpp"
-
+#include "types.hpp"
+#include <cassert>
 #include <iostream>
 
-GameObject::GameObject()
-{
-  std::cout << "GO init" << std::endl;
-  run = 1;
-}
+GameObject::GameObject() {}
 
 GameObject::~GameObject()
 {
@@ -25,16 +22,53 @@ GameObject::~GameObject()
 }
 
 void
-GameObject::trun()
+GameObject::init()
 {
-  std::cout << "GO run" << std::endl;
-  r_.clear();
-  r_.draw();
-  SDL_Delay(2000);
+  assert(SDL_Init(SDL_INIT_VIDEO) == 0 && SDL_GetError());
+  assert(SDL_WasInit(SDL_INIT_VIDEO) != 0 && SDL_GetError());
+
+  std::cout << "GO init" << std::endl;
+  run_ = true;
 }
 
 void
-GameObject::stop()
+GameObject::clear()
 {
-  run = 0;
+  r_.clear();
+}
+
+void
+GameObject::process_events()
+{
+  SDL_Event event;
+  while (SDL_PollEvent(&event)) {
+    switch (event.type) {
+      case SDL_QUIT:
+        this->stop_();
+        break;
+
+      default:
+        break;
+    }
+    switch (event.key.keysym.sym) {
+      case SDLK_ESCAPE:
+        this->stop_();
+        break;
+
+      default:
+        break;
+    }
+  }
+  // const u8* keyboardState = SDL_GetKeyboardState(NULL);
+  // if (keyboardState[SDL_SCANCODE_SPACE]) {
+}
+
+void
+GameObject::update_state(double delta)
+{}
+
+void
+GameObject::render()
+{
+  r_.draw();
 }

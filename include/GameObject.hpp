@@ -18,15 +18,26 @@ class GameObject
 {
 private:
   Renderer r_;
+  bool run_;
+  void stop_() { run_ = false; };
 
 public:
   GameObject();
   ~GameObject();
 
-  void trun();
-  void stop();
+  void init();
+  void clear();
+  void process_events();
+  /**
+   * @brief Advances game simulation one step and runs the game
+   * at a consistent speed despite differences in the underlying hardware
+   *
+   * @param delta
+   */
+  void update_state(double delta);
+  void render();
 
-  int run;
+  bool is_running() { return run_; };
 };
 
 #endif
