@@ -13,9 +13,9 @@
 #define H_TEMPEST_GAME_INC_TIMER_
 
 #include "SDL2/SDL.h"
-#include "types.hpp"
-
 #include "Utils.hpp"
+#include "types.hpp"
+#include <random>
 
 enum timer_type
 {
@@ -26,10 +26,14 @@ enum timer_type
 class Timer
 {
 private:
-  double fps_;
+  timer_type t_;
+  u32 max_ms_per_frame_;
+  std::default_random_engine generator_;
+  std::uniform_int_distribution<int> distribution_;
+
   u64 start_;
   u64 stop_;
-  timer_type t_;
+  double fps_;
 
 public:
   /**
@@ -37,8 +41,8 @@ public:
    * count the number of milliseconds passed
    *
    */
-  Timer();
-  Timer(timer_type t);
+  Timer(u32 max_ms_per_frame);
+  Timer(u32 max_ms_per_frame, timer_type t);
   ~Timer();
 
   void start();
@@ -54,11 +58,16 @@ public:
   /**
    * @brief resets the internal stop_ counter after the variable delay
    * has been applied, allows to get the exact delay between 2 frames
-   * for FPS caping 
-   * 
-   * @param max_ms_per_frame the maximum of allowed ms per frame 
+   * for FPS caping
+   *
    */
-  void variable_delay(u32 max_ms_per_frame);
+  void variable_delay();
+  /**
+   * @brief Induces an artificial delay < max_ms_per_frame - 4
+   * Mainly here to test clock mechanism like FPS caping
+   *
+   */
+  void artificial_delay();
 };
 
 #endif

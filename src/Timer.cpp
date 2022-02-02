@@ -10,21 +10,25 @@
  */
 
 #include "Timer.hpp"
-#include <iostream>
 #include <cassert>
+#include <iostream>
 
-Timer::Timer()
-  : fps_{ 0.0 }
+Timer::Timer(u32 max_ms_per_frame)
+  : t_(NORMAL)
+  , max_ms_per_frame_(max_ms_per_frame)
+  , distribution_{ 0, static_cast<int>(max_ms_per_frame) - 4 }
   , start_{ 0 }
   , stop_{ 0 }
-  , t_(NORMAL)
+  , fps_{ 0.0 }
 {}
 
-Timer::Timer(timer_type t)
-  : fps_{ 0.0 }
+Timer::Timer(u32 max_ms_per_frame, timer_type t)
+  : t_(t)
+  , max_ms_per_frame_(max_ms_per_frame)
+  , distribution_{ 0, static_cast<int>(max_ms_per_frame) - 4 }
   , start_{ 0 }
   , stop_{ 0 }
-  , t_(t)
+  , fps_{ 0.0 }
 {}
 
 Timer::~Timer() {}
@@ -39,7 +43,8 @@ Timer::start()
   }
 }
 
-double to_ms(double value)
+double
+to_ms(double value)
 {
   auto freq_in_ms = static_cast<double>(SDL_GetPerformanceFrequency()) / 1000.;
   return value / freq_in_ms;
@@ -75,7 +80,8 @@ Timer::print()
   std::cout << "[Log] - FPS = " << get_FPS() << std::endl;
 }
 
-void Timer::variable_delay(u32 max_ms_per_frame)
+void
+Timer::variable_delay()
 {
   u64 ms_elapsed;
   if (t_ == NORMAL) {
@@ -85,8 +91,16 @@ void Timer::variable_delay(u32 max_ms_per_frame)
   } else {
     throw utils::not_implemented();
   }
-  auto del = max_ms_per_frame- ms_elapsed;
-  assert(del <= max_ms_per_frame && "Computed delay is way too big");
+  auto del = max_ms_per_frame_ - ms_elapsed;
+  assert(del <= max_ms_per_frame_ && "Computed delay is way too big");
   SDL_Delay(del);
   this->stop();
+}
+
+void
+Timer::artificial_delay()
+{
+  auto r = static_cast<u32>(distribution_(generator_));
+  assert(r < max_ms_per_frame_ && r >= 0);
+  SDL_Delay(r);
 }

@@ -20,14 +20,10 @@ int
 main(void)
 {
   std::cout << "Main.cpp correctly launched" << std::endl;
-  GameObject g;
-  Timer timer;
 
-  // 1 / (24 / 1000) = {42} || 1000 / {41} = 24.3
   const u32 max_ms_per_frame = 1000.f / 30.f;
-
-  std::default_random_engine generator;
-  std::uniform_int_distribution<int> distribution(0, max_ms_per_frame - 4);
+  GameObject g;
+  Timer timer{ max_ms_per_frame };
 
   g.init();
   while (g.is_running()) {
@@ -38,12 +34,12 @@ main(void)
     g.clear();
     g.update_state(0);
     g.render();
-    // auto r = distribution(generator);
-    // SDL_Delay(r); // artificial delay
+
+    timer.artificial_delay();
 
     //// !SECTION: Loop end
     timer.stop();
-    timer.variable_delay(max_ms_per_frame);
+    timer.variable_delay();
     timer.print();
   }
   return 0;
