@@ -16,12 +16,11 @@
 #include <iostream>
 #include <random>
 
-using namespace std;
 
 int
 main(void)
 {
-  cout << "Main.cpp correctly launched" << endl;
+  std::cout << "Main.cpp correctly launched" << std::endl;
   GameObject g;
   Timer timer;
 
@@ -48,8 +47,8 @@ main(void)
 
     SDL_Delay(max_ms_per_frame - ms_elapsed); // delay for exactly 1000 / 30 ms
     end = SDL_GetTicks();
-    cout << "FPS: " << 1. / ((end - start) / 1000.)
-         << endl; // fréquence du temps passé en secondes
+    std::cout << "FPS: " << 1. / ((end - start) / 1000.)
+              << std::endl; // fréquence du temps passé en secondes
   }
   return 0;
 }
