@@ -101,6 +101,6 @@ void
 Timer::artificial_delay()
 {
   auto r = static_cast<u32>(distribution_(generator_));
-  assert(r < max_ms_per_frame_ && r >= 0);
+  assert(r < max_ms_per_frame_);
   SDL_Delay(r);
 }

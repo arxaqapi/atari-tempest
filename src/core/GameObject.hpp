@@ -12,14 +12,18 @@
 #ifndef H_TEMPEST_GAME_INC_GAMEOBJECT_
 #define H_TEMPEST_GAME_INC_GAMEOBJECT_
 
+#include "../utils/types.hpp"
 #include "Renderer.hpp"
-#include "types.hpp"
+#include "Scene.hpp"
+#include <memory>
+
 class GameObject
 {
 private:
   Renderer r_;
   bool run_;
   void stop_() { run_ = false; };
+  std::unique_ptr<Scene> active_scene_;
 
 public:
   GameObject();

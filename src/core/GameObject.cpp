@@ -10,11 +10,16 @@
  */
 
 #include "GameObject.hpp"
-#include "types.hpp"
+#include "../utils/types.hpp"
 #include <cassert>
 #include <iostream>
 
-GameObject::GameObject() {}
+#include "TitleScreen.hpp"
+
+
+GameObject::GameObject()
+  : active_scene_{ new TitleScreen() }
+{}
 
 GameObject::~GameObject()
 {
@@ -65,10 +70,13 @@ GameObject::process_events()
 
 void
 GameObject::update_state(f64 delta)
-{}
+{
+  active_scene_->update(delta);
+}
 
 void
 GameObject::render()
 {
+  active_scene_->render(r_.get_renderer());
   r_.draw();
 }
