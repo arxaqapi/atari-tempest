@@ -1,5 +1,4 @@
 SRC_DIR := src
-INC_DIR := include
 BUILD_DIR := build
 EXE := tempest
 

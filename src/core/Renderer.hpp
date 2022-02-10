@@ -25,6 +25,8 @@ public:
 
   void clear();
   void draw();
+
+  SDL_Renderer* get_renderer();
 };
 
 #endif

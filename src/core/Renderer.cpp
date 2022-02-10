@@ -49,3 +49,9 @@ Renderer::~Renderer()
   SDL_DestroyWindow(w_);
   SDL_Quit();
 }
+
+SDL_Renderer*
+Renderer::get_renderer()
+{
+  return r_;
+}
