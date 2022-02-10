@@ -9,10 +9,10 @@
  * @brief Entry point of the program
  */
 
-#include "GameObject.hpp"
-#include "Timer.hpp"
+#include "core/GameObject.hpp"
+#include "utils/Timer.hpp"
+#include "utils/types.hpp"
 
-#include "types.hpp"
 #include <iostream>
 #include <random>
 

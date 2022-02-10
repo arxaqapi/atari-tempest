@@ -20,7 +20,11 @@ run: clean main
 
 format: .clang-format
 	@echo "Formatting the source code ..."
-	clang-format -i $(SRC_DIR)/*.cpp $(INC_DIR)/*.h $(INC_DIR)/*.hpp
+	clang-format -i \
+		$(SRC_DIR)/*.cpp \
+		$(SRC_DIR)/*/*.cpp \
+		$(SRC_DIR)/*/*.h*
+#$(SRC_DIR)/*.h \
 
 .clang-format:
 	@echo "Dumping mozilla config into .clang-format file"

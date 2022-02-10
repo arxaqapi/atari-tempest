@@ -12,8 +12,8 @@
 #ifndef H_TEMPEST_GAME_INC_GAMEOBJECT_
 #define H_TEMPEST_GAME_INC_GAMEOBJECT_
 
+#include "../utils/types.hpp"
 #include "Renderer.hpp"
-#include "types.hpp"
 class GameObject
 {
 private:

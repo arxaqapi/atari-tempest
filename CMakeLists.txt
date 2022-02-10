@@ -5,10 +5,13 @@ project(tempest-atari VERSION 0.1.0)
 
 find_package(SDL2 REQUIRED)
 
-include_directories(include)
- 
-#set(SOURCES src/mainapp.cpp src/Student.cpp)
-file(GLOB SOURCES "src/*.cpp")
+set(SOURCES 
+  src/main.cpp 
+  src/core/GameObject.cpp
+  src/core/Renderer.cpp
+  src/utils/Timer.cpp
+  src/utils/Utils.cpp
+)
  
 add_executable(tempest ${SOURCES})
 

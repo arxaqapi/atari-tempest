@@ -10,7 +10,7 @@
  */
 
 #include "GameObject.hpp"
-#include "types.hpp"
+#include "../utils/types.hpp"
 #include <cassert>
 #include <iostream>
 

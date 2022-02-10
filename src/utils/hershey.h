@@ -1,6 +1,8 @@
 #ifndef H_TEMPEST_GAME_INC_HERSHEY_
 #define H_TEMPEST_GAME_INC_HERSHEY_
 
+#include "types.hpp"
+
 i32 simplex[95]
            [112] = {
              0,  16, /* Ascii 32 */
