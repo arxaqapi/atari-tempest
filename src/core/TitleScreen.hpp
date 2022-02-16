@@ -24,8 +24,8 @@ public:
   TitleScreen();
   ~TitleScreen();
 
-  void update(f64 delta);
-  void render(SDL_Renderer* r);
+  void update(f64 delta) override;
+  void render(SDL_Renderer* r) override;
 };
 
 #endif
