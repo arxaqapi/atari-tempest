@@ -11,6 +11,7 @@
 #ifndef H_TEMPEST_GAME_INC_RENDERER_
 #define H_TEMPEST_GAME_INC_RENDERER_
 
+#include "../utils/types.hpp"
 #include "SDL2/SDL.h"
 
 class Renderer
@@ -20,7 +21,7 @@ private:
   SDL_Renderer* r_;
 
 public:
-  Renderer();
+  Renderer(u16 w_width, u16 w_height);
   ~Renderer();
 
   void clear();

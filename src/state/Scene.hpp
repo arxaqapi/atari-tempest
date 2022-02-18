@@ -11,8 +11,8 @@
 #ifndef H_TEMPEST_GAME_INC_SCENE_
 #define H_TEMPEST_GAME_INC_SCENE_
 
+#include "../core/Entity.hpp"
 #include "../utils/types.hpp"
-#include "Entity.hpp"
 #include <vector>
 
 #include <SDL2/SDL.h>

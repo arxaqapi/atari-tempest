@@ -17,7 +17,6 @@
 class TitleScreen : public Scene
 {
 private:
-  SDL_Rect button_;
   SDL_Color col_;
 
 public:

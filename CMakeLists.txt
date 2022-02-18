@@ -9,11 +9,14 @@ set(SOURCES
   src/main.cpp 
   src/utils/Timer.cpp
   src/utils/Utils.cpp
+  src/utils/Vector2D.cpp
   src/core/GameObject.cpp
   src/core/Renderer.cpp
-  src/core/Scene.cpp
-  src/core/TitleScreen.cpp
   src/core/Entity.cpp
+  src/state/Scene.cpp
+  src/state/SceneManager.cpp
+  src/state/TitleScreen.cpp
+  src/state/SLevelSelect.cpp
 )
  
 add_executable(tempest ${SOURCES})

@@ -13,15 +13,15 @@
 #include <cassert>
 #include <iostream>
 
-Renderer::Renderer()
+Renderer::Renderer(u16 w_width, u16 w_height)
 {
   std::cout << "rend constr" << std::endl;
 
   w_ = SDL_CreateWindow("Atari Tempest - Kunze Tarek",
                         SDL_WINDOWPOS_CENTERED,
                         SDL_WINDOWPOS_CENTERED,
-                        960,
-                        540,
+                        w_width,
+                        w_height,
                         0);
   assert(w_ != NULL && SDL_GetError());
   r_ = SDL_CreateRenderer(w_, -1, 0);

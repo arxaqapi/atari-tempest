@@ -14,12 +14,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "TitleScreen.hpp"
-
-
-GameObject::GameObject()
-  : active_scene_{ new TitleScreen() }
-{}
+GameObject::GameObject() {}
 
 GameObject::~GameObject()
 {
@@ -31,6 +26,7 @@ GameObject::init()
 {
   assert(SDL_Init(SDL_INIT_VIDEO) == 0 && SDL_GetError());
   assert(SDL_WasInit(SDL_INIT_VIDEO) != 0 && SDL_GetError());
+  // assert(active_scene_ && "Error, active_scene_ pointer is null");
 
   std::cout << "GO init" << std::endl;
   run_ = true;
@@ -71,12 +67,12 @@ GameObject::process_events()
 void
 GameObject::update_state(f64 delta)
 {
-  active_scene_->update(delta);
+  sm_.get_current_scene().update(delta);
 }
 
 void
 GameObject::render()
 {
-  active_scene_->render(r_.get_renderer());
+  sm_.get_current_scene().render(r_.get_renderer());
   r_.draw();
 }

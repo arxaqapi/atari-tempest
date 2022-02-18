@@ -22,7 +22,7 @@ main(void)
   std::cout << "Main.cpp correctly launched" << std::endl;
 
   constexpr u32 max_ms_per_frame = 1000.f / 30.f;
-  GameObject g;
+  GameObject g{ 1000, 600 };
   Timer timer{ max_ms_per_frame, timer_type::PERFORMANCE };
 
   g.init();

@@ -12,21 +12,28 @@
 #ifndef H_TEMPEST_GAME_INC_GAMEOBJECT_
 #define H_TEMPEST_GAME_INC_GAMEOBJECT_
 
+// #include "../state/Scene.hpp"
+#include "../state/SceneManager.hpp"
+#include "../state/TitleScreen.hpp"
 #include "../utils/types.hpp"
 #include "Renderer.hpp"
-#include "Scene.hpp"
 #include <memory>
 
 class GameObject
 {
 private:
-  Renderer r_;
   bool run_;
+  u16 WINDOWS_WIDTH_ = 960;
+  u16 WINDOWS_HEIGHT_ = 540;
+  SceneManager sm_;
+  Renderer r_{ WINDOWS_WIDTH_, WINDOWS_HEIGHT_ };
   void stop_() { run_ = false; };
-  std::unique_ptr<Scene> active_scene_;
 
 public:
   GameObject();
+  GameObject(u16 w_width, u16 w_height)
+    : WINDOWS_WIDTH_{ w_width }
+    , WINDOWS_HEIGHT_{ w_height } {};
   ~GameObject();
 
   void init();

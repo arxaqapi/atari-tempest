@@ -14,12 +14,12 @@
 
 #include "../utils/types.hpp"
 
+#include "../utils/Vector2D.hpp"
 class Entity
 {
 private:
-  f32 x_pos_;
-  f32 y_pos_;
-  i32 health_;
+  Vector2D position_;
+  i32 health_ = 0;
 
 public:
   Entity(/* args */);
