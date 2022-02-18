@@ -55,6 +55,9 @@ GameObject::process_events()
       case SDLK_ESCAPE:
         this->stop_();
         break;
+      case SDLK_SPACE:
+        this->sm_.switch_scene(STATE_LEVEL_SELECT);
+        break;
 
       default:
         break;
