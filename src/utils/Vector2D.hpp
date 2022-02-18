@@ -28,6 +28,19 @@ public:
   ~Vector2D();
 
   void set(f32 x, f32 y);
+
+  f32 magnitude();
+  Vector2D vec_to(const Vector2D& point);
+  /**
+   * @brief Computes the unit vector from the actual position
+   * to the position of the parameter point
+   *
+   * @param point the point to reach
+   * @return Vector2D The direction vector
+   */
+  Vector2D unit_vector_to(const Vector2D& point);
 };
+
+using Position = Vector2D;
 
 #endif
