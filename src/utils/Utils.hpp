@@ -23,6 +23,11 @@ struct not_tested : public std::exception
 {
   const char* what() const throw();
 };
+
+struct non_valid_state_switch : public std::exception
+{
+  const char* what() const throw();
+};
 }
 
 #endif
