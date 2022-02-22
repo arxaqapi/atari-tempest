@@ -18,17 +18,14 @@ GameObject::GameObject() {}
 
 GameObject::~GameObject()
 {
-  std::cout << "GO destr" << std::endl;
+  std::cout << "Game Object destroyed" << std::endl;
 }
 
 void
 GameObject::init()
 {
-  assert(SDL_Init(SDL_INIT_VIDEO) == 0 && SDL_GetError());
-  assert(SDL_WasInit(SDL_INIT_VIDEO) != 0 && SDL_GetError());
   // assert(active_scene_ && "Error, active_scene_ pointer is null");
-
-  std::cout << "GO init" << std::endl;
+  std::cout << "Game Object init called" << std::endl;
   run_ = true;
 }
 
