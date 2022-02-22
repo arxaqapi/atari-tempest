@@ -90,6 +90,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+cmake-build-debug
 
 ### CMake Patch ###
 # External projects
@@ -102,6 +103,9 @@ _deps
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+
+### CLion ###
+.idea/
 
 # Local History for Visual Studio Code
 .history/
