@@ -1,5 +1,5 @@
 /**
- * @file GameObject.cpp
+ * @file Game.cpp
  * @author arxaqapi (https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-01-30
@@ -9,20 +9,20 @@
  * @brief
  */
 
-#include "GameObject.hpp"
+#include "Game.hpp"
 #include "../utils/types.hpp"
 #include <cassert>
 #include <iostream>
 
-GameObject::GameObject() {}
+Game::Game() {}
 
-GameObject::~GameObject()
+Game::~Game()
 {
   std::cout << "Game Object destroyed" << std::endl;
 }
 
 void
-GameObject::init()
+Game::init()
 {
   // assert(active_scene_ && "Error, active_scene_ pointer is null");
   std::cout << "Game Object init called" << std::endl;
@@ -30,13 +30,13 @@ GameObject::init()
 }
 
 void
-GameObject::clear()
+Game::clear()
 {
   r_.clear();
 }
 
 void
-GameObject::process_events()
+Game::process_events()
 {
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
@@ -65,13 +65,13 @@ GameObject::process_events()
 }
 
 void
-GameObject::update_state(f64 delta)
+Game::update_state(f64 delta)
 {
   sm_.get_current_scene().update(delta);
 }
 
 void
-GameObject::render()
+Game::render()
 {
   sm_.get_current_scene().render(r_.get_renderer());
   r_.draw();

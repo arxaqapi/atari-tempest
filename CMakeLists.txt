@@ -10,7 +10,7 @@ set(SOURCES
   src/utils/Timer.cpp
   src/utils/Utils.cpp
   src/utils/Vector2D.cpp
-  src/core/GameObject.cpp
+        src/core/Game.cpp
   src/core/Renderer.cpp
   src/core/Entity.cpp
   src/state/Scene.cpp

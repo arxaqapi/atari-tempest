@@ -1,5 +1,5 @@
 /**
- * @file GameObject.hpp
+ * @file Game.hpp
  * @author arxaqapi (https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-01-30
@@ -19,7 +19,7 @@
 #include "Renderer.hpp"
 #include <memory>
 
-class GameObject
+class Game
 {
 private:
   bool run_;
@@ -30,11 +30,11 @@ private:
   void stop_() { run_ = false; };
 
 public:
-  GameObject();
-  GameObject(u16 w_width, u16 w_height)
+  Game();
+  Game(u16 w_width, u16 w_height)
     : WINDOWS_WIDTH_{ w_width }
     , WINDOWS_HEIGHT_{ w_height } {};
-  ~GameObject();
+  ~Game();
 
   void init();
   void clear();
