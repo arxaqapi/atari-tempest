@@ -16,10 +16,11 @@
 Renderer::Renderer(u16 w_width, u16 w_height)
 {
   std::cout << "rend constr" << std::endl;
+  
+  assert(SDL_Init(SDL_INIT_VIDEO) == 0 && SDL_GetError());
+  assert(SDL_WasInit(SDL_INIT_VIDEO) != 0 && SDL_GetError());
 
-  assert(SDL_Init(SDL_INIT_VIDEO) == 0);
-
-  w_ = SDL_CreateWindow("Atari Tempest - Kunze Tarek",
+  w_ = SDL_CreateWindow("Atari Tempest - VENUTI Massimo, Kunze Tarek",
                         SDL_WINDOWPOS_CENTERED,
                         SDL_WINDOWPOS_CENTERED,
                         w_width,
