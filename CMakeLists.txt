@@ -16,7 +16,7 @@ set(SOURCES
   src/state/Scene.cpp
   src/state/SceneManager.cpp
   src/state/TitleScreen.cpp
-  src/state/SLevelSelect.cpp
+        src/state/LevelSelectionScene.cpp
 )
  
 add_executable(tempest ${SOURCES})

@@ -1,7 +1,7 @@
 
 #include "SceneManager.hpp"
 #include "../utils/Utils.hpp"
-#include "SLevelSelect.hpp"
+#include "LevelSelectionScene.hpp"
 
 template<typename C, typename T>
 bool
@@ -23,7 +23,7 @@ get_corresponding_scene(State state)
       break;
     }
     case STATE_LEVEL_SELECT: {
-      return std::make_unique<SLevelSelect>();
+      return std::make_unique<LevelSelectionScene>();
       break;
     }
     case STATE_LEVEL_1: {
@@ -80,7 +80,7 @@ SceneManager::switch_scene(State next_s)
       } else {
         current_scene_.reset(); // destroy object
         current_scene_ =
-          get_corresponding_scene(next_s); // std::make_unique<SLevelSelect>();
+          get_corresponding_scene(next_s); // std::make_unique<LevelSelectionScene>();
         return true;
       }
       break;

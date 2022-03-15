@@ -4,12 +4,12 @@
 
 #include "Scene.hpp"
 
-class SLevelSelect : public Scene
+class LevelSelectionScene : public Scene
 {
 private:
 public:
-  SLevelSelect();
-  ~SLevelSelect();
+  LevelSelectionScene();
+  ~LevelSelectionScene();
 
   void update(f64 delta) override;
   void render(SDL_Renderer* r) override;
