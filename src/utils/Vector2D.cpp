@@ -12,9 +12,10 @@
 #include "Vector2D.hpp"
 #include <cmath>
 
-Vector2D::Vector2D(/* args */) {}
-
-Vector2D::~Vector2D() {}
+Vector2D::Vector2D(f32 x, f32 y)
+  : x_(x)
+  , y_(y)
+{}
 
 void
 Vector2D::set(f32 x, f32 y)
@@ -24,21 +25,43 @@ Vector2D::set(f32 x, f32 y)
 }
 
 f32
-Vector2D::magnitude()
+Vector2D::magnitude() const
 {
   return sqrtf32(x_ * x_ + y_ * y_);
 }
 
 Vector2D
-Vector2D::vec_to(const Vector2D& point)
+Vector2D::vec_to(const Vector2D& point) const
 {
-  return Vector2D{ this->x_ - point.x_, this->y_ - point.y_ };
+  return { x_ - point.x_, y_ - point.y_ };
 }
 
 Vector2D
-Vector2D::unit_vector_to(const Vector2D& point)
+Vector2D::unit_vector_to(const Vector2D& point) const
 {
-  Vector2D to_point = this->vec_to(point);
-  f32 m = to_point.magnitude();
-  return Vector2D(to_point.x_ / m, to_point.y_ / m);
+  return vec_to(point).unit();
+}
+
+f32
+Vector2D::getX() const
+{
+  return x_;
+}
+
+f32
+Vector2D::getY() const
+{
+  return y_;
+}
+
+Vector2D
+Vector2D::unit() const
+{
+  float max_component = std::max(x_, y_);
+  return {x_/max_component, y_/max_component};
+}
+Vector2D
+Vector2D::operator+(const Vector2D& vector) const
+{
+  return {x_ + vector.x_, y_ + vector.y_};
 }
