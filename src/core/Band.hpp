@@ -33,7 +33,7 @@ public:
   Band(Vector2D exter_a, Vector2D exter_b, Vector2D inter_a, Vector2D inter_b);
   ~Band() = default;
 
-  Vector2D calcPosition(f32 depth);
+  Vector2D calcPosition(f32 depth) const;
   void render(SDL_Renderer* r) const;
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };

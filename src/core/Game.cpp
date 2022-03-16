@@ -11,6 +11,7 @@
 
 #include "Game.hpp"
 #include "../utils/types.hpp"
+#include "Map.hpp"
 #include <cassert>
 #include <iostream>
 

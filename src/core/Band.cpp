@@ -32,7 +32,7 @@ Band::calcCenter(const Vector2D& vec1, const Vector2D& vec2)
 }
 
 Vector2D
-Band::calcPosition(f32 depth)
+Band::calcPosition(f32 depth) const
 {
   Vector2D p{ -unit_vector_.getY() * depth, unit_vector_.getX() * depth };
   return p + exter_center_;
