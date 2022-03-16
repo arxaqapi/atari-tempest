@@ -24,7 +24,7 @@ private:
   Vector2D exter_center_, inter_center_;
   Vector2D unit_vector_;
   f32 depth_;
-  bool is_selected_{ false };
+  bool is_selected_;
   static Vector2D calcCenter(const Vector2D& vec1, const Vector2D& vec2);
 
 public:
@@ -38,6 +38,14 @@ public:
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };
   inline f32 getDepth() const { return depth_; };
+  inline std::pair<Vector2D, Vector2D> getExterior() const
+  {
+    return { exter_a_, exter_b_ };
+  };
+  inline std::pair<Vector2D, Vector2D> getInterior() const
+  {
+    return { inter_a_, inter_b_ };
+  };
 };
 
 #endif // TEMPEST_ATARI_BAND_HPP
