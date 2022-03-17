@@ -23,8 +23,8 @@ private:
   Vector2D exter_a_, exter_b_, inter_a_, inter_b_;
   Vector2D exter_center_, inter_center_;
   Vector2D unit_vector_;
-  f32 depth_;
-  bool is_selected_;
+  f32 depth_{ 0 };
+  bool is_selected_{ false };
   static Vector2D calcCenter(const Vector2D& vec1, const Vector2D& vec2);
 
 public:
@@ -34,7 +34,7 @@ public:
   ~Band() = default;
 
   Vector2D calcPosition(f32 depth) const;
-  void render(SDL_Renderer* r) const;
+  void render(SDL_Renderer* renderer) const;
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };
   inline f32 getDepth() const { return depth_; };

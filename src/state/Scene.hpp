@@ -20,15 +20,17 @@
 class Scene
 {
 private:
-  std::vector<Entity> enemies_;
-  Entity player_;
+//  std::vector<Entity> enemies_;
+//  Entity player_;
 
 public:
-  Scene();
-  ~Scene();
+  Scene() = default;
+  Scene(const Scene & scene) = default;
+  ~Scene() = default;
 
-  virtual void update(f64 delta);
-  virtual void render(SDL_Renderer* r);
+  virtual void processEvent(SDL_Event event) = 0;
+  virtual void update(f64 delta) = 0;
+  virtual void render(SDL_Renderer* renderer) const = 0;
 };
 
 #endif

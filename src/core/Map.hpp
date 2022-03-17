@@ -17,7 +17,7 @@
 class Map
 {
 private:
-  std::vector<Band> bands_{};
+  std::vector<Band> bands_;
   bool is_continuous_{ false };
   u8 selected_band_num_{ 0 };
   void setBands(const std::vector<Vector2D>& exterior,
@@ -36,8 +36,8 @@ public:
   void render(SDL_Renderer* renderer) const;
   void select(u8 num_band);
   void reset(const std::vector<Vector2D>& exterior,
-           const std::vector<Vector2D>& interior,
-           bool is_continuous);
+             const std::vector<Vector2D>& interior,
+             bool is_continuous);
   ~Map() = default;
 };
 

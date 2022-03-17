@@ -39,18 +39,14 @@ Band::calcPosition(f32 depth) const
 }
 
 void
-Band::render(SDL_Renderer* r) const
+Band::render(SDL_Renderer* renderer) const
 {
   if (is_selected_)
-    SDL_SetRenderDrawColor(r, 255, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
   else
-    SDL_SetRenderDrawColor(r, 0, 0, 0, 255);
-  SDL_RenderDrawLineF(
-    r, exter_a_.getX(), exter_a_.getY(), exter_b_.getX(), exter_b_.getY());
-  SDL_RenderDrawLineF(
-    r, exter_b_.getX(), exter_b_.getY(), inter_b_.getX(), inter_b_.getY());
-  SDL_RenderDrawLineF(
-    r, inter_b_.getX(), inter_b_.getY(), inter_a_.getX(), inter_a_.getY());
-  SDL_RenderDrawLineF(
-    r, inter_a_.getX(), inter_a_.getY(), exter_a_.getX(), exter_a_.getY());
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+  SDL_RenderDrawLineF(renderer, exter_a_.getX(), exter_a_.getY(), exter_b_.getX(), exter_b_.getY());
+  SDL_RenderDrawLineF(renderer, exter_b_.getX(), exter_b_.getY(), inter_b_.getX(), inter_b_.getY());
+  SDL_RenderDrawLineF(renderer, inter_b_.getX(), inter_b_.getY(), inter_a_.getX(), inter_a_.getY());
+  SDL_RenderDrawLineF(renderer, inter_a_.getX(), inter_a_.getY(), exter_a_.getX(), exter_a_.getY());
 }

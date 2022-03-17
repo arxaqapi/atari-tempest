@@ -11,8 +11,9 @@ public:
   LevelSelectionScene();
   ~LevelSelectionScene();
 
+  void processEvent(SDL_Event event) override;
   void update(f64 delta) override;
-  void render(SDL_Renderer* r) override;
+  void render(SDL_Renderer* renderer) const override;
 };
 
 #endif

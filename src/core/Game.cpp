@@ -41,6 +41,7 @@ Game::process_events()
 {
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
+//    sm_.get_current_scene().processEvent(event);
     switch (event.type) {
       case SDL_QUIT:
         this->stop_();

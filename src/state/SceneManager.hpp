@@ -2,12 +2,14 @@
 
 #include "Scene.hpp"
 #include "TitleScreen.hpp"
+#include "GameScene.hpp"
 #include <memory>
 
 enum State
 {
   STATE_TITLE_SCREEN,
   STATE_LEVEL_SELECT,
+  STATE_GAME_SCENE,
   STATE_LEVEL_1,
   STATE_LEVEL_2,
   STATE_LEVEL_3,
@@ -20,7 +22,7 @@ enum State
 class SceneManager
 {
 private:
-  std::unique_ptr<Scene> current_scene_ = std::make_unique<TitleScreen>();
+  std::unique_ptr<Scene> current_scene_ = std::make_unique<GameScene>("../data/levels_data.txt");
   State current_state_ = STATE_TITLE_SCREEN;
 
 public:

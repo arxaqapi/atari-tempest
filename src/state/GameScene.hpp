@@ -5,24 +5,29 @@
 #ifndef TEMPEST_ATARI_GAMESCENE_HPP
 #define TEMPEST_ATARI_GAMESCENE_HPP
 
-#include <vector>
-#include <string>
-#include "../utils/Vector2D.hpp"
-#include "../core/Map.hpp"
 #include "../core/Data.hpp"
-class GameScene
+#include "../core/Map.hpp"
+#include "../utils/Vector2D.hpp"
+#include "Scene.hpp"
+#include <string>
+#include <vector>
+
+class GameScene : public Scene
 {
 private:
   Data levels_data_;
-  u8 current_level_ = 0;
+  u8 current_level_{ 0 };
   Map map_;
   // ...
 public:
   GameScene() = default;
-  GameScene(const GameScene &game_scene) = default;
+  GameScene(const GameScene& game_scene) = default;
   explicit GameScene(std::string data_path);
   void loadLevel(u8 level);
   void loadNextLevel();
+  void processEvent(SDL_Event event) override;
+  void update(f64 delta) override;
+  void render(SDL_Renderer* renderer) const override;
 };
 
 #endif // TEMPEST_ATARI_GAMESCENE_HPP

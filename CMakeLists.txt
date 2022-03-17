@@ -13,8 +13,7 @@ set(SOURCES
         src/core/Game.cpp
   src/core/Renderer.cpp
   src/core/Entity.cpp
-  src/state/Scene.cpp
-  src/state/SceneManager.cpp
+        src/state/SceneManager.cpp
   src/state/TitleScreen.cpp
         src/state/LevelSelectionScene.cpp
         src/core/Band.hpp src/core/Band.cpp src/core/Map.hpp src/core/Map.cpp src/state/GameScene.cpp src/state/GameScene.hpp src/core/Data.cpp src/core/Data.hpp)
