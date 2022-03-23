@@ -19,6 +19,31 @@ Map::Map(const std::vector<Vector2D>& exterior,
   setBands(exterior, interior);
 }
 
+u8
+Map::getLeftBandNum(u8 num_band) const
+{
+  assert(num_band < bands_.size());
+  int left_band_num = num_band - 1;
+  if (is_continuous_)
+    left_band_num %= bands_.size();
+  else
+    left_band_num = std::min(left_band_num, 0);
+  return left_band_num;
+}
+
+u8
+Map::getRightBandNum(u8 num_band) const
+{
+  assert(num_band < bands_.size());
+  int right_band_num = num_band + 1;
+  if (is_continuous_)
+    right_band_num %= bands_.size();
+  else
+    right_band_num =
+      std::max(right_band_num, static_cast<int>(bands_.size() - 1));
+  return right_band_num;
+}
+
 const Band&
 Map::getBand(u8 num_band) const
 {
@@ -29,31 +54,20 @@ Map::getBand(u8 num_band) const
 const Band&
 Map::getLeftBand(u8 num_band) const
 {
-  int left_band_num = num_band - 1;
-  if (is_continuous_)
-    left_band_num %= bands_.size();
-  else
-    left_band_num = std::min(left_band_num, 0);
-  return bands_[left_band_num];
+  return bands_[getLeftBandNum(num_band)];
 }
 
 const Band&
 Map::getRightBand(u8 num_band) const
 {
-  int right_band_num = num_band + 1;
-  if (is_continuous_)
-    right_band_num %= bands_.size();
-  else
-    right_band_num =
-      std::max(right_band_num, static_cast<int>(bands_.size() - 1));
-  return bands_[right_band_num];
+  return bands_[getRightBandNum(num_band)];
 }
 
 Vector2D
-Map::calcPosition(u8 num_band, f32 depth) const
+Map::calcPosition(u8 num_band, f32 progress) const
 {
   assert(num_band < bands_.size());
-  return bands_[num_band].calcPosition(depth);
+  return bands_[num_band].calcPosition(progress);
 }
 
 void

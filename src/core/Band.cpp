@@ -32,9 +32,10 @@ Band::calcCenter(const Vector2D& vec1, const Vector2D& vec2)
 }
 
 Vector2D
-Band::calcPosition(f32 depth) const
+Band::calcPosition(f32 progress) const
 {
-  Vector2D p{ -unit_vector_.getY() * depth, unit_vector_.getX() * depth };
+  f32 point_depth = progress * depth_;
+  Vector2D p{ -unit_vector_.getY() * point_depth, unit_vector_.getX() * point_depth };
   return p + exter_center_;
 }
 
