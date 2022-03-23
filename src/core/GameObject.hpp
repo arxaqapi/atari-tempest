@@ -13,8 +13,8 @@ class GameObject
 {
 protected:
   u8 band_num_ = 0;
-  f32 progress_ = 0;
   bool active_ = true;
+  f32 progress_ = 0;
 
 public:
   GameObject() = default;

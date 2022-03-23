@@ -8,7 +8,6 @@
  *
  * @brief
  */
-#include <iostream>
 #include "Map.hpp"
 #include "assert.h"
 

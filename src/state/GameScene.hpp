@@ -10,6 +10,7 @@
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
 #include "../core/Blaster.hpp"
+#include "../core/Flipper.hpp"
 #include <string>
 #include <vector>
 
@@ -20,6 +21,7 @@ private:
   u8 current_level_{ 0 };
   Map map_;
   Blaster player_;
+  Flipper enemy_;
   // ...
 public:
   GameScene() = default;

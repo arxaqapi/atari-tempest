@@ -57,7 +57,7 @@ Vector2D::getY() const
 Vector2D
 Vector2D::unit() const
 {
-  float max_component = std::max(x_, y_);
+  f32 max_component = std::max(std::abs(x_), std::abs(y_));
   return {x_/max_component, y_/max_component};
 }
 Vector2D

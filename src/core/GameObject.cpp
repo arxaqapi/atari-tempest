@@ -34,11 +34,11 @@ GameObject::moveRight(const Map& map)
 void
 GameObject::moveForward()
 {
-  progress_ = std::min(0.0, progress_ - 0.005); // TODO: améliorer
+  progress_ = std::max(0.0, progress_ - 0.01); // TODO: améliorer
 }
 
 void
 GameObject::moveBackward()
 {
-  progress_ = std::max(1.0, progress_ + 0.005); // TODO: améliorer
+  progress_ = std::min(1.0, progress_ + 0.01); // TODO: améliorer
 }

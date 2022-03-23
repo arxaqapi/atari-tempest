@@ -48,24 +48,26 @@ GameScene::processEvent(SDL_Event event)
 
 void
 GameScene::update(f64 delta)
-{}
+{
+  player_.update(map_);
+  enemy_.update(map_);
+}
 
 void
 GameScene::render(SDL_Renderer* renderer) const
 {
   // Select the color for drawing. It is set to black here.
-//  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
   // Clear the entire screen to our selected color.
-//  SDL_RenderClear(renderer);
-
-  // Up until now everything was drawn behind the scenes.
-  // This will show the new, red contents of the window.
-//  SDL_RenderPresent(renderer);
+  SDL_RenderClear(renderer);
 
   // Render map
   map_.render(renderer);
 
   // Render player
   player_.render(renderer, map_);
+
+  // Render enemy
+  enemy_.render(renderer, map_);
 }

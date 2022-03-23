@@ -10,9 +10,6 @@
  */
 
 #include "Game.hpp"
-#include "../utils/types.hpp"
-#include "Map.hpp"
-#include <cassert>
 #include <iostream>
 
 Game::Game() {}
@@ -67,7 +64,7 @@ Game::process_events()
 }
 
 void
-Game::update_state(f64 delta)
+Game::update(f64 delta)
 {
   sm_.get_current_scene().update(delta);
 }

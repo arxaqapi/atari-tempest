@@ -45,7 +45,7 @@ public:
    *
    * @param delta
    */
-  void update_state(f64 delta);
+  void update(f64 delta);
   void render();
 
   bool is_running() { return run_; };

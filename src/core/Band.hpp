@@ -22,6 +22,7 @@ class Band
 private:
   Vector2D exter_a_, exter_b_, inter_a_, inter_b_;
   Vector2D exter_center_, inter_center_;
+  Vector2D axis_;
   Vector2D unit_vector_;
   f32 depth_{ 0 };
   bool is_selected_{ false };
