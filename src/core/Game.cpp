@@ -41,7 +41,6 @@ Game::process_events()
 {
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
-//    sm_.get_current_scene().processEvent(event);
     switch (event.type) {
       case SDL_QUIT:
         this->stop_();
@@ -62,6 +61,7 @@ Game::process_events()
         break;
     }
   }
+  sm_.get_current_scene().processEvent(event);
   // const u8* keyboardState = SDL_GetKeyboardState(NULL);
   // if (keyboardState[SDL_SCANCODE_SPACE]) {
 }

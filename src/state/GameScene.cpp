@@ -33,7 +33,18 @@ GameScene::loadNextLevel()
 
 void
 GameScene::processEvent(SDL_Event event)
-{}
+{
+  switch (event.key.keysym.sym) {
+    case SDLK_LEFT:
+      player_.moveLeft(map_);
+      break;
+    case SDLK_RIGHT:
+      player_.moveRight(map_);
+      break;
+    default:
+      break;
+  }
+}
 
 void
 GameScene::update(f64 delta)
@@ -43,15 +54,18 @@ void
 GameScene::render(SDL_Renderer* renderer) const
 {
   // Select the color for drawing. It is set to black here.
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+//  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
   // Clear the entire screen to our selected color.
-  SDL_RenderClear(renderer);
+//  SDL_RenderClear(renderer);
 
   // Up until now everything was drawn behind the scenes.
   // This will show the new, red contents of the window.
-  SDL_RenderPresent(renderer);
+//  SDL_RenderPresent(renderer);
 
   // Render map
   map_.render(renderer);
+
+  // Render player
+  player_.render(renderer, map_);
 }

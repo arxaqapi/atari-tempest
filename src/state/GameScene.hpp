@@ -9,6 +9,7 @@
 #include "../core/Map.hpp"
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
+#include "../core/Blaster.hpp"
 #include <string>
 #include <vector>
 
@@ -18,6 +19,7 @@ private:
   Data levels_data_;
   u8 current_level_{ 0 };
   Map map_;
+  Blaster player_;
   // ...
 public:
   GameScene() = default;

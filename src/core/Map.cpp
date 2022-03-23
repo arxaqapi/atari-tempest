@@ -8,6 +8,7 @@
  *
  * @brief
  */
+#include <iostream>
 #include "Map.hpp"
 #include "assert.h"
 
@@ -27,7 +28,7 @@ Map::getLeftBandNum(u8 num_band) const
   if (is_continuous_)
     left_band_num %= bands_.size();
   else
-    left_band_num = std::min(left_band_num, 0);
+    left_band_num = std::max(left_band_num, 0);
   return left_band_num;
 }
 
@@ -40,7 +41,7 @@ Map::getRightBandNum(u8 num_band) const
     right_band_num %= bands_.size();
   else
     right_band_num =
-      std::max(right_band_num, static_cast<int>(bands_.size() - 1));
+      std::min(right_band_num, static_cast<int>(bands_.size() - 1));
   return right_band_num;
 }
 
