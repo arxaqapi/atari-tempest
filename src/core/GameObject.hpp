@@ -18,7 +18,7 @@ protected:
 
 public:
   GameObject() = default;
-  GameObject(f32 progress);
+  GameObject(u8 band_num, f32 progress);
   GameObject(const GameObject &go) = default;
   virtual ~GameObject() = default;
 

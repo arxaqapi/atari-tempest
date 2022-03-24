@@ -4,8 +4,9 @@
 
 #include "GameObject.hpp"
 
-GameObject::GameObject(f32 progress)
-  : progress_{ progress }
+GameObject::GameObject(u8 band_num, f32 progress)
+  : band_num_{ band_num }
+  , progress_{ progress }
 {}
 
 bool

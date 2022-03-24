@@ -12,6 +12,7 @@ class Flipper: public GameObject
 {
 public:
   Flipper();
+  Flipper(u8 band_num);
   Flipper(const Flipper &flipper) = default;
   ~Flipper() override = default;
 

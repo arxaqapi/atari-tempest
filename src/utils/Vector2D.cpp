@@ -57,8 +57,8 @@ Vector2D::getY() const
 Vector2D
 Vector2D::unit() const
 {
-  f32 max_component = std::max(std::abs(x_), std::abs(y_));
-  return {x_/max_component, y_/max_component};
+  auto mag = magnitude();
+  return {x_/mag, y_/mag};
 }
 Vector2D
 Vector2D::operator+(const Vector2D& vector) const

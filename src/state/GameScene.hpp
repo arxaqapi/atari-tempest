@@ -21,7 +21,7 @@ private:
   u8 current_level_{ 0 };
   Map map_;
   Blaster player_;
-  Flipper enemy_;
+  Flipper enemy_{2};
   // ...
 public:
   GameScene() = default;

@@ -4,7 +4,9 @@
 
 #include "Flipper.hpp"
 
-Flipper::Flipper() : GameObject(1)
+Flipper::Flipper(u8 band_num) : GameObject(band_num, 1) {}
+
+Flipper::Flipper() : Flipper(0)
 {}
 
 void
