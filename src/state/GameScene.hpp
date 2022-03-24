@@ -11,6 +11,8 @@
 #include "Scene.hpp"
 #include "../core/Blaster.hpp"
 #include "../core/Flipper.hpp"
+#include "../core/Bullet.hpp"
+#include "../core/GameObjectPool.hpp"
 #include <string>
 #include <vector>
 
@@ -21,8 +23,10 @@ private:
   u8 current_level_{ 0 };
   Map map_;
   Blaster player_;
-  Flipper enemy_{2};
-  // ...
+  static const u8 MAX_ENEMIES_ = 10;
+  GameObjectPool<Flipper> enemies_{MAX_ENEMIES_};
+//  Bullet bullet_{2};
+
 public:
   GameScene() = default;
   GameScene(const GameScene& game_scene) = default;

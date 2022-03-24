@@ -10,7 +10,9 @@ GameScene::GameScene(std::string data_path)
   , map_{ levels_data_.getExterior(current_level_),
           levels_data_.getInterior(current_level_),
           levels_data_.isContinuous(current_level_) }
-{}
+{
+  enemies_.create(3);
+}
 
 void
 GameScene::loadLevel(u8 level)
@@ -52,7 +54,7 @@ void
 GameScene::update(f64 delta)
 {
   player_.update(map_);
-  enemy_.update(map_);
+  enemies_.update(map_);
 }
 
 void
@@ -70,6 +72,6 @@ GameScene::render(SDL_Renderer* renderer) const
   // Render player
   player_.render(renderer, map_);
 
-  // Render enemy
-  enemy_.render(renderer, map_);
+  // Render enemies
+  enemies_.render(renderer, map_);
 }

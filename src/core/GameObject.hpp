@@ -18,7 +18,7 @@ protected:
 
 public:
   GameObject() = default;
-  GameObject(u8 band_num, f32 progress);
+  GameObject(u8 band_num, bool active, f32 progress);
   GameObject(const GameObject &go) = default;
   virtual ~GameObject() = default;
 
@@ -28,6 +28,7 @@ public:
   void moveRight(const Map& map);
   void moveForward();
   void moveBackward();
+  void activate(u8 band_num, f32 progress);
   virtual void update(const Map &map) = 0;
   virtual void render(SDL_Renderer *renderer, const Map &map) const = 0;
 };

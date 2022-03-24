@@ -94,7 +94,7 @@ Map::setBands(const std::vector<Vector2D>& exterior,
   assert(exterior.size() == interior.size());
   assert(exterior.size() > 0);
   bands_.clear();
-  for (int i = 0; i < exterior.size() - 1; ++i)
+  for (auto i = 0; i < exterior.size() - 1; ++i)
     bands_.emplace_back(
       exterior[i], exterior[i + 1], interior[i], interior[i + 1]);
   bands_[0].select();

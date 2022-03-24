@@ -12,10 +12,11 @@ class Flipper: public GameObject
 {
 public:
   Flipper();
-  Flipper(u8 band_num);
+  explicit Flipper(u8 band_num);
   Flipper(const Flipper &flipper) = default;
   ~Flipper() override = default;
 
+  void activate(u8 band_num);
   void render(SDL_Renderer *renderer, const Map &map) const override;
   void update(const Map &map) override;
 };
