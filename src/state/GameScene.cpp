@@ -37,9 +37,11 @@ GameScene::processEvent(SDL_Event event)
   switch (event.key.keysym.sym) {
     case SDLK_LEFT:
       player_.moveLeft(map_);
+      map_.select(player_.getBandNum());
       break;
     case SDLK_RIGHT:
       player_.moveRight(map_);
+      map_.select(player_.getBandNum());
       break;
     default:
       break;
