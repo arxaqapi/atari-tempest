@@ -50,15 +50,15 @@ Game::process_events()
       case SDLK_ESCAPE:
         this->stop_();
         break;
-      case SDLK_SPACE:
-        this->sm_.switch_scene(STATE_LEVEL_SELECT);
+//      case SDLK_SPACE:
+//        this->sm_.switch_scene(STATE_LEVEL_SELECT);
         break;
 
       default:
         break;
     }
+    sm_.get_current_scene().processEvent(event);
   }
-  sm_.get_current_scene().processEvent(event);
   // const u8* keyboardState = SDL_GetKeyboardState(NULL);
   // if (keyboardState[SDL_SCANCODE_SPACE]) {
 }

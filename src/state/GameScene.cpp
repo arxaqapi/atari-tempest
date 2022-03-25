@@ -10,9 +10,8 @@ GameScene::GameScene(std::string data_path)
   , map_{ levels_data_.getExterior(current_level_),
           levels_data_.getInterior(current_level_),
           levels_data_.isContinuous(current_level_) }
-{
-  enemies_.create(3);
-}
+  , spawn_manager_{ map_.size() }
+{}
 
 void
 GameScene::loadLevel(u8 level)
@@ -36,15 +35,23 @@ GameScene::loadNextLevel()
 void
 GameScene::processEvent(SDL_Event event)
 {
-  switch (event.key.keysym.sym) {
-    case SDLK_LEFT:
-      player_.moveLeft(map_);
-      map_.select(player_.getBandNum());
+  switch( event.type ) {
+    case SDL_KEYDOWN:
+      if (event.key.keysym.sym == SDLK_LEFT)
+        player_.setMovingDirection(LEFT);
+      else if (event.key.keysym.sym == SDLK_RIGHT)
+        player_.setMovingDirection(RIGHT);
+      else if (event.key.keysym.sym == SDLK_SPACE)
+        player_.shoot();
       break;
-    case SDLK_RIGHT:
-      player_.moveRight(map_);
-      map_.select(player_.getBandNum());
+
+    case SDL_KEYUP:
+      if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_RIGHT)
+        player_.setMovingDirection(NONE);
+      else if (event.key.keysym.sym == SDLK_SPACE)
+        player_.stopShooting();
       break;
+
     default:
       break;
   }
@@ -53,8 +60,9 @@ GameScene::processEvent(SDL_Event event)
 void
 GameScene::update(f64 delta)
 {
-  player_.update(map_);
-  enemies_.update(map_);
+  player_.update(delta, map_);
+  map_.select(player_.getBandNum());
+  spawn_manager_.update(delta, map_);
 }
 
 void
@@ -73,5 +81,5 @@ GameScene::render(SDL_Renderer* renderer) const
   player_.render(renderer, map_);
 
   // Render enemies
-  enemies_.render(renderer, map_);
+  spawn_manager_.render(renderer, map_);
 }

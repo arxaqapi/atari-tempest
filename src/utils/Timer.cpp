@@ -80,7 +80,7 @@ Timer::print()
   std::cout << "[Log] - FPS = " << get_FPS() << std::endl;
 }
 
-void
+f64
 Timer::variable_delay()
 {
   u64 ms_elapsed;
@@ -94,7 +94,7 @@ Timer::variable_delay()
   auto del = max_ms_per_frame_ - ms_elapsed;
   assert(del <= max_ms_per_frame_ && "Computed delay is way too big");
   SDL_Delay(del);
-  this->stop();
+  return this->stop();
 }
 
 void

@@ -61,7 +61,7 @@ public:
    * for FPS caping
    *
    */
-  void variable_delay();
+  f64 variable_delay();
   /**
    * @brief Induces an artificial delay < max_ms_per_frame - 4
    * Mainly here to test clock mechanism like FPS caping

@@ -10,6 +10,9 @@
 #include "GameObject.hpp"
 class Flipper: public GameObject
 {
+private:
+  f64 STAGE_2_MOVING_DELAY_ = 500;
+
 public:
   Flipper();
   explicit Flipper(u8 band_num);
@@ -18,7 +21,7 @@ public:
 
   void activate(u8 band_num);
   void render(SDL_Renderer *renderer, const Map &map) const override;
-  void update(const Map &map) override;
+  void update(f64 delta, const Map &map) override;
 };
 
 #endif // TEMPEST_ATARI_FLIPPER_HPP

@@ -13,6 +13,7 @@
 #include "../core/Flipper.hpp"
 #include "../core/Bullet.hpp"
 #include "../core/GameObjectPool.hpp"
+#include "../core/SpawnManager.hpp"
 #include <string>
 #include <vector>
 
@@ -23,9 +24,7 @@ private:
   u8 current_level_{ 0 };
   Map map_;
   Blaster player_;
-  static const u8 MAX_ENEMIES_ = 10;
-  GameObjectPool<Flipper> enemies_{MAX_ENEMIES_};
-//  Bullet bullet_{2};
+  SpawnManager spawn_manager_;
 
 public:
   GameScene() = default;

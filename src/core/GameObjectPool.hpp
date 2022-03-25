@@ -14,8 +14,7 @@ template<typename GameObjectType>
 class GameObjectPool
 {
 private:
-  //  f32 spawn_delay_, last_spawns_delay_;
-  u8 pool_size_{ 0 }, available_objects_{ 0 };
+  u8 pool_size_{ 0 };
   std::vector<GameObjectType> pool_;
   int find();
 
@@ -26,14 +25,13 @@ public:
   ~GameObjectPool() = default;
 
   void create(u8 band_num);
-  void update(const Map& map);
+  void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
 };
 
 template<typename GameObjectType>
 GameObjectPool<GameObjectType>::GameObjectPool(u8 pool_size)
   : pool_size_{ pool_size }
-  , available_objects_{ pool_size }
   , pool_(pool_size)
 {}
 
@@ -41,9 +39,6 @@ template<typename GameObjectType>
 int
 GameObjectPool<GameObjectType>::find()
 {
-  if (available_objects_ == 0)
-    return -1;
-
   u8 index = 0;
   for (index = 0; index < pool_size_ && pool_[index].isActive(); ++index)
     ;
@@ -58,15 +53,14 @@ GameObjectPool<GameObjectType>::create(u8 band_num)
   if (index == -1)
     return;
   pool_[index].activate(band_num);
-  available_objects_--;
 }
 
 template<typename GameObjectType>
 void
-GameObjectPool<GameObjectType>::update(const Map& map)
+GameObjectPool<GameObjectType>::update(f64 delta, const Map& map)
 {
   for (auto& go : pool_)
-    go.update(map);
+    go.update(delta, map);
 }
 
 template<typename GameObjectType>

@@ -29,6 +29,7 @@ public:
   Map(const std::vector<Vector2D>& exterior,
       const std::vector<Vector2D>& interior,
       bool is_continuous);
+  u8 size() const;
   u8 getLeftBandNum(u8 num_band) const;
   u8 getRightBandNum(u8 num_band) const;
   const Band& getBand(u8 num_band) const;

@@ -8,28 +8,36 @@
 #include <SDL2/SDL_render.h>
 #include "../utils/types.hpp"
 #include "Map.hpp"
+#include "../utils/Delay.hpp"
+
+enum e_direction {
+  NONE, LEFT, RIGHT, FORWARD, BACKWARD
+};
 
 class GameObject
 {
 protected:
+  static constexpr f64 MOVE_DELAY_ = 50;
   u8 band_num_ = 0;
   bool active_ = true;
   f32 progress_ = 0;
+  enum e_direction moving_direction_{NONE};
+  Delay move_delay_{MOVE_DELAY_};
+
+  void move(f64 delta, const Map &map);
 
 public:
   GameObject() = default;
-  GameObject(u8 band_num, bool active, f32 progress);
+  GameObject(u8 band_num, bool active, f32 progress, e_direction moving_direction, f64 move_delay);
   GameObject(const GameObject &go) = default;
   virtual ~GameObject() = default;
 
   bool isActive() const;
   u8 getBandNum() const;
-  void moveLeft(const Map& map);
-  void moveRight(const Map& map);
-  void moveForward();
-  void moveBackward();
-  void activate(u8 band_num, f32 progress);
-  virtual void update(const Map &map) = 0;
+  void setMovingDirection(e_direction moving_direction);
+  void setMoveDelay(f64 moveDelay);
+  void activate(u8 band_num, f32 progress, e_direction moving_direction, f64 move_delay);
+  virtual void update(f64 delta, const Map &map) = 0;
   virtual void render(SDL_Renderer *renderer, const Map &map) const = 0;
 };
 

@@ -108,3 +108,9 @@ Map::reset(const std::vector<Vector2D>& exterior,
   setBands(exterior, interior);
   is_continuous_ = is_continuous;
 }
+
+u8
+Map::size() const
+{
+  return bands_.size();
+}

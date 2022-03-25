@@ -3,27 +3,32 @@
 //
 
 #include "Bullet.hpp"
+#include <iostream>
+
+Bullet::Bullet()
+  : Bullet(0)
+{}
 
 Bullet::Bullet(u8 band_num)
-  : GameObject(band_num, false, 0)
+  : GameObject(band_num, false, 0, BACKWARD, 0)
 {}
 
 void
 Bullet::activate(u8 band_num)
 {
-  GameObject::activate(band_num,0);
+  GameObject::activate(band_num, 0, BACKWARD, 0);
 }
 
 void
-Bullet::update(const Map& map)
+Bullet::update(f64 delta, const Map& map)
 {
   if (!active_)
     return;
 
   if (progress_ == 1)
     active_ = false;
-  else
-    moveBackward();
+
+  move(delta, map);
 }
 
 void
@@ -31,6 +36,7 @@ Bullet::render(SDL_Renderer* renderer, const Map& map) const
 {
   if (!active_)
     return;
+
   Vector2D p = map.calcPosition(band_num_, progress_);
   // draw a rectangle for now...
   SDL_Rect rect;
