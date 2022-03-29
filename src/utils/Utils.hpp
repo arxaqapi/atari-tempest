@@ -28,6 +28,11 @@ struct non_valid_state_switch : public std::exception
 {
   const char* what() const throw();
 };
+
+struct file_not_opened : public std::exception
+{
+  const char* what() const throw();
+};
 }
 
 #endif

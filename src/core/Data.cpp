@@ -7,6 +7,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "../utils/Utils.hpp"
+
 Data::Data(std::string data_path)
 {
   loadData(data_path);
@@ -79,7 +81,7 @@ Data::loadData(const std::string& data_path)
   std::ifstream file{ data_path, std::ios::in };
 
   if (!file.is_open()) {
-    throw "Unable to open levels data file";
+    throw utils::file_not_opened();
   }
 
   std::string line_s;
