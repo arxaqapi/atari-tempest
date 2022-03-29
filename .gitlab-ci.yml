@@ -1,13 +1,20 @@
-image: $CI_REGISTRY/kunze/build-image-sdl-2:latest # ubuntu:20.04
+image: ubuntu:20.04
 
 stages:
   - build
 
 build:
   stage: build
+  before_script:
+      - echo "Europe/Paris" > /etc/timezone
+      - apt-get update && apt-get install -y tzdata
+      - rm /etc/localtime
+      - ln -snf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+      - dpkg-reconfigure -f noninteractive tzdata
+      - apt-get clean
+      - apt update -y && apt install -y build-essential gcc g++ make cmake libsdl2-dev
   script:
     - echo "Compiling the code..."
     - make
-
 
     
