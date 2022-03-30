@@ -33,7 +33,7 @@ GameScene::loadNextLevel()
 }
 
 void
-GameScene::processEvent(SDL_Event event)
+GameScene::processEvent(SDL_Event event, SceneManager const & sm)
 {
   switch( event.type ) {
     case SDL_KEYDOWN:
@@ -58,7 +58,7 @@ GameScene::processEvent(SDL_Event event)
 }
 
 void
-GameScene::update(f64 delta)
+GameScene::update(f64 delta, SceneManager const & sm)
 {
   player_.update(delta, map_);
   map_.select(player_.getBandNum());

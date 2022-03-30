@@ -17,6 +17,8 @@
 #include <string>
 #include <vector>
 
+class SceneManager;
+
 class GameScene : public Scene
 {
 private:
@@ -32,8 +34,8 @@ public:
   explicit GameScene(std::string data_path);
   void loadLevel(u8 level);
   void loadNextLevel();
-  void processEvent(SDL_Event event) override;
-  void update(f64 delta) override;
+  void processEvent(SDL_Event event, SceneManager const & sm) override;
+  void update(f64 delta, SceneManager const & sm) override;
   void render(SDL_Renderer* renderer) const override;
 };
 

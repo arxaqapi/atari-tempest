@@ -1,6 +1,5 @@
 
 #include "LevelSelectionScene.hpp"
-#include <iostream>
 
 LevelSelectionScene::LevelSelectionScene()
 // : button_{}
@@ -9,7 +8,7 @@ LevelSelectionScene::LevelSelectionScene()
 LevelSelectionScene::~LevelSelectionScene() {}
 
 void
-LevelSelectionScene::update(f64 delta)
+LevelSelectionScene::update(f64 delta, SceneManager const & sm)
 {}
 
 void
@@ -22,5 +21,5 @@ LevelSelectionScene::render(SDL_Renderer* renderer) const
 }
 
 void
-LevelSelectionScene::processEvent(SDL_Event event)
+LevelSelectionScene::processEvent(SDL_Event event, SceneManager const & sm)
 {}

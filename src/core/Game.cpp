@@ -57,7 +57,7 @@ Game::process_events()
       default:
         break;
     }
-    sm_.get_current_scene().processEvent(event);
+    sm_.get_current_scene().processEvent(event, sm_);
   }
   // const u8* keyboardState = SDL_GetKeyboardState(NULL);
   // if (keyboardState[SDL_SCANCODE_SPACE]) {
@@ -66,7 +66,7 @@ Game::process_events()
 void
 Game::update(f64 delta)
 {
-  sm_.get_current_scene().update(delta);
+  sm_.get_current_scene().update(delta, sm_);
 }
 
 void
