@@ -33,9 +33,9 @@ GameScene::loadNextLevel()
 }
 
 void
-GameScene::processEvent(SDL_Event event, SceneManager const & sm)
+GameScene::processEvent(SDL_Event event, SceneManager const& sm)
 {
-  switch( event.type ) {
+  switch (event.type) {
     case SDL_KEYDOWN:
       if (event.key.keysym.sym == SDLK_LEFT)
         player_.setMovingDirection(LEFT);
@@ -46,7 +46,8 @@ GameScene::processEvent(SDL_Event event, SceneManager const & sm)
       break;
 
     case SDL_KEYUP:
-      if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_RIGHT)
+      if (event.key.keysym.sym == SDLK_LEFT ||
+          event.key.keysym.sym == SDLK_RIGHT)
         player_.setMovingDirection(NONE);
       else if (event.key.keysym.sym == SDLK_SPACE)
         player_.stopShooting();
@@ -58,7 +59,7 @@ GameScene::processEvent(SDL_Event event, SceneManager const & sm)
 }
 
 void
-GameScene::update(f64 delta, SceneManager const & sm)
+GameScene::update(f64 delta, SceneManager const& sm)
 {
   player_.update(delta, map_);
   map_.select(player_.getBandNum());

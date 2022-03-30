@@ -36,12 +36,12 @@ main(void)
     g.update(delta);
     g.render();
 
-//    timer.artificial_delay();
+    //    timer.artificial_delay();
 
     //// !SECTION: Loop end
     timer.stop();
     delta = timer.variable_delay();
-//    timer.print();
+    //    timer.print();
   }
   return 0;
 }

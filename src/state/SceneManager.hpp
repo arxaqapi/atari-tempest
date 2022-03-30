@@ -1,8 +1,8 @@
 #pragma once
 
+#include "GameScene.hpp"
 #include "Scene.hpp"
 #include "TitleScreen.hpp"
-#include "GameScene.hpp"
 #include <memory>
 
 enum State
@@ -18,7 +18,8 @@ enum State
 class SceneManager
 {
 private:
-  // std::unique_ptr<Scene> current_scene_ = std::make_unique<GameScene>("./data/levels_data.txt");
+  // std::unique_ptr<Scene> current_scene_ =
+  // std::make_unique<GameScene>("./data/levels_data.txt");
   std::unique_ptr<Scene> current_scene_ = std::make_unique<TitleScreen>();
   State current_state_ = STATE_TITLE_SCREEN;
 

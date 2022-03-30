@@ -61,8 +61,8 @@ SceneManager::switch_scene(State next_s)
         throw utils::non_valid_state_switch();
       } else {
         current_scene_.reset(); // destroy object
-        current_scene_ =
-          get_corresponding_scene(next_s); // std::make_unique<LevelSelectionScene>();
+        current_scene_ = get_corresponding_scene(
+          next_s); // std::make_unique<LevelSelectionScene>();
         return true;
       }
       break;

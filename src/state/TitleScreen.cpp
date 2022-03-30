@@ -21,13 +21,14 @@ TitleScreen::TitleScreen()
 TitleScreen::~TitleScreen() {}
 
 void
-TitleScreen::update(f64 delta, SceneManager const & sm)
+TitleScreen::update(f64 delta, SceneManager const& sm)
 {}
 
 void
 TitleScreen::render(SDL_Renderer* renderer) const
 {
-  // SDL_assert(SDL_SetRenderDrawColor(renderer, col_.renderer, col_.g, col_.b, col_.a) == 0
+  // SDL_assert(SDL_SetRenderDrawColor(renderer, col_.renderer, col_.g, col_.b,
+  // col_.a) == 0
 
   // TODO: Oui
   SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, col_.a);
@@ -35,7 +36,7 @@ TitleScreen::render(SDL_Renderer* renderer) const
 }
 
 void
-TitleScreen::processEvent(SDL_Event event, SceneManager const & sm)
+TitleScreen::processEvent(SDL_Event event, SceneManager const& sm)
 {
   // switch_scene
 }
