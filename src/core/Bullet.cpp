@@ -16,7 +16,7 @@ Bullet::Bullet(u8 band_num)
 void
 Bullet::activate(u8 band_num)
 {
-  GameObject::activate(band_num, 0, BACKWARD, 0);
+  GameObject::activate(band_num, 0.01, BACKWARD, 0);
 }
 
 void
@@ -29,6 +29,12 @@ Bullet::update(f64 delta, const Map& map)
     active_ = false;
 
   move(delta, map);
+
+  Vector2D p = map.calcPosition(band_num_, progress_);
+  collider_.x = p.getX();
+  collider_.y = p.getY();
+  collider_.w = 10;
+  collider_.h = 10;
 }
 
 void
@@ -36,14 +42,7 @@ Bullet::render(SDL_Renderer* renderer, const Map& map) const
 {
   if (!active_)
     return;
-
-  Vector2D p = map.calcPosition(band_num_, progress_);
-  // draw a rectangle for now...
-  SDL_Rect rect;
-  rect.x = p.getX();
-  rect.y = p.getY();
-  rect.w = 10;
-  rect.h = 10;
+  // drawing collider rectangle for now...
   SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-  SDL_RenderDrawRect(renderer, &rect);
+  SDL_RenderDrawRect(renderer, &collider_);
 }

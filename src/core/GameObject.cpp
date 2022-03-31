@@ -2,6 +2,7 @@
 // Created by massimo on 23/03/2022.
 //
 
+#include <iostream>
 #include "GameObject.hpp"
 
 GameObject::GameObject(u8 band_num,
@@ -77,4 +78,16 @@ void
 GameObject::setMoveDelay(f64 move_delay)
 {
   move_delay_.set(move_delay);
+}
+
+void
+GameObject::deactivate()
+{
+  active_ = false;
+}
+
+bool
+GameObject::isColliding(const GameObject& go) const
+{
+  return SDL_HasIntersection(&go.collider_, &collider_);
 }

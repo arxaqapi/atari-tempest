@@ -26,6 +26,7 @@ public:
   Blaster(const Blaster &blaster) = default;
   ~Blaster() override = default;
 
+  std::vector<Bullet> &getBullets();
   void shoot();
   void stopShooting();
   void render(SDL_Renderer *renderer, const Map &map) const override;

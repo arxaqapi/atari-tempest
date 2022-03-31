@@ -23,6 +23,7 @@ protected:
   f32 progress_ = 0;
   enum e_direction moving_direction_{NONE};
   Delay move_delay_{MOVE_DELAY_};
+  SDL_Rect collider_;  // todo: init
 
   void move(f64 delta, const Map &map);
 
@@ -37,6 +38,8 @@ public:
   void setMovingDirection(e_direction moving_direction);
   void setMoveDelay(f64 moveDelay);
   void activate(u8 band_num, f32 progress, e_direction moving_direction, f64 move_delay);
+  void deactivate();
+  bool isColliding(const GameObject &go) const;
   virtual void update(f64 delta, const Map &map) = 0;
   virtual void render(SDL_Renderer *renderer, const Map &map) const = 0;
 };

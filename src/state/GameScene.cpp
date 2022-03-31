@@ -63,6 +63,23 @@ GameScene::update(f64 delta)
   player_.update(delta, map_);
   map_.select(player_.getBandNum());
   spawn_manager_.update(delta, map_);
+
+  for (auto &enemy : spawn_manager_.getEnnemies()) {
+    if (!enemy.isActive())
+      continue;
+    if (enemy.isColliding(player_)) {
+      enemy.deactivate();
+      // todo: hit player
+    }
+    std::vector<Bullet> &bullets = player_.getBullets();
+    for (auto &bullet : bullets) {
+      if (bullet.isActive() && enemy.isColliding(bullet)) {
+          bullet.deactivate();
+          enemy.deactivate();
+          // todo: score ++
+      }
+    }
+  }
 }
 
 void

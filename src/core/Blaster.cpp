@@ -21,6 +21,12 @@ Blaster::update(f64 delta, const Map& map)
   }
 
   move(delta, map);
+
+  Vector2D p = map.calcPosition(band_num_, progress_);
+  collider_.x = p.getX();
+  collider_.y = p.getY();
+  collider_.w = 20;
+  collider_.h = 20;
 }
 
 void
@@ -28,18 +34,10 @@ Blaster::render(SDL_Renderer* renderer, const Map& map) const
 {
   if (!active_)
     return;
-
   bullets_.render(renderer, map);
-
-  Vector2D p = map.calcPosition(band_num_, progress_);
-  // draw a rectangle for now...
-  SDL_Rect rect;
-  rect.x = p.getX();
-  rect.y = p.getY();
-  rect.w = 20;
-  rect.h = 20;
+  // drawing collider rectangle for now...
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-  SDL_RenderDrawRect(renderer, &rect);
+  SDL_RenderDrawRect(renderer, &collider_);
 }
 
 void
@@ -52,4 +50,10 @@ void
 Blaster::stopShooting()
 {
   is_shooting_ = false;
+}
+
+std::vector<Bullet>&
+Blaster::getBullets()
+{
+  return bullets_.getPool();
 }

@@ -24,3 +24,9 @@ SpawnManager::render(SDL_Renderer* renderer, const Map& map) const
 {
   enemies_.render(renderer, map);
 }
+
+std::vector<Flipper>&
+SpawnManager::getEnnemies()
+{
+  return enemies_.getPool();
+}

@@ -23,6 +23,7 @@ public:
   SpawnManager(const SpawnManager &spawn_manager) = default;
   explicit SpawnManager(u8 max_band_num);
 
+  std::vector<Flipper> &getEnnemies();
   void update(f64 delta, const Map &map);
   void render(SDL_Renderer* renderer, const Map &map) const;
 };
