@@ -9,7 +9,7 @@ SpawnManager::SpawnManager(u8 max_band_num)
 {}
 
 void
-SpawnManager::update(f64 delta, const Map &map)
+SpawnManager::update(f64 delta, const Map& map)
 {
   spawn_delay_.update(delta);
   if (spawn_delay_.complete()) {

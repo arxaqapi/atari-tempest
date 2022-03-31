@@ -13,19 +13,19 @@ class SpawnManager
 private:
   static const u8 MAX_ENEMIES_ = 4;
   static constexpr f64 SPAWN_DELAY_ = 3000;
-  GameObjectPool<Flipper> enemies_{MAX_ENEMIES_};
-  Delay spawn_delay_{SPAWN_DELAY_};
+  GameObjectPool<Flipper> enemies_{ MAX_ENEMIES_ };
+  Delay spawn_delay_{ SPAWN_DELAY_ };
   std::default_random_engine generator_;
   std::uniform_int_distribution<u8> spawn_distribution_;
 
 public:
   SpawnManager() = default;
-  SpawnManager(const SpawnManager &spawn_manager) = default;
+  SpawnManager(const SpawnManager& spawn_manager) = default;
   explicit SpawnManager(u8 max_band_num);
 
-  std::vector<Flipper> &getEnnemies();
-  void update(f64 delta, const Map &map);
-  void render(SDL_Renderer* renderer, const Map &map) const;
+  std::vector<Flipper>& getEnnemies();
+  void update(f64 delta, const Map& map);
+  void render(SDL_Renderer* renderer, const Map& map) const;
 };
 
 #endif // TEMPEST_ATARI_SPAWNMANAGER_HPP

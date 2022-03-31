@@ -24,7 +24,7 @@ public:
   GameObjectPool(const GameObjectPool& go_pool) = default;
   ~GameObjectPool() = default;
 
-  std::vector<GameObjectType> &getPool();
+  std::vector<GameObjectType>& getPool();
   void create(u8 band_num);
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;

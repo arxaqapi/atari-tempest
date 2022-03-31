@@ -5,13 +5,18 @@
 #ifndef TEMPEST_ATARI_GAMEOBJECT_HPP
 #define TEMPEST_ATARI_GAMEOBJECT_HPP
 
-#include <SDL2/SDL_render.h>
+#include "../utils/Delay.hpp"
 #include "../utils/types.hpp"
 #include "Map.hpp"
-#include "../utils/Delay.hpp"
+#include <SDL2/SDL_render.h>
 
-enum e_direction {
-  NONE, LEFT, RIGHT, FORWARD, BACKWARD
+enum e_direction
+{
+  NONE,
+  LEFT,
+  RIGHT,
+  FORWARD,
+  BACKWARD
 };
 
 class GameObject
@@ -25,12 +30,16 @@ protected:
   Delay move_delay_{MOVE_DELAY_};
   SDL_Rect collider_;  // todo: init
 
-  void move(f64 delta, const Map &map);
+  void move(f64 delta, const Map& map);
 
 public:
   GameObject() = default;
-  GameObject(u8 band_num, bool active, f32 progress, e_direction moving_direction, f64 move_delay);
-  GameObject(const GameObject &go) = default;
+  GameObject(u8 band_num,
+             bool active,
+             f32 progress,
+             e_direction moving_direction,
+             f64 move_delay);
+  GameObject(const GameObject& go) = default;
   virtual ~GameObject() = default;
 
   bool isActive() const;

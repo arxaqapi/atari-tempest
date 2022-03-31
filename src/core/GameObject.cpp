@@ -2,8 +2,8 @@
 // Created by massimo on 23/03/2022.
 //
 
-#include <iostream>
 #include "GameObject.hpp"
+#include <iostream>
 
 GameObject::GameObject(u8 band_num,
                        bool active,
@@ -51,10 +51,12 @@ GameObject::move(f64 delta, const Map& map)
       band_num_ = map.getRightBandNum(band_num_);
       break;
     case FORWARD:
-      progress_ = std::max(0.0, progress_ - delta*0.0005); // TODO: améliorer (vitesse variable)
+      progress_ = std::max(
+        0.0, progress_ - delta * 0.0005); // TODO: améliorer (vitesse variable)
       break;
     case BACKWARD:
-      progress_ = std::min(1.0, progress_ + delta*0.0005); // TODO: améliorer (vitesse variable)
+      progress_ = std::min(
+        1.0, progress_ + delta * 0.0005); // TODO: améliorer (vitesse variable)
       break;
     default:
       break;
@@ -64,7 +66,10 @@ GameObject::move(f64 delta, const Map& map)
 }
 
 void
-GameObject::activate(u8 band_num, f32 progress, e_direction moving_direction, f64 move_delay)
+GameObject::activate(u8 band_num,
+                     f32 progress,
+                     e_direction moving_direction,
+                     f64 move_delay)
 {
   active_ = true;
   band_num_ = band_num;

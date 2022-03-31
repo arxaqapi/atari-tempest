@@ -3,11 +3,11 @@
 //
 
 #include "Data.hpp"
+#include "../utils/Utils.hpp"
 #include <cassert>
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "../utils/Utils.hpp"
 
 Data::Data(std::string data_path)
 {

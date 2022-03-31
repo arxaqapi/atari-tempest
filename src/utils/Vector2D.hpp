@@ -12,8 +12,8 @@
 #ifndef H_TEMPEST_GAME_INC_VECTOR_2D_
 #define H_TEMPEST_GAME_INC_VECTOR_2D_
 
-#include <utility>
 #include "types.hpp"
+#include <utility>
 
 class Vector2D
 {
@@ -23,9 +23,8 @@ private:
   f32 y_ = 0.f;
 
 public:
-
   Vector2D() = default;
-  Vector2D(const Vector2D &vector) = default;
+  Vector2D(const Vector2D& vector) = default;
   Vector2D(f32 x, f32 y);
   ~Vector2D() = default;
 

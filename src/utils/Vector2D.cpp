@@ -58,10 +58,10 @@ Vector2D
 Vector2D::unit() const
 {
   auto mag = magnitude();
-  return {x_/mag, y_/mag};
+  return { x_ / mag, y_ / mag };
 }
 Vector2D
 Vector2D::operator+(const Vector2D& vector) const
 {
-  return {x_ + vector.x_, y_ + vector.y_};
+  return { x_ + vector.x_, y_ + vector.y_ };
 }

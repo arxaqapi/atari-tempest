@@ -12,23 +12,21 @@
 #define H_TEMPEST_GAME_INC_SCENE_
 
 #include "../utils/types.hpp"
+#include <SDL2/SDL.h>
 #include <vector>
 
-#include <SDL2/SDL.h>
+class SceneManager;
 
 class Scene
 {
 private:
-//  std::vector<Entity> enemies_;
-//  Entity player_;
-
 public:
   Scene() = default;
-  Scene(const Scene & scene) = default;
+  Scene(const Scene& scene) = default;
   ~Scene() = default;
 
-  virtual void processEvent(SDL_Event event) = 0;
-  virtual void update(f64 delta) = 0;
+  virtual void processEvent(SDL_Event event, SceneManager const& sm) = 0;
+  virtual void update(f64 delta, SceneManager const& sm) = 0;
   virtual void render(SDL_Renderer* renderer) const = 0;
 };
 

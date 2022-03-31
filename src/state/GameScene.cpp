@@ -33,9 +33,9 @@ GameScene::loadNextLevel()
 }
 
 void
-GameScene::processEvent(SDL_Event event)
+GameScene::processEvent(SDL_Event event, SceneManager const& sm)
 {
-  switch( event.type ) {
+  switch (event.type) {
     case SDL_KEYDOWN:
       if (event.key.keysym.sym == SDLK_LEFT)
         player_.setMovingDirection(LEFT);
@@ -46,7 +46,8 @@ GameScene::processEvent(SDL_Event event)
       break;
 
     case SDL_KEYUP:
-      if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_RIGHT)
+      if (event.key.keysym.sym == SDLK_LEFT ||
+          event.key.keysym.sym == SDLK_RIGHT)
         player_.setMovingDirection(NONE);
       else if (event.key.keysym.sym == SDLK_SPACE)
         player_.stopShooting();
@@ -58,25 +59,25 @@ GameScene::processEvent(SDL_Event event)
 }
 
 void
-GameScene::update(f64 delta)
+GameScene::update(f64 delta, SceneManager const& sm)
 {
   player_.update(delta, map_);
   map_.select(player_.getBandNum());
   spawn_manager_.update(delta, map_);
 
-  for (auto &enemy : spawn_manager_.getEnnemies()) {
+  for (auto& enemy : spawn_manager_.getEnnemies()) {
     if (!enemy.isActive())
       continue;
     if (enemy.isColliding(player_)) {
       enemy.deactivate();
       // todo: hit player
     }
-    std::vector<Bullet> &bullets = player_.getBullets();
-    for (auto &bullet : bullets) {
+    std::vector<Bullet>& bullets = player_.getBullets();
+    for (auto& bullet : bullets) {
       if (bullet.isActive() && enemy.isColliding(bullet)) {
-          bullet.deactivate();
-          enemy.deactivate();
-          // todo: score ++
+        bullet.deactivate();
+        enemy.deactivate();
+        // todo: score ++
       }
     }
   }

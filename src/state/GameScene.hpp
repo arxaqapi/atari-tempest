@@ -5,17 +5,19 @@
 #ifndef TEMPEST_ATARI_GAMESCENE_HPP
 #define TEMPEST_ATARI_GAMESCENE_HPP
 
+#include "../core/Blaster.hpp"
+#include "../core/Bullet.hpp"
 #include "../core/Data.hpp"
+#include "../core/Flipper.hpp"
+#include "../core/GameObjectPool.hpp"
 #include "../core/Map.hpp"
+#include "../core/SpawnManager.hpp"
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
-#include "../core/Blaster.hpp"
-#include "../core/Flipper.hpp"
-#include "../core/Bullet.hpp"
-#include "../core/GameObjectPool.hpp"
-#include "../core/SpawnManager.hpp"
 #include <string>
 #include <vector>
+
+class SceneManager;
 
 class GameScene : public Scene
 {
@@ -32,8 +34,8 @@ public:
   explicit GameScene(std::string data_path);
   void loadLevel(u8 level);
   void loadNextLevel();
-  void processEvent(SDL_Event event) override;
-  void update(f64 delta) override;
+  void processEvent(SDL_Event event, SceneManager const& sm) override;
+  void update(f64 delta, SceneManager const& sm) override;
   void render(SDL_Renderer* renderer) const override;
 };
 
