@@ -10,6 +10,7 @@
  */
 
 #include "TitleScreen.hpp"
+#include "SceneManager.hpp"
 #include <iostream>
 
 TitleScreen::TitleScreen()
@@ -21,7 +22,7 @@ TitleScreen::TitleScreen()
 TitleScreen::~TitleScreen() {}
 
 void
-TitleScreen::update(f64 delta, SceneManager const& sm)
+TitleScreen::update(f64 delta, SceneManager& sm)
 {}
 
 void
@@ -36,7 +37,11 @@ TitleScreen::render(SDL_Renderer* renderer) const
 }
 
 void
-TitleScreen::processEvent(SDL_Event event, SceneManager const& sm)
+TitleScreen::processEvent(SDL_Event event, SceneManager& sm)
 {
-  // switch_scene
+  // set_next_state
+  if (event.key.keysym.sym == SDLK_SPACE) {
+    std::cout << "[Debug]: SPACE pressed while at TitleScreen" << std::endl;
+    sm.set_next_state(STATE_GAME_SCENE);
+  }
 }

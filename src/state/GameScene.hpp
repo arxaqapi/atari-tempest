@@ -34,8 +34,8 @@ public:
   explicit GameScene(std::string data_path);
   void loadLevel(u8 level);
   void loadNextLevel();
-  void processEvent(SDL_Event event, SceneManager const& sm) override;
-  void update(f64 delta, SceneManager const& sm) override;
+  void processEvent(SDL_Event event, SceneManager& sm) override;
+  void update(f64 delta, SceneManager& sm) override;
   void render(SDL_Renderer* renderer) const override;
 };
 

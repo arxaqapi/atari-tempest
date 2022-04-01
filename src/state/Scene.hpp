@@ -25,8 +25,8 @@ public:
   Scene(const Scene& scene) = default;
   ~Scene() = default;
 
-  virtual void processEvent(SDL_Event event, SceneManager const& sm) = 0;
-  virtual void update(f64 delta, SceneManager const& sm) = 0;
+  virtual void processEvent(SDL_Event event, SceneManager& sm) = 0;
+  virtual void update(f64 delta, SceneManager& sm) = 0;
   virtual void render(SDL_Renderer* renderer) const = 0;
 };
 
