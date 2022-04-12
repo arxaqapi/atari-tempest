@@ -3,6 +3,7 @@
 //
 
 #include "GameScene.hpp"
+#include "SceneManager.hpp"
 #include <cassert>
 
 GameScene::GameScene(std::string data_path)
@@ -68,18 +69,29 @@ GameScene::update(f64 delta, SceneManager& sm)
   for (auto& enemy : spawn_manager_.getEnnemies()) {
     if (!enemy.isActive())
       continue;
+
     if (enemy.isColliding(player_)) {
       enemy.deactivate();
-      // todo: hit player
+      player_.hit();
     }
-    std::vector<Bullet>& bullets = player_.getBullets();
-    for (auto& bullet : bullets) {
+
+    if (player_.getHealth() == 0) {
+      // player is dead, go to menu
+      sm.set_next_state(STATE_TITLE_SCREEN);
+    }
+    for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && enemy.isColliding(bullet)) {
         bullet.deactivate();
-        enemy.deactivate();
-        // todo: score ++
+        enemy.hit();
+        player_.addScore(100);
       }
     }
+  }
+
+  if (player_.getScore() >= 500) {
+    // level won, go to menu
+    // todo: go to next level
+    sm.set_next_state(STATE_TITLE_SCREEN);
   }
 }
 

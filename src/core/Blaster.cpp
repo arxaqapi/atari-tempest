@@ -57,3 +57,27 @@ Blaster::getBullets()
 {
   return bullets_.getPool();
 }
+
+void
+Blaster::hit()
+{
+  health_ = std::max(health_ - 1, 0);
+}
+
+f32
+Blaster::getScore() const
+{
+  return score_;
+}
+
+void
+Blaster::addScore(f32 score)
+{
+  score_+=score;
+}
+
+u8
+Blaster::getHealth() const
+{
+  return health_;
+}

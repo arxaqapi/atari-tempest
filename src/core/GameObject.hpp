@@ -55,6 +55,7 @@ public:
                 f64 move_delay);
   void deactivate();
   bool isColliding(const GameObject& go) const;
+  virtual void hit();
   virtual void update(f64 delta, const Map& map) = 0;
   virtual void render(SDL_Renderer* renderer, const Map& map) const = 0;
 };

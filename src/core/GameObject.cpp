@@ -96,3 +96,9 @@ GameObject::isColliding(const GameObject& go) const
 {
   return SDL_HasIntersection(&go.collider_, &collider_);
 }
+
+void
+GameObject::hit()
+{
+  deactivate();
+}

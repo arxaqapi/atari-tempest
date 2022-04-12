@@ -65,6 +65,14 @@ void
 SceneManager::set_next_state(State next_requested_state)
 {
   switch (current_state_) {
+    case STATE_GAME_SCENE: {
+      std::vector<State> valid_states{ STATE_TITLE_SCREEN };
+      if (!contains(valid_states, next_requested_state)) {
+        throw utils::non_valid_state_switch();
+        return;
+      }
+      break;
+    }
     case STATE_TITLE_SCREEN: {
       std::vector<State> valid_states{ STATE_GAME_SCENE };
       if (!contains(valid_states, next_requested_state)) {

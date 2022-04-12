@@ -15,9 +15,12 @@ class Blaster : public GameObject
 private:
   static const u8 MAX_BULLETS_ = 100;
   static constexpr f64 SHOOT_DELAY_ = 150;
-  u8 max_health_{ 3 };
-  u8 health_{ max_health_ };
+  static constexpr u8 MAX_HEALTH_ = 3;
+  u8 health_{ MAX_HEALTH_ };
+  f32 score_{ 0 };
   bool is_shooting_{ false };
+
+private:
   GameObjectPool<Bullet> bullets_{ MAX_BULLETS_ };
   Delay shoot_delay_{ SHOOT_DELAY_ };
 
@@ -27,8 +30,12 @@ public:
   ~Blaster() override = default;
 
   std::vector<Bullet>& getBullets();
+  u8 getHealth() const;
+  f32 getScore() const;
+  void addScore(f32 score);
   void shoot();
   void stopShooting();
+  void hit() override;
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
 };
