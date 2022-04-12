@@ -73,6 +73,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     if (enemy.isColliding(player_)) {
       enemy.deactivate();
       player_.hit();
+      std::cout << "health : " << unsigned(player_.getHealth()) << std::endl;
     }
 
     if (player_.getHealth() == 0) {
@@ -84,11 +85,16 @@ GameScene::update(f64 delta, SceneManager& sm)
         bullet.deactivate();
         enemy.hit();
         player_.addScore(100);
+        std::cout << "score : " << player_.getScore() << std::endl;
       }
     }
   }
 
-  if (player_.getScore() >= 500) {
+  if (current_level_ == levels_data_.getNLevels() - 1) {
+    return;
+  }
+
+  if (player_.getScore() >= levels_data_.getScore(current_level_ + 1)) {
     // level won, go to menu
     // todo: go to next level
     sm.set_next_state(STATE_TITLE_SCREEN);

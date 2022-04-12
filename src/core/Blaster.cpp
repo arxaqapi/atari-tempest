@@ -64,14 +64,14 @@ Blaster::hit()
   health_ = std::max(health_ - 1, 0);
 }
 
-f32
+u32
 Blaster::getScore() const
 {
   return score_;
 }
 
 void
-Blaster::addScore(f32 score)
+Blaster::addScore(u32 score)
 {
   score_+=score;
 }

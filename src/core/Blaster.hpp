@@ -17,7 +17,7 @@ private:
   static constexpr f64 SHOOT_DELAY_ = 150;
   static constexpr u8 MAX_HEALTH_ = 3;
   u8 health_{ MAX_HEALTH_ };
-  f32 score_{ 0 };
+  u32 score_{ 0 };
   bool is_shooting_{ false };
 
 private:
@@ -31,8 +31,8 @@ public:
 
   std::vector<Bullet>& getBullets();
   u8 getHealth() const;
-  f32 getScore() const;
-  void addScore(f32 score);
+  u32 getScore() const;
+  void addScore(u32 score);
   void shoot();
   void stopShooting();
   void hit() override;

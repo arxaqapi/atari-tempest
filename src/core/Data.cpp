@@ -58,14 +58,17 @@ void
 Data::parseLine(const std::string& line)
 {
   std::stringstream line_input{ line };
-  std::string is_continuous_s, exterior_s, interior_s;
+  std::string is_continuous_s, score_s, exterior_s, interior_s;
 
   assert(std::getline(line_input, is_continuous_s, ';') &&
+         std::getline(line_input, score_s, ';') &&
          std::getline(line_input, exterior_s, ';') &&
          std::getline(line_input, interior_s, ';'));
 
   assert(is_continuous_s == "0" || is_continuous_s == "1");
   is_continuous_.emplace_back(is_continuous_s == "1");
+
+  scores_.emplace_back(std::stoul(score_s));
 
   std::vector<Vector2D> exterior, interior;
   parseCoordinates(exterior_s, exterior);
@@ -95,4 +98,11 @@ Data::loadData(const std::string& data_path)
   }
 
   file.close();
+}
+
+u32
+Data::getScore(u8 i) const
+{
+  assert(i < n_levels_);
+  return scores_[i];
 }
