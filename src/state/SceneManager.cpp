@@ -1,8 +1,10 @@
 
 #include "SceneManager.hpp"
 #include "../utils/Utils.hpp"
+#include "DeathScreen.hpp"
 #include "GameScene.hpp"
 #include "LevelSelectionScene.hpp"
+#include "WinScreen.hpp"
 
 template<typename C, typename T>
 bool
@@ -24,8 +26,7 @@ get_corresponding_scene(State state)
       break;
     }
     case STATE_LEVEL_SELECT: {
-      // return std::make_unique<LevelSelectionScene>();
-      throw utils::not_implemented();
+      return std::make_unique<LevelSelectionScene>();
       break;
     }
     case STATE_GAME_SCENE: {
@@ -37,11 +38,11 @@ get_corresponding_scene(State state)
       break;
     }
     case STATE_WIN_SCREEN: {
-      throw utils::not_implemented();
+      return std::make_unique<WinScreen>();
       break;
     }
     case STATE_DEATH_SCREEN: {
-      throw utils::not_implemented();
+      return std::make_unique<DeathScreen>();
       break;
     }
 
@@ -63,16 +64,8 @@ void
 SceneManager::set_next_state(State next_requested_state)
 {
   switch (current_state_) {
-    case STATE_GAME_SCENE: {
-      std::vector<State> valid_states{ STATE_TITLE_SCREEN };
-      if (!contains(valid_states, next_requested_state)) {
-        throw utils::non_valid_state_switch();
-        return;
-      }
-      break;
-    }
     case STATE_TITLE_SCREEN: {
-      std::vector<State> valid_states{ STATE_GAME_SCENE };
+      std::vector<State> valid_states{ STATE_LEVEL_SELECT };
       if (!contains(valid_states, next_requested_state)) {
         throw utils::non_valid_state_switch();
         return;
@@ -81,6 +74,16 @@ SceneManager::set_next_state(State next_requested_state)
     }
     case STATE_LEVEL_SELECT: {
       std::vector<State> valid_states{ STATE_GAME_SCENE };
+      if (!contains(valid_states, next_requested_state)) {
+        throw utils::non_valid_state_switch();
+        return;
+      }
+      break;
+    }
+    case STATE_GAME_SCENE: {
+      std::vector<State> valid_states{ STATE_TITLE_SCREEN,
+                                       STATE_WIN_SCREEN,
+                                       STATE_DEATH_SCREEN };
       if (!contains(valid_states, next_requested_state)) {
         throw utils::non_valid_state_switch();
         return;

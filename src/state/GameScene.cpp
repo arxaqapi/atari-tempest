@@ -7,6 +7,8 @@
 #include "SceneManager.hpp"
 #include <cassert>
 
+using namespace std::string_literals;
+
 GameScene::GameScene(u8 level)
   : current_level_data_{ level }
   , map_{ current_level_data_.getExterior(),
@@ -79,7 +81,7 @@ GameScene::update(f64 delta, SceneManager& sm)
 
     if (player_.getHealth() == 0) {
       // player is dead, go to menu
-      sm.set_next_state(STATE_TITLE_SCREEN);
+      sm.set_next_state(STATE_DEATH_SCREEN);
     }
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && enemy.isColliding(bullet)) {
@@ -94,8 +96,8 @@ GameScene::update(f64 delta, SceneManager& sm)
   if (player_.getScore() >= current_level_data_.getScore()) {
     // level won, go to next level
     if (!loadLevel(current_level_data_.getLevelNum() + 1)) {
-      // if no more level, go to menu
-      sm.set_next_state(STATE_TITLE_SCREEN);
+      // if no more level, go to win screen
+      sm.set_next_state(STATE_WIN_SCREEN);
     }
   }
 }
@@ -119,5 +121,8 @@ GameScene::render(SDL_Renderer* renderer) const
   spawn_manager_.render(renderer, map_);
 
   // Draw text
-  Pen::draw_string("GameScene", 0, 26, renderer);
+  Pen::draw_string(
+    "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
+  Pen::draw_string(
+    "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
 }
