@@ -10,6 +10,7 @@
  */
 
 #include "TitleScreen.hpp"
+#include "../ui/Pen.hpp"
 #include "SceneManager.hpp"
 #include <iostream>
 
@@ -28,12 +29,11 @@ TitleScreen::update(f64 delta, SceneManager& sm)
 void
 TitleScreen::render(SDL_Renderer* renderer) const
 {
-  // SDL_assert(SDL_SetRenderDrawColor(renderer, col_.renderer, col_.g, col_.b,
-  // col_.a) == 0
-
-  // TODO: Oui
   SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, col_.a);
   SDL_RenderClear(renderer);
+
+  // Draw text
+  Pen::draw_string("Title Screen :D", 20, 200, renderer);
 }
 
 void

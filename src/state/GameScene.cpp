@@ -3,6 +3,7 @@
 //
 
 #include "GameScene.hpp"
+#include "../ui/Pen.hpp"
 #include "SceneManager.hpp"
 #include <cassert>
 
@@ -11,7 +12,7 @@ GameScene::GameScene(u8 level)
   , map_{ current_level_data_.getExterior(),
           current_level_data_.getInterior(),
           current_level_data_.isContinuous() }
-  , player_{map_}
+  , player_{ map_ }
   , spawn_manager_{ map_.size() }
 {}
 
@@ -72,7 +73,8 @@ GameScene::update(f64 delta, SceneManager& sm)
     if (enemy.isColliding(player_)) {
       enemy.deactivate();
       player_.hit();
-      std::cout << "[Debug]: Health = " << unsigned(player_.getHealth()) << std::endl;
+      std::cout << "[Debug]: Health = " << unsigned(player_.getHealth())
+                << std::endl;
     }
 
     if (player_.getHealth() == 0) {
@@ -93,7 +95,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     // level won, go to next level
     if (!loadLevel(current_level_data_.getLevelNum() + 1)) {
       // if no more level, go to menu
-       sm.set_next_state(STATE_TITLE_SCREEN);
+      sm.set_next_state(STATE_TITLE_SCREEN);
     }
   }
 }
@@ -115,4 +117,7 @@ GameScene::render(SDL_Renderer* renderer) const
 
   // Render enemies
   spawn_manager_.render(renderer, map_);
+
+  // Draw text
+  Pen::draw_string("GameScene", 0, 26, renderer);
 }
