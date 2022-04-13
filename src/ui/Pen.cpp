@@ -1,4 +1,5 @@
 #include "Pen.hpp"
+#include "../utils/Utils.hpp"
 
 int
 Pen::index_of_ascii(const char c)
@@ -28,11 +29,8 @@ Pen::draw_character(SDL_Renderer* const r,
 {
   int char_index = Pen::index_of_ascii(c);
   if (char_index < 0 || char_index >= 95) {
-    throw "Not a valid character to draw";
-    exit(1);
+    throw utils::non_valid_character_requested();
   }
-  int n_vertices = Pen::hershey_table[char_index][0];
-  int h_space = Pen::hershey_table[char_index][1];
 
   int i = 2;
   while ((i + 3) < 112) {
@@ -50,7 +48,7 @@ Pen::draw_character(SDL_Renderer* const r,
       i += 2;
     }
   }
-  return h_space;
+  return Pen::hershey_table[char_index][1];
 }
 
 void
