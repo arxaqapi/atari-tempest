@@ -23,16 +23,15 @@ GameObject::GameObject(const Map& map,
                        f32 progress,
                        e_direction moving_direction,
                        f64 move_delay)
-  : position_{ map.calcPosition(band_num, progress) }
-  , band_num_{ band_num }
+  : band_num_{ band_num }
   , active_{ active }
   , progress_{ progress }
   , moving_direction_{ moving_direction }
   , move_delay_{ move_delay }
-  , collider_{ static_cast<int>(position_.getX()),
-               static_cast<int>(position_.getY())}
 {
-  std::cout << collider_.w << std::endl;
+  Vector2D position = map.calcPosition(band_num, progress);
+  collider_.x = position.getX();
+  collider_.y = position.getY();
 }
 
 bool
@@ -82,9 +81,9 @@ GameObject::move(f64 delta, const Map& map)
 
   move_delay_.reset();
 
-  position_ = map.calcPosition(band_num_, progress_);
-  collider_.x = position_.getX();
-  collider_.y = position_.getY();
+  Vector2D position = map.calcPosition(band_num_, progress_);
+  collider_.x = position.getX();
+  collider_.y = position.getY();
 }
 
 void
@@ -100,9 +99,9 @@ GameObject::activate(const Map& map,
   moving_direction_ = moving_direction;
   move_delay_.set(move_delay);
   move_delay_.reset();
-  position_ = map.calcPosition(band_num, progress);
-  collider_.x = position_.getX();
-  collider_.y = position_.getY();
+  Vector2D position = map.calcPosition(band_num, progress);
+  collider_.x = position.getX();
+  collider_.y = position.getY();
 }
 
 void

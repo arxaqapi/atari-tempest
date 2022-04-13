@@ -22,7 +22,6 @@ enum e_direction
 class GameObject
 {
 protected:
-  Vector2D position_;
   u8 band_num_ = 0;
   bool active_ = true;
   f32 progress_ = 0;
