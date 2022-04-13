@@ -22,7 +22,7 @@ enum e_direction
 class GameObject
 {
 protected:
-  static constexpr f64 MOVE_DELAY_ = 50;
+  Vector2D position_;
   u8 band_num_ = 0;
   bool active_ = true;
   f32 progress_ = 0;
@@ -30,14 +30,20 @@ protected:
   {
     NONE
   };
-  Delay move_delay_{ MOVE_DELAY_ };
-  SDL_Rect collider_; // todo: init
+  Delay move_delay_{ 0 };
+  SDL_Rect collider_;
 
   void move(f64 delta, const Map& map);
 
 public:
   GameObject() = default;
   GameObject(u8 band_num,
+             bool active,
+             f32 progress,
+             e_direction moving_direction,
+             f64 move_delay);
+  GameObject(const Map& map,
+             u8 band_num,
              bool active,
              f32 progress,
              e_direction moving_direction,
@@ -49,7 +55,8 @@ public:
   u8 getBandNum() const;
   void setMovingDirection(e_direction moving_direction);
   void setMoveDelay(f64 moveDelay);
-  void activate(u8 band_num,
+  void activate(const Map& map,
+                u8 band_num,
                 f32 progress,
                 e_direction moving_direction,
                 f64 move_delay);

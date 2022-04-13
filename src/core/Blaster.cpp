@@ -4,6 +4,10 @@
 
 #include "Blaster.hpp"
 
+Blaster::Blaster(const Map& map)
+  : GameObject(map, 0, true, 0, NONE, MOVE_DELAY_)
+{}
+
 void
 Blaster::update(f64 delta, const Map& map)
 {
@@ -15,18 +19,12 @@ Blaster::update(f64 delta, const Map& map)
   if (is_shooting_) {
     shoot_delay_.update(delta);
     if (shoot_delay_.complete()) {
-      bullets_.create(band_num_);
+      bullets_.create(map, band_num_);
       shoot_delay_.reset();
     }
   }
 
   move(delta, map);
-
-  Vector2D p = map.calcPosition(band_num_, progress_);
-  collider_.x = p.getX();
-  collider_.y = p.getY();
-  collider_.w = 20;
-  collider_.h = 20;
 }
 
 void
@@ -73,7 +71,7 @@ Blaster::getScore() const
 void
 Blaster::addScore(u32 score)
 {
-  score_+=score;
+  score_ += score;
 }
 
 u8

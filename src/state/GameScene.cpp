@@ -11,6 +11,7 @@ GameScene::GameScene(u8 level)
   , map_{ current_level_data_.getExterior(),
           current_level_data_.getInterior(),
           current_level_data_.isContinuous() }
+  , player_{map_}
   , spawn_manager_{ map_.size() }
 {}
 
@@ -64,7 +65,7 @@ GameScene::update(f64 delta, SceneManager& sm)
   map_.select(player_.getBandNum());
   spawn_manager_.update(delta, map_);
 
-  for (auto& enemy : spawn_manager_.getEnnemies()) {
+  for (auto& enemy : spawn_manager_.getEnemies()) {
     if (!enemy.isActive())
       continue;
 

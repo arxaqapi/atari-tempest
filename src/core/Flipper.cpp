@@ -13,9 +13,11 @@ Flipper::Flipper(u8 band_num)
 {}
 
 void
-Flipper::activate(u8 band_num)
+Flipper::activate(const Map &map, u8 band_num)
 {
-  GameObject::activate(band_num, 1, FORWARD, 0);
+  GameObject::activate(map, band_num, 1, FORWARD, 0);
+  collider_.w = 20;
+  collider_.h = 20;
 }
 
 void
@@ -40,10 +42,4 @@ Flipper::update(f64 delta, const Map& map)
   }
 
   move(delta, map);
-
-  Vector2D p = map.calcPosition(band_num_, progress_);
-  collider_.x = p.getX();
-  collider_.y = p.getY();
-  collider_.w = 20;
-  collider_.h = 20;
 }

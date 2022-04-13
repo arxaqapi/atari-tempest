@@ -14,9 +14,11 @@ Bullet::Bullet(u8 band_num)
 {}
 
 void
-Bullet::activate(u8 band_num)
+Bullet::activate(const Map& map, u8 band_num)
 {
-  GameObject::activate(band_num, 0.01, BACKWARD, 0);
+  GameObject::activate(map, band_num, 0.01, BACKWARD, 0);
+  collider_.w = 10;
+  collider_.h = 10;
 }
 
 void
@@ -29,12 +31,6 @@ Bullet::update(f64 delta, const Map& map)
     active_ = false;
 
   move(delta, map);
-
-  Vector2D p = map.calcPosition(band_num_, progress_);
-  collider_.x = p.getX();
-  collider_.y = p.getY();
-  collider_.w = 10;
-  collider_.h = 10;
 }
 
 void

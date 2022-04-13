@@ -17,6 +17,26 @@ GameObject::GameObject(u8 band_num,
   , move_delay_{ move_delay }
 {}
 
+GameObject::GameObject(const Map& map,
+                       u8 band_num,
+                       bool active,
+                       f32 progress,
+                       e_direction moving_direction,
+                       f64 move_delay)
+  : position_{ map.calcPosition(band_num, progress) }
+  , band_num_{ band_num }
+  , active_{ active }
+  , progress_{ progress }
+  , moving_direction_{ moving_direction }
+  , move_delay_{ move_delay }
+  , collider_{ static_cast<int>(position_.getX()),
+               static_cast<int>(position_.getY()),
+               20,
+               20 }
+{
+  std::cout << collider_.w << std::endl;
+}
+
 bool
 GameObject::isActive() const
 {
@@ -63,10 +83,15 @@ GameObject::move(f64 delta, const Map& map)
   }
 
   move_delay_.reset();
+
+  position_ = map.calcPosition(band_num_, progress_);
+  collider_.x = position_.getX();
+  collider_.y = position_.getY();
 }
 
 void
-GameObject::activate(u8 band_num,
+GameObject::activate(const Map& map,
+                     u8 band_num,
                      f32 progress,
                      e_direction moving_direction,
                      f64 move_delay)
@@ -77,6 +102,9 @@ GameObject::activate(u8 band_num,
   moving_direction_ = moving_direction;
   move_delay_.set(move_delay);
   move_delay_.reset();
+  position_ = map.calcPosition(band_num, progress);
+  collider_.x = position_.getX();
+  collider_.y = position_.getY();
 }
 
 void

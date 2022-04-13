@@ -13,7 +13,7 @@ SpawnManager::update(f64 delta, const Map& map)
 {
   spawn_delay_.update(delta);
   if (spawn_delay_.complete()) {
-    enemies_.create(spawn_distribution_(generator_));
+    enemies_.create(map, spawn_distribution_(generator_));
     spawn_delay_.reset();
   }
   enemies_.update(delta, map);
@@ -26,7 +26,7 @@ SpawnManager::render(SDL_Renderer* renderer, const Map& map) const
 }
 
 std::vector<Flipper>&
-SpawnManager::getEnnemies()
+SpawnManager::getEnemies()
 {
   return enemies_.getPool();
 }
