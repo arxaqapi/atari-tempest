@@ -30,9 +30,7 @@ GameObject::GameObject(const Map& map,
   , moving_direction_{ moving_direction }
   , move_delay_{ move_delay }
   , collider_{ static_cast<int>(position_.getX()),
-               static_cast<int>(position_.getY()),
-               20,
-               20 }
+               static_cast<int>(position_.getY())}
 {
   std::cout << collider_.w << std::endl;
 }

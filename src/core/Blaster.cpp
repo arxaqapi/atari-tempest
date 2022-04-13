@@ -6,7 +6,10 @@
 
 Blaster::Blaster(const Map& map)
   : GameObject(map, 0, true, 0, NONE, MOVE_DELAY_)
-{}
+{
+  collider_.w = 20;
+  collider_.h = 20;
+}
 
 void
 Blaster::update(f64 delta, const Map& map)
