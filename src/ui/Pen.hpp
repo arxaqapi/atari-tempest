@@ -30,6 +30,7 @@ private:
                             const int xoffset,
                             const int yoffset);
 
+  // Hershey Vector Font: http://paulbourke.net/dataformats/hershey/
   static constexpr int hershey_table[95][112] = {
     0,  16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
