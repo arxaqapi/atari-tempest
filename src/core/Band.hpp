@@ -26,7 +26,9 @@ private:
   Vector2D unit_vector_;
   f32 depth_{ 0 };
   bool is_selected_{ false };
-  static Vector2D calcCenter(const Vector2D& vec1, const Vector2D& vec2);
+
+public:
+  const Vector2D& getExterCenter() const;
 
 public:
   Band() = default;
@@ -35,6 +37,7 @@ public:
   ~Band() = default;
 
   Vector2D calcPosition(f32 progress) const;
+  Vector2D calcPosition(Vector2D vec) const;
   void render(SDL_Renderer* renderer) const;
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };

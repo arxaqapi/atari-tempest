@@ -36,9 +36,61 @@ Blaster::render(SDL_Renderer* renderer, const Map& map) const
   if (!active_)
     return;
   bullets_.render(renderer, map);
-  // drawing collider rectangle for now...
-  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-  SDL_RenderDrawRect(renderer, &collider_);
+
+  const Band& band = map.getBand(band_num_);
+  auto exterior = band.getExterior();
+
+  f32 x = band.getExterCenter().vec_to(exterior.first).magnitude();
+
+  Vector2D inner_left = band.calcPosition({ x * 0.9f, 0 });
+  Vector2D inner_right = band.calcPosition({ -x * 0.9f, 0 });
+  Vector2D inner_top = band.calcPosition({ 0, -10 });
+  Vector2D outer_top = band.calcPosition({ 0, -25 });
+  Vector2D claw_left = band.calcPosition({ x * 0.2f, 20 });
+  Vector2D claw_right = band.calcPosition({ -x * 0.2f, 20 });
+
+  SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+
+  SDL_RenderDrawLineF(renderer,
+                      exterior.first.getX(),
+                      exterior.first.getY(),
+                      claw_left.getX(),
+                      claw_left.getY());
+  SDL_RenderDrawLineF(renderer,
+                      exterior.second.getX(),
+                      exterior.second.getY(),
+                      claw_right.getX(),
+                      claw_right.getY());
+  SDL_RenderDrawLineF(renderer,
+                      exterior.first.getX(),
+                      exterior.first.getY(),
+                      outer_top.getX(),
+                      outer_top.getY());
+  SDL_RenderDrawLineF(renderer,
+                      exterior.second.getX(),
+                      exterior.second.getY(),
+                      outer_top.getX(),
+                      outer_top.getY());
+  SDL_RenderDrawLineF(renderer,
+                      inner_left.getX(),
+                      inner_left.getY(),
+                      inner_top.getX(),
+                      inner_top.getY());
+  SDL_RenderDrawLineF(renderer,
+                      inner_right.getX(),
+                      inner_right.getY(),
+                      inner_top.getX(),
+                      inner_top.getY());
+  SDL_RenderDrawLineF(renderer,
+                      claw_left.getX(),
+                      claw_left.getY(),
+                      inner_left.getX(),
+                      inner_left.getY());
+  SDL_RenderDrawLineF(renderer,
+                      claw_right.getX(),
+                      claw_right.getY(),
+                      inner_right.getX(),
+                      inner_right.getY());
 }
 
 void

@@ -26,7 +26,7 @@ Flipper::render(SDL_Renderer* renderer, const Map& map) const
   if (!active_)
     return;
   // drawing collider rectangle for now...
-  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderDrawRect(renderer, &collider_);
 }
 
