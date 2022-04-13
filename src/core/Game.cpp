@@ -20,14 +20,6 @@ Game::~Game()
 }
 
 void
-Game::init()
-{
-  // assert(active_scene_ && "Error, active_scene_ pointer is null");
-  std::cout << "Game Object init called" << std::endl;
-  run_ = true;
-}
-
-void
 Game::clear()
 {
   r_.clear();

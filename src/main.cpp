@@ -26,7 +26,6 @@ main(void)
   Game g{ 1000, 600 };
   Timer timer{ max_ms_per_frame, timer_type::PERFORMANCE };
 
-  g.init();
   while (g.is_running()) {
     timer.start();
     //// SECTION: Loop start
