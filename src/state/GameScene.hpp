@@ -10,11 +10,11 @@
 #include "../core/Data.hpp"
 #include "../core/Flipper.hpp"
 #include "../core/GameObjectPool.hpp"
+#include "../core/LevelData.hpp"
 #include "../core/Map.hpp"
 #include "../core/SpawnManager.hpp"
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
-#include "../core/LevelData.hpp"
 #include <string>
 #include <vector>
 

@@ -13,7 +13,7 @@ Flipper::Flipper(u8 band_num)
 {}
 
 void
-Flipper::activate(const Map &map, u8 band_num)
+Flipper::activate(const Map& map, u8 band_num)
 {
   GameObject::activate(map, band_num, 1, FORWARD, 0);
   collider_.w = 20;

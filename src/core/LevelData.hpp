@@ -5,10 +5,10 @@
 #ifndef TEMPEST_ATARI_LEVELDATA_HPP
 #define TEMPEST_ATARI_LEVELDATA_HPP
 
-#include <vector>
-#include <string>
-#include "../utils/types.hpp"
 #include "../utils/Vector2D.hpp"
+#include "../utils/types.hpp"
+#include <string>
+#include <vector>
 class LevelData
 {
 private:

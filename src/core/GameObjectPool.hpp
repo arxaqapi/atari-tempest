@@ -25,7 +25,7 @@ public:
   ~GameObjectPool() = default;
 
   std::vector<GameObjectType>& getPool();
-  void create(const Map &map, u8 band_num);
+  void create(const Map& map, u8 band_num);
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
   void clear();
@@ -49,7 +49,7 @@ GameObjectPool<GameObjectType>::find()
 
 template<typename GameObjectType>
 void
-GameObjectPool<GameObjectType>::create(const Map &map, u8 band_num)
+GameObjectPool<GameObjectType>::create(const Map& map, u8 band_num)
 {
   int index = find();
   if (index == -1)

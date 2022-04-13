@@ -27,7 +27,7 @@ private:
 
 public:
   Blaster() = default;
-  explicit Blaster(const Map &map);
+  explicit Blaster(const Map& map);
   Blaster(const Blaster& blaster) = default;
   ~Blaster() override = default;
 

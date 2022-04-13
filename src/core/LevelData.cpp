@@ -2,19 +2,22 @@
 // Created by massimo on 13/04/2022.
 //
 
-#include <fstream>
-#include <cassert>
-#include <sstream>
-#include <iostream>
 #include "LevelData.hpp"
-LevelData::LevelData(u8 level) : level_num_{level} {
+#include <cassert>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+LevelData::LevelData(u8 level)
+  : level_num_{ level }
+{
   load(level);
 }
 
 bool
 LevelData::load(u8 level)
 {
-  std::string file_path = LEVELS_DATA_DIR_ + LEVEL_PREFIX_ + std::to_string(level);
+  std::string file_path =
+    LEVELS_DATA_DIR_ + LEVEL_PREFIX_ + std::to_string(level);
   std::ifstream file{ file_path, std::ios::in };
 
   std::cout << "[Debug]: Trying to open file : " << file_path << std::endl;
