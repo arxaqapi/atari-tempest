@@ -33,6 +33,11 @@ struct file_not_opened : public std::exception
 {
   const char* what() const throw();
 };
+
+struct non_valid_character_requested : public std::exception
+{
+  const char* what() const throw();
+};
 }
 
 #endif
