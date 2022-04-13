@@ -22,4 +22,4 @@ add_executable(tempest ${SOURCES})
 set_property(TARGET tempest PROPERTY CXX_STANDARD 20)
 target_link_libraries(tempest ${SDL2_LIBRARIES})
 
-target_compile_options(tempest PRIVATE -Wall -Wextra -Wpedantic -g ) 
+target_compile_options(tempest PRIVATE -Wall -Wextra -Wpedantic -Wreorder -g ) 
