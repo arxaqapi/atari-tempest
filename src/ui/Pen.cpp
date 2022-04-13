@@ -55,6 +55,16 @@ void
 Pen::draw_string(std::string s, int xpos, int ypos, SDL_Renderer* const r)
 {
   for (auto& c : s) {
-    xpos += Pen::draw_character(r, c, xpos, ypos) + 2;
+    xpos += Pen::draw_character(r, c, xpos, ypos) + Pen::space_size;
   }
+}
+
+int
+Pen::get_string_width(std::string s)
+{
+  int total_width = 0;
+  for (auto& c : s) {
+    total_width += Pen::hershey_table[Pen::index_of_ascii(c)][1];
+  }
+  return total_width + (s.size() - 1) * Pen::space_size;
 }
