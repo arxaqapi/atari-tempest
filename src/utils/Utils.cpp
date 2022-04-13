@@ -23,3 +23,9 @@ utils::file_not_opened::what() const throw()
 {
   return "Unable to open levels data file";
 }
+
+const char*
+utils::non_valid_character_requested::what() const throw()
+{
+  return "Requested character not supported";
+}
