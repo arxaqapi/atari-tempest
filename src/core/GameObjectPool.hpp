@@ -28,6 +28,7 @@ public:
   void create(u8 band_num);
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
+  void clear();
 };
 
 template<typename GameObjectType>
@@ -78,6 +79,15 @@ std::vector<GameObjectType>&
 GameObjectPool<GameObjectType>::getPool()
 {
   return pool_;
+}
+
+template<typename GameObjectType>
+void
+GameObjectPool<GameObjectType>::clear()
+{
+  for (int i = 0; i < pool_size_; ++i) {
+    pool_[i].deactivate();
+  }
 }
 
 #endif // TEMPEST_ATARI_GAMEOBJECTPOOL_HPP

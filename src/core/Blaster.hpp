@@ -38,6 +38,7 @@ public:
   void hit() override;
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
+  void clear();
 };
 
 #endif // TEMPEST_ATARI_BLASTER_HPP

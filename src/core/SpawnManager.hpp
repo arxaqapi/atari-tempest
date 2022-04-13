@@ -26,6 +26,7 @@ public:
   std::vector<Flipper>& getEnnemies();
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
+  void clear();
 };
 
 #endif // TEMPEST_ATARI_SPAWNMANAGER_HPP

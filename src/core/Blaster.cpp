@@ -81,3 +81,11 @@ Blaster::getHealth() const
 {
   return health_;
 }
+
+void
+Blaster::clear()
+{
+  band_num_ = 0;
+  is_shooting_ = false;
+  bullets_.clear();
+}

@@ -14,6 +14,7 @@
 #include "../core/SpawnManager.hpp"
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
+#include "../core/LevelData.hpp"
 #include <string>
 #include <vector>
 
@@ -22,8 +23,7 @@ class SceneManager;
 class GameScene : public Scene
 {
 private:
-  Data levels_data_;
-  u8 current_level_{ 0 };
+  LevelData current_level_data_;
   Map map_;
   Blaster player_;
   SpawnManager spawn_manager_;
@@ -31,9 +31,8 @@ private:
 public:
   GameScene() = default;
   GameScene(const GameScene& game_scene) = default;
-  explicit GameScene(std::string data_path);
-  void loadLevel(u8 level);
-  void loadNextLevel();
+  explicit GameScene(u8 level);
+  bool loadLevel(u8 level);
   void processEvent(SDL_Event event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
   void render(SDL_Renderer* renderer) const override;

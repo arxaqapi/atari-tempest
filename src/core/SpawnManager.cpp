@@ -30,3 +30,10 @@ SpawnManager::getEnnemies()
 {
   return enemies_.getPool();
 }
+
+void
+SpawnManager::clear()
+{
+  enemies_.clear();
+  spawn_delay_.reset();
+}

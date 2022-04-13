@@ -29,7 +29,7 @@ get_corresponding_scene(State state)
       break;
     }
     case STATE_GAME_SCENE: {
-      return std::make_unique<GameScene>("./data/levels_data.txt");
+      return std::make_unique<GameScene>(0);
       break;
     }
     case STATE_PAUSE_MENU: {

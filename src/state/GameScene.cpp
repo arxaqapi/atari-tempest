@@ -6,31 +6,29 @@
 #include "SceneManager.hpp"
 #include <cassert>
 
-GameScene::GameScene(std::string data_path)
-  : levels_data_{ data_path }
-  , map_{ levels_data_.getExterior(current_level_),
-          levels_data_.getInterior(current_level_),
-          levels_data_.isContinuous(current_level_) }
+GameScene::GameScene(u8 level)
+  : current_level_data_{ level }
+  , map_{ current_level_data_.getExterior(),
+          current_level_data_.getInterior(),
+          current_level_data_.isContinuous() }
   , spawn_manager_{ map_.size() }
 {}
 
-void
+bool
 GameScene::loadLevel(u8 level)
 {
-  map_.reset(levels_data_.getExterior(level),
-             levels_data_.getInterior(level),
-             levels_data_.isContinuous(level));
-  current_level_ = level;
-}
+  if (!current_level_data_.load(level))
+    return false;
 
-void
-GameScene::loadNextLevel()
-{
-  assert(current_level_ != levels_data_.getNLevels() - 1);
-  current_level_++;
-  map_.reset(levels_data_.getExterior(current_level_),
-             levels_data_.getInterior(current_level_),
-             levels_data_.isContinuous(current_level_));
+  spawn_manager_.clear();
+
+  player_.clear();
+
+  map_.reset(current_level_data_.getExterior(),
+             current_level_data_.getInterior(),
+             current_level_data_.isContinuous());
+
+  return true;
 }
 
 void
@@ -73,7 +71,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     if (enemy.isColliding(player_)) {
       enemy.deactivate();
       player_.hit();
-      std::cout << "health : " << unsigned(player_.getHealth()) << std::endl;
+      std::cout << "[Debug]: Health = " << unsigned(player_.getHealth()) << std::endl;
     }
 
     if (player_.getHealth() == 0) {
@@ -84,20 +82,18 @@ GameScene::update(f64 delta, SceneManager& sm)
       if (bullet.isActive() && enemy.isColliding(bullet)) {
         bullet.deactivate();
         enemy.hit();
-        player_.addScore(100);
-        std::cout << "score : " << player_.getScore() << std::endl;
+        player_.addScore(200);
+        std::cout << "[Debug]: Score = " << player_.getScore() << std::endl;
       }
     }
   }
 
-  if (current_level_ == levels_data_.getNLevels() - 1) {
-    return;
-  }
-
-  if (player_.getScore() >= levels_data_.getScore(current_level_ + 1)) {
-    // level won, go to menu
-    // todo: go to next level
-    sm.set_next_state(STATE_TITLE_SCREEN);
+  if (player_.getScore() >= current_level_data_.getScore()) {
+    // level won, go to next level
+    if (!loadLevel(current_level_data_.getLevelNum() + 1)) {
+      // if no more level, go to menu
+       sm.set_next_state(STATE_TITLE_SCREEN);
+    }
   }
 }
 
