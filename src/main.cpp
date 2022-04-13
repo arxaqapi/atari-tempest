@@ -34,7 +34,6 @@ main(void)
     g.process_events();
     g.clear();
     g.update(delta);
-    g.switch_scene();
     g.render();
 
     //    timer.artificial_delay();

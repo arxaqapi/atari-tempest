@@ -47,7 +47,6 @@ public:
    */
   void update(f64 delta);
   void render();
-  void switch_scene();
 
   bool is_running() { return run_; };
 };

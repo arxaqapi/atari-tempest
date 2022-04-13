@@ -54,11 +54,9 @@ get_corresponding_scene(State state)
 void
 SceneManager::switch_scene()
 {
-  if (current_state_ != next_state_) {
-    current_scene_p_.reset();
-    current_scene_p_ = get_corresponding_scene(next_state_);
-    current_state_ = next_state_;
-  }
+  current_scene_p_.reset();
+  current_scene_p_ = get_corresponding_scene(next_state_);
+  current_state_ = next_state_;
 }
 
 void
@@ -111,4 +109,12 @@ SceneManager::set_next_state(State next_requested_state)
       break;
   }
   next_state_ = next_requested_state;
+}
+
+void
+SceneManager::update(f64 delta)
+{
+  if (current_state_ != next_state_)
+    switch_scene();
+  current_scene_p_->update(delta, *this);
 }

@@ -66,7 +66,7 @@ Game::process_events()
 void
 Game::update(f64 delta)
 {
-  sm_.get_current_scene().update(delta, sm_);
+  sm_.update(delta);
 }
 
 void
@@ -74,10 +74,4 @@ Game::render()
 {
   sm_.get_current_scene().render(r_.get_renderer());
   r_.draw();
-}
-
-void
-Game::switch_scene()
-{
-  sm_.switch_scene();
 }

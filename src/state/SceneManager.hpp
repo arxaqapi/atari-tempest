@@ -37,10 +37,11 @@ public:
   void set_next_state(State next_requested_state);
   /**
    * @brief Destroys the current scene object and affects the new requested one
-   * if the `next_state_` variable is different than the `current_state_` one
    *
    */
   void switch_scene();
 
   Scene& get_current_scene() { return *current_scene_p_; }
+
+  void update(f64 delta);
 };
