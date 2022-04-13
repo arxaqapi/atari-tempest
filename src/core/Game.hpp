@@ -22,7 +22,7 @@
 class Game
 {
 private:
-  bool run_;
+  bool run_ = true;
   u16 WINDOWS_WIDTH_ = 960;
   u16 WINDOWS_HEIGHT_ = 540;
   SceneManager sm_;
@@ -36,7 +36,6 @@ public:
     , WINDOWS_HEIGHT_{ w_height } {};
   ~Game();
 
-  void init();
   void clear();
   void process_events();
   /**
