@@ -45,11 +45,16 @@ public:
 
   Vector2D unit() const;
 
-  inline static Vector2D between(const Vector2D& vec1, const Vector2D& vec2, f32 percentage) {
-    return { (vec1.getX() + vec2.getX()) * percentage, (vec1.getY() + vec2.getY()) * percentage };
+  inline static Vector2D between(const Vector2D& vec1,
+                                 const Vector2D& vec2,
+                                 f32 percentage)
+  {
+    return { (vec1.getX() + vec2.getX()) * percentage,
+             (vec1.getY() + vec2.getY()) * percentage };
   }
 
-  inline static Vector2D center(const Vector2D& vec1, const Vector2D& vec2) {
+  inline static Vector2D center(const Vector2D& vec1, const Vector2D& vec2)
+  {
     return between(vec1, vec2, 0.5);
   }
 

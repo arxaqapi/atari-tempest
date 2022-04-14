@@ -9,8 +9,8 @@
  * @brief
  */
 
-#include <iostream>
 #include "Band.hpp"
+#include <iostream>
 
 Band::Band(Vector2D exter_a,
            Vector2D exter_b,
@@ -39,10 +39,9 @@ Band::calcPosition(f32 progress) const
 Vector2D
 Band::calcPosition(Vector2D vec) const
 {
-  Vector2D p {
-    -unit_vector_.getY() * vec.getX() - unit_vector_.getX() * vec.getY(),
-    unit_vector_.getX() - unit_vector_.getY() * vec.getY()
-  };
+  Vector2D p{ -unit_vector_.getY() * vec.getX() -
+                unit_vector_.getX() * vec.getY(),
+              unit_vector_.getX() - unit_vector_.getY() * vec.getY() };
   return p + exter_center_;
 }
 
