@@ -29,9 +29,10 @@ private:
   SpawnManager spawn_manager_;
 
 public:
-  GameScene() = default;
+  GameScene() = delete;
   GameScene(const GameScene& game_scene) = default;
   explicit GameScene(u8 level);
+
   bool loadLevel(u8 level);
   void processEvent(SDL_Event event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
