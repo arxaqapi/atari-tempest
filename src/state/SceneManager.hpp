@@ -18,10 +18,8 @@ enum State
 class SceneManager
 {
 private:
-  // std::unique_ptr<Scene> current_scene_ =
-  // std::make_unique<GameScene>("./data/levels_data.txt");
   std::unique_ptr<Scene> current_scene_p_ = std::make_unique<TitleScreen>();
-  State current_state_ = STATE_TITLE_SCREEN; // TODO: to set at right endroit
+  State current_state_ = STATE_TITLE_SCREEN; // TODO: to set at right place
   State next_state_ = STATE_TITLE_SCREEN;
 
 public:
