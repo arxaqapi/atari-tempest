@@ -89,7 +89,7 @@ Timer::variable_delay()
   } else if (t_ == timer_type::PERFORMANCE) {
     ms_elapsed = to_ms(stop_ - start_);
   } else {
-    throw utils::not_implemented();
+    throw errors::not_implemented();
   }
   auto del = max_ms_per_frame_ - ms_elapsed;
   assert(del <= max_ms_per_frame_ && "Computed delay is way too big");

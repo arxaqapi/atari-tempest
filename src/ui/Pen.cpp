@@ -1,5 +1,5 @@
 #include "Pen.hpp"
-#include "../utils/Utils.hpp"
+#include "../utils/Errors.hpp"
 
 int
 Pen::index_of_ascii(const char c)
@@ -29,7 +29,7 @@ Pen::draw_character(SDL_Renderer* const r,
 {
   int char_index = Pen::index_of_ascii(c);
   if (char_index < 0 || char_index >= 95) {
-    throw utils::non_valid_character_requested();
+    throw errors::non_valid_character_requested();
   }
 
   int i = 2;

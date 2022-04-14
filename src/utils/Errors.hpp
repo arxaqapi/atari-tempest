@@ -9,12 +9,12 @@
  * @brief
  */
 
-#ifndef H_TEMPEST_GAME_INC_UTILS_
-#define H_TEMPEST_GAME_INC_UTILS_
+#ifndef H_TEMPEST_GAME_INC_ERRORS_
+#define H_TEMPEST_GAME_INC_ERRORS_
 
 #include <stdexcept>
 
-namespace utils {
+namespace errors {
 struct not_implemented : public std::exception
 {
   const char* what() const throw();

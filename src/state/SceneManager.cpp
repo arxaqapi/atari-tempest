@@ -1,6 +1,6 @@
 
 #include "SceneManager.hpp"
-#include "../utils/Utils.hpp"
+#include "../utils/Errors.hpp"
 #include "DeathScreen.hpp"
 #include "GameScene.hpp"
 #include "LevelSelectionScene.hpp"
@@ -34,7 +34,7 @@ SceneManager::get_corresponding_scene(State state)
       break;
     }
     case STATE_PAUSE_MENU: {
-      throw utils::not_implemented();
+      throw errors::not_implemented();
       break;
     }
     case STATE_WIN_SCREEN: {
@@ -47,7 +47,7 @@ SceneManager::get_corresponding_scene(State state)
     }
 
     default:
-      throw utils::not_implemented();
+      throw errors::not_implemented();
       break;
   }
 }
@@ -69,7 +69,7 @@ SceneManager::set_next_state(State next_requested_state)
     case STATE_TITLE_SCREEN: {
       std::vector<State> valid_states{ STATE_LEVEL_SELECT };
       if (!contains(valid_states, next_requested_state)) {
-        throw utils::non_valid_state_switch();
+        throw errors::non_valid_state_switch();
         return;
       }
       break;
@@ -77,7 +77,7 @@ SceneManager::set_next_state(State next_requested_state)
     case STATE_LEVEL_SELECT: {
       std::vector<State> valid_states{ STATE_GAME_SCENE };
       if (!contains(valid_states, next_requested_state)) {
-        throw utils::non_valid_state_switch();
+        throw errors::non_valid_state_switch();
         return;
       }
       break;
@@ -87,7 +87,7 @@ SceneManager::set_next_state(State next_requested_state)
                                        STATE_WIN_SCREEN,
                                        STATE_DEATH_SCREEN };
       if (!contains(valid_states, next_requested_state)) {
-        throw utils::non_valid_state_switch();
+        throw errors::non_valid_state_switch();
         return;
       }
       break;
@@ -95,7 +95,7 @@ SceneManager::set_next_state(State next_requested_state)
     case STATE_WIN_SCREEN: {
       std::vector<State> valid_states{ STATE_LEVEL_SELECT };
       if (!contains(valid_states, next_requested_state)) {
-        throw utils::non_valid_state_switch();
+        throw errors::non_valid_state_switch();
         return;
       }
       break;
@@ -103,13 +103,13 @@ SceneManager::set_next_state(State next_requested_state)
     case STATE_DEATH_SCREEN: {
       std::vector<State> valid_states{ STATE_LEVEL_SELECT, STATE_GAME_SCENE };
       if (!contains(valid_states, next_requested_state)) {
-        throw utils::non_valid_state_switch();
+        throw errors::non_valid_state_switch();
         return;
       }
       break;
     }
     default:
-      throw utils::non_valid_state_switch();
+      throw errors::non_valid_state_switch();
       return;
       break;
   }
