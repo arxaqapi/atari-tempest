@@ -52,7 +52,7 @@ Pen::draw_character(SDL_Renderer* const r,
 }
 
 void
-Pen::draw_string(std::string s, int xpos, int ypos, SDL_Renderer* const r)
+Pen::draw_string(std::string const& s, int xpos, int ypos, SDL_Renderer* const r)
 {
   for (auto& c : s) {
     xpos += Pen::draw_character(r, c, xpos, ypos) + Pen::space_size;
@@ -60,7 +60,7 @@ Pen::draw_string(std::string s, int xpos, int ypos, SDL_Renderer* const r)
 }
 
 int
-Pen::get_string_width(std::string s)
+Pen::get_string_width(std::string const& s)
 {
   int total_width = 0;
   for (auto& c : s) {

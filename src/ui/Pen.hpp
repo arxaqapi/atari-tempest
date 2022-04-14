@@ -8,12 +8,12 @@
 class Pen
 {
 public:
-  static void draw_string(std::string s,
+  static void draw_string(std::string const& s,
                           int xpos,
                           int ypos,
                           SDL_Renderer* const r);
 
-  static int get_string_width(std::string s);
+  static int get_string_width(std::string const& s);
 
 private:
   Pen() = delete;
