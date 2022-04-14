@@ -21,12 +21,15 @@ private:
   std::unique_ptr<Scene> current_scene_p_ = std::make_unique<TitleScreen>();
   State current_state_ = STATE_TITLE_SCREEN; // TODO: to set at right place
   State next_state_ = STATE_TITLE_SCREEN;
+  int requested_level_ = 0;
 
   /**
    * @brief Destroys the current scene object and affects the new requested one
    *
    */
   void switch_scene();
+  std::unique_ptr<Scene> get_corresponding_scene(State state);
+
 public:
   SceneManager();
   ~SceneManager();
@@ -38,6 +41,8 @@ public:
    * @param next_requested_state
    */
   void set_next_state(State next_requested_state);
+
+  void set_next_state(State next_requested_state, int level);
 
   Scene& get_current_scene() { return *current_scene_p_; }
 

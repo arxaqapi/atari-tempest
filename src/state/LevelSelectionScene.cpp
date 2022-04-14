@@ -75,8 +75,7 @@ LevelSelectionScene::processEvent(SDL_Event event, SceneManager& sm)
   if (event.type == SDL_KEYDOWN) {
     switch (event.key.keysym.sym) {
       case SDLK_SPACE:
-        // TODO: set game state based on level selected
-        sm.set_next_state(STATE_GAME_SCENE);
+        sm.set_next_state(STATE_GAME_SCENE, selected_level_);
         break;
       case SDLK_RIGHT:
         selected_level_ = selected_level_ < (int)available_levels_.size() - 1

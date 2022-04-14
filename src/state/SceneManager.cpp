@@ -18,7 +18,7 @@ SceneManager::SceneManager() {}
 SceneManager::~SceneManager() {}
 
 std::unique_ptr<Scene>
-get_corresponding_scene(State state)
+SceneManager::get_corresponding_scene(State state)
 {
   switch (state) {
     case STATE_TITLE_SCREEN: {
@@ -30,7 +30,7 @@ get_corresponding_scene(State state)
       break;
     }
     case STATE_GAME_SCENE: {
-      return std::make_unique<GameScene>(0);
+      return std::make_unique<GameScene>(requested_level_);
       break;
     }
     case STATE_PAUSE_MENU: {
@@ -58,6 +58,8 @@ SceneManager::switch_scene()
   current_scene_p_.reset();
   current_scene_p_ = get_corresponding_scene(next_state_);
   current_state_ = next_state_;
+  // reset requested_level_ after usage
+  requested_level_ = 0;
 }
 
 void
@@ -112,6 +114,13 @@ SceneManager::set_next_state(State next_requested_state)
       break;
   }
   next_state_ = next_requested_state;
+}
+
+void
+SceneManager::set_next_state(State next_requested_state, int level)
+{
+  requested_level_ = level;
+  set_next_state(next_requested_state);
 }
 
 void
