@@ -22,6 +22,11 @@ private:
   State current_state_ = STATE_TITLE_SCREEN; // TODO: to set at right place
   State next_state_ = STATE_TITLE_SCREEN;
 
+  /**
+   * @brief Destroys the current scene object and affects the new requested one
+   *
+   */
+  void switch_scene();
 public:
   SceneManager();
   ~SceneManager();
@@ -33,11 +38,6 @@ public:
    * @param next_requested_state
    */
   void set_next_state(State next_requested_state);
-  /**
-   * @brief Destroys the current scene object and affects the new requested one
-   *
-   */
-  void switch_scene();
 
   Scene& get_current_scene() { return *current_scene_p_; }
 
