@@ -13,6 +13,10 @@ public:
                           int ypos,
                           SDL_Renderer* const r);
 
+  static void draw_string_centered_x(std::string const& s,
+                                     int ypos,
+                                     SDL_Renderer* const r);
+
   static int get_string_width(std::string const& s);
 
 private:

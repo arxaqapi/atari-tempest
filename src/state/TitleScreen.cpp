@@ -33,16 +33,9 @@ TitleScreen::render(SDL_Renderer* renderer) const
   SDL_RenderClear(renderer);
 
   // Draw text
-  // TODO: remove hardcoded WINDOWS_WIDTH
-  std::string tempest_s{ "TEMPEST" };
-  std::string play{ "Press space to play!" };
-  std::string authors{ "Massimo Venuti - Tarek Kunze" };
-  Pen::draw_string(
-    tempest_s, 960 / 2 - Pen::get_string_width(tempest_s) / 2, 160, renderer);
-  Pen::draw_string(
-    play, 960 / 2 - Pen::get_string_width(play) / 2, 300, renderer);
-  Pen::draw_string(
-    authors, 960 / 2 - Pen::get_string_width(authors) / 2, 550, renderer);
+  Pen::draw_string_centered_x("TEMPEST", 160, renderer);
+  Pen::draw_string_centered_x("Press space to play!", 300, renderer);
+  Pen::draw_string_centered_x("Massimo Venuti - Tarek Kunze", 550, renderer);
 }
 
 void

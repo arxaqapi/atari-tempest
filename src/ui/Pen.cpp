@@ -62,6 +62,16 @@ Pen::draw_string(std::string const& s,
   }
 }
 
+void
+Pen::draw_string_centered_x(std::string const& s,
+                            int ypos,
+                            SDL_Renderer* const r)
+{
+  // TODO: remove hardcoded WINDOWS_WIDTH
+  // std::cerr << "[Log] - Usage of hardcoded value, be carefull" << std::endl;
+  draw_string(s, 960 / 2 - get_string_width(s) / 2, ypos, r);
+}
+
 int
 Pen::get_string_width(std::string const& s)
 {

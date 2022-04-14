@@ -26,13 +26,7 @@ WinScreen::render(SDL_Renderer* renderer) const
   SDL_RenderClear(renderer);
 
   // Draw text
-  std::string win_msg{ "You won!" };
-  Pen::draw_string(
-    win_msg, 960 / 2 - Pen::get_string_width(win_msg) / 2, 200, renderer);
-
-  std::string lselect_msg{ "Press space to go back to Level selection screen" };
-  Pen::draw_string(lselect_msg,
-                   960 / 2 - Pen::get_string_width(lselect_msg) / 2,
-                   400,
-                   renderer);
+  Pen::draw_string_centered_x("You won!", 200, renderer);
+  Pen::draw_string_centered_x(
+    "Press space to go back to Level selection screen", 400, renderer);
 }

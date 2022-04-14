@@ -54,14 +54,8 @@ LevelSelectionScene::render(SDL_Renderer* renderer) const
   }
 
   // Draw text
-  std::string level_selection{ "Level selection scene" };
-  std::string play_msg{ "Press space" };
-  Pen::draw_string(level_selection,
-                   960 / 2 - Pen::get_string_width(level_selection) / 2,
-                   200,
-                   renderer);
-  Pen::draw_string(
-    play_msg, 960 / 2 - Pen::get_string_width(play_msg) / 2, 350, renderer);
+  Pen::draw_string_centered_x("Level selection scene", 100, renderer);
+  Pen::draw_string_centered_x("Press space", 250, renderer);
 
   for (size_t i = 0; i < available_levels_.size(); i++) {
     Pen::draw_string(

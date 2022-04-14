@@ -29,19 +29,8 @@ DeathScreen::render(SDL_Renderer* renderer) const
   SDL_RenderClear(renderer);
 
   // Draw text
-  std::string death_msg{ "Game Over ..." };
-  Pen::draw_string(
-    death_msg, 960 / 2 - Pen::get_string_width(death_msg) / 2, 200, renderer);
-
-  std::string restart_msg{ "[Space] to restart game" };
-  Pen::draw_string(restart_msg,
-                   960 / 2 - Pen::get_string_width(restart_msg) / 2,
-                   400,
-                   renderer);
-
-  std::string lselect_msg{ "[Enter] to go back to level select" };
-  Pen::draw_string(lselect_msg,
-                   960 / 2 - Pen::get_string_width(lselect_msg) / 2,
-                   500,
-                   renderer);
+  Pen::draw_string_centered_x("Game Over ...", 200, renderer);
+  Pen::draw_string_centered_x("[Space] to restart game", 400, renderer);
+  Pen::draw_string_centered_x(
+    "[Enter] to go back to level select", 500, renderer);
 }
