@@ -12,8 +12,6 @@
 class LevelData
 {
 private:
-  inline static const std::string LEVELS_DATA_DIR_ = "data/";
-  inline static const std::string LEVEL_PREFIX_ = "level-";
   std::vector<Vector2D> exterior_;
   std::vector<Vector2D> interior_;
   bool is_continuous_;
@@ -23,10 +21,14 @@ private:
                                std::vector<Vector2D>& points);
 
 public:
+  inline static const std::string LEVELS_DATA_DIR_ = "data/";
+  inline static const std::string LEVEL_PREFIX_ = "level-";
+
   LevelData() = default;
   LevelData(const LevelData& data) = default;
   explicit LevelData(u8 level);
   ~LevelData() = default;
+
   const std::vector<Vector2D>& getExterior() const;
   const std::vector<Vector2D>& getInterior() const;
   bool isContinuous() const;
