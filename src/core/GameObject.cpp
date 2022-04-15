@@ -8,11 +8,13 @@
 GameObject::GameObject(u8 band_num,
                        bool active,
                        f32 progress,
+                       f32 progress_velocity,
                        e_direction moving_direction,
                        f64 move_delay)
   : band_num_{ band_num }
   , active_{ active }
   , progress_{ progress }
+  , progress_velocity_{ progress_velocity }
   , moving_direction_{ moving_direction }
   , move_delay_{ move_delay }
 {}
@@ -21,18 +23,16 @@ GameObject::GameObject(const Map& map,
                        u8 band_num,
                        bool active,
                        f32 progress,
+                       f32 progress_velocity,
                        e_direction moving_direction,
                        f64 move_delay)
   : band_num_{ band_num }
   , active_{ active }
   , progress_{ progress }
+  , progress_velocity_{ progress_velocity }
   , moving_direction_{ moving_direction }
   , move_delay_{ move_delay }
-{
-  Vector2D position = map.calcPosition(band_num, progress);
-  collider_.x = position.getX();
-  collider_.y = position.getY();
-}
+{}
 
 bool
 GameObject::isActive() const
@@ -68,40 +68,33 @@ GameObject::move(f64 delta, const Map& map)
       band_num_ = map.getRightBandNum(band_num_);
       break;
     case FORWARD:
-      progress_ = std::max(
-        0.0, progress_ - delta * 0.0005); // TODO: améliorer (vitesse variable)
+      progress_ = std::max(0.0, progress_ - delta * progress_velocity_);
       break;
     case BACKWARD:
-      progress_ = std::min(
-        1.0, progress_ + delta * 0.0005); // TODO: améliorer (vitesse variable)
+      progress_ = std::min(1.0, progress_ + delta * progress_velocity_);
       break;
     default:
       break;
   }
 
   move_delay_.reset();
-
-  Vector2D position = map.calcPosition(band_num_, progress_);
-  collider_.x = position.getX();
-  collider_.y = position.getY();
 }
 
 void
 GameObject::activate(const Map& map,
                      u8 band_num,
                      f32 progress,
+                     f32 progress_velocity,
                      e_direction moving_direction,
                      f64 move_delay)
 {
   active_ = true;
   band_num_ = band_num;
   progress_ = progress;
+  progress_velocity_ = progress_velocity;
   moving_direction_ = moving_direction;
   move_delay_.set(move_delay);
   move_delay_.reset();
-  Vector2D position = map.calcPosition(band_num, progress);
-  collider_.x = position.getX();
-  collider_.y = position.getY();
 }
 
 void
@@ -119,7 +112,8 @@ GameObject::deactivate()
 bool
 GameObject::isColliding(const GameObject& go) const
 {
-  return SDL_HasIntersection(&go.collider_, &collider_);
+  // todo: améliorer la gestion des collisions
+  return band_num_ == go.band_num_ && std::abs(go.progress_ - progress_) < 30 * (progress_velocity_ + go.progress_velocity_);
 }
 
 void

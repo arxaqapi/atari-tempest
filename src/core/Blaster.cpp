@@ -5,11 +5,8 @@
 #include "Blaster.hpp"
 
 Blaster::Blaster(const Map& map)
-  : GameObject(map, 0, true, 0, NONE, MOVE_DELAY_)
-{
-  collider_.w = 20;
-  collider_.h = 20;
-}
+  : GameObject(map, 0, true, 0, 0, NONE, MOVE_DELAY_)
+{}
 
 void
 Blaster::update(f64 delta, const Map& map)
@@ -40,14 +37,13 @@ Blaster::render(SDL_Renderer* renderer, const Map& map) const
   const Band& band = map.getBand(band_num_);
   auto exterior = band.getExterior();
 
-  f32 x = band.getExterCenter().vec_to(exterior.first).magnitude();
-
-  Vector2D inner_left = band.calcPosition({ x * 0.9f, 0 });
-  Vector2D inner_right = band.calcPosition({ -x * 0.9f, 0 });
-  Vector2D inner_top = band.calcPosition({ 0, -10 });
-  Vector2D outer_top = band.calcPosition({ 0, -25 });
-  Vector2D claw_left = band.calcPosition({ x * 0.2f, 20 });
-  Vector2D claw_right = band.calcPosition({ -x * 0.2f, 20 });
+  Vector2D unit_vector = band.getUnitVector();
+  Vector2D inner_left = exterior.first.weightedMidPointTo(exterior.second, 0.1);
+  Vector2D inner_right = exterior.first.weightedMidPointTo(exterior.second, 0.9);
+  Vector2D inner_top = exterior.first.weightedMidPointTo(exterior.second, 0.5) + (unit_vector * -10);
+  Vector2D outer_top = exterior.first.weightedMidPointTo(exterior.second, 0.5) + (unit_vector * -30);
+  Vector2D claw_left = exterior.first.weightedMidPointTo(exterior.second, 0.3) + (unit_vector * 20);
+  Vector2D claw_right = exterior.first.weightedMidPointTo(exterior.second, 0.7) + (unit_vector * 20);
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 

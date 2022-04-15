@@ -8,6 +8,7 @@
 #include "../utils/Delay.hpp"
 #include "../utils/types.hpp"
 #include "Map.hpp"
+#include "../utils/Utils.hpp"
 #include <SDL2/SDL_render.h>
 
 enum e_direction
@@ -25,12 +26,12 @@ protected:
   u8 band_num_ = 0;
   bool active_ = true;
   f32 progress_ = 0;
+  f32 progress_velocity_ = 0.0005;
   enum e_direction moving_direction_
   {
     NONE
   };
   Delay move_delay_{ 0 };
-  SDL_Rect collider_;
 
   void move(f64 delta, const Map& map);
 
@@ -39,12 +40,14 @@ public:
   GameObject(u8 band_num,
              bool active,
              f32 progress,
+             f32 progress_velocity,
              e_direction moving_direction,
              f64 move_delay);
   GameObject(const Map& map,
              u8 band_num,
              bool active,
              f32 progress,
+             f32 progress_velocity,
              e_direction moving_direction,
              f64 move_delay);
   GameObject(const GameObject& go) = default;
@@ -57,6 +60,7 @@ public:
   void activate(const Map& map,
                 u8 band_num,
                 f32 progress,
+                f32 progress_velocity,
                 e_direction moving_direction,
                 f64 move_delay);
   void deactivate();

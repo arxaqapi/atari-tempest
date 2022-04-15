@@ -12,11 +12,14 @@
 #include "assert.h"
 
 Map::Map(const std::vector<Vector2D>& exterior,
-         const std::vector<Vector2D>& interior,
-         bool is_continuous)
+         bool is_continuous,
+         f32 focal,
+         Vector2D origin)
   : is_continuous_{ is_continuous }
+  , focal_{ focal }
+  , origin_{ origin }
 {
-  setBands(exterior, interior);
+  makeBands(exterior);
 }
 
 u8
@@ -63,13 +66,6 @@ Map::getRightBand(u8 num_band) const
   return bands_[getRightBandNum(num_band)];
 }
 
-Vector2D
-Map::calcPosition(u8 num_band, f32 progress) const
-{
-  assert(num_band < bands_.size());
-  return bands_[num_band].calcPosition(progress);
-}
-
 void
 Map::select(u8 num_band)
 {
@@ -88,29 +84,42 @@ Map::render(SDL_Renderer* renderer) const
 }
 
 void
-Map::setBands(const std::vector<Vector2D>& exterior,
-              const std::vector<Vector2D>& interior)
+Map::makeBands(const std::vector<Vector2D>& exterior)
 {
-  assert(exterior.size() == interior.size());
   assert(exterior.size() > 0);
   bands_.clear();
-  for (auto i = 0; i < exterior.size() - 1; ++i)
-    bands_.emplace_back(
-      exterior[i], exterior[i + 1], interior[i], interior[i + 1]);
-  bands_[0].select();
+  for (auto i = 0; i < exterior.size() - 1; ++i) {
+    bands_.emplace_back(exterior[i], exterior[i + 1], origin_, focal_);
+  }
+  bands_[selected_band_num_].select();
 }
 
 void
 Map::reset(const std::vector<Vector2D>& exterior,
-           const std::vector<Vector2D>& interior,
-           bool is_continuous)
+           bool is_continuous,
+           f32 focal,
+           Vector2D origin)
 {
-  setBands(exterior, interior);
   is_continuous_ = is_continuous;
+  focal_ = focal;
+  origin_ = origin;
+  makeBands(exterior);
 }
 
 u8
 Map::size() const
 {
   return bands_.size();
+}
+
+const Vector2D&
+Map::getOrigin() const
+{
+  return origin_;
+}
+
+f32
+Map::getFocal() const
+{
+  return focal_;
 }

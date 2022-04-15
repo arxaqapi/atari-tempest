@@ -3,6 +3,7 @@
 //
 
 #include "Bullet.hpp"
+#include "../utils/Utils.hpp"
 #include <iostream>
 
 Bullet::Bullet()
@@ -10,15 +11,13 @@ Bullet::Bullet()
 {}
 
 Bullet::Bullet(u8 band_num)
-  : GameObject(band_num, false, 0, BACKWARD, 0)
+  : GameObject(band_num, false, 0, 0.001, BACKWARD, 0)
 {}
 
 void
 Bullet::activate(const Map& map, u8 band_num)
 {
-  GameObject::activate(map, band_num, 0.01, BACKWARD, 0);
-  collider_.w = 10;
-  collider_.h = 10;
+  GameObject::activate(map, band_num, 0, 0.001, BACKWARD, 0);
 }
 
 void
@@ -38,7 +37,17 @@ Bullet::render(SDL_Renderer* renderer, const Map& map) const
 {
   if (!active_)
     return;
-  // drawing collider rectangle for now...
+
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-  SDL_RenderDrawRect(renderer, &collider_);
+  // Draw rect for now...
+  f32 fraction =
+    utils::easeOutQuad(progress_, 1 - map.getFocal()) - map.getFocal();
+  const Band& band = map.getBand(band_num_);
+  Vector2D position =
+    band.getExterCenter().weightedMidPointTo(map.getOrigin(), fraction);
+  f32 size = 10 * (1 - fraction);
+  SDL_FRect rect {
+    position.getX(), position.getY(), size, size
+  };
+  SDL_RenderFillRectF(renderer, &rect);
 }

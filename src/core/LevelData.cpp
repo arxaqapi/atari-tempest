@@ -31,21 +31,33 @@ LevelData::load(u8 level)
 
   std::string line_s;
 
+  // is_continuous
   std::getline(file, line_s);
   is_continuous_ = line_s == "1";
 
+  // score
   std::getline(file, line_s);
   score_ = std::stoul(line_s);
 
+  // focal_
   std::getline(file, line_s);
+  focal_ = std::stof(line_s);
+
+  // origin
+  std::getline(file, line_s);
+  f32 x, y;
+  char delimiter;
+  std::stringstream coordinates_ss(line_s);
+  coordinates_ss >> x >> delimiter >> y;
+  origin.set(x,y);
+
+  // exterior coordinates
+  std::getline(file, line_s);
+  coordinates_ss.clear();
+  coordinates_ss.str(line_s);
   exterior_.clear();
-  parseCoordinates(line_s, exterior_);
-
-  std::getline(file, line_s);
-  interior_.clear();
-  parseCoordinates(line_s, interior_);
-
-  assert(exterior_.size() == interior_.size());
+  while (coordinates_ss >> x >> delimiter >> y)
+    exterior_.emplace_back(x, y);
 
   file.close();
   return true;
@@ -69,12 +81,6 @@ LevelData::getExterior() const
   return exterior_;
 }
 
-const std::vector<Vector2D>&
-LevelData::getInterior() const
-{
-  return interior_;
-}
-
 bool
 LevelData::isContinuous() const
 {
@@ -91,4 +97,16 @@ i8
 LevelData::getLevelNum() const
 {
   return level_num_;
+}
+
+const Vector2D&
+LevelData::getOrigin() const
+{
+  return origin;
+}
+
+f32
+LevelData::getFocal() const
+{
+  return focal_;
 }

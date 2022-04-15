@@ -33,7 +33,7 @@ Vector2D::magnitude() const
 Vector2D
 Vector2D::vec_to(const Vector2D& point) const
 {
-  return { x_ - point.x_, y_ - point.y_ };
+  return { point.x_ - x_, point.y_ - y_ };
 }
 
 Vector2D
@@ -64,4 +64,10 @@ Vector2D
 Vector2D::operator+(const Vector2D& vector) const
 {
   return { x_ + vector.x_, y_ + vector.y_ };
+}
+
+Vector2D
+Vector2D::operator*(f32 lambda) const
+{
+  return { x_ * lambda, y_ * lambda};
 }

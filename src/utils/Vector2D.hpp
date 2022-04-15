@@ -45,17 +45,17 @@ public:
 
   Vector2D unit() const;
 
-  inline static Vector2D between(const Vector2D& vec1, const Vector2D& vec2, f32 percentage) {
-    return { (vec1.getX() + vec2.getX()) * percentage, (vec1.getY() + vec2.getY()) * percentage };
+  inline Vector2D weightedMidPointTo(const Vector2D& point, f32 weight) const {
+    return { (1-weight) * x_ + weight * point.x_, (1-weight) * y_ + weight * point.y_ };
   }
 
-  inline static Vector2D center(const Vector2D& vec1, const Vector2D& vec2) {
-    return between(vec1, vec2, 0.5);
-  }
+  inline Vector2D orthogonalVector() {
+    return {y_, -x_};
+  };
 
   Vector2D operator+(const Vector2D& vector) const;
-};
 
-using Position = Vector2D;
+  Vector2D operator*(f32 lambda) const;
+};
 
 #endif

@@ -33,23 +33,26 @@ public:
 public:
   Band() = default;
   Band(const Band& band) = default;
-  Band(Vector2D exter_a, Vector2D exter_b, Vector2D inter_a, Vector2D inter_b);
+  Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal);
   ~Band() = default;
 
-  Vector2D calcPosition(f32 progress) const;
-  Vector2D calcPosition(Vector2D vec) const;
   void render(SDL_Renderer* renderer) const;
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };
-  inline f32 getDepth() const { return depth_; };
+
   inline std::pair<Vector2D, Vector2D> getExterior() const
   {
     return { exter_a_, exter_b_ };
   };
+
   inline std::pair<Vector2D, Vector2D> getInterior() const
   {
     return { inter_a_, inter_b_ };
-  };
+  }
+
+  inline const Vector2D& getUnitVector() const { return unit_vector_; }
+  inline const Vector2D& getAxis() const { return axis_; }
+  inline const Vector2D& getInterCenter() const { return inter_center_; };
 };
 
 #endif // TEMPEST_ATARI_BAND_HPP

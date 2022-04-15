@@ -10,8 +10,9 @@
 GameScene::GameScene(u8 level)
   : current_level_data_{ level }
   , map_{ current_level_data_.getExterior(),
-          current_level_data_.getInterior(),
-          current_level_data_.isContinuous() }
+          current_level_data_.isContinuous(),
+          current_level_data_.getFocal(),
+          current_level_data_.getOrigin() }
   , player_{ map_ }
   , spawn_manager_{ map_.size() }
 {}
@@ -27,8 +28,9 @@ GameScene::loadLevel(u8 level)
   player_.clear();
 
   map_.reset(current_level_data_.getExterior(),
-             current_level_data_.getInterior(),
-             current_level_data_.isContinuous());
+             current_level_data_.isContinuous(),
+             current_level_data_.getFocal(),
+             current_level_data_.getOrigin());
 
   return true;
 }
@@ -82,7 +84,7 @@ GameScene::update(f64 delta, SceneManager& sm)
       sm.set_next_state(STATE_TITLE_SCREEN);
     }
     for (auto& bullet : player_.getBullets()) {
-      if (bullet.isActive() && enemy.isColliding(bullet)) {
+      if (bullet.isActive() && bullet.isColliding(enemy)) {
         bullet.deactivate();
         enemy.hit();
         player_.addScore(200);
