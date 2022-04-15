@@ -29,11 +29,13 @@ TitleScreen::update(f64 delta, SceneManager& sm)
 void
 TitleScreen::render(SDL_Renderer* renderer) const
 {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, col_.a);
+  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, col_.a);
   SDL_RenderClear(renderer);
 
   // Draw text
-  Pen::draw_string("Title Screen :D", 20, 200, renderer);
+  Pen::draw_string_centered_x("TEMPEST", 160, renderer);
+  Pen::draw_string_centered_x("Press space to play!", 300, renderer);
+  Pen::draw_string_centered_x("Massimo Venuti - Tarek Kunze", 550, renderer);
 }
 
 void
@@ -42,6 +44,6 @@ TitleScreen::processEvent(SDL_Event event, SceneManager& sm)
   // set_next_state
   if (event.key.keysym.sym == SDLK_SPACE) {
     std::cout << "[Debug]: SPACE pressed while at TitleScreen" << std::endl;
-    sm.set_next_state(STATE_GAME_SCENE);
+    sm.set_next_state(STATE_LEVEL_SELECT);
   }
 }

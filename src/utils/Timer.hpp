@@ -12,8 +12,8 @@
 #ifndef H_TEMPEST_GAME_INC_TIMER_
 #define H_TEMPEST_GAME_INC_TIMER_
 
+#include "Errors.hpp"
 #include "SDL2/SDL.h"
-#include "Utils.hpp"
 #include "types.hpp"
 #include <random>
 

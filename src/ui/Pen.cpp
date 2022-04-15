@@ -1,5 +1,5 @@
 #include "Pen.hpp"
-#include "../utils/Utils.hpp"
+#include "../utils/Errors.hpp"
 
 int
 Pen::index_of_ascii(const char c)
@@ -29,7 +29,7 @@ Pen::draw_character(SDL_Renderer* const r,
 {
   int char_index = Pen::index_of_ascii(c);
   if (char_index < 0 || char_index >= 95) {
-    throw utils::non_valid_character_requested();
+    throw errors::non_valid_character_requested();
   }
 
   int i = 2;
@@ -52,9 +52,32 @@ Pen::draw_character(SDL_Renderer* const r,
 }
 
 void
-Pen::draw_string(std::string s, int xpos, int ypos, SDL_Renderer* const r)
+Pen::draw_string(std::string const& s,
+                 int xpos,
+                 int ypos,
+                 SDL_Renderer* const r)
 {
   for (auto& c : s) {
-    xpos += Pen::draw_character(r, c, xpos, ypos) + 2;
+    xpos += Pen::draw_character(r, c, xpos, ypos) + Pen::space_size;
   }
+}
+
+void
+Pen::draw_string_centered_x(std::string const& s,
+                            int ypos,
+                            SDL_Renderer* const r)
+{
+  // TODO: remove hardcoded WINDOWS_WIDTH
+  // std::cerr << "[Log] - Usage of hardcoded value, be carefull" << std::endl;
+  draw_string(s, 960 / 2 - get_string_width(s) / 2, ypos, r);
+}
+
+int
+Pen::get_string_width(std::string const& s)
+{
+  int total_width = 0;
+  for (auto& c : s) {
+    total_width += Pen::hershey_table[Pen::index_of_ascii(c)][1];
+  }
+  return total_width + (s.size() - 1) * Pen::space_size;
 }

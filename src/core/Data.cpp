@@ -3,7 +3,7 @@
 //
 
 #include "Data.hpp"
-#include "../utils/Utils.hpp"
+#include "../utils/Errors.hpp"
 #include <cassert>
 #include <fstream>
 #include <iostream>
@@ -84,7 +84,7 @@ Data::loadData(const std::string& data_path)
   std::ifstream file{ data_path, std::ios::in };
 
   if (!file.is_open()) {
-    throw utils::file_not_opened();
+    throw errors::file_not_opened();
   }
 
   std::string line_s;

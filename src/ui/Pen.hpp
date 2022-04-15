@@ -8,10 +8,16 @@
 class Pen
 {
 public:
-  static void draw_string(std::string s,
+  static void draw_string(std::string const& s,
                           int xpos,
                           int ypos,
                           SDL_Renderer* const r);
+
+  static void draw_string_centered_x(std::string const& s,
+                                     int ypos,
+                                     SDL_Renderer* const r);
+
+  static int get_string_width(std::string const& s);
 
 private:
   Pen() = delete;
@@ -30,6 +36,7 @@ private:
                             const int xoffset,
                             const int yoffset);
 
+  static constexpr int space_size = 2;
   // Hershey Vector Font: http://paulbourke.net/dataformats/hershey/
   static constexpr int hershey_table[95][112] = {
     0,  16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,

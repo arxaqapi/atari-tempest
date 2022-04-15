@@ -13,33 +13,8 @@
 #define H_TEMPEST_GAME_INC_UTILS_
 
 #include "types.hpp"
-#include <stdexcept>
 
 namespace utils {
-struct not_implemented : public std::exception
-{
-  const char* what() const throw();
-};
-struct not_tested : public std::exception
-{
-  const char* what() const throw();
-};
-
-struct non_valid_state_switch : public std::exception
-{
-  const char* what() const throw();
-};
-
-struct file_not_opened : public std::exception
-{
-  const char* what() const throw();
-};
-
-struct non_valid_character_requested : public std::exception
-{
-  const char* what() const throw();
-};
-
 inline f32
 easeOutQuad(f32 x, f32 frac)
 {

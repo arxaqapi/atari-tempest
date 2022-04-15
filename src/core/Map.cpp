@@ -88,7 +88,7 @@ Map::makeBands(const std::vector<Vector2D>& exterior)
 {
   assert(exterior.size() > 0);
   bands_.clear();
-  for (auto i = 0; i < exterior.size() - 1; ++i) {
+  for (size_t i = 0; i < exterior.size() - 1; ++i) {
     bands_.emplace_back(exterior[i], exterior[i + 1], origin_, focal_);
   }
   bands_[selected_band_num_].select();
