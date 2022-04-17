@@ -14,7 +14,6 @@
 #include "SDL2/SDL.h"
 
 namespace SDLW {
-// TODO: SDL_Rect
 class Rect
 {
 private:
@@ -33,11 +32,9 @@ public:
   const SDL_Rect* get() const;
 };
 
-// TODO: SDL_RenderDrawRect
 void
 RenderDrawRect(SDL_Renderer* renderer, const SDLW::Rect& rect);
 
-// TODO: SDL_RenderFillRect
 void
 RenderFillRect(SDL_Renderer* renderer, const SDLW::Rect& rect);
 
