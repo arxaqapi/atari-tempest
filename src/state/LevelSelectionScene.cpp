@@ -5,6 +5,7 @@
 #include "SceneManager.hpp"
 #include <filesystem>
 #include <regex>
+#include "../utils/types.hpp"
 
 namespace fs = std::filesystem;
 
@@ -30,7 +31,7 @@ LevelSelectionScene::LevelSelectionScene()
             });
   // TODO: implement carousel element
   for (size_t i = 0; i < available_levels_.size(); i++) {
-    UILevelBox b{ i, 200 + ((int)i * 130), 390, 120, 120 };
+    UILevelBox b{ (u32)i, 200 + ((int)i * 130), 390, 120, 120 };
     ui_elements_.push_back(b);
   }
 }
