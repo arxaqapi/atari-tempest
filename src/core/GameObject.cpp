@@ -83,7 +83,9 @@ bool
 GameObject::isColliding(const GameObject& go) const
 {
   // todo: améliorer la gestion des collisions
-  return band_num_ == go.band_num_ && std::abs(go.progress_ - progress_) < 30 * (progress_velocity_ + go.progress_velocity_);
+  return band_num_ == go.band_num_ &&
+         std::abs(go.progress_ - progress_) <
+           30 * (progress_velocity_ + go.progress_velocity_);
 }
 
 void

@@ -8,8 +8,8 @@
 #include "../utils/Timer.hpp"
 #include "../utils/types.hpp"
 #include "Map.hpp"
-#include <iostream>
 #include <cassert>
+#include <iostream>
 
 template<typename GameObjectType>
 class GameObjectPool
@@ -100,6 +100,7 @@ GameObjectPool<GameObjectType>::clear()
     pool_[i].deactivate();
   }
 }
+
 template<typename GameObjectType>
 GameObjectType&
 GameObjectPool<GameObjectType>::get(u8 i)

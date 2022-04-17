@@ -15,7 +15,7 @@ GameScene::GameScene(u8 level)
           current_level_data_.isContinuous(),
           current_level_data_.getFocal(),
           current_level_data_.getOrigin() }
-  , player_{ }
+  , player_{}
   , spawn_manager_{ map_.size() }
 {}
 
@@ -99,8 +99,10 @@ GameScene::update(f64 delta, SceneManager& sm)
       if (bullet.isActive() && bullet.isColliding(tanker)) {
         bullet.deactivate();
         tanker.deactivate();
-        spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()), tanker.getProgress());
-        spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()), tanker.getProgress());
+        spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
+                                    tanker.getProgress());
+        spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
+                                    tanker.getProgress());
         player_.addScore(150);
       }
     }
@@ -112,7 +114,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(spiker)) {
         bullet.deactivate();
-        spiker.setProgress(std::min(1.0f, spiker.getProgress()*2));
+        spiker.setProgress(std::min(1.0f, spiker.getProgress() * 2));
       }
     }
   }

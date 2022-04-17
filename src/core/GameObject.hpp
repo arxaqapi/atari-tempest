@@ -6,9 +6,9 @@
 #define TEMPEST_ATARI_GAMEOBJECT_HPP
 
 #include "../utils/Delay.hpp"
+#include "../utils/Utils.hpp"
 #include "../utils/types.hpp"
 #include "Map.hpp"
-#include "../utils/Utils.hpp"
 #include <SDL2/SDL_render.h>
 
 enum e_direction

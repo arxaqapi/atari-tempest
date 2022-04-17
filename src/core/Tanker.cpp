@@ -24,10 +24,11 @@ Tanker::render(SDL_Renderer* renderer, const Map& map) const
 
   const Band& band = map.getBand(band_num_);
 
-  Vector2D position = band.getExterCenter().vec_to(map.getOrigin()) * fraction + band.getExterCenter();
+  Vector2D position = band.getExterCenter().vec_to(map.getOrigin()) * fraction +
+                      band.getExterCenter();
 
-//    Vector2D position =
-//      band.getExterCenter().weightedMidPointTo(map.getOrigin(), fraction);
+  //    Vector2D position =
+  //      band.getExterCenter().weightedMidPointTo(map.getOrigin(), fraction);
 
   f32 size = 20 * (1 - fraction);
 

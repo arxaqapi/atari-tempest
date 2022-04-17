@@ -10,13 +10,14 @@ class Tanker : public GameObject
 {
 private:
   bool split_ = false;
+
 public:
   Tanker();
-//  explicit Tanker(u8 band_num);
+  //  explicit Tanker(u8 band_num);
   Tanker(const Tanker& tanker) = default;
   ~Tanker() override = default;
 
-//  void activate(const Map& map, u8 band_num);
+  //  void activate(const Map& map, u8 band_num);
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
   inline bool isSplit() const { return split_; }

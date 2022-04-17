@@ -12,13 +12,17 @@
 #ifndef TEMPEST_ATARI_UILEVELBOX_HPP
 #define TEMPEST_ATARI_UILEVELBOX_HPP
 
+#include "../utils/types.hpp"
 #include "UIElement.hpp"
 
 class UILevelBox : public UIElement
 {
 private:
+  u32 level_n_;
+
 public:
-  UILevelBox(int x, int y, int w, int h);
+  UILevelBox(int x, int y, int w, int h) = delete;
+  UILevelBox(u32 level, int x, int y, int w, int h);
   ~UILevelBox();
 
   void update() override;
