@@ -28,9 +28,9 @@ LevelSelectionScene::LevelSelectionScene()
               return std::stoi(p1.filename().string().substr(6)) <
                      std::stoi(p2.filename().string().substr(6));
             });
-
+  // TODO: implement carousel element
   for (size_t i = 0; i < available_levels_.size(); i++) {
-    UILevelBox b{ 40 + ((int)i * 40), 400, 30, 30 };
+    UILevelBox b{ i, 200 + ((int)i * 130), 390, 120, 120 };
     ui_elements_.push_back(b);
   }
 }
@@ -54,13 +54,13 @@ LevelSelectionScene::render(SDL_Renderer* renderer) const
   }
 
   // Draw text
+  Pen::draw_string("LEVEL", 75, 420, renderer);
+  Pen::draw_string("HOLE ", 75, 458, renderer);
+  Pen::draw_string("BONUS", 75, 495, renderer);
+
   Pen::draw_string_centered_x("Level selection scene", 100, renderer);
   Pen::draw_string_centered_x("Press space", 250, renderer);
 
-  for (size_t i = 0; i < available_levels_.size(); i++) {
-    Pen::draw_string(
-      available_levels_[i].string(), 200, 400 + (i * 25), renderer);
-  }
 }
 
 void
