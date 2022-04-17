@@ -35,7 +35,7 @@ public:
 
   bool loadLevel(u8 level);
 
-  void processEvent(SDL_Event event, SceneManager& sm) override;
+  void processEvent(SDL_Event* event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
   void render(SDL_Renderer* renderer) const override;
 };

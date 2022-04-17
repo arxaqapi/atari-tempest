@@ -64,10 +64,10 @@ LevelSelectionScene::render(SDL_Renderer* renderer) const
 }
 
 void
-LevelSelectionScene::processEvent(SDL_Event event, SceneManager& sm)
+LevelSelectionScene::processEvent(SDL_Event* event, SceneManager& sm)
 {
-  if (event.type == SDL_KEYDOWN) {
-    switch (event.key.keysym.sym) {
+  if (event->type == SDL_KEYDOWN) {
+    switch (event->key.keysym.sym) {
       case SDLK_SPACE:
         sm.set_next_state(STATE_GAME_SCENE, selected_level_);
         break;
