@@ -40,11 +40,13 @@ struct non_valid_character_requested : public std::exception
   const char* what() const throw();
 };
 
-inline f32
-easeOutQuad(f32 x, f32 frac)
+struct sdl_error : public std::exception
 {
-  return 1 - frac * (1 - x) * (1 - x);
-}
+  std::string msg_;
+  sdl_error(const std::string& msg);
+  const char* what() const throw();
+};
+
 }
 
 #endif

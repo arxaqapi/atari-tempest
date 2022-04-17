@@ -10,15 +10,16 @@
  */
 
 #include "Renderer.hpp"
-#include <cassert>
+#include "../utils/Errors.hpp"
 #include <iostream>
 
 Renderer::Renderer(u16 w_width, u16 w_height)
 {
   std::cout << "rend constr" << std::endl;
 
-  assert(SDL_Init(SDL_INIT_VIDEO) == 0 && SDL_GetError());
-  assert(SDL_WasInit(SDL_INIT_VIDEO) != 0 && SDL_GetError());
+  // NOTE: to be replaced with wrapped methods and classes
+  if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    throw errors::sdl_error(SDL_GetError());
 
   w_ = SDL_CreateWindow("Atari Tempest - VENUTI Massimo, Kunze Tarek",
                         SDL_WINDOWPOS_CENTERED,
@@ -26,17 +27,20 @@ Renderer::Renderer(u16 w_width, u16 w_height)
                         w_width,
                         w_height,
                         0);
-  assert(w_ != NULL && SDL_GetError());
+  if (w_ == NULL)
+    throw errors::sdl_error(SDL_GetError());
   r_ = SDL_CreateRenderer(w_, -1, 0);
-  assert(r_ != NULL && SDL_GetError());
+  if (r_ == NULL)
+    throw errors::sdl_error(SDL_GetError());
 }
 
 void
 Renderer::clear()
 {
-  assert(SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE) == 0 &&
-         SDL_GetError());
-  assert(SDL_RenderClear(r_) == 0 && SDL_GetError());
+  if (SDL_SetRenderDrawColor(r_, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE) != 0)
+    throw errors::sdl_error(SDL_GetError());
+  if (SDL_RenderClear(r_) != 0)
+    throw errors::sdl_error(SDL_GetError());
 }
 
 void

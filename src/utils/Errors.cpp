@@ -29,3 +29,13 @@ errors::non_valid_character_requested::what() const throw()
 {
   return "Requested character not supported";
 }
+
+errors::sdl_error::sdl_error(const std::string& msg)
+  : msg_{ msg }
+{}
+
+const char*
+errors::sdl_error::what() const throw()
+{
+  return msg_.c_str();
+}
