@@ -8,11 +8,14 @@
 #include "../utils/types.hpp"
 #include "Flipper.hpp"
 #include "GameObjectPool.hpp"
-#include "Tanker.hpp"
 #include "Spiker.hpp"
+#include "Tanker.hpp"
 
-enum enemy_type {
-  FLIPPER, TANKER, SPIKER
+enum enemy_type
+{
+  FLIPPER,
+  TANKER,
+  SPIKER
 };
 
 class SpawnManager
@@ -35,7 +38,6 @@ public:
   SpawnManager() = default;
   SpawnManager(const SpawnManager& spawn_manager) = default;
   explicit SpawnManager(u8 max_band_num);
-
 
   std::vector<Flipper>& getFlippers();
   std::vector<Tanker>& getTankers();

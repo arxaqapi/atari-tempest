@@ -49,7 +49,7 @@ LevelData::load(u8 level)
   char delimiter;
   std::stringstream coordinates_ss(line_s);
   coordinates_ss >> x >> delimiter >> y;
-  origin.set(x,y);
+  origin.set(x, y);
 
   // exterior coordinates
   std::getline(file, line_s);

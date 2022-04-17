@@ -2,10 +2,10 @@
 #include "../core/LevelData.hpp"
 #include "../ui/Pen.hpp"
 #include "../ui/UILevelBox.hpp"
+#include "../utils/types.hpp"
 #include "SceneManager.hpp"
 #include <filesystem>
 #include <regex>
-#include "../utils/types.hpp"
 
 namespace fs = std::filesystem;
 
@@ -61,7 +61,6 @@ LevelSelectionScene::render(SDL_Renderer* renderer) const
 
   Pen::draw_string_centered_x("Level selection scene", 100, renderer);
   Pen::draw_string_centered_x("Press space", 250, renderer);
-
 }
 
 void

@@ -3,7 +3,10 @@
 //
 
 #include "Spiker.hpp"
-Spiker::Spiker() { deactivate(); }
+Spiker::Spiker()
+{
+  deactivate();
+}
 
 void
 Spiker::render(SDL_Renderer* renderer, const Map& map) const
@@ -21,7 +24,11 @@ Spiker::render(SDL_Renderer* renderer, const Map& map) const
   Vector2D position =
     band.getExterCenter().weightedMidPointTo(map.getOrigin(), fraction);
 
-  SDL_RenderDrawLineF(renderer, band.getInterCenter().getX(), band.getInterCenter().getY(), position.getX(), position.getY());
+  SDL_RenderDrawLineF(renderer,
+                      band.getInterCenter().getX(),
+                      band.getInterCenter().getY(),
+                      position.getX(),
+                      position.getY());
 }
 
 void

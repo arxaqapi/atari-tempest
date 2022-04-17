@@ -18,7 +18,7 @@ namespace utils {
 inline f32
 easeOutQuad(f32 x, f32 frac)
 {
-  return 1 - frac * (1-x) * (1-x);
+  return 1 - frac * (1 - x) * (1 - x);
 }
 }
 

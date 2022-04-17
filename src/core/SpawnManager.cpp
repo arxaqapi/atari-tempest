@@ -26,8 +26,10 @@ SpawnManager::update(f64 delta, const Map& map)
   for (auto& tanker : tankers_.getPool()) {
     tanker.update(delta, map);
     if (tanker.isSplit()) {
-      spawnFlipper(map.getLeftBandNum(tanker.getBandNum()), tanker.getProgress());
-      spawnFlipper(map.getRightBandNum(tanker.getBandNum()), tanker.getProgress());
+      spawnFlipper(map.getLeftBandNum(tanker.getBandNum()),
+                   tanker.getProgress());
+      spawnFlipper(map.getRightBandNum(tanker.getBandNum()),
+                   tanker.getProgress());
       tanker.setSplit(false);
     }
   }

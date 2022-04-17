@@ -69,5 +69,5 @@ Vector2D::operator+(const Vector2D& vector) const
 Vector2D
 Vector2D::operator*(f32 lambda) const
 {
-  return { x_ * lambda, y_ * lambda};
+  return { x_ * lambda, y_ * lambda };
 }

@@ -45,13 +45,13 @@ public:
 
   Vector2D unit() const;
 
-  inline Vector2D weightedMidPointTo(const Vector2D& point, f32 weight) const {
-    return { (1-weight) * x_ + weight * point.x_, (1-weight) * y_ + weight * point.y_ };
+  inline Vector2D weightedMidPointTo(const Vector2D& point, f32 weight) const
+  {
+    return { (1 - weight) * x_ + weight * point.x_,
+             (1 - weight) * y_ + weight * point.y_ };
   }
 
-  inline Vector2D orthogonalVector() {
-    return {y_, -x_};
-  };
+  inline Vector2D orthogonalVector() { return { y_, -x_ }; };
 
   Vector2D operator+(const Vector2D& vector) const;
 

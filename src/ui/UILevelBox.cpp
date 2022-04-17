@@ -50,8 +50,10 @@ UILevelBox::render(SDL_Renderer* r, bool selected) const
   }
 
   // Draw Text
-  Pen::draw_string(
-    std::to_string(level_n_), bounding_box_.x + bounding_box_.w / 2 - 10, bounding_box_.y + 30, r);
+  Pen::draw_string(std::to_string(level_n_),
+                   bounding_box_.x + bounding_box_.w / 2 - 10,
+                   bounding_box_.y + 30,
+                   r);
 
   // SDL_RenderDrawRect(r, &bounding_box_);
   // SDL_Rect inside = { bounding_box_.x + 1,

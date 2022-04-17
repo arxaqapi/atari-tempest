@@ -62,7 +62,8 @@ GameObjectPool<GameObjectType>::create(u8 band_num,
   int index = find();
   if (index == -1)
     return;
-  pool_[index].activate(band_num, progress, progress_velocity, moving_direction, move_delay);
+  pool_[index].activate(
+    band_num, progress, progress_velocity, moving_direction, move_delay);
 }
 
 template<typename GameObjectType>

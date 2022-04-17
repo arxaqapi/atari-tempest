@@ -15,7 +15,6 @@ public:
 
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
-
 };
 
 #endif // TEMPEST_ATARI_SPIKER_HPP
