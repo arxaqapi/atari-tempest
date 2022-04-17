@@ -16,7 +16,6 @@ private:
   static const u8 MAX_BULLETS_ = 100;
   static constexpr f64 SHOOT_DELAY_ = 150;
   static constexpr u8 MAX_HEALTH_ = 3;
-  static constexpr f64 MOVE_DELAY_ = 50;
   u8 health_{ MAX_HEALTH_ };
   u32 score_{ 0 };
   bool is_shooting_{ false };
@@ -27,7 +26,6 @@ private:
 
 public:
   Blaster() = default;
-  explicit Blaster(const Map& map);
   Blaster(const Blaster& blaster) = default;
   ~Blaster() override = default;
 

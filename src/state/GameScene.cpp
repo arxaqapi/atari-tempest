@@ -15,7 +15,7 @@ GameScene::GameScene(u8 level)
           current_level_data_.isContinuous(),
           current_level_data_.getFocal(),
           current_level_data_.getOrigin() }
-  , player_{ map_ }
+  , player_{ }
   , spawn_manager_{ map_.size() }
 {}
 
@@ -70,27 +70,49 @@ GameScene::update(f64 delta, SceneManager& sm)
   map_.select(player_.getBandNum());
   spawn_manager_.update(delta, map_);
 
-  for (auto& enemy : spawn_manager_.getEnemies()) {
-    if (!enemy.isActive())
+  for (auto& flipper : spawn_manager_.getFlippers()) {
+    if (!flipper.isActive())
       continue;
-
-    if (enemy.isColliding(player_)) {
-      enemy.deactivate();
+    if (flipper.isColliding(player_)) {
+      flipper.deactivate();
       player_.hit();
       std::cout << "[Debug]: Health = " << unsigned(player_.getHealth())
                 << std::endl;
     }
-
     if (player_.getHealth() == 0) {
       // player is dead, go to menu
       sm.set_next_state(STATE_DEATH_SCREEN);
     }
     for (auto& bullet : player_.getBullets()) {
-      if (bullet.isActive() && bullet.isColliding(enemy)) {
+      if (bullet.isActive() && bullet.isColliding(flipper)) {
+        flipper.deactivate();
         bullet.deactivate();
-        enemy.hit();
         player_.addScore(200);
-        std::cout << "[Debug]: Score = " << player_.getScore() << std::endl;
+      }
+    }
+  }
+
+  for (auto& tanker : spawn_manager_.getTankers()) {
+    if (!tanker.isActive())
+      continue;
+    for (auto& bullet : player_.getBullets()) {
+      if (bullet.isActive() && bullet.isColliding(tanker)) {
+        bullet.deactivate();
+        tanker.deactivate();
+        spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()), tanker.getProgress());
+        spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()), tanker.getProgress());
+        player_.addScore(150);
+      }
+    }
+  }
+
+  for (auto& spiker : spawn_manager_.getSpikers()) {
+    if (!spiker.isActive())
+      continue;
+    for (auto& bullet : player_.getBullets()) {
+      if (bullet.isActive() && bullet.isColliding(spiker)) {
+        bullet.deactivate();
+        spiker.setProgress(std::min(1.0f, spiker.getProgress()*2));
       }
     }
   }

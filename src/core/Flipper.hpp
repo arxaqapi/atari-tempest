@@ -15,11 +15,9 @@ private:
 
 public:
   Flipper();
-  explicit Flipper(u8 band_num);
   Flipper(const Flipper& flipper) = default;
   ~Flipper() override = default;
 
-  void activate(const Map& map, u8 band_num);
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
 };

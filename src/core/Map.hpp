@@ -44,7 +44,6 @@ public:
   const Band& getBand(u8 num_band) const;
   const Band& getLeftBand(u8 num_band) const;
   const Band& getRightBand(u8 num_band) const;
-//  Vector2D calcPosition(u8 num_band, f32 progress) const;
   void render(SDL_Renderer* renderer) const;
   void select(u8 num_band);
   void reset(const std::vector<Vector2D>& exterior,

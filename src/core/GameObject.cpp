@@ -5,35 +5,6 @@
 #include "GameObject.hpp"
 #include <iostream>
 
-GameObject::GameObject(u8 band_num,
-                       bool active,
-                       f32 progress,
-                       f32 progress_velocity,
-                       e_direction moving_direction,
-                       f64 move_delay)
-  : band_num_{ band_num }
-  , active_{ active }
-  , progress_{ progress }
-  , progress_velocity_{ progress_velocity }
-  , moving_direction_{ moving_direction }
-  , move_delay_{ move_delay }
-{}
-
-GameObject::GameObject(const Map& map,
-                       u8 band_num,
-                       bool active,
-                       f32 progress,
-                       f32 progress_velocity,
-                       e_direction moving_direction,
-                       f64 move_delay)
-  : band_num_{ band_num }
-  , active_{ active }
-  , progress_{ progress }
-  , progress_velocity_{ progress_velocity }
-  , moving_direction_{ moving_direction }
-  , move_delay_{ move_delay }
-{}
-
 bool
 GameObject::isActive() const
 {
@@ -81,8 +52,7 @@ GameObject::move(f64 delta, const Map& map)
 }
 
 void
-GameObject::activate(const Map& map,
-                     u8 band_num,
+GameObject::activate(u8 band_num,
                      f32 progress,
                      f32 progress_velocity,
                      e_direction moving_direction,

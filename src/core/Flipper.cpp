@@ -7,17 +7,8 @@
 #include <iostream>
 
 Flipper::Flipper()
-  : Flipper(0)
-{}
-
-Flipper::Flipper(u8 band_num)
-  : GameObject(band_num, false, 1, 0.0005, FORWARD, 0)
-{}
-
-void
-Flipper::activate(const Map& map, u8 band_num)
 {
-  GameObject::activate(map, band_num, 1, 0.0005, FORWARD, 0);
+  deactivate();
 }
 
 void
@@ -37,7 +28,6 @@ Flipper::render(SDL_Renderer* renderer, const Map& map) const
     band.getExterior().first.weightedMidPointTo(map.getOrigin(), fraction);
   Vector2D left_bottom =
     band.getExterior().second.weightedMidPointTo(map.getOrigin(), fraction);
-
 
   Vector2D orthogonal = left_bottom.vec_to(right_bottom).orthogonalVector().unit();
 

@@ -10,11 +10,9 @@ class Bullet : public GameObject
 {
 public:
   Bullet();
-  explicit Bullet(u8 band_num);
   Bullet(const Bullet& bullet) = default;
   ~Bullet() override = default;
 
-  void activate(const Map& map, u8 band_num);
   void update(f64 delta, const Map& map) override;
   void render(SDL_Renderer* renderer, const Map& map) const override;
 };

@@ -31,25 +31,12 @@ protected:
   {
     NONE
   };
-  Delay move_delay_{ 0 };
+  Delay move_delay_{ 50 };
 
   void move(f64 delta, const Map& map);
 
 public:
   GameObject() = default;
-  GameObject(u8 band_num,
-             bool active,
-             f32 progress,
-             f32 progress_velocity,
-             e_direction moving_direction,
-             f64 move_delay);
-  GameObject(const Map& map,
-             u8 band_num,
-             bool active,
-             f32 progress,
-             f32 progress_velocity,
-             e_direction moving_direction,
-             f64 move_delay);
   GameObject(const GameObject& go) = default;
   virtual ~GameObject() = default;
 
@@ -57,8 +44,9 @@ public:
   u8 getBandNum() const;
   void setMovingDirection(e_direction moving_direction);
   void setMoveDelay(f64 moveDelay);
-  void activate(const Map& map,
-                u8 band_num,
+  inline void setProgress(f32 progress) { progress_ = progress; }
+  inline f32 getProgress() const { return progress_; }
+  void activate(u8 band_num,
                 f32 progress,
                 f32 progress_velocity,
                 e_direction moving_direction,
