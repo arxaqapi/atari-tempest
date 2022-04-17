@@ -82,9 +82,11 @@ GameScene::update(f64 delta, SceneManager& sm)
     }
 
     // chasing player
-    if (flipper.getProgress() == 0 && flipper.getBandNum() < player_.getBandNum())
+    if (flipper.getProgress() == 0 &&
+        flipper.getBandNum() < player_.getBandNum())
       flipper.setBandChangeDirection(RIGHT);
-    else if (flipper.getProgress() == 0 && flipper.getBandNum() > player_.getBandNum())
+    else if (flipper.getProgress() == 0 &&
+             flipper.getBandNum() > player_.getBandNum())
       flipper.setBandChangeDirection(LEFT);
 
     if (player_.getHealth() == 0) {
@@ -109,10 +111,11 @@ GameScene::update(f64 delta, SceneManager& sm)
         bullet.deactivate();
         tanker.deactivate();
         int index;
-        spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
-                                    tanker.getProgress(), LEFT);
+        spawn_manager_.spawnFlipper(
+          map_.getLeftBandNum(tanker.getBandNum()), tanker.getProgress(), LEFT);
         spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
-                                    tanker.getProgress(), RIGHT);
+                                    tanker.getProgress(),
+                                    RIGHT);
         player_.addScore(150);
       }
     }

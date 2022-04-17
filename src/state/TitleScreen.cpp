@@ -33,7 +33,7 @@ TitleScreen::render(SDL_Renderer* renderer) const
   SDL_RenderClear(renderer);
 
   // Draw text
-  Pen::draw_string_centered_x("TEMPEST", 160, renderer);
+  Pen::draw_string_centered_x("TEMPEST", 160, renderer, 4);
   Pen::draw_string_centered_x("Press space to play!", 300, renderer);
   Pen::draw_string_centered_x("Massimo Venuti - Tarek Kunze", 550, renderer);
 }

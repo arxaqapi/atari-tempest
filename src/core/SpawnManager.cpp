@@ -77,7 +77,9 @@ SpawnManager::spawnFlipper(u8 band_num, f32 progress)
 }
 
 int
-SpawnManager::spawnFlipper(u8 band_num, f32 progress, e_direction band_change_direction)
+SpawnManager::spawnFlipper(u8 band_num,
+                           f32 progress,
+                           e_direction band_change_direction)
 {
   int index = spawnFlipper(band_num, progress);
   if (index != -1)

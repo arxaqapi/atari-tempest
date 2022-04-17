@@ -17,7 +17,19 @@ public:
                                      int ypos,
                                      SDL_Renderer* const r);
 
+  static void draw_string(std::string const& s,
+                          int xpos,
+                          int ypos,
+                          SDL_Renderer* const r,
+                          float size);
+
+  static void draw_string_centered_x(std::string const& s,
+                                     int ypos,
+                                     SDL_Renderer* const r,
+                                     float size);
+
   static int get_string_width(std::string const& s);
+  static int get_string_width(std::string const& s, float size);
 
 private:
   Pen() = delete;
@@ -25,16 +37,17 @@ private:
 
   static int index_of_ascii(const char c);
   static void draw_edge(SDL_Renderer* const r,
-                        const int x1,
-                        const int y1,
-                        const int x2,
-                        const int y2,
+                        const float x1,
+                        const float y1,
+                        const float x2,
+                        const float y2,
                         const int xoffset,
                         const int yoffset);
   static int draw_character(SDL_Renderer* const r,
                             const char c,
                             const int xoffset,
-                            const int yoffset);
+                            const int yoffset,
+                            const float multiplier);
 
   static constexpr int space_size = 2;
   // Hershey Vector Font: http://paulbourke.net/dataformats/hershey/

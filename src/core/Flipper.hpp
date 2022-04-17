@@ -25,7 +25,10 @@ public:
   }
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
-  inline e_direction getBandChangeDirection() const { return band_change_direction_; }
+  inline e_direction getBandChangeDirection() const
+  {
+    return band_change_direction_;
+  }
 };
 
 #endif // TEMPEST_ATARI_FLIPPER_HPP
