@@ -46,7 +46,7 @@ Game::process_events()
       default:
         break;
     }
-    sm_.get_current_scene().processEvent(event, sm_);
+    sm_.get_current_scene().processEvent(&event, sm_);
   }
   // const u8* keyboardState = SDL_GetKeyboardState(NULL);
   // if (keyboardState[SDL_SCANCODE_SPACE]) {
