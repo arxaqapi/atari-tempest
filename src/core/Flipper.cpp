@@ -29,21 +29,34 @@ Flipper::render(SDL_Renderer* renderer, const Map& map) const
   Vector2D left_bottom =
     band.getExterior().second.weightedMidPointTo(map.getOrigin(), fraction);
 
-  Vector2D orthogonal = left_bottom.vec_to(right_bottom).orthogonalVector().unit();
+  Vector2D orthogonal =
+    left_bottom.vec_to(right_bottom).orthogonalVector().unit();
 
-  f32 height = 20 * (1-fraction);
+  f32 height = 20 * (1 - fraction);
 
-  Vector2D left_top = left_bottom + (orthogonal*-height);
-  Vector2D right_top = right_bottom + (orthogonal*-height);
+  Vector2D left_top = left_bottom + (orthogonal * -height);
+  Vector2D right_top = right_bottom + (orthogonal * -height);
 
-  SDL_RenderDrawLine(
-    renderer, left_bottom.getX(), left_bottom.getY(), right_top.getX(), right_top.getY());
-  SDL_RenderDrawLine(
-    renderer, right_bottom.getX(), right_bottom.getY(), left_top.getX(), left_top.getY());
-  SDL_RenderDrawLine(
-    renderer, right_bottom.getX(), right_bottom.getY(), right_top.getX(), right_top.getY());
-  SDL_RenderDrawLine(
-    renderer, left_bottom.getX(), left_bottom.getY(), left_top.getX(), left_top.getY());
+  SDL_RenderDrawLine(renderer,
+                     left_bottom.getX(),
+                     left_bottom.getY(),
+                     right_top.getX(),
+                     right_top.getY());
+  SDL_RenderDrawLine(renderer,
+                     right_bottom.getX(),
+                     right_bottom.getY(),
+                     left_top.getX(),
+                     left_top.getY());
+  SDL_RenderDrawLine(renderer,
+                     right_bottom.getX(),
+                     right_bottom.getY(),
+                     right_top.getX(),
+                     right_top.getY());
+  SDL_RenderDrawLine(renderer,
+                     left_bottom.getX(),
+                     left_bottom.getY(),
+                     left_top.getX(),
+                     left_top.getY());
 }
 
 void
@@ -52,10 +65,23 @@ Flipper::update(f64 delta, const Map& map)
   if (!active_)
     return;
 
-  if (progress_ == 0) {
-    setMovingDirection(RIGHT);
-    setMoveDelay(STAGE_2_MOVING_DELAY_);
+  band_change_delay_.update(delta);
+  if (band_change_delay_.complete()) {
+    band_change_delay_.reset();
+    // if stuck at the end of the map, change direction
+    if (band_change_direction_ == LEFT &&
+        map.getLeftBandNum(band_num_) == band_num_)
+      setBandChangeDirection(RIGHT);
+    else if (band_change_direction_ == RIGHT &&
+             map.getRightBandNum(band_num_) == band_num_)
+      setBandChangeDirection(LEFT);
+    setMovingDirection(band_change_direction_);
+    move(delta, map);
   }
 
-  move(delta, map);
+  // move forward if not at the end of the band
+  if (progress_ != 0) {
+    setMovingDirection(FORWARD);
+    move(delta, map);
+  }
 }

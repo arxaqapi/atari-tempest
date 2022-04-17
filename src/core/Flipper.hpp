@@ -11,13 +11,18 @@
 class Flipper : public GameObject
 {
 private:
-  f64 STAGE_2_MOVING_DELAY_ = 500;
+  Delay band_change_delay_{750};
+  e_direction band_change_direction_ = RIGHT;
 
 public:
   Flipper();
   Flipper(const Flipper& flipper) = default;
   ~Flipper() override = default;
 
+  inline void setBandChangeDirection(e_direction bandChangeDirection)
+  {
+    band_change_direction_ = bandChangeDirection;
+  }
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
 };

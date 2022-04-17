@@ -41,7 +41,7 @@ public:
   std::vector<Tanker>& getTankers();
   std::vector<Spiker>& getSpikers();
 
-  void spawnFlipper(u8 band_num, f32 progress);
+  int spawnFlipper(u8 band_num, f32 progress);
 
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;

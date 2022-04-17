@@ -9,6 +9,7 @@
 #include "../utils/types.hpp"
 #include "Map.hpp"
 #include <iostream>
+#include <cassert>
 
 template<typename GameObjectType>
 class GameObjectPool
@@ -24,12 +25,13 @@ public:
   GameObjectPool(const GameObjectPool& go_pool) = default;
   ~GameObjectPool() = default;
 
+  GameObjectType& get(u8 i);
   std::vector<GameObjectType>& getPool();
-  void create(u8 band_num,
-              f32 progress,
-              f32 progress_velocity,
-              e_direction moving_direction,
-              f64 move_delay);
+  int create(u8 band_num,
+             f32 progress,
+             f32 progress_velocity,
+             e_direction moving_direction,
+             f64 move_delay);
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
   void clear();
@@ -52,7 +54,7 @@ GameObjectPool<GameObjectType>::find()
 }
 
 template<typename GameObjectType>
-void
+int
 GameObjectPool<GameObjectType>::create(u8 band_num,
                                        f32 progress,
                                        f32 progress_velocity,
@@ -60,9 +62,10 @@ GameObjectPool<GameObjectType>::create(u8 band_num,
                                        f64 move_delay)
 {
   int index = find();
-  if (index == -1)
-    return;
-  pool_[index].activate(band_num, progress, progress_velocity, moving_direction, move_delay);
+  if (index != -1)
+    pool_[index].activate(
+      band_num, progress, progress_velocity, moving_direction, move_delay);
+  return index;
 }
 
 template<typename GameObjectType>
@@ -96,6 +99,13 @@ GameObjectPool<GameObjectType>::clear()
   for (int i = 0; i < pool_size_; ++i) {
     pool_[i].deactivate();
   }
+}
+template<typename GameObjectType>
+GameObjectType&
+GameObjectPool<GameObjectType>::get(u8 i)
+{
+  assert(i < pool_size_ && i > 0);
+  return pool_[i];
 }
 
 #endif // TEMPEST_ATARI_GAMEOBJECTPOOL_HPP
