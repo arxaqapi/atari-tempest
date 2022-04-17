@@ -44,6 +44,7 @@ public:
   std::vector<Spiker>& getSpikers();
 
   int spawnFlipper(u8 band_num, f32 progress);
+  int spawnFlipper(u8 band_num, f32 progress, e_direction band_change_direction);
 
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;

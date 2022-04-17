@@ -19,12 +19,13 @@ public:
   Flipper(const Flipper& flipper) = default;
   ~Flipper() override = default;
 
-  inline void setBandChangeDirection(e_direction bandChangeDirection)
+  inline void setBandChangeDirection(e_direction band_change_direction)
   {
-    band_change_direction_ = bandChangeDirection;
+    band_change_direction_ = band_change_direction;
   }
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
+  inline e_direction getBandChangeDirection() const { return band_change_direction_; }
 };
 
 #endif // TEMPEST_ATARI_FLIPPER_HPP

@@ -26,13 +26,10 @@ SpawnManager::update(f64 delta, const Map& map)
   for (auto& tanker : tankers_.getPool()) {
     tanker.update(delta, map);
     if (tanker.isSplit()) {
-      int index;
-      index = spawnFlipper(map.getLeftBandNum(tanker.getBandNum()),
-                           tanker.getProgress());
-      flippers_.get(index).setBandChangeDirection(LEFT);
-      index = spawnFlipper(map.getRightBandNum(tanker.getBandNum()),
-                           tanker.getProgress());
-      flippers_.get(index).setBandChangeDirection(RIGHT);
+      spawnFlipper(map.getLeftBandNum(tanker.getBandNum()),
+                   tanker.getProgress());
+      spawnFlipper(map.getRightBandNum(tanker.getBandNum()),
+                   tanker.getProgress());
       tanker.setSplit(false);
     }
   }
@@ -77,4 +74,13 @@ int
 SpawnManager::spawnFlipper(u8 band_num, f32 progress)
 {
   return flippers_.create(band_num, progress, 0.0005, FORWARD, 0);
+}
+
+int
+SpawnManager::spawnFlipper(u8 band_num, f32 progress, e_direction band_change_direction)
+{
+  int index = spawnFlipper(band_num, progress);
+  if (index != -1)
+    flippers_.get(index).setBandChangeDirection(band_change_direction);
+  return index;
 }

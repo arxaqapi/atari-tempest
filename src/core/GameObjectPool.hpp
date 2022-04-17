@@ -105,7 +105,7 @@ template<typename GameObjectType>
 GameObjectType&
 GameObjectPool<GameObjectType>::get(u8 i)
 {
-  assert(i < pool_size_ && i > 0);
+  assert(i < pool_size_ && i >= 0);
   return pool_[i];
 }
 

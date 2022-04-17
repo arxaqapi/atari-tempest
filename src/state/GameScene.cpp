@@ -73,16 +73,25 @@ GameScene::update(f64 delta, SceneManager& sm)
   for (auto& flipper : spawn_manager_.getFlippers()) {
     if (!flipper.isActive())
       continue;
+
     if (flipper.isColliding(player_)) {
       flipper.deactivate();
       player_.hit();
       std::cout << "[Debug]: Health = " << unsigned(player_.getHealth())
                 << std::endl;
     }
+
+    // chasing player
+    if (flipper.getProgress() == 0 && flipper.getBandNum() < player_.getBandNum())
+      flipper.setBandChangeDirection(RIGHT);
+    else if (flipper.getProgress() == 0 && flipper.getBandNum() > player_.getBandNum())
+      flipper.setBandChangeDirection(LEFT);
+
     if (player_.getHealth() == 0) {
       // player is dead, go to menu
       sm.set_next_state(STATE_DEATH_SCREEN);
     }
+
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(flipper)) {
         flipper.deactivate();
@@ -99,10 +108,11 @@ GameScene::update(f64 delta, SceneManager& sm)
       if (bullet.isActive() && bullet.isColliding(tanker)) {
         bullet.deactivate();
         tanker.deactivate();
+        int index;
         spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
-                                    tanker.getProgress());
+                                    tanker.getProgress(), LEFT);
         spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
-                                    tanker.getProgress());
+                                    tanker.getProgress(), RIGHT);
         player_.addScore(150);
       }
     }
