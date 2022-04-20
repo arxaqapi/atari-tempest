@@ -3,6 +3,7 @@
 #define H_TEMPEST_GAME_INC_SCENE_LEVEL_SELECT_
 
 #include "../ui/UILevelBox.hpp"
+#include "../ui/UILevelCarousel.hpp"
 #include "Scene.hpp"
 #include <filesystem>
 
@@ -11,9 +12,7 @@ class SceneManager;
 class LevelSelectionScene : public Scene
 {
 private:
-  std::vector<std::filesystem::path> available_levels_;
-  std::vector<UILevelBox> ui_elements_;
-  int selected_level_ = 0;
+  UILevelCarousel ui_level_carousel_;
 
 public:
   LevelSelectionScene();
