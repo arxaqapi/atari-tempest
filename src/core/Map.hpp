@@ -46,7 +46,7 @@ public:
   const Band& getRightBand(u8 num_band) const;
   void render(SDL_Renderer* renderer) const;
   void select(u8 num_band);
-  void reset(const std::vector<Vector2D>& exterior,
+  void load(const std::vector<Vector2D>& exterior,
              bool is_continuous,
              f32 focal,
              Vector2D origin);

@@ -25,13 +25,14 @@ class GameObject
 protected:
   u8 band_num_ = 0;
   bool active_ = true;
-  f32 progress_ = 0;
-  f32 progress_velocity_ = 0.0005;
+  f32 front_progression_ = 0;
+  f32 lateral_progression_ = 0;
+  f32 front_velocity_ = 0.0005;
+  f32 lateral_velocity_ = 0.02;
   enum e_direction moving_direction_
   {
     NONE
   };
-  Delay move_delay_{ 50 };
 
   void move(f64 delta, const Map& map);
 
@@ -43,14 +44,14 @@ public:
   bool isActive() const;
   u8 getBandNum() const;
   void setMovingDirection(e_direction moving_direction);
-  void setMoveDelay(f64 moveDelay);
-  inline void setProgress(f32 progress) { progress_ = progress; }
-  inline f32 getProgress() const { return progress_; }
+  inline void setFrontProgression(f32 front_progression) { front_progression_ = front_progression; }
+  inline f32 getFrontProgression() const { return front_progression_; }
   void activate(u8 band_num,
-                f32 progress,
-                f32 progress_velocity,
-                e_direction moving_direction,
-                f64 move_delay);
+                f32 front_progression,
+                f32 lateral_progression,
+                f32 front_velocity,
+                f32 lateral_velocity,
+                e_direction moving_direction);
   void deactivate();
   bool isColliding(const GameObject& go) const;
   virtual void hit();

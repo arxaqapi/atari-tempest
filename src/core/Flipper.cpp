@@ -22,7 +22,7 @@ Flipper::render(SDL_Renderer* renderer, const Map& map) const
   const Band& band = map.getBand(band_num_);
 
   f32 fraction =
-    utils::easeOutQuad(progress_, 1 - map.getFocal()) - map.getFocal();
+    utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
   Vector2D right_bottom =
     band.getExterior().first.weightedMidPointTo(map.getOrigin(), fraction);
@@ -80,7 +80,7 @@ Flipper::update(f64 delta, const Map& map)
   }
 
   // move forward if not at the end of the band
-  if (progress_ != 0) {
+  if (front_progression_ != 0) {
     setMovingDirection(FORWARD);
     move(delta, map);
   }

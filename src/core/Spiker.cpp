@@ -17,7 +17,7 @@ Spiker::render(SDL_Renderer* renderer, const Map& map) const
   SDL_SetRenderDrawColor(renderer, 0, 250, 0, 255);
 
   f32 fraction =
-    utils::easeOutQuad(progress_, 1 - map.getFocal()) - map.getFocal();
+    utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
   const Band& band = map.getBand(band_num_);
 
@@ -37,6 +37,6 @@ Spiker::update(f64 delta, const Map& map)
   if (!active_)
     return;
 
-  if (progress_ > 0.3)
+  if (front_progression_ > 0.3)
     move(delta, map);
 }

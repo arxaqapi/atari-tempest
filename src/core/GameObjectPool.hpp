@@ -28,10 +28,11 @@ public:
   GameObjectType& get(u8 i);
   std::vector<GameObjectType>& getPool();
   int create(u8 band_num,
-             f32 progress,
-             f32 progress_velocity,
-             e_direction moving_direction,
-             f64 move_delay);
+             f32 front_progression,
+             f32 lateral_progression,
+             f32 front_velocity,
+             f32 lateral_velocity,
+             e_direction moving_direction);
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
   void clear();
@@ -56,15 +57,20 @@ GameObjectPool<GameObjectType>::find()
 template<typename GameObjectType>
 int
 GameObjectPool<GameObjectType>::create(u8 band_num,
-                                       f32 progress,
-                                       f32 progress_velocity,
-                                       e_direction moving_direction,
-                                       f64 move_delay)
+                                       f32 front_progression,
+                                       f32 lateral_progression,
+                                       f32 front_velocity,
+                                       f32 lateral_velocity,
+                                       e_direction moving_direction)
 {
   int index = find();
   if (index != -1)
-    pool_[index].activate(
-      band_num, progress, progress_velocity, moving_direction, move_delay);
+    pool_[index].activate(band_num,
+                          front_progression,
+                          lateral_progression,
+                          front_velocity,
+                          lateral_velocity,
+                          moving_direction);
   return index;
 }
 
@@ -96,9 +102,8 @@ template<typename GameObjectType>
 void
 GameObjectPool<GameObjectType>::clear()
 {
-  for (int i = 0; i < pool_size_; ++i) {
+  for (int i = 0; i < pool_size_; ++i)
     pool_[i].deactivate();
-  }
 }
 
 template<typename GameObjectType>

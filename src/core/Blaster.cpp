@@ -15,7 +15,7 @@ Blaster::update(f64 delta, const Map& map)
   if (is_shooting_) {
     shoot_delay_.update(delta);
     if (shoot_delay_.complete()) {
-      bullets_.create(band_num_, 0, 0.001, BACKWARD, 0);
+      bullets_.create(band_num_, 0, 0.5, 0.001, 0, BACKWARD);
       shoot_delay_.reset();
     }
   }
@@ -37,15 +37,22 @@ Blaster::render(SDL_Renderer* renderer, const Map& map) const
   Vector2D inner_left = exterior.first.weightedMidPointTo(exterior.second, 0.1);
   Vector2D inner_right =
     exterior.first.weightedMidPointTo(exterior.second, 0.9);
-  Vector2D inner_top = exterior.first.weightedMidPointTo(exterior.second, 0.5) +
+
+  auto weight = lateral_progression_;
+  if (lateral_progression_ > .90)
+    weight = .90;
+  else if (lateral_progression_ < .1)
+    weight = .1;
+  Vector2D inner_top = exterior.first.weightedMidPointTo(exterior.second, weight) +
                        (unit_vector * -10);
-  Vector2D outer_top = exterior.first.weightedMidPointTo(exterior.second, 0.5) +
-                       (unit_vector * -30);
-  Vector2D claw_left = exterior.first.weightedMidPointTo(exterior.second, 0.3) +
-                       (unit_vector * 20);
+  Vector2D outer_top = exterior.first.weightedMidPointTo(exterior.second, weight) +
+                       (unit_vector * -20);
+
+  Vector2D claw_left = exterior.first.weightedMidPointTo(exterior.second, .4) +
+                       (unit_vector * 10);
   Vector2D claw_right =
-    exterior.first.weightedMidPointTo(exterior.second, 0.7) +
-    (unit_vector * 20);
+    exterior.first.weightedMidPointTo(exterior.second, .6) +
+    (unit_vector * 10);
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 

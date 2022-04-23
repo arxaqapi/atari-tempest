@@ -26,51 +26,47 @@ GameObject::setMovingDirection(e_direction moving_direction)
 void
 GameObject::move(f64 delta, const Map& map)
 {
-  move_delay_.update(delta);
-
-  if (!move_delay_.complete())
-    return;
-
   switch (moving_direction_) {
     case LEFT:
-      band_num_ = map.getLeftBandNum(band_num_);
+      lateral_progression_ = std::max(0.0, lateral_progression_ - delta * lateral_velocity_);
+      if (lateral_progression_ == 0 && map.getLeftBandNum(band_num_) != band_num_) {
+        band_num_ = map.getLeftBandNum(band_num_);
+        lateral_progression_ = 1;
+      }
       break;
     case RIGHT:
-      band_num_ = map.getRightBandNum(band_num_);
+      lateral_progression_ = std::min(1.0, lateral_progression_ + delta * lateral_velocity_);
+      if (lateral_progression_ == 1 && map.getRightBandNum(band_num_) != band_num_) {
+        band_num_ = map.getRightBandNum(band_num_);
+        lateral_progression_ = 0;
+      }
       break;
     case FORWARD:
-      progress_ = std::max(0.0, progress_ - delta * progress_velocity_);
+      front_progression_ = std::max(0.0, front_progression_ - delta * front_velocity_);
       break;
     case BACKWARD:
-      progress_ = std::min(1.0, progress_ + delta * progress_velocity_);
+      front_progression_ = std::min(1.0, front_progression_ + delta * front_velocity_);
       break;
     default:
       break;
   }
-
-  move_delay_.reset();
 }
 
 void
 GameObject::activate(u8 band_num,
-                     f32 progress,
-                     f32 progress_velocity,
-                     e_direction moving_direction,
-                     f64 move_delay)
+                     f32 front_progression,
+                     f32 lateral_progression,
+                     f32 front_velocity,
+                     f32 lateral_velocity,
+                     e_direction moving_direction)
 {
   active_ = true;
   band_num_ = band_num;
-  progress_ = progress;
-  progress_velocity_ = progress_velocity;
+  front_progression_ = front_progression;
+  lateral_progression_ = lateral_progression;
+  front_velocity_ = front_velocity;
+  lateral_velocity_ = lateral_velocity;
   moving_direction_ = moving_direction;
-  move_delay_.set(move_delay);
-  move_delay_.reset();
-}
-
-void
-GameObject::setMoveDelay(f64 move_delay)
-{
-  move_delay_.set(move_delay);
 }
 
 void
@@ -84,8 +80,8 @@ GameObject::isColliding(const GameObject& go) const
 {
   // todo: améliorer la gestion des collisions
   return band_num_ == go.band_num_ &&
-         std::abs(go.progress_ - progress_) <
-           30 * (progress_velocity_ + go.progress_velocity_);
+         std::abs(go.front_progression_ - front_progression_) <
+           30 * (front_velocity_ + go.front_velocity_);
 }
 
 void

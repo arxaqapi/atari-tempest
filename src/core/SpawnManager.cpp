@@ -16,9 +16,9 @@ SpawnManager::update(f64 delta, const Map& map)
     u8 band_num = spawn_distribution_(generator_);
     u8 spawn_type = spawn_distribution_(generator_) % 2;
     if (spawn_type == 0)
-      tankers_.create(band_num, 1, 0.0001, FORWARD, 0);
+      tankers_.create(band_num, 1, 0.5, 0.0001, 0, FORWARD);
     else
-      spikers_.create(band_num, 1, 0.00005, FORWARD, 0);
+      spikers_.create(band_num, 1, 0.5, 0.00005, 0, FORWARD);
     spawn_delay_.reset();
   }
   flippers_.update(delta, map);
@@ -27,9 +27,9 @@ SpawnManager::update(f64 delta, const Map& map)
     tanker.update(delta, map);
     if (tanker.isSplit()) {
       spawnFlipper(map.getLeftBandNum(tanker.getBandNum()),
-                   tanker.getProgress());
+                   tanker.getFrontProgression());
       spawnFlipper(map.getRightBandNum(tanker.getBandNum()),
-                   tanker.getProgress());
+                   tanker.getFrontProgression());
       tanker.setSplit(false);
     }
   }
@@ -73,7 +73,7 @@ SpawnManager::getSpikers()
 int
 SpawnManager::spawnFlipper(u8 band_num, f32 progress)
 {
-  return flippers_.create(band_num, progress, 0.0005, FORWARD, 0);
+  return flippers_.create(band_num, progress, 0.5, 0.0005, 0.05, FORWARD);
 }
 
 int
@@ -85,4 +85,11 @@ SpawnManager::spawnFlipper(u8 band_num,
   if (index != -1)
     flippers_.get(index).setBandChangeDirection(band_change_direction);
   return index;
+}
+
+void
+SpawnManager::load(u8 max_band_num)
+{
+  clear();
+  spawn_distribution_.param(std::uniform_int_distribution<u8>::param_type(0, max_band_num-1));
 }

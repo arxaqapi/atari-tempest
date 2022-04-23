@@ -20,7 +20,7 @@ Tanker::render(SDL_Renderer* renderer, const Map& map) const
 
   // Draw rect for now...
   f32 fraction =
-    utils::easeOutQuad(progress_, 1 - map.getFocal()) - map.getFocal();
+    utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
   const Band& band = map.getBand(band_num_);
 
@@ -43,7 +43,7 @@ Tanker::update(f64 delta, const Map& map)
   if (!active_)
     return;
 
-  if (progress_ == 0) {
+  if (front_progression_ == 0) {
     split_ = true;
     active_ = false;
   }

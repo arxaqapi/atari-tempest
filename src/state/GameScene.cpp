@@ -25,14 +25,14 @@ GameScene::loadLevel(u8 level)
   if (!current_level_data_.load(level))
     return false;
 
-  spawn_manager_.clear();
+  map_.load(current_level_data_.getExterior(),
+            current_level_data_.isContinuous(),
+            current_level_data_.getFocal(),
+            current_level_data_.getOrigin());
+
+  spawn_manager_.load(map_.size());
 
   player_.clear();
-
-  map_.reset(current_level_data_.getExterior(),
-             current_level_data_.isContinuous(),
-             current_level_data_.getFocal(),
-             current_level_data_.getOrigin());
 
   return true;
 }
@@ -82,10 +82,10 @@ GameScene::update(f64 delta, SceneManager& sm)
     }
 
     // chasing player
-    if (flipper.getProgress() == 0 &&
+    if (flipper.getFrontProgression() == 0 &&
         flipper.getBandNum() < player_.getBandNum())
       flipper.setBandChangeDirection(RIGHT);
-    else if (flipper.getProgress() == 0 &&
+    else if (flipper.getFrontProgression() == 0 &&
              flipper.getBandNum() > player_.getBandNum())
       flipper.setBandChangeDirection(LEFT);
 
@@ -112,9 +112,10 @@ GameScene::update(f64 delta, SceneManager& sm)
         tanker.deactivate();
         int index;
         spawn_manager_.spawnFlipper(
-          map_.getLeftBandNum(tanker.getBandNum()), tanker.getProgress(), LEFT);
+          map_.getLeftBandNum(tanker.getBandNum()),
+                                    tanker.getFrontProgression(), LEFT);
         spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
-                                    tanker.getProgress(),
+                                    tanker.getFrontProgression(),
                                     RIGHT);
         player_.addScore(150);
       }
@@ -127,7 +128,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(spiker)) {
         bullet.deactivate();
-        spiker.setProgress(std::min(1.0f, spiker.getProgress() * 2));
+        spiker.setFrontProgression(std::min(1.0f, spiker.getFrontProgression() * 2));
       }
     }
   }

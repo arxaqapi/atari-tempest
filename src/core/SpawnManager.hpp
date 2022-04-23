@@ -51,6 +51,7 @@ public:
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
   void clear();
+  void load(u8 max_band_num);
 };
 
 #endif // TEMPEST_ATARI_SPAWNMANAGER_HPP
