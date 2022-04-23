@@ -101,7 +101,8 @@ template<typename GameObjectType>
 void
 GameObjectPool<GameObjectType>::clear()
 {
-  std::for_each(pool_.begin(), pool_.end(), [](GameObjectType &go) { go.deactivate(); });
+  for (auto& go : pool_)
+    go.deactivate();
 }
 
 template<typename GameObjectType>
