@@ -43,8 +43,9 @@ public:
   std::vector<Tanker>& getTankers();
   std::vector<Spiker>& getSpikers();
 
-  int spawnFlipper(u8 band_num, f32 progress);
-  int spawnFlipper(u8 band_num,
+  void spawn();
+  std::vector<Flipper>::iterator spawnFlipper(u8 band_num, f32 progress);
+  std::vector<Flipper>::iterator spawnFlipper(u8 band_num,
                    f32 progress,
                    e_direction band_change_direction);
 

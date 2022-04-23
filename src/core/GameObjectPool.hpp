@@ -17,7 +17,7 @@ class GameObjectPool
 private:
   u8 pool_size_{ 0 };
   std::vector<GameObjectType> pool_;
-  int find();
+  typename std::vector<GameObjectType>::iterator find();
 
 public:
   GameObjectPool() = default;
@@ -27,12 +27,13 @@ public:
 
   GameObjectType& get(u8 i);
   std::vector<GameObjectType>& getPool();
-  int create(u8 band_num,
-             f32 front_progression,
-             f32 lateral_progression,
-             f32 front_velocity,
-             f32 lateral_velocity,
-             e_direction moving_direction);
+  typename std::vector<GameObjectType>::iterator create(
+    u8 band_num,
+    f32 front_progression,
+    f32 lateral_progression,
+    f32 front_velocity,
+    f32 lateral_velocity,
+    e_direction moving_direction);
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;
   void clear();
@@ -45,17 +46,15 @@ GameObjectPool<GameObjectType>::GameObjectPool(u8 pool_size)
 {}
 
 template<typename GameObjectType>
-int
+typename std::vector<GameObjectType>::iterator
 GameObjectPool<GameObjectType>::find()
 {
-  u8 index = 0;
-  for (index = 0; index < pool_size_ && pool_[index].isActive(); ++index)
-    ;
-  return index < pool_size_ ? index : -1;
+  return std::find_if(
+    pool_.begin(), pool_.end(), [](GameObjectType go) { return !go.isActive(); });
 }
 
 template<typename GameObjectType>
-int
+typename std::vector<GameObjectType>::iterator
 GameObjectPool<GameObjectType>::create(u8 band_num,
                                        f32 front_progression,
                                        f32 lateral_progression,
@@ -63,15 +62,15 @@ GameObjectPool<GameObjectType>::create(u8 band_num,
                                        f32 lateral_velocity,
                                        e_direction moving_direction)
 {
-  int index = find();
-  if (index != -1)
-    pool_[index].activate(band_num,
-                          front_progression,
-                          lateral_progression,
-                          front_velocity,
-                          lateral_velocity,
-                          moving_direction);
-  return index;
+  auto it = find();
+  if (it != pool_.end())
+    (*it).activate(band_num,
+                   front_progression,
+                   lateral_progression,
+                   front_velocity,
+                   lateral_velocity,
+                   moving_direction);
+  return it;
 }
 
 template<typename GameObjectType>

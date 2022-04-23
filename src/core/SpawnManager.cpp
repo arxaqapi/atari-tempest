@@ -13,16 +13,13 @@ SpawnManager::update(f64 delta, const Map& map)
 {
   spawn_delay_.update(delta);
   if (spawn_delay_.complete()) {
-    u8 band_num = spawn_distribution_(generator_);
-    u8 spawn_type = spawn_distribution_(generator_) % 2;
-    if (spawn_type == 0)
-      tankers_.create(band_num, 1, 0.5, 0.0001, 0, FORWARD);
-    else
-      spikers_.create(band_num, 1, 0.5, 0.00005, 0, FORWARD);
+    spawn();
     spawn_delay_.reset();
   }
+
   flippers_.update(delta, map);
   spikers_.update(delta, map);
+
   for (auto& tanker : tankers_.getPool()) {
     tanker.update(delta, map);
     if (tanker.isSplit()) {
@@ -70,21 +67,21 @@ SpawnManager::getSpikers()
   return spikers_.getPool();
 }
 
-int
+std::vector<Flipper>::iterator
 SpawnManager::spawnFlipper(u8 band_num, f32 progress)
 {
   return flippers_.create(band_num, progress, 0.5, 0.0005, 0.0015, FORWARD);
 }
 
-int
+std::vector<Flipper>::iterator
 SpawnManager::spawnFlipper(u8 band_num,
                            f32 progress,
                            e_direction band_change_direction)
 {
-  int index = spawnFlipper(band_num, progress);
-  if (index != -1)
-    flippers_.get(index).setBandChangeDirection(band_change_direction);
-  return index;
+  auto it = spawnFlipper(band_num, progress);
+  if (it != flippers_.getPool().end())
+    (*it).setBandChangeDirection(band_change_direction);
+  return it;
 }
 
 void
@@ -92,4 +89,16 @@ SpawnManager::load(u8 max_band_num)
 {
   clear();
   spawn_distribution_.param(std::uniform_int_distribution<u8>::param_type(0, max_band_num-1));
+}
+
+void
+SpawnManager::spawn()
+{
+  // todo : améliorer
+  u8 band_num = spawn_distribution_(generator_);
+  u8 spawn_type = spawn_distribution_(generator_) % 2;
+  if (spawn_type == 0)
+    tankers_.create(band_num, 1, 0.5, 0.0001, 0, FORWARD);
+  else
+    spikers_.create(band_num, 1, 0.5, 0.00005, 0, FORWARD);
 }
