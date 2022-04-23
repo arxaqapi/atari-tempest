@@ -31,8 +31,10 @@ private:
   GameObjectPool<Spiker> spikers_{ MAX_SPIKERS_ };
 
   Delay spawn_delay_{ SPAWN_DELAY_ };
-  std::default_random_engine generator_;
-  std::uniform_int_distribution<u8> spawn_distribution_;
+  std::random_device rd;
+  std::default_random_engine generator_{ rd() };
+  std::uniform_int_distribution<u8> spawn_type_distribution_{ 0, 1 };
+  std::uniform_int_distribution<u8> band_num_distribution_;
 
 public:
   SpawnManager() = default;
@@ -45,9 +47,8 @@ public:
 
   void spawn();
   std::vector<Flipper>::iterator spawnFlipper(u8 band_num, f32 progress);
-  std::vector<Flipper>::iterator spawnFlipper(u8 band_num,
-                   f32 progress,
-                   e_direction band_change_direction);
+  std::vector<Flipper>::iterator
+  spawnFlipper(u8 band_num, f32 progress, e_direction band_change_direction);
 
   void update(f64 delta, const Map& map);
   void render(SDL_Renderer* renderer, const Map& map) const;

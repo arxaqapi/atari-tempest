@@ -5,7 +5,7 @@
 #include "SpawnManager.hpp"
 
 SpawnManager::SpawnManager(u8 max_band_num)
-  : spawn_distribution_{ 0, static_cast<u8>(max_band_num - 1) }
+  : band_num_distribution_{0, static_cast<u8>(max_band_num - 1)}
 {}
 
 void
@@ -88,15 +88,16 @@ void
 SpawnManager::load(u8 max_band_num)
 {
   clear();
-  spawn_distribution_.param(std::uniform_int_distribution<u8>::param_type(0, max_band_num-1));
+  band_num_distribution_.reset();
+  band_num_distribution_.param(std::uniform_int_distribution<u8>::param_type(0, max_band_num-1));
 }
 
 void
 SpawnManager::spawn()
 {
   // todo : améliorer
-  u8 band_num = spawn_distribution_(generator_);
-  u8 spawn_type = spawn_distribution_(generator_) % 2;
+  u8 band_num = band_num_distribution_(generator_);
+  u8 spawn_type = spawn_type_distribution_(generator_);
   if (spawn_type == 0)
     tankers_.create(band_num, 1, 0.5, 0.0001, 0, FORWARD);
   else

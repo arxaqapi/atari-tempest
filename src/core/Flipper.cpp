@@ -24,18 +24,28 @@ Flipper::render(SDL_Renderer* renderer, const Map& map) const
   f32 fraction =
     utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
-  Vector2D right_bottom =
-    band.getExterior().first.weightedMidPointTo(map.getOrigin(), fraction);
   Vector2D left_bottom =
     band.getExterior().second.weightedMidPointTo(map.getOrigin(), fraction);
+
+  Vector2D right_bottom =
+    band.getExterior().first.weightedMidPointTo(map.getOrigin(), fraction);
 
   Vector2D orthogonal =
     left_bottom.vec_to(right_bottom).orthogonalVector().unit();
 
   f32 height = 20 * (1 - fraction);
 
-  Vector2D left_top = left_bottom + (orthogonal * -height);
-  Vector2D right_top = right_bottom + (orthogonal * -height);
+  Vector2D left_top =
+    left_bottom.weightedMidPointTo(right_bottom, .1) + (orthogonal * -height);
+
+  Vector2D right_top =
+    right_bottom.weightedMidPointTo(left_bottom, .1) + (orthogonal * -height);
+
+  Vector2D left_inner = left_bottom.weightedMidPointTo(right_bottom, .2) +
+                        (orthogonal * (-height / 2));
+
+  Vector2D right_inner = right_bottom.weightedMidPointTo(left_bottom, .2) +
+                         (orthogonal * (-height / 2));
 
   SDL_RenderDrawLine(renderer,
                      left_bottom.getX(),
@@ -43,20 +53,30 @@ Flipper::render(SDL_Renderer* renderer, const Map& map) const
                      right_top.getX(),
                      right_top.getY());
   SDL_RenderDrawLine(renderer,
-                     right_bottom.getX(),
-                     right_bottom.getY(),
-                     left_top.getX(),
-                     left_top.getY());
-  SDL_RenderDrawLine(renderer,
-                     right_bottom.getX(),
-                     right_bottom.getY(),
-                     right_top.getX(),
-                     right_top.getY());
-  SDL_RenderDrawLine(renderer,
                      left_bottom.getX(),
                      left_bottom.getY(),
+                     left_inner.getX(),
+                     left_inner.getY());
+  SDL_RenderDrawLine(renderer,
+                     left_inner.getX(),
+                     left_inner.getY(),
                      left_top.getX(),
                      left_top.getY());
+  SDL_RenderDrawLine(renderer,
+                     right_bottom.getX(),
+                     right_bottom.getY(),
+                     left_top.getX(),
+                     left_top.getY());
+  SDL_RenderDrawLine(renderer,
+                     right_bottom.getX(),
+                     right_bottom.getY(),
+                     right_inner.getX(),
+                     right_inner.getY());
+  SDL_RenderDrawLine(renderer,
+                     right_inner.getX(),
+                     right_inner.getY(),
+                     right_top.getX(),
+                     right_top.getY());
 }
 
 void
