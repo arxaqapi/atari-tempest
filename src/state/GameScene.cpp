@@ -110,7 +110,6 @@ GameScene::update(f64 delta, SceneManager& sm)
       if (bullet.isActive() && bullet.isColliding(tanker)) {
         bullet.deactivate();
         tanker.deactivate();
-        int index;
         spawn_manager_.spawnFlipper(
           map_.getLeftBandNum(tanker.getBandNum()),
                                     tanker.getFrontProgression(), LEFT);

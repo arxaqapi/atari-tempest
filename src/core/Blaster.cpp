@@ -146,4 +146,6 @@ Blaster::clear()
   band_num_ = 0;
   is_shooting_ = false;
   bullets_.clear();
+  lateral_progression_ = 0;
+  moving_direction_ = NONE;
 }

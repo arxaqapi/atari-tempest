@@ -19,8 +19,6 @@ private:
   u8 health_{ MAX_HEALTH_ };
   u32 score_{ 0 };
   bool is_shooting_{ false };
-
-private:
   GameObjectPool<Bullet> bullets_{ MAX_BULLETS_ };
   Delay shoot_delay_{ SHOOT_DELAY_ };
 
