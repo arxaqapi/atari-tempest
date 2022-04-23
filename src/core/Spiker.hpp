@@ -13,6 +13,7 @@ public:
   Spiker(const Spiker& spiker) = default;
   ~Spiker() override = default;
 
+  void hit() override;
   void render(SDL_Renderer* renderer, const Map& map) const override;
   void update(f64 delta, const Map& map) override;
 };

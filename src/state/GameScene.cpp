@@ -127,7 +127,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(spiker)) {
         bullet.deactivate();
-        spiker.setFrontProgression(std::min(1.0f, spiker.getFrontProgression() * 2));
+        spiker.hit();
       }
     }
   }

@@ -14,7 +14,7 @@ Spiker::render(SDL_Renderer* renderer, const Map& map) const
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer, 0, 250, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 
   f32 fraction =
     utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
@@ -37,6 +37,15 @@ Spiker::update(f64 delta, const Map& map)
   if (!active_)
     return;
 
-  if (front_progression_ > 0.3)
+  if (front_progression_ > 0.2)
     move(delta, map);
+}
+
+void
+Spiker::hit()
+{
+  moving_direction_ = NONE;
+  front_progression_ = std::min(1.0f, front_progression_ + .1f);
+  if (front_progression_ == 1)
+    deactivate();
 }
