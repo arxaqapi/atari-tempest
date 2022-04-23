@@ -73,7 +73,7 @@ SpawnManager::getSpikers()
 int
 SpawnManager::spawnFlipper(u8 band_num, f32 progress)
 {
-  return flippers_.create(band_num, progress, 0.5, 0.0005, 0.05, FORWARD);
+  return flippers_.create(band_num, progress, 0.5, 0.0005, 0.0015, FORWARD);
 }
 
 int

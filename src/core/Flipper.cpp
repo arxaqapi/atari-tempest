@@ -65,19 +65,16 @@ Flipper::update(f64 delta, const Map& map)
   if (!active_)
     return;
 
-  band_change_delay_.update(delta);
-  if (band_change_delay_.complete()) {
-    band_change_delay_.reset();
-    // if stuck at the end of the map, change direction
-    if (band_change_direction_ == LEFT &&
-        map.getLeftBandNum(band_num_) == band_num_)
-      setBandChangeDirection(RIGHT);
-    else if (band_change_direction_ == RIGHT &&
-             map.getRightBandNum(band_num_) == band_num_)
-      setBandChangeDirection(LEFT);
-    setMovingDirection(band_change_direction_);
-    move(delta, map);
-  }
+  // if stuck at the end of the map, change direction
+  if (band_change_direction_ == LEFT &&
+      map.getLeftBandNum(band_num_) == band_num_)
+    setBandChangeDirection(RIGHT);
+  else if (band_change_direction_ == RIGHT &&
+           map.getRightBandNum(band_num_) == band_num_)
+    setBandChangeDirection(LEFT);
+
+  setMovingDirection(band_change_direction_);
+  move(delta, map);
 
   // move forward if not at the end of the band
   if (front_progression_ != 0) {

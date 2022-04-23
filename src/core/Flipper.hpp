@@ -11,7 +11,6 @@
 class Flipper : public GameObject
 {
 private:
-  Delay band_change_delay_{ 750 };
   e_direction band_change_direction_ = RIGHT;
 
 public:
