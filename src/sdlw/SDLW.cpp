@@ -10,6 +10,7 @@
  */
 
 #include "SDLW.hpp"
+#include "../utils/Errors.hpp"
 #include <cassert>
 
 SDLW::Rect::Rect(int x, int y, int w, int h)
@@ -51,11 +52,49 @@ SDLW::Rect::get() const
 void
 SDLW::RenderDrawRect(SDL_Renderer* renderer, const SDLW::Rect& rect)
 {
-  assert(SDL_RenderDrawRect(renderer, rect.get()) == 0 && SDL_GetError());
+  if (SDL_RenderDrawRect(renderer, rect.get()) != 0) {
+    throw errors::sdl_error(SDL_GetError());
+  }
 }
 
 void
 SDLW::RenderFillRect(SDL_Renderer* renderer, const SDLW::Rect& rect)
 {
-  assert(SDL_RenderFillRect(renderer, rect.get()) == 0 && SDL_GetError());
+  if (SDL_RenderFillRect(renderer, rect.get()) != 0) {
+    throw errors::sdl_error(SDL_GetError());
+  }
+}
+
+//// Window
+SDLW::Window::Window(const std::string& title,
+                     int x,
+                     int y,
+                     int w,
+                     int h,
+                     Uint32 flags)
+{
+  w_ = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
+  if (w_ == NULL) {
+    throw errors::sdl_error(SDL_GetError());
+  }
+}
+
+SDLW::Window::~Window()
+{
+  SDL_DestroyWindow(w_);
+}
+
+//// Renderer
+
+SDLW::Renderer::Renderer(SDLW::Window& window, int index, Uint32 flags)
+{
+  r_ = SDL_CreateRenderer(window.w_, index, flags);
+  if (r_ == NULL) {
+    throw errors::sdl_error(SDL_GetError());
+  }
+}
+
+SDLW::Renderer::~Renderer()
+{
+  SDL_DestroyRenderer(r_);
 }
