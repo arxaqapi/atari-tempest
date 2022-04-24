@@ -10,11 +10,12 @@
 using namespace std::string_literals;
 
 GameScene::GameScene(u8 level)
-  : GameScene(level % 15, level / 15)
+  : GameScene(level, level / 15)
 {}
 
 GameScene::GameScene(u8 level, u8 cycle)
-  : current_figure_data_{ level }
+  : current_figure_data_{ level  % 15 }
+  , current_level_ {level}
   , current_cycle_{ cycle }
   , map_{ current_figure_data_.getExterior(),
           current_figure_data_.isContinuous(),
@@ -142,8 +143,10 @@ GameScene::update(f64 delta, SceneManager& sm)
     u8 new_level_num = (current_figure_data_.getFigureNum() + 1) % 15;
     if (new_level_num == 0)
       current_cycle_ += 1;
+    ++current_level_;
     if (!loadFigure(new_level_num)) {
       // if no more level, go to win screen
+      current_level_ = 0;
       sm.set_next_state(STATE_WIN_SCREEN);
     }
   }
@@ -172,6 +175,8 @@ GameScene::render(SDL_Renderer* renderer) const
     "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
   Pen::draw_string(
     "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
+  Pen::draw_string(
+    "Level "s + std::to_string(current_level_), 0, 78, renderer);
 }
 
 f32

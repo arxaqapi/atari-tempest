@@ -28,6 +28,7 @@ private:
   Map map_;
   Blaster player_;
   SpawnManager spawn_manager_;
+  u8 current_level_;
 
 public:
   GameScene() = delete;
