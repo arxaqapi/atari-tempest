@@ -10,7 +10,7 @@
 #include "../core/Data.hpp"
 #include "../core/Flipper.hpp"
 #include "../core/GameObjectPool.hpp"
-#include "../core/LevelData.hpp"
+#include "../core/FigureData.hpp"
 #include "../core/Map.hpp"
 #include "../core/SpawnManager.hpp"
 #include "../utils/Vector2D.hpp"
@@ -23,7 +23,8 @@ class SceneManager;
 class GameScene : public Scene
 {
 private:
-  LevelData current_level_data_;
+  FigureData current_figure_data_;
+  u8 current_cycle_ = 0;
   Map map_;
   Blaster player_;
   SpawnManager spawn_manager_;
@@ -32,9 +33,11 @@ public:
   GameScene() = delete;
   GameScene(const GameScene& game_scene) = default;
   explicit GameScene(u8 level);
+  GameScene(u8 figure, u8 cycle);
 
-  bool loadLevel(u8 level);
+  bool loadFigure(u8 figure);
 
+  f32 currentLevelMaxScore() const;
   void processEvent(SDL_Event* event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
   void render(SDL_Renderer* renderer) const override;

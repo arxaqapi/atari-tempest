@@ -50,8 +50,8 @@ void
 SpawnManager::clear()
 {
   flippers_.clear();
-  tankers_.clear();
   spikers_.clear();
+  tankers_.clear();
   spawn_delay_.reset();
 }
 

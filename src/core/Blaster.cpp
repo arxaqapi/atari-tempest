@@ -120,6 +120,7 @@ void
 Blaster::hit()
 {
   health_ = std::max(health_ - 1, 0);
+  clear();
 }
 
 u32

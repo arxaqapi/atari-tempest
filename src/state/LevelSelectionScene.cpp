@@ -1,5 +1,5 @@
 #include "LevelSelectionScene.hpp"
-#include "../core/LevelData.hpp"
+#include "../core/FigureData.hpp"
 #include "../ui/Pen.hpp"
 #include "../ui/UILevelBox.hpp"
 #include "../utils/types.hpp"
@@ -10,7 +10,7 @@
 namespace fs = std::filesystem;
 
 LevelSelectionScene::LevelSelectionScene()
-  : ui_level_carousel_{ LevelData::LEVELS_DATA_DIR_, 200, 390, 200, 200 }
+  : ui_level_carousel_{ FigureData::FIGURES_DATA_DIR_, 200, 390, 200, 200 }
 {}
 
 LevelSelectionScene::~LevelSelectionScene() {}

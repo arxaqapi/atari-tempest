@@ -10,25 +10,29 @@
 using namespace std::string_literals;
 
 GameScene::GameScene(u8 level)
-  : current_level_data_{ level }
-  , map_{ current_level_data_.getExterior(),
-          current_level_data_.isContinuous(),
-          current_level_data_.getFocal(),
-          current_level_data_.getOrigin() }
-  , player_{}
+  : GameScene(level % 15, level / 15)
+{}
+
+GameScene::GameScene(u8 level, u8 cycle)
+  : current_figure_data_{ level }
+  , current_cycle_{ cycle }
+  , map_{ current_figure_data_.getExterior(),
+          current_figure_data_.isContinuous(),
+          current_figure_data_.getFocal(),
+          current_figure_data_.getOrigin() }
   , spawn_manager_{ map_.size() }
 {}
 
 bool
-GameScene::loadLevel(u8 level)
+GameScene::loadFigure(u8 figure)
 {
-  if (!current_level_data_.load(level))
+  if (!current_figure_data_.load(figure))
     return false;
 
-  map_.load(current_level_data_.getExterior(),
-            current_level_data_.isContinuous(),
-            current_level_data_.getFocal(),
-            current_level_data_.getOrigin());
+  map_.load(current_figure_data_.getExterior(),
+            current_figure_data_.isContinuous(),
+            current_figure_data_.getFocal(),
+            current_figure_data_.getOrigin());
 
   spawn_manager_.load(map_.size());
 
@@ -77,8 +81,7 @@ GameScene::update(f64 delta, SceneManager& sm)
     if (flipper.isColliding(player_)) {
       flipper.deactivate();
       player_.hit();
-      std::cout << "[Debug]: Health = " << unsigned(player_.getHealth())
-                << std::endl;
+      spawn_manager_.clear();
     }
 
     // chasing player
@@ -94,6 +97,7 @@ GameScene::update(f64 delta, SceneManager& sm)
       sm.set_next_state(STATE_DEATH_SCREEN);
     }
 
+//    handleBulletsCollision(bullets, flippers, score, []);
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(flipper)) {
         flipper.deactivate();
@@ -110,9 +114,9 @@ GameScene::update(f64 delta, SceneManager& sm)
       if (bullet.isActive() && bullet.isColliding(tanker)) {
         bullet.deactivate();
         tanker.deactivate();
-        spawn_manager_.spawnFlipper(
-          map_.getLeftBandNum(tanker.getBandNum()),
-                                    tanker.getFrontProgression(), LEFT);
+        spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
+                                    tanker.getFrontProgression(),
+                                    LEFT);
         spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
                                     tanker.getFrontProgression(),
                                     RIGHT);
@@ -128,13 +132,17 @@ GameScene::update(f64 delta, SceneManager& sm)
       if (bullet.isActive() && bullet.isColliding(spiker)) {
         bullet.deactivate();
         spiker.hit();
+        player_.addScore(50);
       }
     }
   }
 
-  if (player_.getScore() >= current_level_data_.getScore()) {
+  if (player_.getScore() >= currentLevelMaxScore()) {
     // level won, go to next level
-    if (!loadLevel(current_level_data_.getLevelNum() + 1)) {
+    u8 new_level_num = (current_figure_data_.getFigureNum() + 1) % 15;
+    if (new_level_num == 0)
+      current_cycle_ += 1;
+    if (!loadFigure(new_level_num)) {
       // if no more level, go to win screen
       sm.set_next_state(STATE_WIN_SCREEN);
     }
@@ -164,4 +172,13 @@ GameScene::render(SDL_Renderer* renderer) const
     "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
   Pen::draw_string(
     "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
+}
+
+f32
+GameScene::currentLevelMaxScore() const
+{
+  return 1000 +
+         (current_cycle_ + 1) *
+           std::pow(current_figure_data_.getFigureNum() + 1, 2) * 600 +
+         current_cycle_ * 16 * 16 * 600;
 }

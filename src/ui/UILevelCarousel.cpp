@@ -24,7 +24,7 @@ UILevelCarousel::UILevelCarousel(std::string levels_dir,
 {
   // recup all levels
   // for each level, create ui element max 5
-  std::regex r{ "level-[0-9]+" };
+  std::regex r{ "figure-[0-9]+" };
   // Get all available scenes
   if (fs::exists(levels_dir) && fs::is_directory(levels_dir)) {
     for (const auto& file : fs::directory_iterator(levels_dir)) {
