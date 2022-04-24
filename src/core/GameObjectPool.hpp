@@ -49,8 +49,9 @@ template<typename GameObjectType>
 typename std::vector<GameObjectType>::iterator
 GameObjectPool<GameObjectType>::find()
 {
-  return std::find_if(
-    pool_.begin(), pool_.end(), [](GameObjectType go) { return !go.isActive(); });
+  return std::find_if(pool_.begin(), pool_.end(), [](GameObjectType go) {
+    return !go.isActive();
+  });
 }
 
 template<typename GameObjectType>

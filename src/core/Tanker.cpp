@@ -26,16 +26,20 @@ Tanker::render(SDL_Renderer* renderer, const Map& map) const
   f32 inner_size = (30 * (1 - fraction)) / 2;
   f32 outer_size = (60 * (1 - fraction)) / 2;
 
-  Vector2D u = {1,0};
-  Vector2D v = {0,1};
+  Vector2D u = { 1, 0 };
+  Vector2D v = { 0, 1 };
   Vector2D position = band.getExterCenter().vec_to(map.getOrigin()) * fraction;
 
-  Vector2D inner_left = band.getExterCenter() + (u * .7f * inner_size ) + position;
-  Vector2D inner_right = band.getExterCenter() + (u * (-.7f*inner_size))+ position;
+  Vector2D inner_left =
+    band.getExterCenter() + (u * .7f * inner_size) + position;
+  Vector2D inner_right =
+    band.getExterCenter() + (u * (-.7f * inner_size)) + position;
   Vector2D inner_top = band.getExterCenter() + (v * inner_size) + position;
   Vector2D inner_bottom = band.getExterCenter() + (v * -inner_size) + position;
-  Vector2D outer_left = band.getExterCenter() + (u * (.7f*outer_size)) + position;
-  Vector2D outer_right = band.getExterCenter() + (u * (-.7f*outer_size))+ position;
+  Vector2D outer_left =
+    band.getExterCenter() + (u * (.7f * outer_size)) + position;
+  Vector2D outer_right =
+    band.getExterCenter() + (u * (-.7f * outer_size)) + position;
   Vector2D outer_top = band.getExterCenter() + (v * outer_size) + position;
   Vector2D outer_bottom = band.getExterCenter() + (v * -outer_size) + position;
 

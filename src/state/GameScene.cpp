@@ -14,8 +14,8 @@ GameScene::GameScene(u8 level)
 {}
 
 GameScene::GameScene(u8 level, u8 cycle)
-  : current_figure_data_{ level  % 15 }
-  , current_level_ {level}
+  : current_figure_data_{ level % 15 }
+  , current_level_{ level }
   , current_cycle_{ cycle }
   , map_{ current_figure_data_.getExterior(),
           current_figure_data_.isContinuous(),
@@ -98,7 +98,7 @@ GameScene::update(f64 delta, SceneManager& sm)
       sm.set_next_state(STATE_DEATH_SCREEN);
     }
 
-//    handleBulletsCollision(bullets, flippers, score, []);
+    //    handleBulletsCollision(bullets, flippers, score, []);
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(flipper)) {
         flipper.deactivate();
@@ -175,8 +175,7 @@ GameScene::render(SDL_Renderer* renderer) const
     "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
   Pen::draw_string(
     "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
-  Pen::draw_string(
-    "Level "s + std::to_string(current_level_), 0, 78, renderer);
+  Pen::draw_string("Level "s + std::to_string(current_level_), 0, 82, renderer);
 }
 
 f32

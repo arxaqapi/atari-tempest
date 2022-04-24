@@ -5,7 +5,7 @@
 #include "SpawnManager.hpp"
 
 SpawnManager::SpawnManager(u8 max_band_num)
-  : band_num_distribution_{0, static_cast<u8>(max_band_num - 1)}
+  : band_num_distribution_{ 0, static_cast<u8>(max_band_num - 1) }
 {}
 
 void
@@ -89,7 +89,8 @@ SpawnManager::load(u8 max_band_num)
 {
   clear();
   band_num_distribution_.reset();
-  band_num_distribution_.param(std::uniform_int_distribution<u8>::param_type(0, max_band_num-1));
+  band_num_distribution_.param(
+    std::uniform_int_distribution<u8>::param_type(0, max_band_num - 1));
 }
 
 void

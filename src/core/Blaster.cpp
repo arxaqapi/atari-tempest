@@ -43,16 +43,17 @@ Blaster::render(SDL_Renderer* renderer, const Map& map) const
     weight = .90;
   else if (lateral_progression_ < .1)
     weight = .1;
-  Vector2D inner_top = exterior.first.weightedMidPointTo(exterior.second, weight) +
-                       (unit_vector * -10);
-  Vector2D outer_top = exterior.first.weightedMidPointTo(exterior.second, weight) +
-                       (unit_vector * -20);
+  Vector2D inner_top =
+    exterior.first.weightedMidPointTo(exterior.second, weight) +
+    (unit_vector * -10);
+  Vector2D outer_top =
+    exterior.first.weightedMidPointTo(exterior.second, weight) +
+    (unit_vector * -20);
 
-  Vector2D claw_left = exterior.first.weightedMidPointTo(exterior.second, .4) +
-                       (unit_vector * 10);
+  Vector2D claw_left =
+    exterior.first.weightedMidPointTo(exterior.second, .4) + (unit_vector * 10);
   Vector2D claw_right =
-    exterior.first.weightedMidPointTo(exterior.second, .6) +
-    (unit_vector * 10);
+    exterior.first.weightedMidPointTo(exterior.second, .6) + (unit_vector * 10);
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 
