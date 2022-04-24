@@ -22,8 +22,7 @@ UILevelCarousel::UILevelCarousel(std::string levels_dir,
                                  int h)
   : UIElement{ x, y, w, h }
 {
-  // recup all levels
-  // for each level, create ui element max 5
+
   std::regex r{ "figure-[0-9]+" };
   // Get all available scenes
   if (fs::exists(levels_dir) && fs::is_directory(levels_dir)) {
@@ -41,7 +40,7 @@ UILevelCarousel::UILevelCarousel(std::string levels_dir,
                      std::stoi(p2.filename().string().substr(6));
             });
 
-  for (size_t i = 0; i < available_levels_.size(); i++) {
+  for (size_t i = 0; i < available_levels_.size() && i < 5; i++) {
     UILevelBox b{ (u32)i, 200 + ((int)i * 130), 390, 120, 120 };
     ui_elements_.push_back(b);
   }
@@ -58,7 +57,7 @@ UILevelCarousel::render(SDL_Renderer* r) const
 {
   // Draw UI
   for (size_t i = 0; i < ui_elements_.size(); i++) {
-    bool selected = selected_level_ == (int)i;
+    bool selected = (selected_level_ - offset_) == (int)i;
     ui_elements_[i].render(r, selected);
   }
 }
@@ -66,15 +65,22 @@ UILevelCarousel::render(SDL_Renderer* r) const
 void
 UILevelCarousel::go_right()
 {
-  selected_level_ = selected_level_ < (int)available_levels_.size() - 1
-                      ? selected_level_ + 1
-                      : selected_level_;
+  int max = available_levels_.size() - 1;
+  if ((selected_level_ - offset_) == 4 && max >= 5 && selected_level_ < max) {
+    cycle_right();
+  } else if (selected_level_ < max) {
+    ++selected_level_;
+  }
 }
 
 void
 UILevelCarousel::go_left()
 {
-  selected_level_ = selected_level_ > 0 ? selected_level_ - 1 : selected_level_;
+  if ((selected_level_ - offset_) == 0 && selected_level_ > 0) {
+    cycle_left();
+  } else if (selected_level_ > 0) {
+    --selected_level_;
+  }
 }
 
 void
@@ -83,9 +89,24 @@ UILevelCarousel::select(SceneManager& sm)
   sm.set_next_state(STATE_GAME_SCENE, selected_level_);
 }
 
-// void
-// UILevelCarousel::processEvent(SDL_Event* e)
-// {
-//   // if right arrow, selected_level ++
-//   // if at end of 5, render with offset
-// }
+void
+UILevelCarousel::cycle_right()
+{
+  std::cout << "[Debug] - Cycling right, at offset = " << offset_ << std::endl;
+  for (auto& e : ui_elements_) {
+    e.set_level_n(e.get_level_n() + 1);
+  }
+  ++offset_;
+  ++selected_level_;
+}
+
+void
+UILevelCarousel::cycle_left()
+{
+  std::cout << "[Debug] - Cycling left, at offset = " << offset_ << std::endl;
+  for (auto& e : ui_elements_) {
+    e.set_level_n(e.get_level_n() - 1);
+  }
+  --offset_;
+  --selected_level_;
+}

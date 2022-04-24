@@ -28,6 +28,9 @@ public:
   void update() override;
   void render(SDL_Renderer* r) const override;
   void render(SDL_Renderer* r, bool selected) const;
+
+  void set_level_n(u32 new_level);
+  u32 get_level_n();
 };
 
 #endif // TEMPEST_ATARI_UILEVELBOX_HPP
