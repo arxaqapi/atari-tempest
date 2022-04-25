@@ -15,10 +15,7 @@
 #include <iostream>
 
 TitleScreen::TitleScreen()
-// : button_{}
-{
-  col_ = { .r = 0xFF, .g = 0x00, .b = 0x00, .a = SDL_ALPHA_OPAQUE };
-}
+{}
 
 TitleScreen::~TitleScreen() {}
 
@@ -29,7 +26,7 @@ TitleScreen::update(f64 delta, SceneManager& sm)
 void
 TitleScreen::render(SDL_Renderer* renderer) const
 {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, col_.a);
+  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(renderer);
 
   // Draw text

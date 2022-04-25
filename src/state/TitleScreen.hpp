@@ -19,7 +19,6 @@ class SceneManager;
 class TitleScreen : public Scene
 {
 private:
-  SDL_Color col_;
 
 public:
   TitleScreen();
