@@ -18,7 +18,6 @@
 class UIElement
 {
 protected:
-  // SDL_Rect bounding_box_; // TODO: Change Me !!
   SDLW::Rect bounding_box_;
 
 public:

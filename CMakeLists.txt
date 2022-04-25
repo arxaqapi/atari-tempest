@@ -11,7 +11,7 @@ set(SOURCES
       src/utils/Errors.cpp
       src/utils/Vector2D.cpp
       src/core/Game.cpp
-      src/core/Renderer.cpp
+      src/core/RenderHandler.cpp
       src/state/SceneManager.cpp
       src/state/TitleScreen.cpp
       src/state/WinScreen.cpp

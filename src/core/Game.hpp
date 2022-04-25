@@ -16,7 +16,7 @@
 #include "../state/SceneManager.hpp"
 #include "../state/TitleScreen.hpp"
 #include "../utils/types.hpp"
-#include "Renderer.hpp"
+#include "RenderHandler.hpp"
 #include <memory>
 
 class Game
@@ -26,7 +26,7 @@ private:
   u16 WINDOWS_WIDTH_ = 960;
   u16 WINDOWS_HEIGHT_ = 540;
   SceneManager sm_;
-  Renderer r_{ WINDOWS_WIDTH_, WINDOWS_HEIGHT_ };
+  RenderHandler r_{ WINDOWS_WIDTH_, WINDOWS_HEIGHT_ };
   void stop_() { run_ = false; };
 
 public:

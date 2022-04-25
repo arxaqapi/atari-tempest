@@ -1,5 +1,5 @@
 /**
- * @file Renderer.hpp
+ * @file RenderHandler.hpp
  * @author arxaqapi (https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-01-30
@@ -8,23 +8,23 @@
  *
  * @brief
  */
-#ifndef H_TEMPEST_GAME_INC_RENDERER_
-#define H_TEMPEST_GAME_INC_RENDERER_
+#ifndef H_TEMPEST_GAME_INC_RENDERHANDLER_
+#define H_TEMPEST_GAME_INC_RENDERHANDLER_
 
 #include "../sdlw/SDLW.hpp"
 #include "../utils/types.hpp"
 #include "SDL2/SDL.h"
 #include <memory>
 
-class Renderer // TODO: change confusing name
+class RenderHandler
 {
 private:
   std::unique_ptr<SDLW::Window> w_;
   std::unique_ptr<SDLW::Renderer> r_;
 
 public:
-  Renderer(u16 w_width, u16 w_height);
-  ~Renderer();
+  RenderHandler(u16 w_width, u16 w_height);
+  ~RenderHandler();
 
   void clear();
   void draw();

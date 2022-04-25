@@ -9,11 +9,11 @@
  * @brief
  */
 
-#include "Renderer.hpp"
+#include "RenderHandler.hpp"
 #include "../utils/Errors.hpp"
 #include <iostream>
 
-Renderer::Renderer(u16 w_width, u16 w_height)
+RenderHandler::RenderHandler(u16 w_width, u16 w_height)
 {
   std::cout << "rend constr" << std::endl;
 
@@ -30,19 +30,19 @@ Renderer::Renderer(u16 w_width, u16 w_height)
 }
 
 void
-Renderer::clear()
+RenderHandler::clear()
 {
   (*r_).SetRenderDrawColor(0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
   (*r_).RenderClear();
 }
 
 void
-Renderer::draw()
+RenderHandler::draw()
 {
   (*r_).RenderPresent();
 }
 
-Renderer::~Renderer()
+RenderHandler::~RenderHandler()
 {
   std::cout << "rend destr" << std::endl;
   SDLW::Quit();
@@ -50,7 +50,7 @@ Renderer::~Renderer()
 }
 
 SDLW::Renderer&
-Renderer::get_renderer()
+RenderHandler::get_renderer()
 {
   return *r_;
 }
