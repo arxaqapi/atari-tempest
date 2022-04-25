@@ -96,9 +96,9 @@ Map::makeBands(const std::vector<Vector2D>& exterior)
 
 void
 Map::load(const std::vector<Vector2D>& exterior,
-           bool is_continuous,
-           f32 focal,
-           Vector2D origin)
+          bool is_continuous,
+          f32 focal,
+          Vector2D origin)
 {
   is_continuous_ = is_continuous;
   focal_ = focal;

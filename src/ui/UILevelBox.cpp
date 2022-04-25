@@ -54,12 +54,16 @@ UILevelBox::render(SDL_Renderer* r, bool selected) const
                    bounding_box_.x + bounding_box_.w / 2 - 10,
                    bounding_box_.y + 30,
                    r);
+}
 
-  // SDL_RenderDrawRect(r, &bounding_box_);
-  // SDL_Rect inside = { bounding_box_.x + 1,
-  //                     bounding_box_.y + 1,
-  //                     bounding_box_.w - 2,
-  //                     bounding_box_.h - 2 };
-  // SDL_SetRenderDrawColor(r, 0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE);
-  // SDL_RenderFillRect(r, &inside);
+void
+UILevelBox::set_level_n(u32 new_level)
+{
+  level_n_ = new_level;
+}
+
+u32
+UILevelBox::get_level_n()
+{
+  return level_n_;
 }

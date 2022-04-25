@@ -44,7 +44,10 @@ public:
   bool isActive() const;
   u8 getBandNum() const;
   void setMovingDirection(e_direction moving_direction);
-  inline void setFrontProgression(f32 front_progression) { front_progression_ = front_progression; }
+  inline void setFrontProgression(f32 front_progression)
+  {
+    front_progression_ = front_progression;
+  }
   inline f32 getFrontProgression() const { return front_progression_; }
   void activate(u8 band_num,
                 f32 front_progression,

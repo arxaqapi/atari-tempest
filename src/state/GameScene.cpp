@@ -18,7 +18,8 @@ GameScene::GameScene(u8 level)
           current_figure_data_.getOrigin() }
   , spawn_manager_{ map_.size(), level }
 {
-  player_.addScore(getLevelMaxScore((level - 1) / 15, (level - 1) % 15));
+  if (level > 0)
+    player_.addScore(getLevelMaxScore((level - 1) / 15, (level - 1) % 15));
 }
 
 bool
@@ -136,9 +137,7 @@ GameScene::update(f64 delta, SceneManager& sm)
   }
 
   if (player_.getScore() >= getCurrentLevelMaxScore()) {
-    if (gameOver()) // if no more level, go to win screen
-      sm.set_next_state(STATE_WIN_SCREEN);
-    else if (!loadNextLevel()) // todo : improve error handling
+    if (gameOver() || !loadNextLevel()) // if no more level, go to win screen
       sm.set_next_state(STATE_WIN_SCREEN);
   }
 }
@@ -198,6 +197,7 @@ GameScene::render(SDL_Renderer* renderer) const
     "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
   Pen::draw_string(
     "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
+  Pen::draw_string("Level "s + std::to_string(getCurrentLevelNum()), 0, 82, renderer);
 }
 
 u32

@@ -28,24 +28,30 @@ GameObject::move(f64 delta, const Map& map)
 {
   switch (moving_direction_) {
     case LEFT:
-      lateral_progression_ = std::max(0.0, lateral_progression_ - delta * lateral_velocity_);
-      if (lateral_progression_ == 0 && map.getLeftBandNum(band_num_) != band_num_) {
+      lateral_progression_ =
+        std::max(0.0, lateral_progression_ - delta * lateral_velocity_);
+      if (lateral_progression_ == 0 &&
+          map.getLeftBandNum(band_num_) != band_num_) {
         band_num_ = map.getLeftBandNum(band_num_);
         lateral_progression_ = 1;
       }
       break;
     case RIGHT:
-      lateral_progression_ = std::min(1.0, lateral_progression_ + delta * lateral_velocity_);
-      if (lateral_progression_ == 1 && map.getRightBandNum(band_num_) != band_num_) {
+      lateral_progression_ =
+        std::min(1.0, lateral_progression_ + delta * lateral_velocity_);
+      if (lateral_progression_ == 1 &&
+          map.getRightBandNum(band_num_) != band_num_) {
         band_num_ = map.getRightBandNum(band_num_);
         lateral_progression_ = 0;
       }
       break;
     case FORWARD:
-      front_progression_ = std::max(0.0, front_progression_ - delta * front_velocity_);
+      front_progression_ =
+        std::max(0.0, front_progression_ - delta * front_velocity_);
       break;
     case BACKWARD:
-      front_progression_ = std::min(1.0, front_progression_ + delta * front_velocity_);
+      front_progression_ =
+        std::min(1.0, front_progression_ + delta * front_velocity_);
       break;
     default:
       break;
