@@ -11,9 +11,9 @@
 #ifndef TEMPEST_ATARI_SDLW_HPP
 #define TEMPEST_ATARI_SDLW_HPP
 
+#include "../utils/types.hpp"
 #include "SDL2/SDL.h"
 #include <string>
-#include "../utils/types.hpp"
 
 namespace SDLW {
 /// Forward declaration
@@ -22,6 +22,7 @@ class Renderer;
 class Rect
 {
   friend class Renderer;
+
 private:
   SDL_Rect r_;
 
@@ -35,7 +36,6 @@ public:
   int w();
   int h();
 };
-
 
 //// Window
 
@@ -78,22 +78,21 @@ public:
   // TODO: order and implement theses functions
   // struct SDL_FRect;
   // void SDL_RenderFillRectF();
-
 };
 
-void Init(u32 flags);
-void Quit();
+void
+Init(u32 flags);
+void
+Quit();
 
 } // namespace SDLW
 
-
 // SECTION: Extra
-  // SDL_Color
-  // SDL_GetTicks
-  // SDL_GetPerformanceCounter
-  // SDL_Delay()
-  // struct SDL_Event; // override == operator 
-  // SDL_Event SDL_PollEvent();
-
+// SDL_Color
+// SDL_GetTicks
+// SDL_GetPerformanceCounter
+// SDL_Delay()
+// struct SDL_Event; // override == operator
+// SDL_Event SDL_PollEvent();
 
 #endif

@@ -5,6 +5,7 @@
 #ifndef TEMPEST_ATARI_SPAWNMANAGER_HPP
 #define TEMPEST_ATARI_SPAWNMANAGER_HPP
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/types.hpp"
 #include "Flipper.hpp"
 #include "GameObjectPool.hpp"
@@ -39,12 +40,17 @@ public:
   std::vector<Spiker>& getSpikers();
 
   void spawn(f64 delta, u8 level);
-  std::vector<Flipper>::iterator spawnFlipper(u8 band_num, f32 progress, u8 level);
-  std::vector<Flipper>::iterator
-  spawnFlipper(u8 band_num, f32 progress, u8 level, e_direction band_change_direction);
+  std::vector<Flipper>::iterator spawnFlipper(u8 band_num,
+                                              f32 progress,
+                                              u8 level);
+  std::vector<Flipper>::iterator spawnFlipper(
+    u8 band_num,
+    f32 progress,
+    u8 level,
+    e_direction band_change_direction);
 
   void update(f64 delta, const Map& map, u8 level);
-  void render(SDL_Renderer* renderer,
+  void render(SDLW::Renderer& renderer,
               const Map& map,
               const color& flipper_color,
               const color& tanker_color,

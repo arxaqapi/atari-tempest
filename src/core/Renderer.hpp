@@ -11,14 +11,16 @@
 #ifndef H_TEMPEST_GAME_INC_RENDERER_
 #define H_TEMPEST_GAME_INC_RENDERER_
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/types.hpp"
 #include "SDL2/SDL.h"
+#include <memory>
 
-class Renderer
+class Renderer // TODO: change confusing name
 {
 private:
-  SDL_Window* w_;
-  SDL_Renderer* r_;
+  std::unique_ptr<SDLW::Window> w_;
+  std::unique_ptr<SDLW::Renderer> r_;
 
 public:
   Renderer(u16 w_width, u16 w_height);
@@ -27,7 +29,7 @@ public:
   void clear();
   void draw();
 
-  SDL_Renderer* get_renderer();
+  SDLW::Renderer& get_renderer();
 };
 
 #endif

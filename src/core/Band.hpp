@@ -12,9 +12,9 @@
 #ifndef TEMPEST_ATARI_BAND_HPP
 #define TEMPEST_ATARI_BAND_HPP
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/Vector2D.hpp"
 #include "../utils/types.hpp"
-#include <SDL2/SDL_render.h>
 #include <vector>
 
 class Band
@@ -36,7 +36,9 @@ public:
   Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal);
   ~Band() = default;
 
-  void render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const;
+  void render(SDLW::Renderer& renderer,
+              const color& standard_color,
+              const color& accent_color) const;
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };
 

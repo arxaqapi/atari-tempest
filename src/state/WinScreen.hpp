@@ -25,7 +25,7 @@ public:
 
   void processEvent(SDL_Event* event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
-  void render(SDL_Renderer* renderer) const override;
+  void render(SDLW::Renderer& renderer) const override;
 };
 
 #endif

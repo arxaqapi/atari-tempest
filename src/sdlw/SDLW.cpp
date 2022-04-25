@@ -17,7 +17,6 @@ SDLW::Rect::Rect(int x, int y, int w, int h)
   : r_{ x, y, w, h }
 {}
 
-
 SDLW::Rect::~Rect() {}
 
 int
@@ -40,7 +39,6 @@ SDLW::Rect::h()
 {
   return r_.h;
 }
-
 
 //// Window
 SDLW::Window::Window(const std::string& title,
@@ -95,7 +93,7 @@ SDLW::Renderer::RenderFillRect(const SDLW::Rect& rect)
 void
 SDLW::Renderer::RenderDrawLineF(f32 x1, f32 y1, f32 x2, f32 y2)
 {
-  
+
   if (SDL_RenderDrawLineF(r_, x1, y1, x2, y2) != 0)
     throw errors::sdl_error(SDL_GetError());
 }
@@ -130,7 +128,7 @@ SDLW::Renderer::RenderClear()
 // SDL Setup methods
 
 void
-SDLW::init(u32 flags)
+SDLW::Init(u32 flags)
 {
   if (SDL_Init(flags) != 0)
     throw errors::sdl_error(SDL_GetError());

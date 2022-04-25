@@ -35,7 +35,7 @@ public:
   ~UILevelCarousel();
 
   void update() override;
-  void render(SDL_Renderer* r) const override;
+  void render(SDLW::Renderer& renderer) const override;
 
   void go_right();
   void go_left();

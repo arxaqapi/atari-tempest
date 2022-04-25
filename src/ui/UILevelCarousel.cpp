@@ -53,12 +53,12 @@ UILevelCarousel::update()
 {}
 
 void
-UILevelCarousel::render(SDL_Renderer* r) const
+UILevelCarousel::render(SDLW::Renderer& renderer) const
 {
   // Draw UI
   for (size_t i = 0; i < ui_elements_.size(); i++) {
     bool selected = (selected_level_ - offset_) == (int)i;
-    ui_elements_[i].render(r, selected);
+    ui_elements_[i].render(renderer, selected);
   }
 }
 

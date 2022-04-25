@@ -12,16 +12,17 @@ Flipper::Flipper()
 }
 
 void
-Flipper::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
+Flipper::render(SDLW::Renderer& renderer,
+                const Map& map,
+                const color& render_color) const
 {
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer,
-                         std::get<0>(render_color),
-                         std::get<1>(render_color),
-                         std::get<2>(render_color),
-                         255);
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
 
   const Band& band = map.getBand(band_num_);
 
@@ -51,36 +52,22 @@ Flipper::render(SDL_Renderer* renderer, const Map& map, const color& render_colo
   Vector2D right_inner = right_bottom.weightedMidPointTo(left_bottom, .2) +
                          (orthogonal * (-height / 2));
 
-  SDL_RenderDrawLine(renderer,
-                     left_bottom.getX(),
-                     left_bottom.getY(),
-                     right_top.getX(),
-                     right_top.getY());
-  SDL_RenderDrawLine(renderer,
-                     left_bottom.getX(),
-                     left_bottom.getY(),
-                     left_inner.getX(),
-                     left_inner.getY());
-  SDL_RenderDrawLine(renderer,
-                     left_inner.getX(),
-                     left_inner.getY(),
-                     left_top.getX(),
-                     left_top.getY());
-  SDL_RenderDrawLine(renderer,
-                     right_bottom.getX(),
-                     right_bottom.getY(),
-                     left_top.getX(),
-                     left_top.getY());
-  SDL_RenderDrawLine(renderer,
-                     right_bottom.getX(),
-                     right_bottom.getY(),
-                     right_inner.getX(),
-                     right_inner.getY());
-  SDL_RenderDrawLine(renderer,
-                     right_inner.getX(),
-                     right_inner.getY(),
-                     right_top.getX(),
-                     right_top.getY());
+  renderer.RenderDrawLine(
+    left_bottom.getX(), left_bottom.getY(), right_top.getX(), right_top.getY());
+  renderer.RenderDrawLine(left_bottom.getX(),
+                          left_bottom.getY(),
+                          left_inner.getX(),
+                          left_inner.getY());
+  renderer.RenderDrawLine(
+    left_inner.getX(), left_inner.getY(), left_top.getX(), left_top.getY());
+  renderer.RenderDrawLine(
+    right_bottom.getX(), right_bottom.getY(), left_top.getX(), left_top.getY());
+  renderer.RenderDrawLine(right_bottom.getX(),
+                          right_bottom.getY(),
+                          right_inner.getX(),
+                          right_inner.getY());
+  renderer.RenderDrawLine(
+    right_inner.getX(), right_inner.getY(), right_top.getX(), right_top.getY());
 }
 
 void

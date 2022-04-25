@@ -1,7 +1,8 @@
 #ifndef TEMPEST_ATARI_PEN_HPP
 #define TEMPEST_ATARI_PEN_HPP
 
-#include <SDL2/SDL.h>
+// #include <SDL2/SDL.h>
+#include "../sdlw/SDLW.hpp"
 #include <string>
 #include <vector>
 
@@ -11,21 +12,21 @@ public:
   static void draw_string(std::string const& s,
                           int xpos,
                           int ypos,
-                          SDL_Renderer* const r);
+                          SDLW::Renderer& renderer);
 
   static void draw_string_centered_x(std::string const& s,
                                      int ypos,
-                                     SDL_Renderer* const r);
+                                     SDLW::Renderer& renderer);
 
   static void draw_string(std::string const& s,
                           int xpos,
                           int ypos,
-                          SDL_Renderer* const r,
+                          SDLW::Renderer& renderer,
                           float size);
 
   static void draw_string_centered_x(std::string const& s,
                                      int ypos,
-                                     SDL_Renderer* const r,
+                                     SDLW::Renderer& renderer,
                                      float size);
 
   static int get_string_width(std::string const& s);
@@ -36,14 +37,14 @@ private:
   ~Pen() = delete;
 
   static int index_of_ascii(const char c);
-  static void draw_edge(SDL_Renderer* const r,
+  static void draw_edge(SDLW::Renderer& renderer,
                         const float x1,
                         const float y1,
                         const float x2,
                         const float y2,
                         const int xoffset,
                         const int yoffset);
-  static int draw_character(SDL_Renderer* const r,
+  static int draw_character(SDLW::Renderer& renderer,
                             const char c,
                             const int xoffset,
                             const int yoffset,

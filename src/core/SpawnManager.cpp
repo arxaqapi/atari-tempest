@@ -35,7 +35,7 @@ SpawnManager::update(f64 delta, const Map& map, u8 level)
 }
 
 void
-SpawnManager::render(SDL_Renderer* renderer,
+SpawnManager::render(SDLW::Renderer& renderer,
                      const Map& map,
                      const color& flipper_color,
                      const color& tanker_color,

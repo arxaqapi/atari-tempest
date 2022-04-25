@@ -25,41 +25,28 @@ Band::Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal)
 {}
 
 void
-Band::render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const
+Band::render(SDLW::Renderer& renderer,
+             const color& standard_color,
+             const color& accent_color) const
 {
   if (is_selected_)
-    SDL_SetRenderDrawColor(renderer,
-                           std::get<0>(accent_color),
-                           std::get<1>(accent_color),
-                           std::get<2>(accent_color),
-                           255);
+    renderer.SetRenderDrawColor(std::get<0>(accent_color),
+                                std::get<1>(accent_color),
+                                std::get<2>(accent_color),
+                                255);
   else
-    SDL_SetRenderDrawColor(renderer,
-                           std::get<0>(standard_color),
-                           std::get<1>(standard_color),
-                           std::get<2>(standard_color),
-                           255);
-
-  SDL_RenderDrawLineF(renderer,
-                      exter_a_.getX(),
-                      exter_a_.getY(),
-                      exter_b_.getX(),
-                      exter_b_.getY());
-  SDL_RenderDrawLineF(renderer,
-                      exter_b_.getX(),
-                      exter_b_.getY(),
-                      inter_b_.getX(),
-                      inter_b_.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inter_b_.getX(),
-                      inter_b_.getY(),
-                      inter_a_.getX(),
-                      inter_a_.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inter_a_.getX(),
-                      inter_a_.getY(),
-                      exter_a_.getX(),
-                      exter_a_.getY());
+    renderer.SetRenderDrawColor(std::get<0>(standard_color),
+                                std::get<1>(standard_color),
+                                std::get<2>(standard_color),
+                                255);
+  renderer.RenderDrawLineF(
+    exter_a_.getX(), exter_a_.getY(), exter_b_.getX(), exter_b_.getY());
+  renderer.RenderDrawLineF(
+    exter_b_.getX(), exter_b_.getY(), inter_b_.getX(), inter_b_.getY());
+  renderer.RenderDrawLineF(
+    inter_b_.getX(), inter_b_.getY(), inter_a_.getX(), inter_a_.getY());
+  renderer.RenderDrawLineF(
+    inter_a_.getX(), inter_a_.getY(), exter_a_.getX(), exter_a_.getY());
 }
 
 const Vector2D&

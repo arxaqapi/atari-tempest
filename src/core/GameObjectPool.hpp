@@ -5,6 +5,7 @@
 #ifndef TEMPEST_ATARI_GAMEOBJECTPOOL_HPP
 #define TEMPEST_ATARI_GAMEOBJECTPOOL_HPP
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/Timer.hpp"
 #include "../utils/types.hpp"
 #include "Map.hpp"
@@ -35,7 +36,7 @@ public:
     f32 lateral_velocity,
     e_direction moving_direction);
   void update(f64 delta, const Map& map);
-  void render(SDL_Renderer* renderer,
+  void render(SDLW::Renderer& renderer,
               const Map& map,
               const color& render_color) const;
   void clear();
@@ -86,7 +87,7 @@ GameObjectPool<GameObjectType>::update(f64 delta, const Map& map)
 
 template<typename GameObjectType>
 void
-GameObjectPool<GameObjectType>::render(SDL_Renderer* renderer,
+GameObjectPool<GameObjectType>::render(SDLW::Renderer& renderer,
                                        const Map& map,
                                        const color& render_color) const
 {

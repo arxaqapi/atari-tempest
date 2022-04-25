@@ -26,34 +26,33 @@ UILevelBox::update()
 {}
 
 void
-UILevelBox::render(SDL_Renderer* r) const
+UILevelBox::render(SDLW::Renderer& renderer) const
 {
-  render(r, false);
+  render(renderer, false);
 }
 
 void
-UILevelBox::render(SDL_Renderer* r, bool selected) const
+UILevelBox::render(SDLW::Renderer& renderer, bool selected) const
 {
   if (selected) {
     // Draw white border
-    SDL_SetRenderDrawColor(r, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
+    renderer.SetRenderDrawColor(0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
 
-    SDL_RenderDrawRect(r, &bounding_box_);
+    renderer.RenderDrawRect(SDLW::Rect(
+      bounding_box_.x, bounding_box_.y, bounding_box_.w, bounding_box_.h));
   } else {
-
-    SDL_SetRenderDrawColor(r, 0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE);
-    SDLW::RenderFillRect(r,
-                         SDLW::Rect(bounding_box_.x + 2,
-                                    bounding_box_.y + 2,
-                                    bounding_box_.w - 4,
-                                    bounding_box_.h - 4));
+    renderer.SetRenderDrawColor(0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE);
+    renderer.RenderFillRect(SDLW::Rect(bounding_box_.x + 2,
+                                       bounding_box_.y + 2,
+                                       bounding_box_.w - 4,
+                                       bounding_box_.h - 4));
   }
 
   // Draw Text
   Pen::draw_string(std::to_string(level_n_),
                    bounding_box_.x + bounding_box_.w / 2 - 10,
                    bounding_box_.y + 30,
-                   r);
+                   renderer);
 }
 
 void

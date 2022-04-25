@@ -20,10 +20,10 @@ LevelSelectionScene::update(f64 delta, SceneManager& sm)
 {}
 
 void
-LevelSelectionScene::render(SDL_Renderer* renderer) const
+LevelSelectionScene::render(SDLW::Renderer& renderer) const
 {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-  SDL_RenderClear(renderer);
+  renderer.SetRenderDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+  renderer.RenderClear();
 
   // Draw UI
   ui_level_carousel_.render(renderer);

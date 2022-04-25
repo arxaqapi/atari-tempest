@@ -5,6 +5,7 @@
 #ifndef TEMPEST_ATARI_BLASTER_HPP
 #define TEMPEST_ATARI_BLASTER_HPP
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/Delay.hpp"
 #include "Bullet.hpp"
 #include "GameObject.hpp"
@@ -34,7 +35,9 @@ public:
   void shoot();
   void stopShooting();
   void hit() override;
-  void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const override;
+  void render(SDLW::Renderer& renderer,
+              const Map& map,
+              const color& render_color) const override;
   void update(f64 delta, const Map& map) override;
   void clear();
 };

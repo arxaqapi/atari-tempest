@@ -5,6 +5,7 @@
 #ifndef TEMPEST_ATARI_BULLET_HPP
 #define TEMPEST_ATARI_BULLET_HPP
 
+#include "../sdlw/SDLW.hpp"
 #include "GameObject.hpp"
 class Bullet : public GameObject
 {
@@ -14,7 +15,9 @@ public:
   ~Bullet() override = default;
 
   void update(f64 delta, const Map& map) override;
-  void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const override;
+  void render(SDLW::Renderer& renderer,
+              const Map& map,
+              const color& render_color) const override;
 };
 
 #endif // TEMPEST_ATARI_BULLET_HPP

@@ -11,16 +11,17 @@ Tanker::Tanker()
 }
 
 void
-Tanker::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
+Tanker::render(SDLW::Renderer& renderer,
+               const Map& map,
+               const color& render_color) const
 {
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer,
-                         std::get<0>(render_color),
-                         std::get<1>(render_color),
-                         std::get<2>(render_color),
-                         255);
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
 
   const Band& band = map.getBand(band_num_);
 
@@ -47,66 +48,42 @@ Tanker::render(SDL_Renderer* renderer, const Map& map, const color& render_color
   Vector2D outer_top = band.getExterCenter() + (v * outer_size) + position;
   Vector2D outer_bottom = band.getExterCenter() + (v * -outer_size) + position;
 
-  SDL_RenderDrawLineF(renderer,
-                      inner_left.getX(),
-                      inner_left.getY(),
-                      inner_top.getX(),
-                      inner_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inner_top.getX(),
-                      inner_top.getY(),
-                      inner_right.getX(),
-                      inner_right.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inner_right.getX(),
-                      inner_right.getY(),
-                      inner_bottom.getX(),
-                      inner_bottom.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inner_bottom.getX(),
-                      inner_bottom.getY(),
-                      inner_left.getX(),
-                      inner_left.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_left.getX(),
-                      outer_left.getY(),
-                      outer_top.getX(),
-                      outer_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_top.getX(),
-                      outer_top.getY(),
-                      outer_right.getX(),
-                      outer_right.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_right.getX(),
-                      outer_right.getY(),
-                      outer_bottom.getX(),
-                      outer_bottom.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_bottom.getX(),
-                      outer_bottom.getY(),
-                      outer_left.getX(),
-                      outer_left.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_top.getX(),
-                      outer_top.getY(),
-                      inner_left.getX(),
-                      inner_left.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_right.getX(),
-                      outer_right.getY(),
-                      inner_top.getX(),
-                      inner_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_bottom.getX(),
-                      outer_bottom.getY(),
-                      inner_right.getX(),
-                      inner_right.getY());
-  SDL_RenderDrawLineF(renderer,
-                      outer_left.getX(),
-                      outer_left.getY(),
-                      inner_bottom.getX(),
-                      inner_bottom.getY());
+  renderer.RenderDrawLineF(
+    inner_left.getX(), inner_left.getY(), inner_top.getX(), inner_top.getY());
+  renderer.RenderDrawLineF(
+    inner_top.getX(), inner_top.getY(), inner_right.getX(), inner_right.getY());
+  renderer.RenderDrawLineF(inner_right.getX(),
+                           inner_right.getY(),
+                           inner_bottom.getX(),
+                           inner_bottom.getY());
+  renderer.RenderDrawLineF(inner_bottom.getX(),
+                           inner_bottom.getY(),
+                           inner_left.getX(),
+                           inner_left.getY());
+  renderer.RenderDrawLineF(
+    outer_left.getX(), outer_left.getY(), outer_top.getX(), outer_top.getY());
+  renderer.RenderDrawLineF(
+    outer_top.getX(), outer_top.getY(), outer_right.getX(), outer_right.getY());
+  renderer.RenderDrawLineF(outer_right.getX(),
+                           outer_right.getY(),
+                           outer_bottom.getX(),
+                           outer_bottom.getY());
+  renderer.RenderDrawLineF(outer_bottom.getX(),
+                           outer_bottom.getY(),
+                           outer_left.getX(),
+                           outer_left.getY());
+  renderer.RenderDrawLineF(
+    outer_top.getX(), outer_top.getY(), inner_left.getX(), inner_left.getY());
+  renderer.RenderDrawLineF(
+    outer_right.getX(), outer_right.getY(), inner_top.getX(), inner_top.getY());
+  renderer.RenderDrawLineF(outer_bottom.getX(),
+                           outer_bottom.getY(),
+                           inner_right.getX(),
+                           inner_right.getY());
+  renderer.RenderDrawLineF(outer_left.getX(),
+                           outer_left.getY(),
+                           inner_bottom.getX(),
+                           inner_bottom.getY());
 }
 
 void
