@@ -23,7 +23,8 @@ class SceneManager;
 class GameScene : public Scene
 {
 private:
-  FigureData current_figure_data_;
+  Data level_data;
+  u8 current_figure_ = 0;
   u8 current_cycle_ = 0;
   Map map_;
   Blaster player_;
@@ -34,8 +35,7 @@ public:
   GameScene(const GameScene& game_scene) = default;
   explicit GameScene(u8 level);
 
-  bool loadFigure(u8 figure);
-  bool loadNextLevel();
+  void loadNextLevel();
   bool gameOver() const;
   static u32 getLevelMaxScore(u8 cycle, u8 figure) ;
   u32 getCurrentLevelMaxScore() const;

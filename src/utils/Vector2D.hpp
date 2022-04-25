@@ -51,7 +51,11 @@ public:
              (1 - weight) * y_ + weight * point.y_ };
   }
 
-  inline Vector2D orthogonalVector() const { return { y_, -x_ }; };
+  inline Vector2D orthogonalVector() const { return { y_, -x_ }; }
+
+  inline void setX(f32 x) { x_ = x; }
+
+  inline void setY(f32 y) { y_ = y; };
 
   Vector2D operator+(const Vector2D& vector) const;
 

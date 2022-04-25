@@ -10,34 +10,17 @@
 using namespace std::string_literals;
 
 GameScene::GameScene(u8 level)
-  : current_figure_data_{ static_cast<u8>(level % 15) }
-  , current_cycle_{ static_cast<u8>(level / 15) }
-  , map_{ current_figure_data_.getExterior(),
-          current_figure_data_.isContinuous(),
-          current_figure_data_.getFocal(),
-          current_figure_data_.getOrigin() }
+  : current_figure_{ static_cast<u8>(level % (Data::N_FIGURES_ - 1)) }
+  , current_cycle_{ static_cast<u8>(level / (Data::N_FIGURES_ - 1)) }
+  , map_{ level_data.getExterior()[current_figure_],
+          level_data.getIsContinuous()[current_figure_],
+          level_data.getFocal()[current_figure_],
+          level_data.getOrigin()[current_figure_] }
   , spawn_manager_{ map_.size(), level }
 {
   if (level > 0)
-    player_.addScore(getLevelMaxScore((level - 1) / 15, (level - 1) % 15));
-}
-
-bool
-GameScene::loadFigure(u8 figure)
-{
-  if (!current_figure_data_.load(figure))
-    return false;
-
-  map_.load(current_figure_data_.getExterior(),
-            current_figure_data_.isContinuous(),
-            current_figure_data_.getFocal(),
-            current_figure_data_.getOrigin());
-
-  spawn_manager_.load(map_.size(), getCurrentLevelNum());
-
-  player_.clear();
-
-  return true;
+    player_.addScore(getLevelMaxScore((level - 1) / (Data::N_FIGURES_ - 1),
+                                      (level - 1) % (Data::N_FIGURES_ - 1)));
 }
 
 void
@@ -137,8 +120,10 @@ GameScene::update(f64 delta, SceneManager& sm)
   }
 
   if (player_.getScore() >= getCurrentLevelMaxScore()) {
-    if (gameOver() || !loadNextLevel()) // if no more level, go to win screen
+    if (gameOver()) // if no more level, go to win screen
       sm.set_next_state(STATE_WIN_SCREEN);
+    else
+      loadNextLevel();
   }
 }
 
@@ -197,40 +182,50 @@ GameScene::render(SDL_Renderer* renderer) const
     "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
   Pen::draw_string(
     "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
-  Pen::draw_string("Level "s + std::to_string(getCurrentLevelNum()), 0, 82, renderer);
+  Pen::draw_string(
+    "Level "s + std::to_string(getCurrentLevelNum()), 0, 82, renderer);
 }
 
 u32
 GameScene::getCurrentLevelMaxScore() const
 {
-
-  return getLevelMaxScore(current_cycle_, current_figure_data_.getFigureNum());
+  return getLevelMaxScore(current_cycle_, current_figure_);
 }
 
 u8
 GameScene::getCurrentLevelNum() const
 {
-  return current_figure_data_.getFigureNum() + 15 * current_cycle_;
+  return current_figure_ + (Data::N_FIGURES_ - 1) * current_cycle_;
 }
 
-bool
+void
 GameScene::loadNextLevel()
 {
-  u8 next_figure_num = (current_figure_data_.getFigureNum() + 1) % 15;
-  if (next_figure_num == 0)
+  current_figure_ = (current_figure_ + 1) % (Data::N_FIGURES_ - 1);
+
+  if (current_figure_ == 0)
     current_cycle_ += 1;
-  return loadFigure(next_figure_num);
+
+  map_.load(level_data.getExterior()[current_figure_],
+            level_data.getIsContinuous()[current_figure_],
+            level_data.getFocal()[current_figure_],
+            level_data.getOrigin()[current_figure_]);
+
+  spawn_manager_.load(map_.size(), getCurrentLevelNum());
+
+  player_.clear();
 }
 
 bool
 GameScene::gameOver() const
 {
-  return current_cycle_ == 4 && current_figure_data_.getFigureNum() == 15;
+  return current_cycle_ == Data::N_CYCLES_ &&
+         current_figure_ == Data::N_FIGURES_ - 1;
 }
 
 u32
 GameScene::getLevelMaxScore(u8 cycle, u8 figure)
 {
   return 1000 + (cycle + 1) * std::pow(figure + 1, 2) * 600 +
-         cycle * 16 * 16 * 600;
+         cycle * Data::N_FIGURES_ * Data::N_FIGURES_ * 600;
 }

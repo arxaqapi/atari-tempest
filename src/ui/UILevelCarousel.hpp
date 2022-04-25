@@ -24,14 +24,13 @@ class UILevelCarousel : public UIElement
 {
 private:
   int selected_level_ = 0;
-  std::vector<std::filesystem::path> available_levels_;
+//  std::vector<std::filesystem::path> available_levels_;
   std::vector<UILevelBox> ui_elements_;
   u16 offset_ = 0;
 
 public:
   UILevelCarousel() = delete;
-  UILevelCarousel(int x, int y, int w, int h) = delete;
-  UILevelCarousel(std::string levels_dir, int x, int y, int w, int h);
+  UILevelCarousel(int x, int y, int w, int h);
   ~UILevelCarousel();
 
   void update() override;

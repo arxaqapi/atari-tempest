@@ -39,7 +39,6 @@ Band::render(SDL_Renderer* renderer, const color& standard_color, const color& a
                            std::get<1>(standard_color),
                            std::get<2>(standard_color),
                            255);
-
   SDL_RenderDrawLineF(renderer,
                       exter_a_.getX(),
                       exter_a_.getY(),

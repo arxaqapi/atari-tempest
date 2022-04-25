@@ -76,7 +76,9 @@ Map::select(u8 num_band)
 }
 
 void
-Map::render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const
+Map::render(SDL_Renderer* renderer,
+            const color& standard_color,
+            const color& accent_color) const
 {
   for (auto band : bands_)
     band.render(renderer, standard_color, accent_color);
@@ -88,9 +90,11 @@ Map::makeBands(const std::vector<Vector2D>& exterior)
 {
   assert(exterior.size() > 0);
   bands_.clear();
-  for (size_t i = 0; i < exterior.size() - 1; ++i) {
+  size_t i;
+  for (i = 0; i < exterior.size() - 1; ++i)
     bands_.emplace_back(exterior[i], exterior[i + 1], origin_, focal_);
-  }
+  if (is_continuous_)
+    bands_.emplace_back(exterior[i], exterior[0], origin_, focal_);
   bands_[selected_band_num_].select();
 }
 

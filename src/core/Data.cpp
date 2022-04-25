@@ -9,100 +9,82 @@
 #include <iostream>
 #include <sstream>
 
-Data::Data(std::string data_path)
+Data::Data()
+  : exterior_(N_FIGURES_, std::vector<Vector2D>(N_BANDS_PER_FIGURE_))
+  , origin_(N_FIGURES_)
 {
-  loadData(data_path);
-  n_levels_ = exteriors_.size();
-}
-
-const std::vector<Vector2D>&
-Data::getExterior(u8 i) const
-{
-  assert(i < n_levels_);
-  return exteriors_[i];
-}
-
-const std::vector<Vector2D>&
-Data::getInterior(u8 i) const
-{
-  assert(i < n_levels_);
-  return interiors_[i];
-}
-
-bool
-Data::isContinuous(u8 i) const
-{
-  assert(i < n_levels_);
-  return is_continuous_[i];
-}
-
-u8
-Data::getNLevels() const
-{
-  return n_levels_;
-}
-
-void
-Data::parseCoordinates(const std::string& coordinates,
-                       std::vector<Vector2D>& points)
-{
-  f32 x, y;
-  char delimiter;
-  points.clear();
-  std::stringstream coordinates_ss(coordinates);
-  while (coordinates_ss >> x >> delimiter >> y)
-    points.emplace_back(x, y);
-}
-
-void
-Data::parseLine(const std::string& line)
-{
-  std::stringstream line_input{ line };
-  std::string is_continuous_s, score_s, exterior_s, interior_s;
-
-  assert(std::getline(line_input, is_continuous_s, ';') &&
-         std::getline(line_input, score_s, ';') &&
-         std::getline(line_input, exterior_s, ';') &&
-         std::getline(line_input, interior_s, ';'));
-
-  assert(is_continuous_s == "0" || is_continuous_s == "1");
-  is_continuous_.emplace_back(is_continuous_s == "1");
-
-  scores_.emplace_back(std::stoul(score_s));
-
-  std::vector<Vector2D> exterior, interior;
-  parseCoordinates(exterior_s, exterior);
-  parseCoordinates(interior_s, interior);
-  assert(interior.size() == exterior.size());
-  exteriors_.emplace_back(exterior);
-  interiors_.emplace_back(interior);
-}
-
-void
-Data::loadData(const std::string& data_path)
-{
-  std::ifstream file{ data_path, std::ios::in };
+  std::ifstream file{ DATA_PATH_, std::ios::in };
+  f32 buf;
 
   if (!file.is_open()) {
-    throw errors::file_not_opened();
+    // todo : handle error
+    return;
   }
 
-  std::string line_s;
-
-  // header
-  std::getline(file, line_s);
-
-  // data
-  while (std::getline(file, line_s)) {
-    parseLine(line_s);
+  // Is continuous
+  for (int i = 0; i < N_FIGURES_; ++i) {
+    file >> buf;
+    is_continuous_.emplace_back(buf);
   }
 
-  file.close();
+  // Focal
+  for (int i = 0; i < N_FIGURES_; ++i) {
+    file >> buf;
+    focal_.emplace_back(buf);
+  }
+
+  // Origin
+  for (int i = 0; i < N_FIGURES_; ++i) {
+    file >> buf;
+    origin_[i].setX(buf);
+  }
+  for (int i = 0; i < N_FIGURES_; ++i) {
+    file >> buf;
+    origin_[i].setY(buf);
+  }
+
+//   Exterior
+  for (int i = 0; i < N_FIGURES_; ++i) {
+    for (int j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
+      exterior_[i][j].setX(buf);
+    }
+  }
+  for (int i = 0; i < N_FIGURES_; ++i) {
+    for (int j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
+      exterior_[i][j].setY(buf);
+    }
+  }
+
+
+  assert(exterior_.size() == N_FIGURES_ && origin_.size() == N_FIGURES_ &&
+         focal_.size() == N_FIGURES_ && is_continuous_.size() == N_FIGURES_);
+
+//  for (int i = 0; i < N_FIGURES_; ++i) {
+//    for (int j = 0; j < N_BANDS_PER_FIGURE_; ++j) {
+//
+//    }
+//    std::cout << exterior_[i] << " ";
+//  }
 }
 
-u32
-Data::getScore(u8 i) const
+void
+Data::readCoords(std::ifstream& file,
+                 std::vector<Vector2D>& coords,
+                 u8 n_coords)
 {
-  assert(i < n_levels_);
-  return scores_[i];
+  f32 x, y;
+  std::string x_s, y_s;
+  std::stringstream x_ss, y_ss;
+
+  std::getline(file, x_s);
+  std::cout << "X " << x_s;
+  std::getline(file, y_s);
+  std::cout << "Y" << y_s;
+  x_ss.str(x_s);
+  y_ss.str(y_s);
+  for (int j = 0; j < n_coords; ++j) {
+    x_ss >> x;
+    y_ss >> y;
+    coords.emplace_back(x, y);
+  }
 }

@@ -15,32 +15,13 @@
 
 namespace fs = std::filesystem;
 
-UILevelCarousel::UILevelCarousel(std::string levels_dir,
-                                 int x,
+UILevelCarousel::UILevelCarousel(int x,
                                  int y,
                                  int w,
                                  int h)
   : UIElement{ x, y, w, h }
 {
-
-  std::regex r{ "figure-[0-9]+" };
-  // Get all available scenes
-  if (fs::exists(levels_dir) && fs::is_directory(levels_dir)) {
-    for (const auto& file : fs::directory_iterator(levels_dir)) {
-      if (std::regex_match(file.path().filename().string(), r)) {
-        available_levels_.push_back(file.path());
-      }
-    }
-  }
-
-  std::sort(available_levels_.begin(),
-            available_levels_.end(),
-            [](fs::path p1, fs::path p2) {
-              return std::stoi(p1.filename().string().substr(6)) <
-                     std::stoi(p2.filename().string().substr(6));
-            });
-
-  for (size_t i = 0; i < available_levels_.size() && i < 5; i++) {
+  for (size_t i = 0; i < Data::N_LEVELS_; ++i) {
     UILevelBox b{ (u32)i, 200 + ((int)i * 130), 390, 120, 120 };
     ui_elements_.push_back(b);
   }
@@ -65,7 +46,7 @@ UILevelCarousel::render(SDL_Renderer* r) const
 void
 UILevelCarousel::go_right()
 {
-  int max = available_levels_.size() - 1;
+  int max = Data::N_LEVELS_ - 1;
   if ((selected_level_ - offset_) == 4 && max >= 5 && selected_level_ < max) {
     cycle_right();
   } else if (selected_level_ < max) {
