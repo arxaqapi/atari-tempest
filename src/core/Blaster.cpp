@@ -24,11 +24,11 @@ Blaster::update(f64 delta, const Map& map)
 }
 
 void
-Blaster::render(SDL_Renderer* renderer, const Map& map) const
+Blaster::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
 {
   if (!active_)
     return;
-  bullets_.render(renderer, map);
+  bullets_.render(renderer, map, render_color);
 
   const Band& band = map.getBand(band_num_);
   auto exterior = band.getExterior();
@@ -54,7 +54,11 @@ Blaster::render(SDL_Renderer* renderer, const Map& map) const
     exterior.first.weightedMidPointTo(exterior.second, .6) +
     (unit_vector * 10);
 
-  SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+  SDL_SetRenderDrawColor(renderer,
+                         std::get<0>(render_color),
+                         std::get<1>(render_color),
+                         std::get<2>(render_color),
+                         255);
 
   SDL_RenderDrawLineF(renderer,
                       exterior.first.getX(),

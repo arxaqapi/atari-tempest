@@ -14,7 +14,7 @@ public:
   ~Bullet() override = default;
 
   void update(f64 delta, const Map& map) override;
-  void render(SDL_Renderer* renderer, const Map& map) const override;
+  void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const override;
 };
 
 #endif // TEMPEST_ATARI_BULLET_HPP

@@ -18,7 +18,7 @@ public:
   ~Tanker() override = default;
 
   //  void activate(const Map& map, u8 band_num);
-  void render(SDL_Renderer* renderer, const Map& map) const override;
+  void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const override;
   void update(f64 delta, const Map& map) override;
   inline bool isSplit() const { return split_; }
   inline void setSplit(bool split) { split_ = split; }

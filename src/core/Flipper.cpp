@@ -12,12 +12,16 @@ Flipper::Flipper()
 }
 
 void
-Flipper::render(SDL_Renderer* renderer, const Map& map) const
+Flipper::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
 {
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer,
+                         std::get<0>(render_color),
+                         std::get<1>(render_color),
+                         std::get<2>(render_color),
+                         255);
 
   const Band& band = map.getBand(band_num_);
 

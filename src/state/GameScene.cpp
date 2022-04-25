@@ -10,18 +10,16 @@
 using namespace std::string_literals;
 
 GameScene::GameScene(u8 level)
-  : GameScene(level % 15, level / 15)
-{}
-
-GameScene::GameScene(u8 level, u8 cycle)
-  : current_figure_data_{ level }
-  , current_cycle_{ cycle }
+  : current_figure_data_{ static_cast<u8>(level % 15) }
+  , current_cycle_{ static_cast<u8>(level / 15) }
   , map_{ current_figure_data_.getExterior(),
           current_figure_data_.isContinuous(),
           current_figure_data_.getFocal(),
           current_figure_data_.getOrigin() }
-  , spawn_manager_{ map_.size() }
-{}
+  , spawn_manager_{ map_.size(), level }
+{
+  player_.addScore(getLevelMaxScore((level - 1) / 15, (level - 1) % 15));
+}
 
 bool
 GameScene::loadFigure(u8 figure)
@@ -34,7 +32,7 @@ GameScene::loadFigure(u8 figure)
             current_figure_data_.getFocal(),
             current_figure_data_.getOrigin());
 
-  spawn_manager_.load(map_.size());
+  spawn_manager_.load(map_.size(), getCurrentLevelNum());
 
   player_.clear();
 
@@ -72,7 +70,7 @@ GameScene::update(f64 delta, SceneManager& sm)
 {
   player_.update(delta, map_);
   map_.select(player_.getBandNum());
-  spawn_manager_.update(delta, map_);
+  spawn_manager_.update(delta, map_, getCurrentLevelNum());
 
   for (auto& flipper : spawn_manager_.getFlippers()) {
     if (!flipper.isActive())
@@ -97,7 +95,7 @@ GameScene::update(f64 delta, SceneManager& sm)
       sm.set_next_state(STATE_DEATH_SCREEN);
     }
 
-//    handleBulletsCollision(bullets, flippers, score, []);
+    //    handleBulletsCollision(bullets, flippers, score, []);
     for (auto& bullet : player_.getBullets()) {
       if (bullet.isActive() && bullet.isColliding(flipper)) {
         flipper.deactivate();
@@ -137,21 +135,43 @@ GameScene::update(f64 delta, SceneManager& sm)
     }
   }
 
-  if (player_.getScore() >= currentLevelMaxScore()) {
-    // level won, go to next level
-    u8 new_level_num = (current_figure_data_.getFigureNum() + 1) % 15;
-    if (new_level_num == 0)
-      current_cycle_ += 1;
-    if (!loadFigure(new_level_num)) {
-      // if no more level, go to win screen
+  if (player_.getScore() >= getCurrentLevelMaxScore()) {
+    if (gameOver()) // if no more level, go to win screen
       sm.set_next_state(STATE_WIN_SCREEN);
-    }
+    else if (!loadNextLevel()) // todo : improve error handling
+      sm.set_next_state(STATE_WIN_SCREEN);
   }
 }
 
 void
 GameScene::render(SDL_Renderer* renderer) const
 {
+  // todo : ne pas stocker en dur ici
+  std::vector<std::tuple<int, int, int>> map_standard_colors = {
+    { 0, 0, 255 }, { 255, 0, 0 }, { 255, 255, 0 }, { 0, 255, 255 }, { 0, 0, 0 }
+  };
+  std::vector<std::tuple<int, int, int>> map_selected_colors = {
+    { 255, 255, 0 }, { 0, 255, 0 }, { 0, 0, 255 }, { 0, 0, 255 }, { 0, 0, 0 }
+  };
+  std::vector<std::tuple<int, int, int>> blaster_colors = { { 255, 255, 0 },
+                                                            { 0, 255, 0 },
+                                                            { 0, 0, 255 },
+                                                            { 0, 0, 255 },
+                                                            { 255, 255, 0 } };
+  std::vector<std::tuple<int, int, int>> flipper_colors = { { 255, 0, 0 },
+                                                            { 238, 130, 238 },
+                                                            { 0, 255, 0 },
+                                                            { 0, 255, 0 },
+                                                            { 255, 0, 0 } };
+  std::vector<std::tuple<int, int, int>> tanker_colors = { { 238, 130, 238 },
+                                                           { 127, 0, 255 },
+                                                           { 0, 255, 255 },
+                                                           { 238, 130, 238 },
+                                                           { 238, 130, 238 } };
+  std::vector<std::tuple<int, int, int>> spiker_colors = {
+    { 0, 255, 0 }, { 0, 255, 255 }, { 255, 0, 0 }, { 255, 0, 0 }, { 0, 255, 0 }
+  };
+
   // Select the color for drawing. It is set to black here.
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
@@ -159,13 +179,19 @@ GameScene::render(SDL_Renderer* renderer) const
   SDL_RenderClear(renderer);
 
   // Render map
-  map_.render(renderer);
+  map_.render(renderer,
+              map_standard_colors[current_cycle_],
+              map_selected_colors[current_cycle_]);
 
   // Render player
-  player_.render(renderer, map_);
+  player_.render(renderer, map_, blaster_colors[current_cycle_]);
 
   // Render enemies
-  spawn_manager_.render(renderer, map_);
+  spawn_manager_.render(renderer,
+                        map_,
+                        flipper_colors[current_cycle_],
+                        tanker_colors[current_cycle_],
+                        spiker_colors[current_cycle_]);
 
   // Draw text
   Pen::draw_string(
@@ -174,11 +200,37 @@ GameScene::render(SDL_Renderer* renderer) const
     "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
 }
 
-f32
-GameScene::currentLevelMaxScore() const
+u32
+GameScene::getCurrentLevelMaxScore() const
 {
-  return 1000 +
-         (current_cycle_ + 1) *
-           std::pow(current_figure_data_.getFigureNum() + 1, 2) * 600 +
-         current_cycle_ * 16 * 16 * 600;
+
+  return getLevelMaxScore(current_cycle_, current_figure_data_.getFigureNum());
+}
+
+u8
+GameScene::getCurrentLevelNum() const
+{
+  return current_figure_data_.getFigureNum() + 15 * current_cycle_;
+}
+
+bool
+GameScene::loadNextLevel()
+{
+  u8 next_figure_num = (current_figure_data_.getFigureNum() + 1) % 15;
+  if (next_figure_num == 0)
+    current_cycle_ += 1;
+  return loadFigure(next_figure_num);
+}
+
+bool
+GameScene::gameOver() const
+{
+  return current_cycle_ == 4 && current_figure_data_.getFigureNum() == 15;
+}
+
+u32
+GameScene::getLevelMaxScore(u8 cycle, u8 figure)
+{
+  return 1000 + (cycle + 1) * std::pow(figure + 1, 2) * 600 +
+         cycle * 16 * 16 * 600;
 }

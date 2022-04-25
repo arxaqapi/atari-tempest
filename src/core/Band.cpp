@@ -10,6 +10,7 @@
  */
 
 #include "Band.hpp"
+#include <tuple>
 
 Band::Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal)
   : exter_a_{ exter_a }
@@ -24,12 +25,21 @@ Band::Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal)
 {}
 
 void
-Band::render(SDL_Renderer* renderer) const
+Band::render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const
 {
   if (is_selected_)
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer,
+                           std::get<0>(accent_color),
+                           std::get<1>(accent_color),
+                           std::get<2>(accent_color),
+                           255);
   else
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    SDL_SetRenderDrawColor(renderer,
+                           std::get<0>(standard_color),
+                           std::get<1>(standard_color),
+                           std::get<2>(standard_color),
+                           255);
+
   SDL_RenderDrawLineF(renderer,
                       exter_a_.getX(),
                       exter_a_.getY(),

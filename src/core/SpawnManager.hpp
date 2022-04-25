@@ -11,13 +11,6 @@
 #include "Spiker.hpp"
 #include "Tanker.hpp"
 
-enum enemy_type
-{
-  FLIPPER,
-  TANKER,
-  SPIKER
-};
-
 class SpawnManager
 {
 private:
@@ -39,21 +32,26 @@ private:
 public:
   SpawnManager() = default;
   SpawnManager(const SpawnManager& spawn_manager) = default;
-  explicit SpawnManager(u8 max_band_num);
+  SpawnManager(u8 max_band_num, u8 level);
 
   std::vector<Flipper>& getFlippers();
   std::vector<Tanker>& getTankers();
   std::vector<Spiker>& getSpikers();
 
-  void spawn();
-  std::vector<Flipper>::iterator spawnFlipper(u8 band_num, f32 progress);
+  void spawn(f64 delta, u8 level);
+  std::vector<Flipper>::iterator spawnFlipper(u8 band_num, f32 progress, u8 level);
   std::vector<Flipper>::iterator
-  spawnFlipper(u8 band_num, f32 progress, e_direction band_change_direction);
+  spawnFlipper(u8 band_num, f32 progress, u8 level, e_direction band_change_direction);
 
-  void update(f64 delta, const Map& map);
-  void render(SDL_Renderer* renderer, const Map& map) const;
+  void update(f64 delta, const Map& map, u8 level);
+  void render(SDL_Renderer* renderer,
+              const Map& map,
+              const color& flipper_color,
+              const color& tanker_color,
+              const color& spiker_color) const;
   void clear();
-  void load(u8 max_band_num);
+  void setSpawnTypeDistribution(u8 level);
+  void load(u8 max_band_num, u8 level);
 };
 
 #endif // TEMPEST_ATARI_SPAWNMANAGER_HPP

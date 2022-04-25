@@ -22,7 +22,7 @@ public:
   {
     band_change_direction_ = band_change_direction;
   }
-  void render(SDL_Renderer* renderer, const Map& map) const override;
+  void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const override;
   void update(f64 delta, const Map& map) override;
   inline e_direction getBandChangeDirection() const
   {

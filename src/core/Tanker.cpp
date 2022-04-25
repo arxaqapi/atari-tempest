@@ -11,12 +11,16 @@ Tanker::Tanker()
 }
 
 void
-Tanker::render(SDL_Renderer* renderer, const Map& map) const
+Tanker::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
 {
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer, 230, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer,
+                         std::get<0>(render_color),
+                         std::get<1>(render_color),
+                         std::get<2>(render_color),
+                         255);
 
   const Band& band = map.getBand(band_num_);
 

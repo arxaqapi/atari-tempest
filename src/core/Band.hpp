@@ -36,7 +36,7 @@ public:
   Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal);
   ~Band() = default;
 
-  void render(SDL_Renderer* renderer) const;
+  void render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const;
   inline void select() { is_selected_ = true; };
   inline void unselect() { is_selected_ = false; };
 

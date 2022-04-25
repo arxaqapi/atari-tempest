@@ -33,11 +33,13 @@ public:
   GameScene() = delete;
   GameScene(const GameScene& game_scene) = default;
   explicit GameScene(u8 level);
-  GameScene(u8 figure, u8 cycle);
 
   bool loadFigure(u8 figure);
-
-  f32 currentLevelMaxScore() const;
+  bool loadNextLevel();
+  bool gameOver() const;
+  static u32 getLevelMaxScore(u8 cycle, u8 figure) ;
+  u32 getCurrentLevelMaxScore() const;
+  u8 getCurrentLevelNum() const;
   void processEvent(SDL_Event* event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
   void render(SDL_Renderer* renderer) const override;

@@ -9,13 +9,16 @@ Spiker::Spiker()
 }
 
 void
-Spiker::render(SDL_Renderer* renderer, const Map& map) const
+Spiker::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
 {
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-
+  SDL_SetRenderDrawColor(renderer,
+                         std::get<0>(render_color),
+                         std::get<1>(render_color),
+                         std::get<2>(render_color),
+                         255);
   f32 fraction =
     utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 

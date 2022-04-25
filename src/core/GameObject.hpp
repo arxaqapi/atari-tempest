@@ -56,7 +56,7 @@ public:
   bool isColliding(const GameObject& go) const;
   virtual void hit();
   virtual void update(f64 delta, const Map& map) = 0;
-  virtual void render(SDL_Renderer* renderer, const Map& map) const = 0;
+  virtual void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const = 0;
 };
 
 #endif // TEMPEST_ATARI_GAMEOBJECT_HPP

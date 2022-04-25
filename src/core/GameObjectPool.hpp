@@ -35,7 +35,9 @@ public:
     f32 lateral_velocity,
     e_direction moving_direction);
   void update(f64 delta, const Map& map);
-  void render(SDL_Renderer* renderer, const Map& map) const;
+  void render(SDL_Renderer* renderer,
+              const Map& map,
+              const color& render_color) const;
   void clear();
 };
 
@@ -49,8 +51,9 @@ template<typename GameObjectType>
 typename std::vector<GameObjectType>::iterator
 GameObjectPool<GameObjectType>::find()
 {
-  return std::find_if(
-    pool_.begin(), pool_.end(), [](GameObjectType go) { return !go.isActive(); });
+  return std::find_if(pool_.begin(), pool_.end(), [](GameObjectType go) {
+    return !go.isActive();
+  });
 }
 
 template<typename GameObjectType>
@@ -84,10 +87,11 @@ GameObjectPool<GameObjectType>::update(f64 delta, const Map& map)
 template<typename GameObjectType>
 void
 GameObjectPool<GameObjectType>::render(SDL_Renderer* renderer,
-                                       const Map& map) const
+                                       const Map& map,
+                                       const color& render_color) const
 {
   for (auto& go : pool_)
-    go.render(renderer, map);
+    go.render(renderer, map, render_color);
 }
 
 template<typename GameObjectType>

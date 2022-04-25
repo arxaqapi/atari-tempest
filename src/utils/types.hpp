@@ -13,6 +13,7 @@
 #define H_TEMPEST_GAME_INC_TYPES_
 
 #include <cstdint>
+#include <tuple>
 
 using i8 = int8_t;
 using i16 = int16_t;
@@ -26,5 +27,7 @@ using u64 = uint64_t;
 
 using f32 = float;
 using f64 = double;
+
+using color = std::tuple<int, int, int>;
 
 #endif

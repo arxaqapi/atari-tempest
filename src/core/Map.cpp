@@ -76,11 +76,11 @@ Map::select(u8 num_band)
 }
 
 void
-Map::render(SDL_Renderer* renderer) const
+Map::render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const
 {
   for (auto band : bands_)
-    band.render(renderer);
-  bands_[selected_band_num_].render(renderer);
+    band.render(renderer, standard_color, accent_color);
+  bands_[selected_band_num_].render(renderer, standard_color, accent_color);
 }
 
 void
