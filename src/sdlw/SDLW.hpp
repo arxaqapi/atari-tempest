@@ -13,33 +13,29 @@
 
 #include "SDL2/SDL.h"
 #include <string>
+#include "../utils/types.hpp"
+
 namespace SDLW {
+/// Forward declaration
+class Renderer;
+
 class Rect
 {
+  friend class Renderer;
 private:
   SDL_Rect r_;
 
 public:
   Rect() = delete;
   Rect(int x, int y, int w, int h);
-  Rect(SDL_Rect* r);
   ~Rect();
 
   int x();
   int y();
   int w();
   int h();
-  const SDL_Rect* get() const;
 };
 
-void
-RenderDrawRect(SDL_Renderer* renderer, const SDLW::Rect& rect);
-
-void
-RenderFillRect(SDL_Renderer* renderer, const SDLW::Rect& rect);
-
-/// Forward declaration
-class Renderer;
 
 //// Window
 
@@ -68,8 +64,36 @@ public:
   Renderer(const SDLW::Renderer&) = delete;
   Renderer(SDLW::Window& window, int index, Uint32 flags);
   ~Renderer();
+
+  void RenderDrawRect(const SDLW::Rect& rect);
+  void RenderFillRect(const SDLW::Rect& rect);
+
+  void RenderDrawLineF(f32 x1, f32 y1, f32 x2, f32 y2);
+  void RenderDrawLine(i32 x1, i32 y1, i32 x2, i32 y2);
+
+  void SetRenderDrawColor(u8 r, u8 g, u8 b, u8 a);
+  void RenderPresent();
+  void RenderClear();
+
+  // TODO: order and implement theses functions
+  // struct SDL_FRect;
+  // void SDL_RenderFillRectF();
+
 };
 
+void Init(u32 flags);
+void Quit();
+
 } // namespace SDLW
+
+
+// SECTION: Extra
+  // SDL_Color
+  // SDL_GetTicks
+  // SDL_GetPerformanceCounter
+  // SDL_Delay()
+  // struct SDL_Event; // override == operator 
+  // SDL_Event SDL_PollEvent();
+
 
 #endif

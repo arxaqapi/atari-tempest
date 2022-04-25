@@ -17,9 +17,6 @@ SDLW::Rect::Rect(int x, int y, int w, int h)
   : r_{ x, y, w, h }
 {}
 
-SDLW::Rect::Rect(SDL_Rect* r)
-  : r_{ r->x, r->y, r->w, r->h }
-{}
 
 SDLW::Rect::~Rect() {}
 
@@ -43,27 +40,7 @@ SDLW::Rect::h()
 {
   return r_.h;
 }
-const SDL_Rect*
-SDLW::Rect::get() const
-{
-  return &r_;
-}
 
-void
-SDLW::RenderDrawRect(SDL_Renderer* renderer, const SDLW::Rect& rect)
-{
-  if (SDL_RenderDrawRect(renderer, rect.get()) != 0) {
-    throw errors::sdl_error(SDL_GetError());
-  }
-}
-
-void
-SDLW::RenderFillRect(SDL_Renderer* renderer, const SDLW::Rect& rect)
-{
-  if (SDL_RenderFillRect(renderer, rect.get()) != 0) {
-    throw errors::sdl_error(SDL_GetError());
-  }
-}
 
 //// Window
 SDLW::Window::Window(const std::string& title,
@@ -97,4 +74,70 @@ SDLW::Renderer::Renderer(SDLW::Window& window, int index, Uint32 flags)
 SDLW::Renderer::~Renderer()
 {
   SDL_DestroyRenderer(r_);
+}
+
+// Renderer:Rect
+void
+SDLW::Renderer::RenderDrawRect(const SDLW::Rect& rect)
+{
+  if (SDL_RenderDrawRect(r_, &rect.r_) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+void
+SDLW::Renderer::RenderFillRect(const SDLW::Rect& rect)
+{
+  if (SDL_RenderFillRect(r_, &rect.r_) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+// Renderer
+void
+SDLW::Renderer::RenderDrawLineF(f32 x1, f32 y1, f32 x2, f32 y2)
+{
+  
+  if (SDL_RenderDrawLineF(r_, x1, y1, x2, y2) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+void
+SDLW::Renderer::RenderDrawLine(i32 x1, i32 y1, i32 x2, i32 y2)
+{
+  if (SDL_RenderDrawLine(r_, x1, y1, x2, y2) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+// Renderer:utils
+void
+SDLW::Renderer::SetRenderDrawColor(u8 r, u8 g, u8 b, u8 a)
+{
+  if (SDL_SetRenderDrawColor(r_, r, g, b, a) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+void
+SDLW::Renderer::RenderPresent()
+{
+  SDL_RenderPresent(r_);
+}
+
+void
+SDLW::Renderer::RenderClear()
+{
+  SDL_RenderClear(r_);
+}
+
+// SDL Setup methods
+
+void
+SDLW::init(u32 flags)
+{
+  if (SDL_Init(flags) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+void
+SDLW::Quit()
+{
+  SDL_Quit();
 }
