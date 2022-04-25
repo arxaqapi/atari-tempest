@@ -139,3 +139,29 @@ SDLW::Quit()
 {
   SDL_Quit();
 }
+
+// Time
+
+u64
+SDLW::GetTicks64()
+{
+  return SDL_GetTicks64();
+}
+
+u64
+SDLW::GetPerformanceCounter()
+{
+  return SDL_GetPerformanceCounter();
+}
+
+void
+SDLW::Delay(u32 ms)
+{
+  SDL_Delay(ms);
+}
+
+u64
+SDLW::GetPerformanceFrequency()
+{
+  return SDL_GetPerformanceFrequency();
+}

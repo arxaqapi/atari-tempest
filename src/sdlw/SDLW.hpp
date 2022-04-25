@@ -76,7 +76,6 @@ public:
   void RenderClear();
 
   // TODO: order and implement theses functions
-  // struct SDL_FRect;
   // void SDL_RenderFillRectF();
 };
 
@@ -85,14 +84,22 @@ Init(u32 flags);
 void
 Quit();
 
+// Time
+u64
+GetTicks64();
+u64
+GetPerformanceCounter();
+void
+Delay(u32 ms);
+u64
+GetPerformanceFrequency();
+
 } // namespace SDLW
 
 // SECTION: Extra
-// SDL_Color
-// SDL_GetTicks
-// SDL_GetPerformanceCounter
-// SDL_Delay()
-// struct SDL_Event; // override == operator
-// SDL_Event SDL_PollEvent();
+  // struct SDL_FRect;
+  // SDL_Color
+  // struct SDL_Event; // override == operator
+  // SDL_Event SDL_PollEvent();
 
 #endif

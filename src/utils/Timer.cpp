@@ -37,16 +37,16 @@ void
 Timer::start()
 {
   if (t_ == timer_type::NORMAL) {
-    start_ = SDL_GetTicks();
+    start_ = SDLW::GetTicks64();
   } else if (t_ == timer_type::PERFORMANCE) {
-    start_ = SDL_GetPerformanceCounter();
+    start_ = SDLW::GetPerformanceCounter();
   }
 }
 
 f64
 to_ms(f64 value)
 {
-  auto freq_in_ms = static_cast<f64>(SDL_GetPerformanceFrequency()) / 1000.;
+  auto freq_in_ms = static_cast<f64>(SDLW::GetPerformanceFrequency()) / 1000.;
   return value / freq_in_ms;
 }
 
@@ -54,10 +54,10 @@ f64
 Timer::stop()
 {
   if (t_ == timer_type::NORMAL) {
-    stop_ = SDL_GetTicks();
+    stop_ = SDLW::GetTicks64();
     return stop_ - start_;
   } else if (t_ == timer_type::PERFORMANCE) {
-    stop_ = SDL_GetPerformanceCounter();
+    stop_ = SDLW::GetPerformanceCounter();
     return to_ms(stop_ - start_);
   }
   return 0.;
@@ -93,7 +93,7 @@ Timer::variable_delay()
   }
   auto del = max_ms_per_frame_ - ms_elapsed;
   assert(del <= max_ms_per_frame_ && "Computed delay is way too big");
-  SDL_Delay(del);
+  SDLW::Delay(del);
   return this->stop();
 }
 
@@ -102,5 +102,5 @@ Timer::artificial_delay()
 {
   auto r = static_cast<u32>(distribution_(generator_));
   assert(r < max_ms_per_frame_);
-  SDL_Delay(r);
+  SDLW::Delay(r);
 }
