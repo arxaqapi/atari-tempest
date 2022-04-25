@@ -31,10 +31,10 @@ public:
   Rect(i32 x, i32 y, i32 w, i32 h);
   ~Rect();
 
-  i32 x();
-  i32 y();
-  i32 w();
-  i32 h();
+  i32 x() const;
+  i32 y() const;
+  i32 w() const;
+  i32 h() const;
 };
 
 //// Window

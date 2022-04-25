@@ -13,14 +13,17 @@
 #define TEMPEST_ATARI_UIELEMENT_HPP
 
 #include "../sdlw/SDLW.hpp"
+#include "../utils/types.hpp"
+
 class UIElement
 {
 protected:
-  SDL_Rect bounding_box_; // TODO: Change Me !!
+  // SDL_Rect bounding_box_; // TODO: Change Me !!
+  SDLW::Rect bounding_box_;
 
 public:
   UIElement() = delete;
-  UIElement(int x, int y, int w, int h);
+  UIElement(i32 x, i32 y, i32 w, i32 h);
   ~UIElement();
 
   virtual void update() = 0;

@@ -21,8 +21,8 @@ private:
   u32 level_n_;
 
 public:
-  UILevelBox(int x, int y, int w, int h) = delete;
-  UILevelBox(u32 level, int x, int y, int w, int h);
+  UILevelBox(i32 x, i32 y, i32 w, i32 h) = delete;
+  UILevelBox(u32 level, i32 x, i32 y, i32 w, i32 h);
   ~UILevelBox();
 
   void update() override;

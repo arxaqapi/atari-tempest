@@ -16,10 +16,10 @@
 namespace fs = std::filesystem;
 
 UILevelCarousel::UILevelCarousel(std::string levels_dir,
-                                 int x,
-                                 int y,
-                                 int w,
-                                 int h)
+                                 i32 x,
+                                 i32 y,
+                                 i32 w,
+                                 i32 h)
   : UIElement{ x, y, w, h }
 {
 
@@ -41,7 +41,7 @@ UILevelCarousel::UILevelCarousel(std::string levels_dir,
             });
 
   for (size_t i = 0; i < available_levels_.size() && i < 5; i++) {
-    UILevelBox b{ (u32)i, 200 + ((int)i * 130), 390, 120, 120 };
+    UILevelBox b{ (u32)i, 200 + ((i32)i * 130), 390, 120, 120 };
     ui_elements_.push_back(b);
   }
 }
@@ -57,7 +57,7 @@ UILevelCarousel::render(SDLW::Renderer& renderer) const
 {
   // Draw UI
   for (size_t i = 0; i < ui_elements_.size(); i++) {
-    bool selected = (selected_level_ - offset_) == (int)i;
+    bool selected = (selected_level_ - offset_) == (i32)i;
     ui_elements_[i].render(renderer, selected);
   }
 }
@@ -65,7 +65,7 @@ UILevelCarousel::render(SDLW::Renderer& renderer) const
 void
 UILevelCarousel::go_right()
 {
-  int max = available_levels_.size() - 1;
+  i32 max = available_levels_.size() - 1;
   if ((selected_level_ - offset_) == 4 && max >= 5 && selected_level_ < max) {
     cycle_right();
   } else if (selected_level_ < max) {

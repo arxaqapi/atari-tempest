@@ -13,29 +13,29 @@
 #include "../utils/Errors.hpp"
 #include <cassert>
 
-SDLW::Rect::Rect(int x, int y, int w, int h)
+SDLW::Rect::Rect(i32 x, i32 y, i32 w, i32 h)
   : r_{ x, y, w, h }
 {}
 
 SDLW::Rect::~Rect() {}
 
-int
-SDLW::Rect::x()
+i32
+SDLW::Rect::x() const
 {
   return r_.x;
 }
-int
-SDLW::Rect::y()
+i32
+SDLW::Rect::y() const
 {
   return r_.y;
 }
-int
-SDLW::Rect::w()
+i32
+SDLW::Rect::w() const
 {
   return r_.w;
 }
-int
-SDLW::Rect::h()
+i32
+SDLW::Rect::h() const
 {
   return r_.h;
 }

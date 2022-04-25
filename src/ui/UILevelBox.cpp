@@ -14,7 +14,7 @@
 #include "../ui/Pen.hpp"
 #include "iostream"
 
-UILevelBox::UILevelBox(u32 level, int x, int y, int w, int h)
+UILevelBox::UILevelBox(u32 level, i32 x, i32 y, i32 w, i32 h)
   : UIElement{ x, y, w, h }
   , level_n_{ level }
 {}
@@ -38,20 +38,19 @@ UILevelBox::render(SDLW::Renderer& renderer, bool selected) const
     // Draw white border
     renderer.SetRenderDrawColor(0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
 
-    renderer.RenderDrawRect(SDLW::Rect(
-      bounding_box_.x, bounding_box_.y, bounding_box_.w, bounding_box_.h));
+    renderer.RenderDrawRect(bounding_box_);
   } else {
     renderer.SetRenderDrawColor(0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE);
-    renderer.RenderFillRect(SDLW::Rect(bounding_box_.x + 2,
-                                       bounding_box_.y + 2,
-                                       bounding_box_.w - 4,
-                                       bounding_box_.h - 4));
+    renderer.RenderFillRect(SDLW::Rect(bounding_box_.x() + 2,
+                                       bounding_box_.y() + 2,
+                                       bounding_box_.w() - 4,
+                                       bounding_box_.h() - 4));
   }
 
   // Draw Text
   Pen::draw_string(std::to_string(level_n_),
-                   bounding_box_.x + bounding_box_.w / 2 - 10,
-                   bounding_box_.y + 30,
+                   bounding_box_.x() + bounding_box_.w() / 2 - 10,
+                   bounding_box_.y() + 30,
                    renderer);
 }
 
