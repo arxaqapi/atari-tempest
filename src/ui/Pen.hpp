@@ -1,7 +1,6 @@
 #ifndef TEMPEST_ATARI_PEN_HPP
 #define TEMPEST_ATARI_PEN_HPP
 
-// #include <SDL2/SDL.h>
 #include "../sdlw/SDLW.hpp"
 #include <string>
 #include <vector>

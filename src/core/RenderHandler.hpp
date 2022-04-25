@@ -13,7 +13,6 @@
 
 #include "../sdlw/SDLW.hpp"
 #include "../utils/types.hpp"
-#include "SDL2/SDL.h"
 #include <memory>
 
 class RenderHandler

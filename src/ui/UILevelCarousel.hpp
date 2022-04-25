@@ -13,7 +13,6 @@
 #define TEMPEST_ATARI_UILEVELCAROUSEL_HPP
 
 #include "../state/SceneManager.hpp"
-#include "SDL2/SDL.h"
 #include "UIElement.hpp"
 #include "UILevelBox.hpp"
 #include <filesystem>
