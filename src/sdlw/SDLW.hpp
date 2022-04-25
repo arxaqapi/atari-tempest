@@ -28,13 +28,13 @@ private:
 
 public:
   Rect() = delete;
-  Rect(int x, int y, int w, int h);
+  Rect(i32 x, i32 y, i32 w, i32 h);
   ~Rect();
 
-  int x();
-  int y();
-  int w();
-  int h();
+  i32 x();
+  i32 y();
+  i32 w();
+  i32 h();
 };
 
 //// Window
@@ -49,7 +49,7 @@ private:
 public:
   Window() = delete;
   Window(const SDLW::Window&) = delete;
-  Window(const std::string& title, int x, int y, int w, int h, Uint32 flags);
+  Window(const std::string& title, i32 x, i32 y, i32 w, i32 h, u32 flags);
   ~Window();
 };
 
@@ -62,7 +62,7 @@ private:
 public:
   Renderer() = delete;
   Renderer(const SDLW::Renderer&) = delete;
-  Renderer(SDLW::Window& window, int index, Uint32 flags);
+  Renderer(SDLW::Window& window, i32 index, u32 flags);
   ~Renderer();
 
   void RenderDrawRect(const SDLW::Rect& rect);

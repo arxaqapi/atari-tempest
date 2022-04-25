@@ -42,11 +42,11 @@ SDLW::Rect::h()
 
 //// Window
 SDLW::Window::Window(const std::string& title,
-                     int x,
-                     int y,
-                     int w,
-                     int h,
-                     Uint32 flags)
+                     i32 x,
+                     i32 y,
+                     i32 w,
+                     i32 h,
+                     u32 flags)
 {
   w_ = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
   if (w_ == NULL) {
@@ -61,7 +61,7 @@ SDLW::Window::~Window()
 
 //// Renderer
 
-SDLW::Renderer::Renderer(SDLW::Window& window, int index, Uint32 flags)
+SDLW::Renderer::Renderer(SDLW::Window& window, i32 index, u32 flags)
 {
   r_ = SDL_CreateRenderer(window.w_, index, flags);
   if (r_ == NULL) {
