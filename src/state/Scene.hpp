@@ -11,6 +11,7 @@
 #ifndef H_TEMPEST_GAME_INC_SCENE_
 #define H_TEMPEST_GAME_INC_SCENE_
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/types.hpp"
 #include <SDL2/SDL.h>
 #include <vector>
@@ -27,7 +28,7 @@ public:
 
   virtual void processEvent(SDL_Event* event, SceneManager& sm) = 0;
   virtual void update(f64 delta, SceneManager& sm) = 0;
-  virtual void render(SDL_Renderer* renderer) const = 0;
+  virtual void render(SDLW::Renderer& renderer) const = 0;
 };
 
 #endif

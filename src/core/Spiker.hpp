@@ -14,7 +14,9 @@ public:
   ~Spiker() override = default;
 
   void hit() override;
-  void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const override;
+  void render(SDLW::Renderer& renderer,
+              const Map& map,
+              const color& render_color) const override;
   void update(f64 delta, const Map& map) override;
 };
 

@@ -23,10 +23,10 @@ DeathScreen::update(f64 delta, SceneManager& sm)
 {}
 
 void
-DeathScreen::render(SDL_Renderer* renderer) const
+DeathScreen::render(SDLW::Renderer& renderer) const
 {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_RenderClear(renderer);
+  renderer.SetRenderDrawColor(0, 0, 0, 255);
+  renderer.RenderClear();
 
   // Draw text
   Pen::draw_string_centered_x("Game Over ...", 200, renderer);

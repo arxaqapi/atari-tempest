@@ -14,11 +14,7 @@
 #include "SceneManager.hpp"
 #include <iostream>
 
-TitleScreen::TitleScreen()
-// : button_{}
-{
-  col_ = { .r = 0xFF, .g = 0x00, .b = 0x00, .a = SDL_ALPHA_OPAQUE };
-}
+TitleScreen::TitleScreen() {}
 
 TitleScreen::~TitleScreen() {}
 
@@ -27,10 +23,10 @@ TitleScreen::update(f64 delta, SceneManager& sm)
 {}
 
 void
-TitleScreen::render(SDL_Renderer* renderer) const
+TitleScreen::render(SDLW::Renderer& renderer) const
 {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, col_.a);
-  SDL_RenderClear(renderer);
+  renderer.SetRenderDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+  renderer.RenderClear();
 
   // Draw text
   Pen::draw_string_centered_x("TEMPEST", 160, renderer, 4);

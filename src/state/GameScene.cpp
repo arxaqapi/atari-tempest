@@ -128,7 +128,7 @@ GameScene::update(f64 delta, SceneManager& sm)
 }
 
 void
-GameScene::render(SDL_Renderer* renderer) const
+GameScene::render(SDLW::Renderer& renderer) const
 {
   // todo : ne pas stocker en dur ici
   std::vector<std::tuple<int, int, int>> map_standard_colors = {
@@ -157,10 +157,10 @@ GameScene::render(SDL_Renderer* renderer) const
   };
 
   // Select the color for drawing. It is set to black here.
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  renderer.SetRenderDrawColor(0, 0, 0, 255);
 
   // Clear the entire screen to our selected color.
-  SDL_RenderClear(renderer);
+  renderer.RenderClear();
 
   // Render map
   map_.render(renderer,

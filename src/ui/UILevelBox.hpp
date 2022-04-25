@@ -21,13 +21,13 @@ private:
   u32 level_n_;
 
 public:
-  UILevelBox(int x, int y, int w, int h) = delete;
-  UILevelBox(u32 level, int x, int y, int w, int h);
+  UILevelBox(i32 x, i32 y, i32 w, i32 h) = delete;
+  UILevelBox(u32 level, i32 x, i32 y, i32 w, i32 h);
   ~UILevelBox();
 
   void update() override;
-  void render(SDL_Renderer* r) const override;
-  void render(SDL_Renderer* r, bool selected) const;
+  void render(SDLW::Renderer& renderer) const override;
+  void render(SDLW::Renderer& renderer, bool selected) const;
 
   void set_level_n(u32 new_level);
   u32 get_level_n();

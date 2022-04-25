@@ -12,21 +12,21 @@
 #ifndef TEMPEST_ATARI_UIELEMENT_HPP
 #define TEMPEST_ATARI_UIELEMENT_HPP
 
-#include "SDL2/SDL.h"
+#include "../sdlw/SDLW.hpp"
+#include "../utils/types.hpp"
 
 class UIElement
 {
 protected:
-  SDL_Rect bounding_box_;
+  SDLW::Rect bounding_box_;
 
 public:
   UIElement() = delete;
-  // UIElement(const UIElement &) = delete;
-  UIElement(int x, int y, int w, int h);
+  UIElement(i32 x, i32 y, i32 w, i32 h);
   ~UIElement();
 
   virtual void update() = 0;
-  virtual void render(SDL_Renderer* r) const = 0;
+  virtual void render(SDLW::Renderer& renderer) const = 0;
 };
 
 #endif // TEMPEST_ATARI_UIELEMENT_HPP

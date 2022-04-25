@@ -5,11 +5,11 @@
 #ifndef TEMPEST_ATARI_GAMEOBJECT_HPP
 #define TEMPEST_ATARI_GAMEOBJECT_HPP
 
+#include "../sdlw/SDLW.hpp"
 #include "../utils/Delay.hpp"
 #include "../utils/Utils.hpp"
 #include "../utils/types.hpp"
 #include "Map.hpp"
-#include <SDL2/SDL_render.h>
 
 enum e_direction
 {
@@ -59,7 +59,9 @@ public:
   bool isColliding(const GameObject& go) const;
   virtual void hit();
   virtual void update(f64 delta, const Map& map) = 0;
-  virtual void render(SDL_Renderer* renderer, const Map& map, const color& render_color) const = 0;
+  virtual void render(SDLW::Renderer& renderer,
+                      const Map& map,
+                      const color& render_color) const = 0;
 };
 
 #endif // TEMPEST_ATARI_GAMEOBJECT_HPP

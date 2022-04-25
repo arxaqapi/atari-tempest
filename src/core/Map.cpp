@@ -76,7 +76,7 @@ Map::select(u8 num_band)
 }
 
 void
-Map::render(SDL_Renderer* renderer,
+Map::render(SDLW::Renderer& renderer,
             const color& standard_color,
             const color& accent_color) const
 {

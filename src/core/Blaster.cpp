@@ -24,7 +24,9 @@ Blaster::update(f64 delta, const Map& map)
 }
 
 void
-Blaster::render(SDL_Renderer* renderer, const Map& map, const color& render_color) const
+Blaster::render(SDLW::Renderer& renderer,
+                const Map& map,
+                const color& render_color) const
 {
   if (!active_)
     return;
@@ -55,52 +57,37 @@ Blaster::render(SDL_Renderer* renderer, const Map& map, const color& render_colo
   Vector2D claw_right =
     exterior.first.weightedMidPointTo(exterior.second, .6) + (unit_vector * 10);
 
-  SDL_SetRenderDrawColor(renderer,
-                         std::get<0>(render_color),
-                         std::get<1>(render_color),
-                         std::get<2>(render_color),
-                         255);
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
 
-  SDL_RenderDrawLineF(renderer,
-                      exterior.first.getX(),
-                      exterior.first.getY(),
-                      claw_left.getX(),
-                      claw_left.getY());
-  SDL_RenderDrawLineF(renderer,
-                      exterior.second.getX(),
-                      exterior.second.getY(),
-                      claw_right.getX(),
-                      claw_right.getY());
-  SDL_RenderDrawLineF(renderer,
-                      exterior.first.getX(),
-                      exterior.first.getY(),
-                      outer_top.getX(),
-                      outer_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      exterior.second.getX(),
-                      exterior.second.getY(),
-                      outer_top.getX(),
-                      outer_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inner_left.getX(),
-                      inner_left.getY(),
-                      inner_top.getX(),
-                      inner_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      inner_right.getX(),
-                      inner_right.getY(),
-                      inner_top.getX(),
-                      inner_top.getY());
-  SDL_RenderDrawLineF(renderer,
-                      claw_left.getX(),
-                      claw_left.getY(),
-                      inner_left.getX(),
-                      inner_left.getY());
-  SDL_RenderDrawLineF(renderer,
-                      claw_right.getX(),
-                      claw_right.getY(),
-                      inner_right.getX(),
-                      inner_right.getY());
+  renderer.RenderDrawLineF(exterior.first.getX(),
+                           exterior.first.getY(),
+                           claw_left.getX(),
+                           claw_left.getY());
+  renderer.RenderDrawLineF(exterior.second.getX(),
+                           exterior.second.getY(),
+                           claw_right.getX(),
+                           claw_right.getY());
+  renderer.RenderDrawLineF(exterior.first.getX(),
+                           exterior.first.getY(),
+                           outer_top.getX(),
+                           outer_top.getY());
+  renderer.RenderDrawLineF(exterior.second.getX(),
+                           exterior.second.getY(),
+                           outer_top.getX(),
+                           outer_top.getY());
+  renderer.RenderDrawLineF(
+    inner_left.getX(), inner_left.getY(), inner_top.getX(), inner_top.getY());
+  renderer.RenderDrawLineF(
+    inner_right.getX(), inner_right.getY(), inner_top.getX(), inner_top.getY());
+  renderer.RenderDrawLineF(
+    claw_left.getX(), claw_left.getY(), inner_left.getX(), inner_left.getY());
+  renderer.RenderDrawLineF(claw_right.getX(),
+                           claw_right.getY(),
+                           inner_right.getX(),
+                           inner_right.getY());
 }
 
 void

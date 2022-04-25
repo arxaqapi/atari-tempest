@@ -25,18 +25,17 @@ Bullet::update(f64 delta, const Map& map)
 }
 
 void
-Bullet::render(SDL_Renderer* renderer,
+Bullet::render(SDLW::Renderer& renderer,
                const Map& map,
                const color& render_color) const
 {
   if (!active_)
     return;
 
-  SDL_SetRenderDrawColor(renderer,
-                         std::get<0>(render_color),
-                         std::get<1>(render_color),
-                         std::get<2>(render_color),
-                         255);
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
 
   // Draw rect for now...
   f32 fraction =
@@ -56,14 +55,12 @@ Bullet::render(SDL_Renderer* renderer,
   Vector2D bottom =
     band.getExterCenter() + (band.getUnitVector() * (-size / 2)) + position;
 
-  SDL_RenderDrawLineF(
-    renderer, left.getX(), left.getY(), top.getX(), top.getY());
-  SDL_RenderDrawLineF(
-    renderer, top.getX(), top.getY(), right.getX(), right.getY());
-  SDL_RenderDrawLineF(
-    renderer, right.getX(), right.getY(), bottom.getX(), bottom.getY());
-  SDL_RenderDrawLineF(
-    renderer, bottom.getX(), bottom.getY(), left.getX(), left.getY());
+  renderer.RenderDrawLineF(left.getX(), left.getY(), top.getX(), top.getY());
+  renderer.RenderDrawLineF(top.getX(), top.getY(), right.getX(), right.getY());
+  renderer.RenderDrawLineF(
+    right.getX(), right.getY(), bottom.getX(), bottom.getY());
+  renderer.RenderDrawLineF(
+    bottom.getX(), bottom.getY(), left.getX(), left.getY());
   //  SDL_FRect rect{ position.getX(), position.getY(), size, size };
   //  SDL_RenderFillRectF(renderer, &rect);
 }

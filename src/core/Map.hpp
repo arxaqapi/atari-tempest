@@ -44,7 +44,9 @@ public:
   const Band& getBand(u8 num_band) const;
   const Band& getLeftBand(u8 num_band) const;
   const Band& getRightBand(u8 num_band) const;
-  void render(SDL_Renderer* renderer, const color& standard_color, const color& accent_color) const;
+  void render(SDLW::Renderer& renderer,
+              const color& standard_color,
+              const color& accent_color) const;
   void select(u8 num_band);
   void load(const std::vector<Vector2D>& exterior,
             bool is_continuous,

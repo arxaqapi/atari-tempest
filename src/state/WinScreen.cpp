@@ -20,10 +20,10 @@ WinScreen::update(f64 delta, SceneManager& sm)
 {}
 
 void
-WinScreen::render(SDL_Renderer* renderer) const
+WinScreen::render(SDLW::Renderer& renderer) const
 {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_RenderClear(renderer);
+  renderer.SetRenderDrawColor(0, 0, 0, 255);
+  renderer.RenderClear();
 
   // Draw text
   Pen::draw_string_centered_x("You won!", 200, renderer);

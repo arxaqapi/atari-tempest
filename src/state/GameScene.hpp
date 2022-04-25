@@ -37,12 +37,12 @@ public:
 
   void loadNextLevel();
   bool gameOver() const;
-  static u32 getLevelMaxScore(u8 cycle, u8 figure) ;
+  static u32 getLevelMaxScore(u8 cycle, u8 figure);
   u32 getCurrentLevelMaxScore() const;
   u8 getCurrentLevelNum() const;
   void processEvent(SDL_Event* event, SceneManager& sm) override;
   void update(f64 delta, SceneManager& sm) override;
-  void render(SDL_Renderer* renderer) const override;
+  void render(SDLW::Renderer& renderer) const override;
 };
 
 #endif // TEMPEST_ATARI_GAMESCENE_HPP

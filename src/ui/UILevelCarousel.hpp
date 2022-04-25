@@ -13,7 +13,6 @@
 #define TEMPEST_ATARI_UILEVELCAROUSEL_HPP
 
 #include "../state/SceneManager.hpp"
-#include "SDL2/SDL.h"
 #include "UIElement.hpp"
 #include "UILevelBox.hpp"
 #include <filesystem>
@@ -23,18 +22,17 @@
 class UILevelCarousel : public UIElement
 {
 private:
-  int selected_level_ = 0;
-//  std::vector<std::filesystem::path> available_levels_;
+  i32 selected_level_ = 0;
   std::vector<UILevelBox> ui_elements_;
   u16 offset_ = 0;
 
 public:
   UILevelCarousel() = delete;
-  UILevelCarousel(int x, int y, int w, int h);
+  UILevelCarousel(i32 x, i32 y, i32 w, i32 h);
   ~UILevelCarousel();
 
   void update() override;
-  void render(SDL_Renderer* r) const override;
+  void render(SDLW::Renderer& renderer) const override;
 
   void go_right();
   void go_left();
