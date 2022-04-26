@@ -97,9 +97,9 @@ GetPerformanceFrequency();
 } // namespace SDLW
 
 // SECTION: Extra
-  // struct SDL_FRect;
-  // SDL_Color
-  // struct SDL_Event; // override == operator
-  // SDL_Event SDL_PollEvent();
+// struct SDL_FRect;
+// SDL_Color
+// struct SDL_Event; // override == operator
+// SDL_Event SDL_PollEvent();
 
 #endif

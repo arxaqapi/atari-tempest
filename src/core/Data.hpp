@@ -18,7 +18,9 @@ private:
   std::vector<f32> focal_;
   std::vector<bool> is_continuous_;
 
-  void readCoords(std::ifstream& file, std::vector<Vector2D>& coords, u8 n_coords);
+  void readCoords(std::ifstream& file,
+                  std::vector<Vector2D>& coords,
+                  u8 n_coords);
 
 public:
   inline static const u8 N_FIGURES_ = 16;

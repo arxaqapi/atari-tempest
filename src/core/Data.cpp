@@ -43,7 +43,7 @@ Data::Data()
     origin_[i].setY(buf);
   }
 
-//   Exterior
+  //   Exterior
   for (int i = 0; i < N_FIGURES_; ++i) {
     for (int j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
       exterior_[i][j].setX(buf);
@@ -55,16 +55,15 @@ Data::Data()
     }
   }
 
-
   assert(exterior_.size() == N_FIGURES_ && origin_.size() == N_FIGURES_ &&
          focal_.size() == N_FIGURES_ && is_continuous_.size() == N_FIGURES_);
 
-//  for (int i = 0; i < N_FIGURES_; ++i) {
-//    for (int j = 0; j < N_BANDS_PER_FIGURE_; ++j) {
-//
-//    }
-//    std::cout << exterior_[i] << " ";
-//  }
+  //  for (int i = 0; i < N_FIGURES_; ++i) {
+  //    for (int j = 0; j < N_BANDS_PER_FIGURE_; ++j) {
+  //
+  //    }
+  //    std::cout << exterior_[i] << " ";
+  //  }
 }
 
 void

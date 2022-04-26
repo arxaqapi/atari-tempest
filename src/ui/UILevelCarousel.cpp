@@ -15,10 +15,7 @@
 
 namespace fs = std::filesystem;
 
-UILevelCarousel::UILevelCarousel(i32 x,
-                                 i32 y,
-                                 i32 w,
-                                 i32 h)
+UILevelCarousel::UILevelCarousel(i32 x, i32 y, i32 w, i32 h)
   : UIElement{ x, y, w, h }
 {
   for (size_t i = 0; i < Data::N_LEVELS_; ++i) {
