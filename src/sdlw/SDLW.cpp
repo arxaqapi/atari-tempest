@@ -145,7 +145,11 @@ SDLW::Quit()
 u64
 SDLW::GetTicks64()
 {
+  #if SDL_MAJOR_VERSION >= 2 && SDL_MINOR_VERSION >= 0 && SDL_PATCHLEVEL >= 18
   return SDL_GetTicks64();
+  #else
+  return SDL_GetTicks(); 
+  #endif
 }
 
 u64
