@@ -38,7 +38,9 @@ Flipper::render(SDLW::Renderer& renderer,
   Vector2D orthogonal =
     left_bottom.vec_to(right_bottom).orthogonalVector().unit();
 
-  f32 height = 20 * (1 - fraction);
+  f32 width =
+    band.getExterior().first.vec_to(band.getExterior().second).magnitude();
+  f32 height = 0.2 * width * (1 - fraction);
 
   Vector2D left_top =
     left_bottom.weightedMidPointTo(right_bottom, .1) + (orthogonal * -height);

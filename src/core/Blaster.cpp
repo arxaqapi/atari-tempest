@@ -42,7 +42,7 @@ Blaster::render(SDLW::Renderer& renderer,
   Vector2D inner_right =
     exterior.first.weightedMidPointTo(exterior.second, 0.9);
 
-  auto height = exterior_vec.magnitude() * 1/5;
+  auto height = exterior_vec.magnitude() * 0.3;
   auto weight = lateral_progression_;
   if (lateral_progression_ > .90)
     weight = .90;
