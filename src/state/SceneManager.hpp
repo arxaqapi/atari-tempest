@@ -19,7 +19,7 @@ class SceneManager
 {
 private:
   std::unique_ptr<Scene> current_scene_p_ = std::make_unique<TitleScreen>();
-  State current_state_ = STATE_TITLE_SCREEN; // TODO: to set at right place
+  State current_state_ = STATE_TITLE_SCREEN;
   State next_state_ = STATE_TITLE_SCREEN;
   int requested_level_ = 0;
 
