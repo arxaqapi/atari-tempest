@@ -1,4 +1,5 @@
-#pragma once
+#ifndef H_TEMPEST_GAME_INC_SCENEMANAGER_
+#define H_TEMPEST_GAME_INC_SCENEMANAGER_
 
 #include "GameScene.hpp"
 #include "Scene.hpp"
@@ -102,3 +103,5 @@ public:
    */
   void update(f64 delta);
 };
+
+#endif
