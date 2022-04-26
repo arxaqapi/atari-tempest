@@ -1,4 +1,5 @@
 #include "Pen.hpp"
+#include "../core/Game.hpp"
 #include "../utils/Errors.hpp"
 
 int
@@ -70,8 +71,8 @@ Pen::draw_string_centered_x(std::string const& s,
                             int ypos,
                             SDLW::Renderer& renderer)
 {
-  // TODO: remove hardcoded WINDOWS_WIDTH
-  draw_string(s, 763 / 2 - get_string_width(s) / 2, ypos, renderer);
+  draw_string(
+    s, Game::get_width() / 2 - get_string_width(s) / 2, ypos, renderer);
 }
 
 void
@@ -93,7 +94,11 @@ Pen::draw_string_centered_x(std::string const& s,
                             SDLW::Renderer& renderer,
                             float size)
 {
-  draw_string(s, 763 / 2 - get_string_width(s, size) / 2, ypos, renderer, size);
+  draw_string(s,
+              Game::get_width() / 2 - get_string_width(s, size) / 2,
+              ypos,
+              renderer,
+              size);
 }
 
 int

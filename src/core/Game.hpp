@@ -23,17 +23,15 @@ class Game
 {
 private:
   bool run_ = true;
-  u16 WINDOWS_WIDTH_ = 960;
-  u16 WINDOWS_HEIGHT_ = 540;
+  static u16 WINDOWS_WIDTH_;
+  static u16 WINDOWS_HEIGHT_;
   SceneManager sm_;
   RenderHandler r_{ WINDOWS_WIDTH_, WINDOWS_HEIGHT_ };
   void stop_() { run_ = false; };
 
 public:
   Game();
-  Game(u16 w_width, u16 w_height)
-    : WINDOWS_WIDTH_{ w_width }
-    , WINDOWS_HEIGHT_{ w_height } {};
+  Game(u16 w_width, u16 w_height);
   ~Game();
 
   void clear();
@@ -48,6 +46,8 @@ public:
   void render();
 
   bool is_running() { return run_; };
+
+  static u16 get_width();
 };
 
 #endif

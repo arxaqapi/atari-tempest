@@ -35,7 +35,8 @@ Blaster::render(SDLW::Renderer& renderer,
   const Band& band = map.getBand(band_num_);
   auto exterior = band.getExterior();
 
-  Vector2D exterior_vec = exterior.first.vec_to(exterior.second);
+  Vector2D exterior_vec =
+    exterior.first.vec_to(exterior.second);
                             Vector2D unit_vector = exterior_vec.orthogonalVector().unit();
   Vector2D inner_left = exterior.first.weightedMidPointTo(exterior.second, 0.1);
   Vector2D inner_right =

@@ -12,7 +12,18 @@
 #include "Game.hpp"
 #include <iostream>
 
+u16 Game::WINDOWS_WIDTH_ = 960;
+
+u16 Game::WINDOWS_HEIGHT_ = 540;
+
 Game::Game() {}
+
+Game::Game(u16 w_width, u16 w_height)
+  : r_{ w_width, w_height }
+{
+  WINDOWS_WIDTH_ = w_width;
+  WINDOWS_HEIGHT_ = w_height;
+}
 
 Game::~Game()
 {
@@ -63,4 +74,10 @@ Game::render()
 {
   sm_.get_current_scene().render(r_.get_renderer());
   r_.draw();
+}
+
+u16
+Game::get_width()
+{
+  return Game::WINDOWS_WIDTH_;
 }
