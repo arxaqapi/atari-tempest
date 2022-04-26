@@ -10,8 +10,8 @@
 using namespace std::string_literals;
 
 GameScene::GameScene(u8 level)
-  : current_figure_{ static_cast<u8>(level % (Data::N_FIGURES_ - 1)) }
-  , current_cycle_{ static_cast<u8>(level / (Data::N_FIGURES_ - 1)) }
+  : current_figure_{ static_cast<u8>(level % Data::N_FIGURES_) }
+  , current_cycle_{ static_cast<u8>(level / Data::N_FIGURES_) }
   , map_{ level_data.getExterior()[current_figure_],
           level_data.getIsContinuous()[current_figure_],
           level_data.getFocal()[current_figure_],
@@ -19,8 +19,8 @@ GameScene::GameScene(u8 level)
   , spawn_manager_{ map_.size(), level }
 {
   if (level > 0)
-    player_.addScore(getLevelMaxScore((level - 1) / (Data::N_FIGURES_ - 1),
-                                      (level - 1) % (Data::N_FIGURES_ - 1)));
+    player_.addScore(getLevelMaxScore((level - 1) / Data::N_FIGURES_,
+                                      (level - 1) % Data::N_FIGURES_));
 }
 
 void
@@ -201,7 +201,7 @@ GameScene::getCurrentLevelNum() const
 void
 GameScene::loadNextLevel()
 {
-  current_figure_ = (current_figure_ + 1) % (Data::N_FIGURES_ - 1);
+  current_figure_ = (current_figure_ + 1) % Data::N_FIGURES_;
 
   if (current_figure_ == 0)
     current_cycle_ += 1;
