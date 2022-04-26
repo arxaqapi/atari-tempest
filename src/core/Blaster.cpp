@@ -35,9 +35,8 @@ Blaster::render(SDLW::Renderer& renderer,
   const Band& band = map.getBand(band_num_);
   auto exterior = band.getExterior();
 
-  Vector2D exterior_vec =
-    exterior.first.vec_to(exterior.second);
-                            Vector2D unit_vector = exterior_vec.orthogonalVector().unit();
+  Vector2D exterior_vec = exterior.first.vec_to(exterior.second);
+  Vector2D unit_vector = exterior_vec.orthogonalVector().unit();
   Vector2D inner_left = exterior.first.weightedMidPointTo(exterior.second, 0.1);
   Vector2D inner_right =
     exterior.first.weightedMidPointTo(exterior.second, 0.9);
@@ -51,15 +50,15 @@ Blaster::render(SDLW::Renderer& renderer,
 
   Vector2D inner_top =
     exterior.first.weightedMidPointTo(exterior.second, weight) +
-    (unit_vector * (-height/2));
+    (unit_vector * (-height / 2));
   Vector2D outer_top =
     exterior.first.weightedMidPointTo(exterior.second, weight) +
     (unit_vector * -height);
 
-  Vector2D claw_left =
-    exterior.first.weightedMidPointTo(exterior.second, .4) + (unit_vector * (height/2));
-  Vector2D claw_right =
-    exterior.first.weightedMidPointTo(exterior.second, .6) + (unit_vector * (height/2));
+  Vector2D claw_left = exterior.first.weightedMidPointTo(exterior.second, .4) +
+                       (unit_vector * (height / 2));
+  Vector2D claw_right = exterior.first.weightedMidPointTo(exterior.second, .6) +
+                        (unit_vector * (height / 2));
 
   renderer.SetRenderDrawColor(std::get<0>(render_color),
                               std::get<1>(render_color),

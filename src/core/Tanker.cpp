@@ -32,7 +32,6 @@ Tanker::render(SDLW::Renderer& renderer,
     band.getExterior().first.vec_to(band.getExterior().second).magnitude();
   f32 size = 0.7 * width;
 
-
   f32 outer_size = (size * (1 - fraction)) / 2;
   f32 inner_size = (size * (1 - fraction)) / 4;
 

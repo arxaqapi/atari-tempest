@@ -69,7 +69,7 @@ public:
 
   /**
    * @brief Lance l'horloge et stocke la valeur de l'horloge interne
-   * 
+   *
    */
   void start();
 
