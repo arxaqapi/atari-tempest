@@ -58,7 +58,7 @@ SceneManager::switch_scene()
   current_scene_p_.reset();
   current_scene_p_ = get_corresponding_scene(next_state_);
   current_state_ = next_state_;
-  // load requested_level_ after usage
+  // resets requested_level_ after usage
   requested_level_ = 0;
 }
 
