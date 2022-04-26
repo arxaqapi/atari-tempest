@@ -29,6 +29,12 @@ class UILevelCarousel : public UIElement
 {
 private:
   /**
+   * @brief Nombre maximum de boîte à afficher avant décalage de tout les
+   * éléments
+   *
+   */
+  static constexpr u8 AMOUNT_OF_BOXES_ = 4;
+  /**
    * @brief le numéro du niveau en cours de sélection
    *
    */

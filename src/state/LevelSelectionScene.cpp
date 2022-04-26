@@ -29,9 +29,9 @@ LevelSelectionScene::render(SDLW::Renderer& renderer) const
   ui_level_carousel_.render(renderer);
 
   // Draw text
-  Pen::draw_string("LEVEL", 75, 420, renderer);
-  Pen::draw_string("HOLE ", 75, 458, renderer);
-  Pen::draw_string("BONUS", 75, 495, renderer);
+  Pen::draw_string("LEVEL", 60, 420, renderer);
+  Pen::draw_string("HOLE ", 60, 458, renderer);
+  Pen::draw_string("BONUS", 60, 495, renderer);
 
   Pen::draw_string_centered_x("Level selection scene", 100, renderer);
   Pen::draw_string_centered_x("Press space", 250, renderer);
