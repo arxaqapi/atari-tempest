@@ -17,7 +17,7 @@ run: clean main
 	clear
 	./bin/main
 
-format: .clang-format
+f format: .clang-format
 	@echo "Formatting the source code ..."
 	clang-format -i \
 		$(SRC_DIR)/*.cpp \
