@@ -2,6 +2,7 @@
 #define TEMPEST_ATARI_PEN_HPP
 
 #include "../sdlw/SDLW.hpp"
+#include "../utils/types.hpp"
 #include <string>
 #include <vector>
 
@@ -18,8 +19,8 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    */
   static void draw_string(std::string const& s,
-                          int xpos,
-                          int ypos,
+                          i32 xpos,
+                          i32 ypos,
                           SDLW::Renderer& renderer);
 
   /**
@@ -32,7 +33,7 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    */
   static void draw_string_centered_x(std::string const& s,
-                                     int ypos,
+                                     i32 ypos,
                                      SDLW::Renderer& renderer);
 
   /**
@@ -47,10 +48,10 @@ public:
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    */
   static void draw_string(std::string const& s,
-                          int xpos,
-                          int ypos,
+                          i32 xpos,
+                          i32 ypos,
                           SDLW::Renderer& renderer,
-                          float size);
+                          f32 size);
 
   /**
    * @brief
@@ -61,18 +62,18 @@ public:
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    */
   static void draw_string_centered_x(std::string const& s,
-                                     int ypos,
+                                     i32 ypos,
                                      SDLW::Renderer& renderer,
-                                     float size);
+                                     f32 size);
 
   /**
    * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
    * paramètre.
    *
    * @param s la chaîne de caractère
-   * @return int: taille de la chaîne de caractères
+   * @return i32: taille de la chaîne de caractères
    */
-  static int get_string_width(std::string const& s);
+  static i32 get_string_width(std::string const& s);
 
   /**
    * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
@@ -81,9 +82,9 @@ public:
    * @param s la chaîne de caractère
    * @param size le facteur d'agrandissement (la valeur de base est 1) de la
    * taille des caractères
-   * @return int: taille de la chaîne de caractères
+   * @return i32: taille de la chaîne de caractères
    */
-  static int get_string_width(std::string const& s, float size);
+  static i32 get_string_width(std::string const& s, f32 size);
 
 private:
   Pen() = delete;
@@ -94,9 +95,9 @@ private:
    * caractère ascii donnée en paramètre
    *
    * @param c le caractère dont on veut récupérer l'indice
-   * @return int: l'indice cible
+   * @return i32: l'indice cible
    */
-  static int index_of_ascii(const char c);
+  static i32 index_of_ascii(const char c);
 
   /**
    * \~french @brief Désigne une arête sur le \b renderer fournis en paramètre,
@@ -111,12 +112,12 @@ private:
    * @param yoffset la position en y du caractère
    */
   static void draw_edge(SDLW::Renderer& renderer,
-                        const float x1,
-                        const float y1,
-                        const float x2,
-                        const float y2,
-                        const int xoffset,
-                        const int yoffset);
+                        const f32 x1,
+                        const f32 y1,
+                        const f32 x2,
+                        const f32 y2,
+                        const i32 xoffset,
+                        const i32 yoffset);
 
   /**
    * \~english @brief Draws a single character on the renderer at a specific
@@ -134,7 +135,7 @@ private:
    * \~english @param xoffset
    * \~english @param yoffset
    * \~english @param multiplier size of the character (origin is 1)
-   * \~english @return int: width of the drawn character
+   * \~english @return i32: width of the drawn character
 
    * \~french @param renderer l'object Renderer sur lequel rendre la chaîne de
    caractères
@@ -143,20 +144,20 @@ private:
    * \~french @param yoffset
    * \~french @param multiplier le facteur d'agrandissement (la valeur de base
    est 1)
-   * \~french @return int: largeur du caractère rendu
+   * \~french @return i32: largeur du caractère rendu
    */
-  static int draw_character(SDLW::Renderer& renderer,
+  static i32 draw_character(SDLW::Renderer& renderer,
                             const char c,
-                            const int xoffset,
-                            const int yoffset,
-                            const float multiplier);
+                            const i32 xoffset,
+                            const i32 yoffset,
+                            const f32 multiplier);
 
   /**
    * \~english @brief Amount of space (in pixels) between two characters
    * \~french @brief Taille de l'espace (en pixels) entre deux caractères
    *
    */
-  static constexpr int space_size = 2;
+  static constexpr i32 space_size = 2;
 
   /**
    * \~english @brief Hershey Vector Font:
@@ -165,7 +166,7 @@ private:
    * http://paulbourke.net/dataformats/hershey/
    *
    */
-  static constexpr int hershey_table[95][112] = {
+  static constexpr i32 hershey_table[95][112] = {
     0,  16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
