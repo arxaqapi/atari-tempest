@@ -43,7 +43,9 @@ Bullet::render(SDLW::Renderer& renderer,
 
   const Band& band = map.getBand(band_num_);
 
-  f32 size = 10 * (1 - fraction);
+  f32 width =
+    band.getExterior().first.vec_to(band.getExterior().second).magnitude();
+  f32 size = 0.1 * width;
 
   Vector2D orthogonal = band.getUnitVector().orthogonalVector();
   Vector2D position = band.getExterCenter().vec_to(map.getOrigin()) * fraction;
