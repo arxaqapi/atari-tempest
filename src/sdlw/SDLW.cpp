@@ -13,33 +13,6 @@
 #include "../utils/Errors.hpp"
 #include <cassert>
 
-SDLW::Rect::Rect(i32 x, i32 y, i32 w, i32 h)
-  : r_{ x, y, w, h }
-{}
-
-SDLW::Rect::~Rect() {}
-
-i32
-SDLW::Rect::x() const
-{
-  return r_.x;
-}
-i32
-SDLW::Rect::y() const
-{
-  return r_.y;
-}
-i32
-SDLW::Rect::w() const
-{
-  return r_.w;
-}
-i32
-SDLW::Rect::h() const
-{
-  return r_.h;
-}
-
 //// Window
 SDLW::Window::Window(const std::string& title,
                      i32 x,
@@ -76,16 +49,23 @@ SDLW::Renderer::~Renderer()
 
 // Renderer:Rect
 void
-SDLW::Renderer::RenderDrawRect(const SDLW::Rect& rect)
+SDLW::Renderer::RenderDrawRect(const SDLW::Rect_T<i32>& rect)
 {
   if (SDL_RenderDrawRect(r_, &rect.r_) != 0)
     throw errors::sdl_error(SDL_GetError());
 }
 
 void
-SDLW::Renderer::RenderFillRect(const SDLW::Rect& rect)
+SDLW::Renderer::RenderFillRect(const SDLW::Rect_T<i32>& rect)
 {
   if (SDL_RenderFillRect(r_, &rect.r_) != 0)
+    throw errors::sdl_error(SDL_GetError());
+}
+
+void
+SDLW::Renderer::RenderFillRectF(const SDLW::Rect_T<f32>& rect)
+{
+  if (SDL_RenderFillRectF(r_, &rect.r_) != 0)
     throw errors::sdl_error(SDL_GetError());
 }
 

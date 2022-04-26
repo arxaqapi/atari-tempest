@@ -15,27 +15,52 @@
 #include "SDL2/SDL.h"
 #include <string>
 
+namespace impl {
+template<typename T, typename Enable = void>
+class base_Rect;
+
+template<typename T>
+class base_Rect<T, std::enable_if_t<std::is_same<T, f32>::value>>
+{
+protected:
+  SDL_FRect r_;
+};
+
+template<typename T>
+class base_Rect<T, std::enable_if_t<std::is_same<T, i32>::value>>
+{
+protected:
+  SDL_Rect r_;
+};
+}
+
 namespace SDLW {
 /// Forward declaration
 class Renderer;
 
-class Rect
+template<typename T>
+class Rect_T : public impl::base_Rect<T>
 {
   friend class Renderer;
 
-private:
-  SDL_Rect r_;
-
 public:
-  Rect() = delete;
-  Rect(i32 x, i32 y, i32 w, i32 h);
-  ~Rect();
+  Rect_T() = delete;
+  Rect_T(T x, T y, T w, T h)
+  {
+    impl::base_Rect<T>::r_.x = x;
+    impl::base_Rect<T>::r_.y = y;
+    impl::base_Rect<T>::r_.w = w;
+    impl::base_Rect<T>::r_.h = h;
+  };
+  ~Rect_T(){};
 
-  i32 x() const;
-  i32 y() const;
-  i32 w() const;
-  i32 h() const;
+  T x() const { return impl::base_Rect<T>::r_.x; };
+  T y() const { return impl::base_Rect<T>::r_.y; };
+  T w() const { return impl::base_Rect<T>::r_.w; };
+  T h() const { return impl::base_Rect<T>::r_.h; };
 };
+
+///////////////////
 
 //// Window
 
@@ -65,8 +90,9 @@ public:
   Renderer(SDLW::Window& window, i32 index, u32 flags);
   ~Renderer();
 
-  void RenderDrawRect(const SDLW::Rect& rect);
-  void RenderFillRect(const SDLW::Rect& rect);
+  void RenderDrawRect(const SDLW::Rect_T<i32>& rect);
+  void RenderFillRect(const SDLW::Rect_T<i32>& rect);
+  void RenderFillRectF(const SDLW::Rect_T<f32>& rect);
 
   void RenderDrawLineF(f32 x1, f32 y1, f32 x2, f32 y2);
   void RenderDrawLine(i32 x1, i32 y1, i32 x2, i32 y2);
@@ -74,9 +100,6 @@ public:
   void SetRenderDrawColor(u8 r, u8 g, u8 b, u8 a);
   void RenderPresent();
   void RenderClear();
-
-  // TODO: order and implement theses functions
-  // void SDL_RenderFillRectF();
 };
 
 void

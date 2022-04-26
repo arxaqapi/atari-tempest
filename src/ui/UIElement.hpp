@@ -26,7 +26,7 @@ protected:
    * @brief Boite englobante délimitant l'élément
    *
    */
-  SDLW::Rect bounding_box_;
+  SDLW::Rect_T<i32> bounding_box_;
 
 public:
   UIElement() = delete;

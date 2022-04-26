@@ -41,10 +41,10 @@ UILevelBox::render(SDLW::Renderer& renderer, bool selected) const
     renderer.RenderDrawRect(bounding_box_);
   } else {
     renderer.SetRenderDrawColor(0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE);
-    renderer.RenderFillRect(SDLW::Rect(bounding_box_.x() + 2,
-                                       bounding_box_.y() + 2,
-                                       bounding_box_.w() - 4,
-                                       bounding_box_.h() - 4));
+    renderer.RenderFillRect(SDLW::Rect_T(bounding_box_.x() + 2,
+                                         bounding_box_.y() + 2,
+                                         bounding_box_.w() - 4,
+                                         bounding_box_.h() - 4));
   }
 
   // Draw Text
