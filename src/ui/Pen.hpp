@@ -8,34 +8,108 @@
 class Pen
 {
 public:
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position cible
+   * sur le \b renderer passé en paramètre
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param xpos position en x du début de la chaîne de caractères
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   */
   static void draw_string(std::string const& s,
                           int xpos,
                           int ypos,
                           SDLW::Renderer& renderer);
 
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x.
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   */
   static void draw_string_centered_x(std::string const& s,
                                      int ypos,
                                      SDLW::Renderer& renderer);
 
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x.
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param xpos position en x du début de la chaîne de caractères
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   * @param size le facteur d'agrandissement (la valeur de base est 1)
+   */
   static void draw_string(std::string const& s,
                           int xpos,
                           int ypos,
                           SDLW::Renderer& renderer,
                           float size);
 
+  /**
+   * @brief
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   * @param size le facteur d'agrandissement (la valeur de base est 1)
+   */
   static void draw_string_centered_x(std::string const& s,
                                      int ypos,
                                      SDLW::Renderer& renderer,
                                      float size);
 
+  /**
+   * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
+   * paramètre.
+   *
+   * @param s la chaîne de caractère
+   * @return int: taille de la chaîne de caractères
+   */
   static int get_string_width(std::string const& s);
+
+  /**
+   * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
+   * paramètre.
+   *
+   * @param s la chaîne de caractère
+   * @param size le facteur d'agrandissement (la valeur de base est 1) de la
+   * taille des caractères
+   * @return int: taille de la chaîne de caractères
+   */
   static int get_string_width(std::string const& s, float size);
 
 private:
   Pen() = delete;
   ~Pen() = delete;
 
+  /**
+   * @brief récupère le n° de l'indice dans le tableau \b hershey_table du
+   * caractère ascii donnée en paramètre
+   *
+   * @param c le caractère dont on veut récupérer l'indice
+   * @return int: l'indice cible
+   */
   static int index_of_ascii(const char c);
+
+  /**
+   * \~french @brief Désigne une arête sur le \b renderer fournis en paramètre,
+   * de couleur blanche
+   *
+   * @param renderer l'object Renderer sur lequel rendre l'arête
+   * @param x1 la position en x de l'origine de l'arête
+   * @param y1 la position en y de l'origine de l'arête
+   * @param x2 la position en x de l'arrivée de l'arête
+   * @param y2 la position en y de l'arrivée de l'arête
+   * @param xoffset la position en x du caractère
+   * @param yoffset la position en y du caractère
+   */
   static void draw_edge(SDLW::Renderer& renderer,
                         const float x1,
                         const float y1,
@@ -43,14 +117,54 @@ private:
                         const float y2,
                         const int xoffset,
                         const int yoffset);
+
+  /**
+   * \~english @brief Draws a single character on the renderer at a specific
+   position
+   * (bottom left is the origin of the character) with a specific size
+   (multiplier)
+   *
+   * \~french @brief Rend un simple caractère sur le renderer simple
+   * a la position spécifié en paramètre (l'origine du caractère est en bas à
+   gauche)
+   * avec une taille donnée
+   *
+   * \~english @param renderer the renderer target
+   * \~english @param c the character to draw to the screen
+   * \~english @param xoffset
+   * \~english @param yoffset
+   * \~english @param multiplier size of the character (origin is 1)
+   * \~english @return int: width of the drawn character
+
+   * \~french @param renderer l'object Renderer sur lequel rendre la chaîne de
+   caractères
+   * \~french @param c le caractère à rendre
+   * \~french @param xoffset
+   * \~french @param yoffset
+   * \~french @param multiplier le facteur d'agrandissement (la valeur de base
+   est 1)
+   * \~french @return int: largeur du caractère rendu
+   */
   static int draw_character(SDLW::Renderer& renderer,
                             const char c,
                             const int xoffset,
                             const int yoffset,
                             const float multiplier);
 
+  /**
+   * \~english @brief Amount of space (in pixels) between two characters
+   * \~french @brief Taille de l'espace (en pixels) entre deux caractères
+   *
+   */
   static constexpr int space_size = 2;
-  // Hershey Vector Font: http://paulbourke.net/dataformats/hershey/
+
+  /**
+   * \~english @brief Hershey Vector Font:
+   * http://paulbourke.net/dataformats/hershey/
+   * \~french @brief police de caractère vectorielle d'Hershey:
+   * http://paulbourke.net/dataformats/hershey/
+   *
+   */
   static constexpr int hershey_table[95][112] = {
     0,  16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
