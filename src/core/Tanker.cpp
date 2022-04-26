@@ -28,8 +28,13 @@ Tanker::render(SDLW::Renderer& renderer,
   f32 fraction =
     utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
-  f32 inner_size = (30 * (1 - fraction)) / 2;
-  f32 outer_size = (60 * (1 - fraction)) / 2;
+  f32 width =
+    band.getExterior().first.vec_to(band.getExterior().second).magnitude();
+  f32 size = 0.7 * width;
+
+
+  f32 outer_size = (size * (1 - fraction)) / 2;
+  f32 inner_size = (size * (1 - fraction)) / 4;
 
   Vector2D u = { 1, 0 };
   Vector2D v = { 0, 1 };
