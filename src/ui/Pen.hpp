@@ -97,7 +97,7 @@ private:
    * @param c le caractère dont on veut récupérer l'indice
    * @return i32: l'indice cible
    */
-  static i32 index_of_ascii(const char c);
+  static i32 index_of_ascii(const u8 c);
 
   /**
    * \~french @brief Désigne une arête sur le \b renderer fournis en paramètre,
@@ -147,7 +147,7 @@ private:
    * \~french @return i32: largeur du caractère rendu
    */
   static i32 draw_character(SDLW::Renderer& renderer,
-                            const char c,
+                            const u8 c,
                             const i32 xoffset,
                             const i32 yoffset,
                             const f32 multiplier);

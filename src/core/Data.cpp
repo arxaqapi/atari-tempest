@@ -21,35 +21,35 @@ Data::Data()
   }
 
   // Is continuous
-  for (int i = 0; i < N_FIGURES_; ++i) {
+  for (u8 i = 0; i < N_FIGURES_; ++i) {
     file >> buf;
     is_continuous_.emplace_back(buf);
   }
 
   // Focal
-  for (int i = 0; i < N_FIGURES_; ++i) {
+  for (u8 i = 0; i < N_FIGURES_; ++i) {
     file >> buf;
     focal_.emplace_back(buf);
   }
 
   // Origin
-  for (int i = 0; i < N_FIGURES_; ++i) {
+  for (u8 i = 0; i < N_FIGURES_; ++i) {
     file >> buf;
     origin_[i].setX(buf);
   }
-  for (int i = 0; i < N_FIGURES_; ++i) {
+  for (u8 i = 0; i < N_FIGURES_; ++i) {
     file >> buf;
     origin_[i].setY(buf);
   }
 
   //   Exterior
-  for (int i = 0; i < N_FIGURES_; ++i) {
-    for (int j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
+  for (u8 i = 0; i < N_FIGURES_; ++i) {
+    for (u8 j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
       exterior_[i][j].setX(buf);
     }
   }
-  for (int i = 0; i < N_FIGURES_; ++i) {
-    for (int j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
+  for (u8 i = 0; i < N_FIGURES_; ++i) {
+    for (u8 j = 0; j < N_BANDS_PER_FIGURE_ && file >> buf; ++j) {
       exterior_[i][j].setY(buf);
     }
   }

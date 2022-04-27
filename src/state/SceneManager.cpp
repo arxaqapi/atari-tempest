@@ -117,7 +117,7 @@ SceneManager::set_next_state(State next_requested_state)
 }
 
 void
-SceneManager::set_next_state(State next_requested_state, int level)
+SceneManager::set_next_state(State next_requested_state, i32 level)
 {
   requested_level_ = level;
   set_next_state(next_requested_state);

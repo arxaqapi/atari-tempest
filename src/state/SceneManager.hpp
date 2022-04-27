@@ -39,7 +39,7 @@ private:
    * jeu: STATE_GAME_SCENE
    *
    */
-  int requested_level_ = 0;
+  i32 requested_level_ = 0;
 
   /**
    * \~english @brief Destroys the current scene object and affects the new
@@ -87,7 +87,7 @@ public:
    * \~french @param next_requested_state le prochain état demandée
    * \~french @param level le niveau du jeu demandé
    */
-  void set_next_state(State next_requested_state, int level);
+  void set_next_state(State next_requested_state, i32 level);
 
   /**
    * \~french @brief Getter sur la Scene courante

@@ -3,7 +3,7 @@
 #include "../utils/Errors.hpp"
 
 i32
-Pen::index_of_ascii(const char c)
+Pen::index_of_ascii(const u8 c)
 {
   return static_cast<i32>(c) - 32;
 }
@@ -24,7 +24,7 @@ Pen::draw_edge(SDLW::Renderer& renderer,
 
 i32
 Pen::draw_character(SDLW::Renderer& renderer,
-                    const char c,
+                    const u8 c,
                     const i32 xoffset,
                     const i32 yoffset,
                     const f32 multiplier)

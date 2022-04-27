@@ -27,7 +27,7 @@ u8
 Map::getLeftBandNum(u8 num_band) const
 {
   assert(num_band < bands_.size());
-  int left_band_num = num_band - 1;
+  i32 left_band_num = num_band - 1;
   if (is_continuous_)
     left_band_num %= bands_.size();
   else
@@ -39,7 +39,7 @@ u8
 Map::getRightBandNum(u8 num_band) const
 {
   assert(num_band < bands_.size());
-  int right_band_num = num_band + 1;
+  i32 right_band_num = num_band + 1;
   if (is_continuous_)
     right_band_num %= bands_.size();
   else
