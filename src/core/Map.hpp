@@ -87,7 +87,8 @@ public:
    * Getters
    */
   inline const Vector2D& getOrigin() const { return origin_; };
-  inline f32 getFocal() const {return focal_;};
+  inline f32 getFocal() const {return focal_;}
+  inline f32 getAvgBandWith() const { return avg_band_with_; };
 };
 
 #endif // TEMPEST_ATARI_MAP_HPP

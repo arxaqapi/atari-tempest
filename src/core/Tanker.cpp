@@ -18,19 +18,12 @@ Tanker::render(SDLW::Renderer& renderer,
   if (!active_)
     return;
 
-  renderer.SetRenderDrawColor(std::get<0>(render_color),
-                              std::get<1>(render_color),
-                              std::get<2>(render_color),
-                              255);
-
   const Band& band = map.getBand(band_num_);
 
   f32 fraction =
     utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
-  f32 width =
-    band.getExterior().first.vec_to(band.getExterior().second).magnitude();
-  f32 size = 0.7 * width;
+  f32 size = 0.7 * map.getAvgBandWith();
 
   f32 outer_size = (size * (1 - fraction)) / 2;
   f32 inner_size = (size * (1 - fraction)) / 4;
@@ -52,6 +45,10 @@ Tanker::render(SDLW::Renderer& renderer,
   Vector2D outer_top = band.getExterCenter() + (v * outer_size) + position;
   Vector2D outer_bottom = band.getExterCenter() + (v * -outer_size) + position;
 
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
   renderer.RenderDrawLineF(
     inner_left.getX(), inner_left.getY(), inner_top.getX(), inner_top.getY());
   renderer.RenderDrawLineF(

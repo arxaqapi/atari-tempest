@@ -10,6 +10,7 @@
  */
 #include "Map.hpp"
 #include "assert.h"
+#include <numeric>
 
 Map::Map(const std::vector<Vector2D>& exterior,
          bool is_continuous,
@@ -75,12 +76,19 @@ void
 Map::makeBands(const std::vector<Vector2D>& exterior)
 {
   assert(exterior.size() > 0);
+
   bands_.clear();
+
   size_t i;
   for (i = 0; i < exterior.size() - 1; ++i)
     bands_.emplace_back(exterior[i], exterior[i + 1], origin_, focal_);
   if (is_continuous_)
     bands_.emplace_back(exterior[i], exterior[0], origin_, focal_);
+
+  avg_band_with_ = static_cast<f32>(
+    std::accumulate(bands_.begin(), bands_.end(), 0.0, [](f32 a, const Band& b) {
+                       return a + b.getExterior().first.vec_to(b.getExterior().second).magnitude();
+    })) / bands_.size();
 }
 
 void

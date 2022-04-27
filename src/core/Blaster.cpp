@@ -30,18 +30,19 @@ Blaster::render(SDLW::Renderer& renderer,
 {
   if (!active_)
     return;
+
   bullets_.render(renderer, map, render_color);
 
   const Band& band = map.getBand(band_num_);
   auto exterior = band.getExterior();
 
-  Vector2D exterior_vec = exterior.first.vec_to(exterior.second);
-  Vector2D unit_vector = exterior_vec.orthogonalVector().unit();
+  Vector2D unit_vector =
+    exterior.first.vec_to(exterior.second).orthogonalVector().unit();
   Vector2D inner_left = exterior.first.weightedMidPointTo(exterior.second, 0.1);
   Vector2D inner_right =
     exterior.first.weightedMidPointTo(exterior.second, 0.9);
 
-  auto height = exterior_vec.magnitude() * 0.3;
+  auto height = map.getAvgBandWith() * 0.3;
   auto weight = lateral_progression_;
   if (lateral_progression_ > .90)
     weight = .90;
@@ -64,7 +65,6 @@ Blaster::render(SDLW::Renderer& renderer,
                               std::get<1>(render_color),
                               std::get<2>(render_color),
                               255);
-
   renderer.RenderDrawLineF(exterior.first.getX(),
                            exterior.first.getY(),
                            claw_left.getX(),

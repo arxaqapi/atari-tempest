@@ -19,11 +19,6 @@ Flipper::render(SDLW::Renderer& renderer,
   if (!active_)
     return;
 
-  renderer.SetRenderDrawColor(std::get<0>(render_color),
-                              std::get<1>(render_color),
-                              std::get<2>(render_color),
-                              255);
-
   const Band& band = map.getBand(band_num_);
 
   f32 fraction =
@@ -38,9 +33,7 @@ Flipper::render(SDLW::Renderer& renderer,
   Vector2D orthogonal =
     left_bottom.vec_to(right_bottom).orthogonalVector().unit();
 
-  f32 width =
-    band.getExterior().first.vec_to(band.getExterior().second).magnitude();
-  f32 height = 0.2 * width * (1 - fraction);
+  f32 height = 0.2 * map.getAvgBandWith() * (1 - fraction);
 
   Vector2D left_top =
     left_bottom.weightedMidPointTo(right_bottom, .1) + (orthogonal * -height);
@@ -54,6 +47,10 @@ Flipper::render(SDLW::Renderer& renderer,
   Vector2D right_inner = right_bottom.weightedMidPointTo(left_bottom, .2) +
                          (orthogonal * (-height / 2));
 
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
   renderer.RenderDrawLine(
     left_bottom.getX(), left_bottom.getY(), right_top.getX(), right_top.getY());
   renderer.RenderDrawLine(left_bottom.getX(),

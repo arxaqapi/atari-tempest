@@ -16,10 +16,6 @@ Spiker::render(SDLW::Renderer& renderer,
   if (!active_)
     return;
 
-  renderer.SetRenderDrawColor(std::get<0>(render_color),
-                              std::get<1>(render_color),
-                              std::get<2>(render_color),
-                              255);
   f32 fraction =
     utils::easeOutQuad(front_progression_, 1 - map.getFocal()) - map.getFocal();
 
@@ -28,6 +24,10 @@ Spiker::render(SDLW::Renderer& renderer,
   Vector2D position =
     band.getExterCenter().weightedMidPointTo(map.getOrigin(), fraction);
 
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
   renderer.RenderDrawLineF(band.getInterCenter().getX(),
                            band.getInterCenter().getY(),
                            position.getX(),
