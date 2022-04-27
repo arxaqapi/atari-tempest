@@ -6,10 +6,22 @@
 #define TEMPEST_ATARI_DELAY_HPP
 
 #include "types.hpp"
+
+/**
+ * @brief Classe utilitaire pour gérer des délais
+ */
 class Delay
 {
 private:
-  f64 min_delay_{ 0 }, current_delay_{ min_delay_ };
+  /**
+   * Temps minimal pour que le délai soit complet
+   */
+  f64 min_delay_ = 0;
+
+  /**
+   * Délai en cours
+   */
+  f64 current_delay_ = min_delay_;
 
 public:
   Delay() = default;
@@ -19,9 +31,21 @@ public:
   {}
   ~Delay() = default;
 
-  inline void set(f64 min_delay) { min_delay_ = min_delay; }
+  /**
+   * @brief Réinitialise le délai en cours
+   */
   inline void reset() { current_delay_ = 0; }
+
+  /**
+   * @brief Teste si le délai en cours est complet
+   * @return Vrai si le délai est complet, faux sinon
+   */
   inline bool complete() const { return current_delay_ > min_delay_; }
+
+  /**
+   * @brief Met à jour le délai en cours
+   * @param delta Temps passé depuis le dernier appel
+   */
   inline void update(f64 delta) { current_delay_ += delta; }
 };
 

@@ -94,46 +94,10 @@ Blaster::render(SDLW::Renderer& renderer,
 }
 
 void
-Blaster::shoot()
-{
-  is_shooting_ = true;
-}
-
-void
-Blaster::stopShooting()
-{
-  is_shooting_ = false;
-}
-
-std::vector<Bullet>&
-Blaster::getBullets()
-{
-  return bullets_.getPool();
-}
-
-void
 Blaster::hit()
 {
   health_ = std::max(health_ - 1, 0);
   clear();
-}
-
-u32
-Blaster::getScore() const
-{
-  return score_;
-}
-
-void
-Blaster::addScore(u32 score)
-{
-  score_ += score;
-}
-
-u8
-Blaster::getHealth() const
-{
-  return health_;
 }
 
 void

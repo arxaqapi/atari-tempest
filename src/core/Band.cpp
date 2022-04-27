@@ -21,23 +21,15 @@ Band::Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal)
   , inter_center_{ inter_a_.weightedMidPointTo(inter_b_, .5) }
   , axis_{ exter_center_.vec_to(inter_center_) }
   , unit_vector_{ axis_.unit() }
-  , depth_{ axis_.magnitude() }
 {}
 
 void
 Band::render(SDLW::Renderer& renderer,
-             const color& standard_color,
-             const color& accent_color) const
+             const color& render_color) const
 {
-  if (is_selected_)
-    renderer.SetRenderDrawColor(std::get<0>(accent_color),
-                                std::get<1>(accent_color),
-                                std::get<2>(accent_color),
-                                255);
-  else
-    renderer.SetRenderDrawColor(std::get<0>(standard_color),
-                                std::get<1>(standard_color),
-                                std::get<2>(standard_color),
+    renderer.SetRenderDrawColor(std::get<0>(render_color),
+                                std::get<1>(render_color),
+                                std::get<2>(render_color),
                                 255);
   renderer.RenderDrawLineF(
     exter_a_.getX(), exter_a_.getY(), exter_b_.getX(), exter_b_.getY());

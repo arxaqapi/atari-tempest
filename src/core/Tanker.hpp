@@ -6,23 +6,37 @@
 #define TEMPEST_ATARI_TANKER_HPP
 
 #include "GameObject.hpp"
+
+/**
+ * @brief Représente le Tanker
+ */
 class Tanker : public GameObject
 {
 private:
+  /**
+   * @brief Booléen indiquant si le Tanker s'est séparé pour faire apparaître deux
+   * Flippers
+   */
   bool split_ = false;
 
 public:
   Tanker();
-  //  explicit Tanker(u8 band_num);
   Tanker(const Tanker& tanker) = default;
   ~Tanker() override = default;
 
-  //  void activate(const Map& map, u8 band_num);
   void render(SDLW::Renderer& renderer,
               const Map& map,
               const color& render_color) const override;
   void update(f64 delta, const Map& map) override;
+
+  /**
+   * Getters
+   */
   inline bool isSplit() const { return split_; }
+
+  /**
+   * Setters
+   */
   inline void setSplit(bool split) { split_ = split; }
 };
 

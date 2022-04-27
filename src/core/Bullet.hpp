@@ -7,6 +7,10 @@
 
 #include "../sdlw/SDLW.hpp"
 #include "GameObject.hpp"
+
+/**
+ * @brief Représente une balle
+ */
 class Bullet : public GameObject
 {
 public:

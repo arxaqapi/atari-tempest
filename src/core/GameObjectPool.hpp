@@ -12,12 +12,22 @@
 #include <cassert>
 #include <iostream>
 
+/**
+ * @brief Gère une pool d'objets
+ * @tparam GameObjectType Type enfant de GameObject
+ */
 template<typename GameObjectType>
 class GameObjectPool
 {
 private:
-  u8 pool_size_{ 0 };
+  u8 pool_size_ = 0;
   std::vector<GameObjectType> pool_;
+
+  /**
+   * @brief Cherche le premier objet innactif de la pool
+   * @return Itérateur pointant sur l'objet trouvé, peut pointer sur
+   * `pool_.end()` si un tel objet n'a pas été trouvé
+   */
   typename std::vector<GameObjectType>::iterator find();
 
 public:
@@ -26,8 +36,13 @@ public:
   GameObjectPool(const GameObjectPool& go_pool) = default;
   ~GameObjectPool() = default;
 
-  GameObjectType& get(u8 i);
-  std::vector<GameObjectType>& getPool();
+  /**
+   * @brief Cherche le premier objet innactif de la pool. Si un tel objet est
+   * trouvé, l'active et l'initialise.
+   * Appelle la fonction `activate` deGameObject.
+   * @return Itérateur pointant sur l'objet créé, peut pointer sur
+   * `pool_.end()` si un tel objet n'a pas été trouvé
+   */
   typename std::vector<GameObjectType>::iterator create(
     u8 band_num,
     f32 front_progression,
@@ -35,11 +50,28 @@ public:
     f32 front_velocity,
     f32 lateral_velocity,
     e_direction moving_direction);
+
+  /**
+   * @brief Appelle la fonction `update` sur tous les objets de la pool.
+   */
   void update(f64 delta, const Map& map);
+
+  /**
+   * @brief Appelle la fonction `render` sur tous les objets de la pool.
+   */
   void render(SDLW::Renderer& renderer,
               const Map& map,
               const color& render_color) const;
+
+  /**
+   * @brief Réinitialise la pool d'objets (désactive tous les objets)
+   */
   void clear();
+
+  /**
+   * Getters
+   */
+  std::vector<GameObjectType>& getPool();
 };
 
 template<typename GameObjectType>
@@ -108,14 +140,6 @@ GameObjectPool<GameObjectType>::clear()
 {
   for (auto& go : pool_)
     go.deactivate();
-}
-
-template<typename GameObjectType>
-GameObjectType&
-GameObjectPool<GameObjectType>::get(u8 i)
-{
-  assert(i < pool_size_ && i >= 0);
-  return pool_[i];
 }
 
 #endif // TEMPEST_ATARI_GAMEOBJECTPOOL_HPP

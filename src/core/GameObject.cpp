@@ -5,24 +5,6 @@
 #include "GameObject.hpp"
 #include <iostream>
 
-bool
-GameObject::isActive() const
-{
-  return active_;
-}
-
-u8
-GameObject::getBandNum() const
-{
-  return band_num_;
-}
-
-void
-GameObject::setMovingDirection(e_direction moving_direction)
-{
-  moving_direction_ = moving_direction;
-}
-
 void
 GameObject::move(f64 delta, const Map& map)
 {
@@ -75,12 +57,6 @@ GameObject::activate(u8 band_num,
   moving_direction_ = moving_direction;
 }
 
-void
-GameObject::deactivate()
-{
-  active_ = false;
-}
-
 bool
 GameObject::isColliding(const GameObject& go) const
 {
@@ -88,10 +64,4 @@ GameObject::isColliding(const GameObject& go) const
   return band_num_ == go.band_num_ &&
          std::abs(go.front_progression_ - front_progression_) <
            30 * (front_velocity_ + go.front_velocity_);
-}
-
-void
-GameObject::hit()
-{
-  deactivate();
 }

@@ -6,6 +6,10 @@
 #define TEMPEST_ATARI_SPIKER_HPP
 
 #include "GameObject.hpp"
+
+/**
+ * @brief Représente le Spiker
+ */
 class Spiker : public GameObject
 {
 public:

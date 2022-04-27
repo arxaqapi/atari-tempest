@@ -74,20 +74,20 @@ SpawnManager::getSpikers()
 }
 
 std::vector<Flipper>::iterator
-SpawnManager::spawnFlipper(u8 band_num, f32 progress, u8 level)
+SpawnManager::spawnFlipper(u8 band_num, f32 front_progression, u8 level)
 {
   if (level > 0)
-    return flippers_.create(band_num, progress, 0.5, 0.0005, 0.0015, FORWARD);
-  return flippers_.create(band_num, progress, 0.5, 0.0005, 0, FORWARD);
+    return flippers_.create(band_num, front_progression, 0.5, 0.0005, 0.0015, FORWARD);
+  return flippers_.create(band_num, front_progression, 0.5, 0.0005, 0, FORWARD);
 }
 
 std::vector<Flipper>::iterator
 SpawnManager::spawnFlipper(u8 band_num,
-                           f32 progress,
+                           f32 front_progression,
                            u8 level,
                            e_direction band_change_direction)
 {
-  auto it = spawnFlipper(band_num, progress, level);
+  auto it = spawnFlipper(band_num, front_progression, level);
   if (it != flippers_.getPool().end())
     (*it).setBandChangeDirection(band_change_direction);
   return it;

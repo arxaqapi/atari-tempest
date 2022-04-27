@@ -54,24 +54,10 @@ Map::getBand(u8 num_band) const
   return bands_[num_band];
 }
 
-const Band&
-Map::getLeftBand(u8 num_band) const
-{
-  return bands_[getLeftBandNum(num_band)];
-}
-
-const Band&
-Map::getRightBand(u8 num_band) const
-{
-  return bands_[getRightBandNum(num_band)];
-}
-
 void
 Map::select(u8 num_band)
 {
   assert(num_band < bands_.size());
-  bands_[selected_band_num_].unselect();
-  bands_[num_band].select();
   selected_band_num_ = num_band;
 }
 
@@ -81,8 +67,8 @@ Map::render(SDLW::Renderer& renderer,
             const color& accent_color) const
 {
   for (auto band : bands_)
-    band.render(renderer, standard_color, accent_color);
-  bands_[selected_band_num_].render(renderer, standard_color, accent_color);
+    band.render(renderer, standard_color);
+  bands_[selected_band_num_].render(renderer, accent_color);
 }
 
 void
@@ -95,7 +81,6 @@ Map::makeBands(const std::vector<Vector2D>& exterior)
     bands_.emplace_back(exterior[i], exterior[i + 1], origin_, focal_);
   if (is_continuous_)
     bands_.emplace_back(exterior[i], exterior[0], origin_, focal_);
-  bands_[selected_band_num_].select();
 }
 
 void
@@ -108,22 +93,4 @@ Map::load(const std::vector<Vector2D>& exterior,
   focal_ = focal;
   origin_ = origin;
   makeBands(exterior);
-}
-
-u8
-Map::size() const
-{
-  return bands_.size();
-}
-
-const Vector2D&
-Map::getOrigin() const
-{
-  return origin_;
-}
-
-f32
-Map::getFocal() const
-{
-  return focal_;
 }
