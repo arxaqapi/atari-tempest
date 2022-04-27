@@ -10,6 +10,7 @@
  */
 
 #include "UILevelCarousel.hpp"
+#include <algorithm>
 #include <filesystem>
 #include <regex>
 
@@ -81,10 +82,9 @@ UILevelCarousel::select(SceneManager& sm)
 void
 UILevelCarousel::cycle_right()
 {
-  std::cout << "[Debug] - Cycling right, at offset = " << offset_ << std::endl;
-  for (auto& e : ui_elements_) {
+  std::for_each(ui_elements_.begin(), ui_elements_.end(), [](auto& e) {
     e.set_level_n(e.get_level_n() + 1);
-  }
+  });
   ++offset_;
   ++selected_level_;
 }
@@ -92,10 +92,9 @@ UILevelCarousel::cycle_right()
 void
 UILevelCarousel::cycle_left()
 {
-  std::cout << "[Debug] - Cycling left, at offset = " << offset_ << std::endl;
-  for (auto& e : ui_elements_) {
+  std::for_each(ui_elements_.begin(), ui_elements_.end(), [](auto& e) {
     e.set_level_n(e.get_level_n() - 1);
-  }
+  });
   --offset_;
   --selected_level_;
 }
