@@ -24,6 +24,22 @@ public:
                           SDLW::Renderer& renderer);
 
   /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position cible
+   * sur le \b renderer passé en paramètre
+   * 
+   * @param s la chaîne de caractère à rendre
+   * @param xpos position en x du début de la chaîne de caractères
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   * @param render_color la couleur du caractère
+   */
+  static void draw_string(std::string const& s,
+                          i32 xpos,
+                          i32 ypos,
+                          SDLW::Renderer& renderer,
+                          const color& render_color);
+
+  /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
    * cible sur le \b renderer passé en paramètre avec un centrage automatique de
    * la position x.
@@ -110,6 +126,7 @@ private:
    * @param y2 la position en y de l'arrivée de l'arête
    * @param xoffset la position en x du caractère
    * @param yoffset la position en y du caractère
+   * @param render_color la couleur du caractère
    */
   static void draw_edge(SDLW::Renderer& renderer,
                         const f32 x1,
@@ -117,7 +134,8 @@ private:
                         const f32 x2,
                         const f32 y2,
                         const i32 xoffset,
-                        const i32 yoffset);
+                        const i32 yoffset,
+                        const color& render_color);
 
   /**
    * \~english @brief Draws a single character on the renderer at a specific
@@ -136,7 +154,8 @@ private:
    * \~english @param yoffset
    * \~english @param multiplier size of the character (origin is 1)
    * \~english @return i32: width of the drawn character
-
+   * \~english @param render_color color of the character
+   *
    * \~french @param renderer l'object Renderer sur lequel rendre la chaîne de
    caractères
    * \~french @param c le caractère à rendre
@@ -145,12 +164,14 @@ private:
    * \~french @param multiplier le facteur d'agrandissement (la valeur de base
    est 1)
    * \~french @return i32: largeur du caractère rendu
+   * \~french @param render_color la couleur du caractère
    */
   static i32 draw_character(SDLW::Renderer& renderer,
                             const u8 c,
                             const i32 xoffset,
                             const i32 yoffset,
-                            const f32 multiplier);
+                            const f32 multiplier,
+                            const color& render_color);
 
   /**
    * \~english @brief Amount of space (in pixels) between two characters
@@ -158,6 +179,12 @@ private:
    *
    */
   static constexpr i32 space_size = 2;
+
+  /**
+   * @brief Couleur de base des caractères affiché (blanc)
+   * 
+   */
+  static constexpr color base_color{ 0xFF, 0xFF, 0xFF };
 
   /**
    * \~english @brief Hershey Vector Font:

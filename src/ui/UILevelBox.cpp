@@ -39,19 +39,14 @@ UILevelBox::render(SDLW::Renderer& renderer, bool selected) const
     renderer.SetRenderDrawColor(0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
 
     renderer.RenderDrawRect(bounding_box_);
-  } else {
-    renderer.SetRenderDrawColor(0x00, 0x00, 0xFF, SDL_ALPHA_OPAQUE);
-    renderer.RenderFillRect(SDLW::Rect_T(bounding_box_.x() + 2,
-                                         bounding_box_.y() + 2,
-                                         bounding_box_.w() - 4,
-                                         bounding_box_.h() - 4));
   }
 
   // Draw Text
   Pen::draw_string(std::to_string(level_n_),
                    bounding_box_.x() + bounding_box_.w() / 2 - 10,
                    bounding_box_.y() + 30,
-                   renderer);
+                   renderer,
+                   color {0x00, 0xFF, 0x00});
 }
 
 void

@@ -28,6 +28,6 @@ using u64 = uint64_t;
 using f32 = float;
 using f64 = double;
 
-using color = std::tuple<int, int, int>;
+using color = std::tuple<u8, u8, u8>;
 
 #endif
