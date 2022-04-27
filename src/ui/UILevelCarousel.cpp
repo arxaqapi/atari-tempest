@@ -15,13 +15,23 @@
 
 namespace fs = std::filesystem;
 
+inline void
+setup_ui_elements(std::vector<UILevelBox>& ui_elements)
+{
+  for (u8 i = 0; i < UILevelCarousel::AMOUNT_OF_BOXES_; ++i) {
+    ui_elements.emplace_back((u32)i, 185 + ((i32)i * 130), 390, 120, 120);
+  }
+}
+
+UILevelCarousel::UILevelCarousel()
+{
+  setup_ui_elements(ui_elements_);
+}
+
 UILevelCarousel::UILevelCarousel(i32 x, i32 y, i32 w, i32 h)
   : UIElement{ x, y, w, h }
 {
-  for (size_t i = 0; i < AMOUNT_OF_BOXES_; ++i) {
-    UILevelBox b{ (u32)i, 185 + ((i32)i * 130), 390, 120, 120 };
-    ui_elements_.push_back(b);
-  }
+  setup_ui_elements(ui_elements_);
 }
 
 UILevelCarousel::~UILevelCarousel() {}

@@ -29,7 +29,7 @@ protected:
   SDLW::Rect_T<i32> bounding_box_;
 
 public:
-  UIElement() = delete;
+  UIElement();
   /**
    * @brief Construction d'un nouvel objet UIElement de forme rectangulaire à la
    * position x, y et de taille w * y

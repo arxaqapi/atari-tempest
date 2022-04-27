@@ -27,6 +27,8 @@
  */
 class UILevelCarousel : public UIElement
 {
+  friend inline void setup_ui_elements(std::vector<UILevelBox>& ui_elements);
+
 private:
   /**
    * @brief Nombre maximum de boîte à afficher avant décalage de tout les
@@ -65,7 +67,7 @@ private:
   void cycle_left();
 
 public:
-  UILevelCarousel() = delete;
+  UILevelCarousel();
   /**
    * @brief Construction d'un nouvel objet UILevelBox de forme rectangulaire à
    * la position x, y et de taille w * y

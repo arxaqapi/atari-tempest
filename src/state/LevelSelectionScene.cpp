@@ -8,9 +8,7 @@
 
 namespace fs = std::filesystem;
 
-LevelSelectionScene::LevelSelectionScene()
-  : ui_level_carousel_{ 200, 390, 200, 200 }
-{}
+LevelSelectionScene::LevelSelectionScene() {}
 
 LevelSelectionScene::~LevelSelectionScene() {}
 

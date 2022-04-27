@@ -11,6 +11,10 @@
 
 #include "UIElement.hpp"
 
+UIElement::UIElement()
+  : bounding_box_{ 0, 0, 0, 0 }
+{}
+
 UIElement::UIElement(i32 x, i32 y, i32 w, i32 h)
   : bounding_box_{ x, y, w, h }
 {}
