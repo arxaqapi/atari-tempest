@@ -26,7 +26,7 @@ public:
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position cible
    * sur le \b renderer passé en paramètre
-   * 
+   *
    * @param s la chaîne de caractère à rendre
    * @param xpos position en x du début de la chaîne de caractères
    * @param ypos position en y du début de la chaîne de caractères
@@ -38,19 +38,6 @@ public:
                           i32 ypos,
                           SDLW::Renderer& renderer,
                           const color& render_color);
-
-  /**
-   * @brief Rend la chaîne de caractères passé en paramètre à la position y
-   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
-   * la position x.
-   *
-   * @param s la chaîne de caractère à rendre
-   * @param ypos position en y du début de la chaîne de caractères
-   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
-   */
-  static void draw_string_centered_x(std::string const& s,
-                                     i32 ypos,
-                                     SDLW::Renderer& renderer);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -70,7 +57,56 @@ public:
                           f32 size);
 
   /**
-   * @brief
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x.
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param xpos position en x du début de la chaîne de caractères
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   * @param size le facteur d'agrandissement (la valeur de base est 1)
+   * @param render_color la couleur du caractère
+   */
+  static void draw_string(std::string const& s,
+                          i32 xpos,
+                          i32 ypos,
+                          SDLW::Renderer& renderer,
+                          f32 size,
+                          const color& render_color);
+
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x.
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   */
+  static void draw_string_centered_x(std::string const& s,
+                                     i32 ypos,
+                                     SDLW::Renderer& renderer);
+
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x et de couleur choisie
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   * @param render_color la couleur du caractère
+   */
+  static void draw_string_centered_x(std::string const& s,
+                                     i32 ypos,
+                                     SDLW::Renderer& renderer,
+                                     const color& render_color);
+
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x et de taille choisie
    *
    * @param s la chaîne de caractère à rendre
    * @param ypos position en y du début de la chaîne de caractères
@@ -81,6 +117,23 @@ public:
                                      i32 ypos,
                                      SDLW::Renderer& renderer,
                                      f32 size);
+
+  /**
+   * @brief Rend la chaîne de caractères passé en paramètre à la position y
+   * cible sur le \b renderer passé en paramètre avec un centrage automatique de
+   * la position x, de taille choisie et de couleur choisie
+   *
+   * @param s la chaîne de caractère à rendre
+   * @param ypos position en y du début de la chaîne de caractères
+   * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
+   * @param size le facteur d'agrandissement (la valeur de base est 1)
+   * @param render_color la couleur du caractère
+   */
+  static void draw_string_centered_x(std::string const& s,
+                                     i32 ypos,
+                                     SDLW::Renderer& renderer,
+                                     f32 size,
+                                     const color& render_color);
 
   /**
    * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
@@ -182,7 +235,7 @@ private:
 
   /**
    * @brief Couleur de base des caractères affiché (blanc)
-   * 
+   *
    */
   static constexpr color base_color{ 0xFF, 0xFF, 0xFF };
 
