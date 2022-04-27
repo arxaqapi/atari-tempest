@@ -18,7 +18,7 @@ class Blaster : public GameObject
 {
 private:
   static const u8 MAX_BULLETS_ = 100;
-  static constexpr f64 SHOOT_DELAY_ = 150;
+  static constexpr f64 SHOOT_DELAY_ = 120;
   static constexpr u8 MAX_HEALTH_ = 3;
   u8 health_ = MAX_HEALTH_;
   u32 score_ = 0;
