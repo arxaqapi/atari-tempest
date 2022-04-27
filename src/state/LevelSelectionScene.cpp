@@ -15,7 +15,7 @@ LevelSelectionScene::LevelSelectionScene()
 LevelSelectionScene::~LevelSelectionScene() {}
 
 void
-LevelSelectionScene::update(f64 delta, SceneManager& sm)
+LevelSelectionScene::update(f64, SceneManager&)
 {}
 
 void

@@ -19,7 +19,7 @@ TitleScreen::TitleScreen() {}
 TitleScreen::~TitleScreen() {}
 
 void
-TitleScreen::update(f64 delta, SceneManager& sm)
+TitleScreen::update(f64, SceneManager&)
 {}
 
 void

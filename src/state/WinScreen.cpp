@@ -16,7 +16,7 @@ WinScreen::processEvent(SDL_Event* event, SceneManager& sm)
 }
 
 void
-WinScreen::update(f64 delta, SceneManager& sm)
+WinScreen::update(f64, SceneManager&)
 {}
 
 void

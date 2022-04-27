@@ -19,7 +19,7 @@ DeathScreen::processEvent(SDL_Event* event, SceneManager& sm)
 }
 
 void
-DeathScreen::update(f64 delta, SceneManager& sm)
+DeathScreen::update(f64, SceneManager&)
 {}
 
 void

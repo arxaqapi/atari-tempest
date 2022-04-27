@@ -24,7 +24,7 @@ GameScene::GameScene(u8 level)
 }
 
 void
-GameScene::processEvent(SDL_Event* event, SceneManager& sm)
+GameScene::processEvent(SDL_Event* event, SceneManager&)
 {
   switch (event->type) {
     case SDL_KEYDOWN:
