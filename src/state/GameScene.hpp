@@ -8,7 +8,6 @@
 #include "../core/Blaster.hpp"
 #include "../core/Bullet.hpp"
 #include "../core/Data.hpp"
-#include "../core/FigureData.hpp"
 #include "../core/Flipper.hpp"
 #include "../core/GameObjectPool.hpp"
 #include "../core/Map.hpp"

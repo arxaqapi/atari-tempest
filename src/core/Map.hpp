@@ -18,9 +18,9 @@ class Map
 {
 private:
   std::vector<Band> bands_;
-  bool is_continuous_{ false };
-  u8 selected_band_num_{ 0 };
-  // todo : supprimer car doublon avec FigureData
+  bool is_continuous_ = false;
+  u8 selected_band_num_ = 0;
+  f32 avg_band_with_ = 0;
   f32 focal_;
   Vector2D origin_;
   void makeBands(const std::vector<Vector2D>& exterior);

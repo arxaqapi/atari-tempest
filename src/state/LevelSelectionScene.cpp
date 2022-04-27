@@ -1,5 +1,4 @@
 #include "LevelSelectionScene.hpp"
-#include "../core/FigureData.hpp"
 #include "../ui/Pen.hpp"
 #include "../ui/UILevelBox.hpp"
 #include "../utils/types.hpp"
