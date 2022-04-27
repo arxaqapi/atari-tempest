@@ -46,7 +46,7 @@ UILevelBox::render(SDLW::Renderer& renderer, bool selected) const
                    bounding_box_.x() + bounding_box_.w() / 2 - 10,
                    bounding_box_.y() + 30,
                    renderer,
-                   color {0x00, 0xFF, 0x00});
+                   color{ 0x00, 0xFF, 0x00 });
 }
 
 void
