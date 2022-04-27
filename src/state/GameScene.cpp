@@ -180,8 +180,8 @@ GameScene::render(SDLW::Renderer& renderer) const
   // Draw text
   Pen::draw_string(std::to_string(player_.getScore()), 20, 46, renderer, 1.7);
   Pen::draw_string(std::to_string(getCurrentLevelNum()),
-                   250,
-                   26,
+                   280,
+                   32,
                    renderer,
                    color{ 0x00, 0xFF, 0x00 });
 
