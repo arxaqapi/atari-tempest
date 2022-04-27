@@ -59,8 +59,6 @@ Game::process_events()
     }
     sm_.get_current_scene().processEvent(&event, sm_);
   }
-  // const u8* keyboardState = SDL_GetKeyboardState(NULL);
-  // if (keyboardState[SDL_SCANCODE_SPACE]) {
 }
 
 void
@@ -80,4 +78,10 @@ u16
 Game::get_width()
 {
   return Game::WINDOWS_WIDTH_;
+}
+
+u16
+Game::get_height()
+{
+  return Game::WINDOWS_HEIGHT_;
 }
