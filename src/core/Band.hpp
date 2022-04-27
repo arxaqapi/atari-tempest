@@ -39,8 +39,7 @@ public:
    * @param renderer Wrapper du renderer SDL
    * @param render_color Couleur de la bande
    */
-  void render(SDLW::Renderer& renderer,
-              const color& render_color) const;
+  void render(SDLW::Renderer& renderer, const color& render_color) const;
 
   /**
    * Getters

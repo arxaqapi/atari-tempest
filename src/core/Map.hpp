@@ -55,12 +55,13 @@ public:
   u8 getRightBandNum(u8 num_band) const;
   const Band& getBand(u8 num_band) const;
 
-   /**
-    * @brief Réalise le rendu de la carte. Appelle la fonction `render` sur chaque bande
-    * @param renderer Wrapper du renderer SDL
-    * @param standard_color Couleur standard des bandes
-    * @param accent_color Couleur de la bande sélectionnée
-    */
+  /**
+   * @brief Réalise le rendu de la carte. Appelle la fonction `render` sur
+   * chaque bande
+   * @param renderer Wrapper du renderer SDL
+   * @param standard_color Couleur standard des bandes
+   * @param accent_color Couleur de la bande sélectionnée
+   */
   void render(SDLW::Renderer& renderer,
               const color& standard_color,
               const color& accent_color) const;
@@ -72,10 +73,12 @@ public:
   void select(u8 num_band);
 
   /**
-   * @brief Charge une carte. Les anciennes valeurs des membres de la classe sont écrasés.
+   * @brief Charge une carte. Les anciennes valeurs des membres de la classe
+   * sont écrasés.
    * @param exterior Coordonnées des points extérieurs de la carte
    * @param is_continuous Booléen indiquant si la carte est fermée ou non
-   * @param focal Indique le rapport entre l'intérieur et l'extérieur de la carte
+   * @param focal Indique le rapport entre l'intérieur et l'extérieur de la
+   * carte
    * @param origin Point d'origine vers lesquels sont orientées les bandes
    */
   void load(const std::vector<Vector2D>& exterior,
@@ -87,7 +90,7 @@ public:
    * Getters
    */
   inline const Vector2D& getOrigin() const { return origin_; };
-  inline f32 getFocal() const {return focal_;}
+  inline f32 getFocal() const { return focal_; }
   inline f32 getAvgBandWith() const { return avg_band_with_; };
 };
 

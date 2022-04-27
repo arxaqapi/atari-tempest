@@ -77,7 +77,8 @@ std::vector<Flipper>::iterator
 SpawnManager::spawnFlipper(u8 band_num, f32 front_progression, u8 level)
 {
   if (level > 0)
-    return flippers_.create(band_num, front_progression, 0.5, 0.0005, 0.0015, FORWARD);
+    return flippers_.create(
+      band_num, front_progression, 0.5, 0.0005, 0.0015, FORWARD);
   return flippers_.create(band_num, front_progression, 0.5, 0.0005, 0, FORWARD);
 }
 

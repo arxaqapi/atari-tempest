@@ -14,8 +14,8 @@ class Tanker : public GameObject
 {
 private:
   /**
-   * @brief Booléen indiquant si le Tanker s'est séparé pour faire apparaître deux
-   * Flippers
+   * @brief Booléen indiquant si le Tanker s'est séparé pour faire apparaître
+   * deux Flippers
    */
   bool split_ = false;
 

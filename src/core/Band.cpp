@@ -24,13 +24,12 @@ Band::Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal)
 {}
 
 void
-Band::render(SDLW::Renderer& renderer,
-             const color& render_color) const
+Band::render(SDLW::Renderer& renderer, const color& render_color) const
 {
-    renderer.SetRenderDrawColor(std::get<0>(render_color),
-                                std::get<1>(render_color),
-                                std::get<2>(render_color),
-                                255);
+  renderer.SetRenderDrawColor(std::get<0>(render_color),
+                              std::get<1>(render_color),
+                              std::get<2>(render_color),
+                              255);
   renderer.RenderDrawLineF(
     exter_a_.getX(), exter_a_.getY(), exter_b_.getX(), exter_b_.getY());
   renderer.RenderDrawLineF(

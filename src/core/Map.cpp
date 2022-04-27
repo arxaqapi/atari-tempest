@@ -85,10 +85,16 @@ Map::makeBands(const std::vector<Vector2D>& exterior)
   if (is_continuous_)
     bands_.emplace_back(exterior[i], exterior[0], origin_, focal_);
 
-  avg_band_with_ = static_cast<f32>(
-    std::accumulate(bands_.begin(), bands_.end(), 0.0, [](f32 a, const Band& b) {
-                       return a + b.getExterior().first.vec_to(b.getExterior().second).magnitude();
-    })) / bands_.size();
+  avg_band_with_ =
+    static_cast<f32>(std::accumulate(
+      bands_.begin(),
+      bands_.end(),
+      0.0,
+      [](f32 a, const Band& b) {
+        return a +
+               b.getExterior().first.vec_to(b.getExterior().second).magnitude();
+      })) /
+    bands_.size();
 }
 
 void
