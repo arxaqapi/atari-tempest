@@ -26,10 +26,8 @@ Flipper::render(SDLW::Renderer& renderer,
 
   Vector2D left_bottom =
     band.getExterior().second.weightedMidPointTo(map.getOrigin(), fraction);
-
   Vector2D right_bottom =
     band.getExterior().first.weightedMidPointTo(map.getOrigin(), fraction);
-
   Vector2D orthogonal =
     left_bottom.vec_to(right_bottom).orthogonalVector().unit();
 
@@ -37,13 +35,10 @@ Flipper::render(SDLW::Renderer& renderer,
 
   Vector2D left_top =
     left_bottom.weightedMidPointTo(right_bottom, .1) + (orthogonal * -height);
-
   Vector2D right_top =
     right_bottom.weightedMidPointTo(left_bottom, .1) + (orthogonal * -height);
-
   Vector2D left_inner = left_bottom.weightedMidPointTo(right_bottom, .2) +
                         (orthogonal * (-height / 2));
-
   Vector2D right_inner = right_bottom.weightedMidPointTo(left_bottom, .2) +
                          (orthogonal * (-height / 2));
 

@@ -19,7 +19,7 @@ Band::Band(Vector2D exter_a, Vector2D exter_b, Vector2D origin, f32 focal)
   , inter_b_{ origin.weightedMidPointTo(exter_b, focal) }
   , exter_center_{ exter_a.weightedMidPointTo(exter_b, .5) }
   , inter_center_{ inter_a_.weightedMidPointTo(inter_b_, .5) }
-  , axis_{ exter_center_.vec_to(inter_center_) }
+  , axis_{ exter_center_.vec_to(origin) }
   , unit_vector_{ axis_.unit() }
 {}
 

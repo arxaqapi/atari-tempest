@@ -30,7 +30,7 @@ Tanker::render(SDLW::Renderer& renderer,
 
   Vector2D u = { 1, 0 };
   Vector2D v = { 0, 1 };
-  Vector2D position = band.getExterCenter().vec_to(map.getOrigin()) * fraction;
+  Vector2D position = band.getAxis() * fraction;
 
   Vector2D inner_left =
     band.getExterCenter() + (u * .7f * inner_size) + position;
