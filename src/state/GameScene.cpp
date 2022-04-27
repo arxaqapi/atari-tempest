@@ -178,12 +178,31 @@ GameScene::render(SDLW::Renderer& renderer) const
                         spiker_colors[current_cycle_]);
 
   // Draw text
-  Pen::draw_string(
-    "Score: "s + std::to_string(player_.getScore()), 0, 26, renderer);
-  Pen::draw_string(
-    "Health: "s + std::to_string(player_.getHealth()), 0, 56, renderer);
-  Pen::draw_string(
-    "Level "s + std::to_string(getCurrentLevelNum()), 0, 82, renderer);
+  Pen::draw_string(std::to_string(player_.getScore()), 20, 46, renderer, 1.7);
+  Pen::draw_string(std::to_string(getCurrentLevelNum()),
+                   250,
+                   26,
+                   renderer,
+                   color{ 0x00, 0xFF, 0x00 });
+
+  // Render life points
+  renderer.SetRenderDrawColor(0xFF, 0, 0, SDL_ALPHA_OPAQUE);
+  u8 ymid = 80;
+
+  for (u8 i = 0; i < player_.getHealth(); ++i) {
+    u8 xmid = 20 + 32 * i;
+    renderer.RenderDrawLine(xmid, ymid - 8, xmid - 14, ymid); // TopL band
+    renderer.RenderDrawLine(xmid, ymid - 4, xmid - 10, ymid); // TopL- band
+
+    renderer.RenderDrawLine(xmid, ymid - 8, xmid + 14, ymid); // TopR
+    renderer.RenderDrawLine(xmid, ymid - 4, xmid + 10, ymid); // TopR-
+
+    renderer.RenderDrawLine(xmid - 2, ymid + 4, xmid - 14, ymid); // BotL band
+    renderer.RenderDrawLine(xmid - 2, ymid + 4, xmid - 10, ymid); // BotL- band
+
+    renderer.RenderDrawLine(xmid + 2, ymid + 4, xmid + 14, ymid); // BotR band
+    renderer.RenderDrawLine(xmid + 2, ymid + 4, xmid + 10, ymid); // BotR- band
+  }
 }
 
 u32
