@@ -10,7 +10,10 @@
  */
 
 #include "Game.hpp"
+#include "../ui/Pen.hpp"
 #include <iostream>
+
+using namespace std::string_literals;
 
 u16 Game::WINDOWS_WIDTH_ = 960;
 
@@ -45,7 +48,13 @@ Game::process_events()
       case SDL_QUIT:
         this->stop_();
         break;
-
+      case SDL_KEYDOWN: {
+        if (event.key.keysym.sym == SDLK_d) {
+          std::cout << "[Log] - Debug overlay activated" << std::endl;
+          debug_flag_ = !debug_flag_;
+        }
+        break;
+      }
       default:
         break;
     }
@@ -71,6 +80,18 @@ void
 Game::render()
 {
   sm_.get_current_scene().render(r_.get_renderer());
+  if (debug_flag_) {
+    Pen::draw_string("IFD: "s + std::to_string(debug_val_.inter_frame_delay_),
+                     763 - 300,
+                     30,
+                     r_.get_renderer(),
+                     color{ 0xFF, 0, 0 });
+    Pen::draw_string("FPS: "s + std::to_string(debug_val_.fps_),
+                     763 - 300,
+                     60,
+                     r_.get_renderer(),
+                     color{ 0xFF, 0, 0 });
+  }
   r_.draw();
 }
 
@@ -84,4 +105,16 @@ u16
 Game::get_height()
 {
   return Game::WINDOWS_HEIGHT_;
+}
+
+void
+Game::debug_set_interframe_delay(f64 inter_frame_delay)
+{
+  debug_val_.inter_frame_delay_ = inter_frame_delay;
+}
+
+void
+Game::debug_set_fps(f64 fps)
+{
+  debug_val_.fps_ = fps;
 }

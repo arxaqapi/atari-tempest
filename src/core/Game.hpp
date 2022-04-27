@@ -26,6 +26,16 @@
 class Game
 {
 private:
+  bool debug_flag_ = false;
+  /**
+   * @brief Structure de donnée comportant les informations de debug
+   *
+   */
+  struct Debug
+  {
+    f64 inter_frame_delay_;
+    f64 fps_;
+  } debug_val_;
   bool run_ = true;
   static u16 WINDOWS_WIDTH_;
   static u16 WINDOWS_HEIGHT_;
@@ -107,6 +117,19 @@ public:
    * @return u16 hauteur de la fenêtre
    */
   static u16 get_height();
+
+  /**
+   * @brief met à jour la variable contenant le délai inter image
+   *
+   * @param inter_frame_delay le délais inter image
+   */
+  void debug_set_interframe_delay(f64 inter_frame_delay);
+  /**
+   * @brief met à jour la valeur des fps (images par secondes)
+   *
+   * @param fps le nombre de fps (images par secondes)
+   */
+  void debug_set_fps(f64 fps);
 };
 
 #endif

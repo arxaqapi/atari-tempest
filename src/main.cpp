@@ -23,24 +23,24 @@ main(void)
 
   constexpr u32 max_ms_per_frame = 1000.f / 30.f;
   f64 delta = 0;
+  f64 ifd;
   Game g{ 763, 823 };
   Timer timer{ max_ms_per_frame, timer_type::PERFORMANCE };
 
   while (g.is_running()) {
     timer.start();
-    //// SECTION: Loop start
 
     g.process_events();
     g.clear();
     g.update(delta);
     g.render();
 
-    //    timer.artificial_delay();
-
-    //// !SECTION: Loop end
-    timer.stop();
+    ifd = timer.stop();
     delta = timer.variable_delay();
-    //    timer.print();
+
+    // Debug
+    g.debug_set_fps(timer.get_FPS());
+    g.debug_set_interframe_delay(ifd);
   }
   return 0;
 }
