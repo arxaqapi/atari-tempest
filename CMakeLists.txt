@@ -7,7 +7,7 @@ find_package(SDL2 REQUIRED)
 
 set(SOURCES 
       src/main.cpp 
-      src/utils/Timer.cpp
+      src/utils/Timer.hpp
       src/utils/Errors.cpp
       src/utils/Vector2D.cpp
       src/core/Game.cpp

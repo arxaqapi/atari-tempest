@@ -25,7 +25,7 @@ main(void)
   f64 delta = 0;
   f64 ifd;
   Game g{ 763, 823 };
-  Timer timer{ max_ms_per_frame, timer_type::PERFORMANCE };
+  Timer<timer_type::PERFORMANCE> timer{ max_ms_per_frame };
 
   while (g.is_running()) {
     timer.start();

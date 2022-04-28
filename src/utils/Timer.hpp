@@ -15,6 +15,8 @@
 #include "../sdlw/SDLW.hpp"
 #include "Errors.hpp"
 #include "types.hpp"
+#include <cassert>
+#include <iostream>
 #include <random>
 
 /**
@@ -33,10 +35,11 @@ enum class timer_type
  * et donc du nombre d'images par secondes de notre jeux
  *
  */
+// TODO: make a specific template class
+template<timer_type T>
 class Timer
 {
 private:
-  timer_type t_;
   u32 max_ms_per_frame_;
   std::default_random_engine generator_;
   std::uniform_int_distribution<i32> distribution_;
@@ -55,16 +58,6 @@ public:
    * image
    */
   Timer(u32 max_ms_per_frame);
-  /**
-   * @brief Construction d'un nouvel objet Timer de type t permettant de compter
-   * le nombre de millisecondes qui sont passées
-   * tout en limitant le temps maximum utilisé par images
-   *
-   * @param max_ms_per_frame nombre maximum de millisecondes autorisées par
-   * image
-   * @param t type d'horloge utilisé pour les calculs
-   */
-  Timer(u32 max_ms_per_frame, timer_type t);
   ~Timer();
 
   /**
@@ -115,5 +108,100 @@ public:
    */
   void artificial_delay();
 };
+
+// Util function
+
+inline f64
+to_ms(f64 value)
+{
+  auto freq_in_ms = static_cast<f64>(SDLW::GetPerformanceFrequency()) / 1000.;
+  return value / freq_in_ms;
+}
+
+// Template implementation
+
+template<timer_type T>
+Timer<T>::Timer(u32 max_ms_per_frame)
+  : max_ms_per_frame_(max_ms_per_frame)
+  , distribution_{ 0, static_cast<i32>(max_ms_per_frame) - 4 }
+  , start_{ 0 }
+  , stop_{ 0 }
+  , fps_{ 0.0 }
+{}
+
+template<timer_type T>
+Timer<T>::~Timer()
+{}
+template<timer_type T>
+void
+Timer<T>::start()
+{
+  if constexpr (T == timer_type::NORMAL)
+    start_ = SDLW::GetTicks64();
+  else if constexpr (T == timer_type::PERFORMANCE)
+    start_ = SDLW::GetPerformanceCounter();
+  else
+    throw errors::not_implemented();
+}
+
+template<timer_type T>
+f64
+Timer<T>::stop()
+{
+  if constexpr (T == timer_type::NORMAL) {
+    stop_ = SDLW::GetTicks64();
+    return stop_ - start_;
+  } else if constexpr (T == timer_type::PERFORMANCE) {
+    stop_ = SDLW::GetPerformanceCounter();
+    return to_ms(stop_ - start_);
+  } else
+    throw errors::not_implemented();
+}
+
+template<timer_type T>
+f64
+Timer<T>::get_FPS()
+{
+  if constexpr (T == timer_type::NORMAL) {
+    return 1. / ((stop_ - start_) / 1000.);
+  } else if constexpr (T == timer_type::PERFORMANCE) {
+    return 1. / ((to_ms(stop_ - start_) / 1000.));
+  } else
+    throw errors::not_implemented();
+}
+
+template<timer_type T>
+void
+Timer<T>::print()
+{
+  std::cout << "[Log] - FPS = " << get_FPS() << std::endl;
+}
+
+template<timer_type T>
+f64
+Timer<T>::variable_delay()
+{
+  u64 ms_elapsed;
+  if constexpr (T == timer_type::NORMAL) {
+    ms_elapsed = stop_ - start_;
+  } else if constexpr (T == timer_type::PERFORMANCE) {
+    ms_elapsed = to_ms(stop_ - start_);
+  } else {
+    throw errors::not_implemented();
+  }
+  auto del = max_ms_per_frame_ - ms_elapsed;
+  assert(del <= max_ms_per_frame_ && "Computed delay is way too big");
+  SDLW::Delay(del);
+  return this->stop();
+}
+
+template<timer_type T>
+void
+Timer<T>::artificial_delay()
+{
+  auto r = static_cast<u32>(distribution_(generator_));
+  assert(r < max_ms_per_frame_);
+  SDLW::Delay(r);
+}
 
 #endif
