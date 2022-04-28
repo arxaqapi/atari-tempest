@@ -38,7 +38,7 @@ Game::clear()
 }
 
 void
-Game::process_events()
+Game::processEvents()
 {
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
@@ -56,7 +56,7 @@ Game::process_events()
       default:
         break;
     }
-    sm_.get_current_scene().processEvent(&event, sm_);
+    sm_.getCurrentScene().processEvent(&event, sm_);
   }
 }
 
@@ -69,14 +69,14 @@ Game::update(f64 delta)
 void
 Game::render()
 {
-  sm_.get_current_scene().render(r_.get_renderer());
+  sm_.getCurrentScene().render(r_.get_renderer());
   if (debug_flag_) {
-    Pen::draw_string("IFD: "s + std::to_string(debug_val_.inter_frame_delay_),
+    Pen::drawString("IFD: "s + std::to_string(debug_val_.inter_frame_delay_),
                      763 - 300,
                      30,
                      r_.get_renderer(),
                      color{ 0xFF, 0, 0 });
-    Pen::draw_string("FPS: "s + std::to_string(debug_val_.fps_),
+    Pen::drawString("FPS: "s + std::to_string(debug_val_.fps_),
                      763 - 300,
                      60,
                      r_.get_renderer(),
@@ -86,25 +86,25 @@ Game::render()
 }
 
 u16
-Game::get_width()
+Game::getWidth()
 {
   return Game::WINDOWS_WIDTH_;
 }
 
 u16
-Game::get_height()
+Game::getHeight()
 {
   return Game::WINDOWS_HEIGHT_;
 }
 
 void
-Game::debug_set_interframe_delay(f64 inter_frame_delay)
+Game::debugSetInterframeDelay(f64 inter_frame_delay)
 {
   debug_val_.inter_frame_delay_ = inter_frame_delay;
 }
 
 void
-Game::debug_set_fps(f64 fps)
+Game::debugSetFPS(f64 fps)
 {
   debug_val_.fps_ = fps;
 }

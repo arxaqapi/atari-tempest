@@ -17,25 +17,21 @@
 
 ColorHandler::ColorHandler()
 {
-  i32 n_colors;
   i32 buff;
   i32 r, g, b;
 
   std::ifstream file{ COLOR_DATA_PATH_, std::ios::in };
   if (!file.is_open())
-    throw errors::file_not_opened();
+    throw errors::FileNotOpened();
 
   // get number of colors
-  file >> n_colors;
-  colors_.reserve(n_colors);
-  std::cout << "[Color Handling] - n° colors: " << n_colors << std::endl;
+  file >> buff;
+  colors_.reserve(buff);
 
   // Get all n (8) colors
-  for (i32 i = 0; i < n_colors; i++) {
+  for (i32 i = 0; i < buff; i++) {
     file >> r >> g >> b;
     colors_.emplace_back(r, g, b);
-    std::cout << "[Color Handling] - Loaded col: " << r << " " << g << " " << b
-              << std::endl;
   }
 
   // get all indices
@@ -51,43 +47,43 @@ ColorHandler::ColorHandler()
 ColorHandler::~ColorHandler() {}
 
 const color&
-ColorHandler::get_map_standard_colors(i32 cycle) const
+ColorHandler::getMapStandardColor(i32 cycle) const
 {
   return colors_[color_indices_[0][cycle]];
 }
 
 const color&
-ColorHandler::get_map_selected_colors(i32 cycle) const
+ColorHandler::getMapSelectedColor(i32 cycle) const
 {
   return colors_[color_indices_[1][cycle]];
 }
 
 const color&
-ColorHandler::get_blaster_colors(i32 cycle) const
+ColorHandler::getBlasterColor(i32 cycle) const
 {
   return colors_[color_indices_[2][cycle]];
 }
 
 const color&
-ColorHandler::get_flipper_colors(i32 cycle) const
+ColorHandler::getFlipperColor(i32 cycle) const
 {
   return colors_[color_indices_[3][cycle]];
 }
 
 const color&
-ColorHandler::get_tanker_colors(i32 cycle) const
+ColorHandler::getTankerColor(i32 cycle) const
 {
   return colors_[color_indices_[4][cycle]];
 }
 
 const color&
-ColorHandler::get_spiker_colors(i32 cycle) const
+ColorHandler::getSpikerColor(i32 cycle) const
 {
   return colors_[color_indices_[5][cycle]];
 }
 
 const color&
-ColorHandler::get_score_colors(i32 cycle) const
+ColorHandler::getScoreColor(i32 cycle) const
 {
   return colors_[color_indices_[6][cycle]];
 }

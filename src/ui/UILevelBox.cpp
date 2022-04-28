@@ -42,7 +42,7 @@ UILevelBox::render(SDLW::Renderer& renderer, bool selected) const
   }
 
   // Draw Text
-  Pen::draw_string(std::to_string(level_n_),
+  Pen::drawString(std::to_string(level_n_),
                    bounding_box_.x() + bounding_box_.w() / 2 - 10,
                    bounding_box_.y() + 30,
                    renderer,

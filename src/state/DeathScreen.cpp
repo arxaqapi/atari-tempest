@@ -11,9 +11,9 @@ DeathScreen::processEvent(SDL_Event* event, SceneManager& sm)
 {
   if (event->type == SDL_KEYDOWN) {
     if (event->key.keysym.sym == SDLK_SPACE) {
-      sm.set_next_state(STATE_GAME_SCENE);
+      sm.setNextState(STATE_GAME_SCENE);
     } else if (event->key.keysym.sym == SDLK_RETURN) {
-      sm.set_next_state(STATE_LEVEL_SELECT);
+      sm.setNextState(STATE_LEVEL_SELECT);
     }
   }
 }
@@ -29,8 +29,8 @@ DeathScreen::render(SDLW::Renderer& renderer) const
   renderer.RenderClear();
 
   // Draw text
-  Pen::draw_string_centered_x("Game Over ...", 200, renderer);
-  Pen::draw_string_centered_x("[Space] to restart game", 400, renderer);
-  Pen::draw_string_centered_x(
+  Pen::drawStringCenteredInX("Game Over ...", 200, renderer);
+  Pen::drawStringCenteredInX("[Space] to restart game", 400, renderer);
+  Pen::drawStringCenteredInX(
     "[Enter] to go back to level select", 500, renderer);
 }

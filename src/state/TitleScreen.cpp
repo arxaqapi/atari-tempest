@@ -29,17 +29,17 @@ TitleScreen::render(SDLW::Renderer& renderer) const
   renderer.RenderClear();
 
   // Draw text
-  Pen::draw_string_centered_x("TEMPEST", 160, renderer, 4);
-  Pen::draw_string_centered_x("Press space to play!", 300, renderer);
-  Pen::draw_string_centered_x("Massimo Venuti - Tarek Kunze", 550, renderer);
+  Pen::drawStringCenteredInX("TEMPEST", 160, renderer, 4);
+  Pen::drawStringCenteredInX("Press space to play!", 300, renderer);
+  Pen::drawStringCenteredInX("Massimo Venuti - Tarek Kunze", 550, renderer);
 }
 
 void
 TitleScreen::processEvent(SDL_Event* event, SceneManager& sm)
 {
-  // set_next_state
+  // setNextState
   if (event->key.keysym.sym == SDLK_SPACE) {
     std::cout << "[Debug]: SPACE pressed while at TitleScreen" << std::endl;
-    sm.set_next_state(STATE_LEVEL_SELECT);
+    sm.setNextState(STATE_LEVEL_SELECT);
   }
 }

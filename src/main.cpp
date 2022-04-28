@@ -25,22 +25,22 @@ main(void)
   f64 delta = 0;
   f64 ifd;
   Game g{ 763, 823 };
-  Timer<timer_type::PERFORMANCE> timer{ max_ms_per_frame };
+  Timer<TimerType::PERFORMANCE> timer{ max_ms_per_frame };
 
-  while (g.is_running()) {
+  while (g.isRunning()) {
     timer.start();
 
-    g.process_events();
+    g.processEvents();
     g.clear();
     g.update(delta);
     g.render();
 
     ifd = timer.stop();
-    delta = timer.variable_delay();
+    delta = timer.variableDelay();
 
     // Debug
-    g.debug_set_fps(timer.get_FPS());
-    g.debug_set_interframe_delay(ifd);
+    g.debugSetFPS(timer.getFPS());
+    g.debugSetInterframeDelay(ifd);
   }
   return 0;
 }

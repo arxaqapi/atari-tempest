@@ -48,7 +48,7 @@ private:
    * affecte la nouvelle
    *
    */
-  void switch_scene();
+  void switchScene();
   /**
    * \~french @brief Retourne le pointeur sur la scène suivante d'après l'état
    * passé en paramètre
@@ -57,7 +57,7 @@ private:
    * \~french @return std::unique_ptr<Scene> pointeur unique sur la scène
    * suivante
    */
-  std::unique_ptr<Scene> get_corresponding_scene(State state);
+  std::unique_ptr<Scene> getCorrespondingScene(State state);
 
 public:
   /**
@@ -78,7 +78,7 @@ public:
    *
    * \~english @param next_requested_state Le prochain état demandé
    */
-  void set_next_state(State next_requested_state);
+  void setNextState(State next_requested_state);
 
   /**
    * \~french @brief Mets à jour la variable du prochain état demandé ainsi que
@@ -87,14 +87,14 @@ public:
    * \~french @param next_requested_state le prochain état demandée
    * \~french @param level le niveau du jeu demandé
    */
-  void set_next_state(State next_requested_state, i32 level);
+  void setNextState(State next_requested_state, i32 level);
 
   /**
    * \~french @brief Getter sur la Scene courante
    *
    * \~french @return Scene& Renvoie une référence sur la scène courante
    */
-  Scene& get_current_scene() { return *current_scene_p_; }
+  Scene& getCurrentScene() { return *current_scene_p_; }
 
   /**
    * \~french @brief Met à jour la scène si une transition à été demandé

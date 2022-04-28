@@ -23,7 +23,7 @@ SDLW::Window::Window(const std::string& title,
 {
   w_ = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
   if (w_ == NULL) {
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
   }
 }
 
@@ -38,7 +38,7 @@ SDLW::Renderer::Renderer(SDLW::Window& window, i32 index, u32 flags)
 {
   r_ = SDL_CreateRenderer(window.w_, index, flags);
   if (r_ == NULL) {
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
   }
 }
 
@@ -52,21 +52,21 @@ void
 SDLW::Renderer::RenderDrawRect(const SDLW::Rect_T<i32>& rect)
 {
   if (SDL_RenderDrawRect(r_, &rect.r_) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 void
 SDLW::Renderer::RenderFillRect(const SDLW::Rect_T<i32>& rect)
 {
   if (SDL_RenderFillRect(r_, &rect.r_) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 void
 SDLW::Renderer::RenderFillRectF(const SDLW::Rect_T<f32>& rect)
 {
   if (SDL_RenderFillRectF(r_, &rect.r_) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 // Renderer
@@ -75,14 +75,14 @@ SDLW::Renderer::RenderDrawLineF(f32 x1, f32 y1, f32 x2, f32 y2)
 {
 
   if (SDL_RenderDrawLineF(r_, x1, y1, x2, y2) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 void
 SDLW::Renderer::RenderDrawLine(i32 x1, i32 y1, i32 x2, i32 y2)
 {
   if (SDL_RenderDrawLine(r_, x1, y1, x2, y2) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 // Renderer:utils
@@ -90,7 +90,7 @@ void
 SDLW::Renderer::SetRenderDrawColor(u8 r, u8 g, u8 b, u8 a)
 {
   if (SDL_SetRenderDrawColor(r_, r, g, b, a) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 void
@@ -111,7 +111,7 @@ void
 SDLW::Init(u32 flags)
 {
   if (SDL_Init(flags) != 0)
-    throw errors::sdl_error(SDL_GetError());
+    throw errors::SdlError(SDL_GetError());
 }
 
 void

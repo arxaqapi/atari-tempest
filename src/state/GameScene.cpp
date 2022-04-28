@@ -39,7 +39,7 @@ GameScene::processEvent(SDL_Event* event, SceneManager& sm)
       else if (event->key.keysym.sym == SDLK_SPACE)
         player_.shoot();
       else if (event->key.keysym.sym == SDLK_ESCAPE)
-        sm.set_next_state(STATE_LEVEL_SELECT);
+        sm.setNextState(STATE_LEVEL_SELECT);
       break;
 
     case SDL_KEYUP:
@@ -78,12 +78,12 @@ GameScene::update(f64 delta, SceneManager& sm)
 
   // player is dead, go to menu
   if (player_.getHealth() == 0)
-    sm.set_next_state(STATE_DEATH_SCREEN);
+    sm.setNextState(STATE_DEATH_SCREEN);
 
   // player finished the level
   if (player_.getScore() >= getCurrentLevelMaxScore()) {
     if (gameOver()) // if no more level, go to win screen
-      sm.set_next_state(STATE_WIN_SCREEN);
+      sm.setNextState(STATE_WIN_SCREEN);
     else
       loadNextLevel();
   }
@@ -100,35 +100,35 @@ GameScene::render(SDLW::Renderer& renderer) const
 
   // Render map
   map_.render(renderer,
-              color_handler_.get_map_standard_colors(current_cycle_),
-              color_handler_.get_map_standard_colors(current_cycle_));
+              color_handler_.getMapStandardColor(current_cycle_),
+              color_handler_.getMapSelectedColor(current_cycle_));
 
   // Render player
   player_.render(
-    renderer, map_, color_handler_.get_blaster_colors(current_cycle_));
+    renderer, map_, color_handler_.getBlasterColor(current_cycle_));
 
   // Render enemies
   spawn_manager_.render(renderer,
                         map_,
-                        color_handler_.get_flipper_colors(current_cycle_),
-                        color_handler_.get_tanker_colors(current_cycle_),
-                        color_handler_.get_spiker_colors(current_cycle_));
+                        color_handler_.getFlipperColor(current_cycle_),
+                        color_handler_.getTankerColor(current_cycle_),
+                        color_handler_.getSpikerColor(current_cycle_));
 
   // Draw text
-  Pen::draw_string(std::to_string(player_.getScore()),
+  Pen::drawString(std::to_string(player_.getScore()),
                    20,
                    46,
                    renderer,
                    1.7,
-                   color_handler_.get_score_colors(current_cycle_));
-  Pen::draw_string(std::to_string(getCurrentLevelNum()),
+                   color_handler_.getScoreColor(current_cycle_));
+  Pen::drawString(std::to_string(getCurrentLevelNum()),
                    280,
                    32,
                    renderer,
-                   color_handler_.get_map_standard_colors(current_cycle_));
+                   color_handler_.getMapStandardColor(current_cycle_));
 
   // Render life points
-  auto health_color = color_handler_.get_blaster_colors(current_cycle_);
+  auto health_color = color_handler_.getBlasterColor(current_cycle_);
   renderer.SetRenderDrawColor(std::get<0>(health_color),
                               std::get<1>(health_color),
                               std::get<2>(health_color),

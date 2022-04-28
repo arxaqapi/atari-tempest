@@ -42,7 +42,8 @@ private:
 public:
   GameObjectPool() = default;
   explicit GameObjectPool(u8 pool_size)
-    : pool_(pool_size){}
+    : pool_(pool_size)
+  {}
   GameObjectPool(const GameObjectPool& go_pool) = default;
   ~GameObjectPool() = default;
 

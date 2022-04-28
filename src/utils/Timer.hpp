@@ -24,7 +24,7 @@
  * une horloge de plus grande précision
  *
  */
-enum class timer_type
+enum class TimerType
 {
   NORMAL,
   PERFORMANCE
@@ -36,7 +36,7 @@ enum class timer_type
  *
  */
 // TODO: make a specific template class
-template<timer_type T>
+template<TimerType T>
 class Timer
 {
 private:
@@ -80,7 +80,7 @@ public:
    *
    * @return f64: valeur correspondant au nombre d'images par secondes calculées
    */
-  f64 get_FPS();
+  f64 getFPS();
 
   /**
    * @brief Affiche le nombre d'images par secondes à l'écran de façon lisible
@@ -97,7 +97,7 @@ public:
    * afin de limiter le nombre d'images par seconde
    *
    */
-  f64 variable_delay();
+  f64 variableDelay();
 
   /**
    * \~english @brief Induces an artificial delay < max_ms_per_frame - 4
@@ -106,13 +106,13 @@ public:
    * Permets de tester le mécanisme de limitation du nombres d'images par
    * seconde
    */
-  void artificial_delay();
+  void artificialDelay();
 };
 
 // Util function
 
 inline f64
-to_ms(f64 value)
+toMs(f64 value)
 {
   auto freq_in_ms = static_cast<f64>(SDLW::GetPerformanceFrequency()) / 1000.;
   return value / freq_in_ms;
@@ -120,7 +120,7 @@ to_ms(f64 value)
 
 // Template implementation
 
-template<timer_type T>
+template<TimerType T>
 Timer<T>::Timer(u32 max_ms_per_frame)
   : max_ms_per_frame_(max_ms_per_frame)
   , distribution_{ 0, static_cast<i32>(max_ms_per_frame) - 4 }
@@ -129,65 +129,65 @@ Timer<T>::Timer(u32 max_ms_per_frame)
   , fps_{ 0.0 }
 {}
 
-template<timer_type T>
+template<TimerType T>
 Timer<T>::~Timer()
 {}
-template<timer_type T>
+template<TimerType T>
 void
 Timer<T>::start()
 {
-  if constexpr (T == timer_type::NORMAL)
+  if constexpr (T == TimerType::NORMAL)
     start_ = SDLW::GetTicks64();
-  else if constexpr (T == timer_type::PERFORMANCE)
+  else if constexpr (T == TimerType::PERFORMANCE)
     start_ = SDLW::GetPerformanceCounter();
   else
-    throw errors::not_implemented();
+    throw errors::NotImplemented();
 }
 
-template<timer_type T>
+template<TimerType T>
 f64
 Timer<T>::stop()
 {
-  if constexpr (T == timer_type::NORMAL) {
+  if constexpr (T == TimerType::NORMAL) {
     stop_ = SDLW::GetTicks64();
     return stop_ - start_;
-  } else if constexpr (T == timer_type::PERFORMANCE) {
+  } else if constexpr (T == TimerType::PERFORMANCE) {
     stop_ = SDLW::GetPerformanceCounter();
-    return to_ms(stop_ - start_);
+    return toMs(stop_ - start_);
   } else
-    throw errors::not_implemented();
+    throw errors::NotImplemented();
 }
 
-template<timer_type T>
+template<TimerType T>
 f64
-Timer<T>::get_FPS()
+Timer<T>::getFPS()
 {
-  if constexpr (T == timer_type::NORMAL) {
+  if constexpr (T == TimerType::NORMAL) {
     return 1. / ((stop_ - start_) / 1000.);
-  } else if constexpr (T == timer_type::PERFORMANCE) {
-    return 1. / ((to_ms(stop_ - start_) / 1000.));
+  } else if constexpr (T == TimerType::PERFORMANCE) {
+    return 1. / ((toMs(stop_ - start_) / 1000.));
   } else
-    throw errors::not_implemented();
+    throw errors::NotImplemented();
 }
 
-template<timer_type T>
+template<TimerType T>
 void
 Timer<T>::print()
 {
-  std::cout << "[Log] - FPS = " << get_FPS() << std::endl;
+  std::cout << "[Log] - FPS = " << getFPS() << std::endl;
 }
 
-template<timer_type T>
+template<TimerType T>
 f64
-Timer<T>::variable_delay()
+Timer<T>::variableDelay()
 {
   u64 ms_elapsed;
-  if constexpr (T == timer_type::NORMAL) {
+  if constexpr (T == TimerType::NORMAL) {
     ms_elapsed = stop_ - start_;
-  } else if constexpr (T == timer_type::PERFORMANCE) {
-    ms_elapsed = to_ms(stop_ - start_);
+  } else if constexpr (T == TimerType::PERFORMANCE) {
+    ms_elapsed = toMs(stop_ - start_);
   } else {
-    throw errors::not_implemented();
+    throw errors::NotImplemented();
   }
   auto del = max_ms_per_frame_ - ms_elapsed;
   assert(del <= max_ms_per_frame_ && "Computed delay is way too big");
@@ -195,9 +195,9 @@ Timer<T>::variable_delay()
   return this->stop();
 }
 
-template<timer_type T>
+template<TimerType T>
 void
-Timer<T>::artificial_delay()
+Timer<T>::artificialDelay()
 {
   auto r = static_cast<u32>(distribution_(generator_));
   assert(r < max_ms_per_frame_);

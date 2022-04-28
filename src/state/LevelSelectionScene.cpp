@@ -26,17 +26,17 @@ LevelSelectionScene::render(SDLW::Renderer& renderer) const
   ui_level_carousel_.render(renderer);
 
   // Draw text
-  Pen::draw_string("LEVEL", 60, 420, renderer, color{ 0x00, 0xFF, 0x00 });
-  Pen::draw_string("HOLE ", 60, 458, renderer, color{ 0x00, 0xFF, 0x00 });
-  Pen::draw_string("BONUS", 60, 495, renderer, color{ 0x00, 0xFF, 0x00 });
+  Pen::drawString("LEVEL", 60, 420, renderer, color{ 0x00, 0xFF, 0x00 });
+  Pen::drawString("HOLE ", 60, 458, renderer, color{ 0x00, 0xFF, 0x00 });
+  Pen::drawString("BONUS", 60, 495, renderer, color{ 0x00, 0xFF, 0x00 });
 
-  Pen::draw_string_centered_x("Joueur I", 150, renderer, 1.6);
-  Pen::draw_string_centered_x("Fleches directionnelles pour le choix du niveau",
+  Pen::drawStringCenteredInX("Joueur I", 150, renderer, 1.6);
+  Pen::drawStringCenteredInX("Fleches directionnelles pour le choix du niveau",
                               230,
                               renderer,
                               0.90,
                               color{ 0x00, 0xFF, 0xFF });
-  Pen::draw_string_centered_x(
+  Pen::drawStringCenteredInX(
     "[Espace] pour jouer", 275, renderer, color{ 0xF8, 0xEA, 0x8C });
 }
 

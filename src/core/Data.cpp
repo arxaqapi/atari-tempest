@@ -21,7 +21,7 @@ Data::Data()
   f32 buf;
 
   if (!file.is_open())
-    throw errors::file_not_opened();
+    throw errors::FileNotOpened();
 
   // Is continuous parsing
   for (u8 i = 0; i < N_FIGURES_; ++i) {

@@ -40,47 +40,47 @@ public:
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_map_standard_colors(i32 cycle) const;
+  const color& getMapStandardColor(i32 cycle) const;
   /**
    * @brief Retourne la couleur correspondant au cycle courant
    *
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_map_selected_colors(i32 cycle) const;
+  const color& getMapSelectedColor(i32 cycle) const;
   /**
    * @brief Retourne la couleur correspondant au cycle courant
    *
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_blaster_colors(i32 cycle) const;
+  const color& getBlasterColor(i32 cycle) const;
   /**
    * @brief Retourne la couleur correspondant au cycle courant
    *
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_flipper_colors(i32 cycle) const;
+  const color& getFlipperColor(i32 cycle) const;
   /**
    * @brief Retourne la couleur correspondant au cycle courant
    *
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_tanker_colors(i32 cycle) const;
+  const color& getTankerColor(i32 cycle) const;
   /**
    * @brief Retourne la couleur correspondant au cycle courant
    *
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_spiker_colors(i32 cycle) const;
+  const color& getSpikerColor(i32 cycle) const;
   /**
    * @brief Retourne la couleur correspondant au cycle courant
    *
    * @param cycle cycle courant
    * @return const color&: référence constante sur la couleur à afficher
    */
-  const color& get_score_colors(i32 cycle) const;
+  const color& getScoreColor(i32 cycle) const;
 };

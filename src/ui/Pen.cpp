@@ -3,13 +3,13 @@
 #include "../utils/Errors.hpp"
 
 i32
-Pen::index_of_ascii(const u8 c)
+Pen::indexOfAscii(const u8 c)
 {
   return static_cast<i32>(c) - 32;
 }
 
 void
-Pen::draw_edge(SDLW::Renderer& renderer,
+Pen::drawEdge(SDLW::Renderer& renderer,
                const f32 x1,
                const f32 y1,
                const f32 x2,
@@ -27,16 +27,16 @@ Pen::draw_edge(SDLW::Renderer& renderer,
 }
 
 i32
-Pen::draw_character(SDLW::Renderer& renderer,
+Pen::drawCharacter(SDLW::Renderer& renderer,
                     const u8 c,
                     const i32 xoffset,
                     const i32 yoffset,
                     const f32 multiplier,
                     const color& render_color)
 {
-  i32 char_index = Pen::index_of_ascii(c);
+  i32 char_index = Pen::indexOfAscii(c);
   if (char_index < 0 || char_index >= 95) {
-    throw errors::non_valid_character_requested();
+    throw errors::NonValidCharacterRequested();
   }
 
   i32 i = 2;
@@ -45,7 +45,7 @@ Pen::draw_character(SDLW::Renderer& renderer,
         Pen::hershey_table[char_index][i + 2] == -1) {
       i += 2;
     } else {
-      draw_edge(renderer,
+      drawEdge(renderer,
                 multiplier * Pen::hershey_table[char_index][i],
                 multiplier * Pen::hershey_table[char_index][i + 1],
                 multiplier * Pen::hershey_table[char_index][i + 2],
@@ -62,29 +62,29 @@ Pen::draw_character(SDLW::Renderer& renderer,
 // Public
 
 void
-Pen::draw_string(std::string const& s,
+Pen::drawString(std::string const& s,
                  i32 xpos,
                  i32 ypos,
                  SDLW::Renderer& renderer)
 {
-  draw_string(s, xpos, ypos, renderer, Pen::base_color);
+  drawString(s, xpos, ypos, renderer, Pen::base_color);
 }
 
 void
-Pen::draw_string(std::string const& s,
+Pen::drawString(std::string const& s,
                  i32 xpos,
                  i32 ypos,
                  SDLW::Renderer& renderer,
                  const color& render_color)
 {
   for (auto& c : s) {
-    xpos += Pen::draw_character(renderer, c, xpos, ypos, 1, render_color) +
+    xpos += Pen::drawCharacter(renderer, c, xpos, ypos, 1, render_color) +
             Pen::space_size;
   }
 }
 
 void
-Pen::draw_string(std::string const& s,
+Pen::drawString(std::string const& s,
                  i32 xpos,
                  i32 ypos,
                  SDLW::Renderer& renderer,
@@ -92,13 +92,13 @@ Pen::draw_string(std::string const& s,
 {
   for (auto& c : s) {
     xpos +=
-      Pen::draw_character(renderer, c, xpos, ypos, size, Pen::base_color) +
+      Pen::drawCharacter(renderer, c, xpos, ypos, size, Pen::base_color) +
       Pen::space_size;
   }
 }
 
 void
-Pen::draw_string(std::string const& s,
+Pen::drawString(std::string const& s,
                  i32 xpos,
                  i32 ypos,
                  SDLW::Renderer& renderer,
@@ -106,55 +106,55 @@ Pen::draw_string(std::string const& s,
                  const color& render_color)
 {
   for (auto& c : s) {
-    xpos += Pen::draw_character(renderer, c, xpos, ypos, size, render_color) +
+    xpos += Pen::drawCharacter(renderer, c, xpos, ypos, size, render_color) +
             Pen::space_size;
   }
 }
 
 void
-Pen::draw_string_centered_x(std::string const& s,
+Pen::drawStringCenteredInX(std::string const& s,
                             i32 ypos,
                             SDLW::Renderer& renderer)
 {
-  draw_string(
-    s, Game::get_width() / 2 - get_string_width(s) / 2, ypos, renderer);
+  drawString(
+    s, Game::getWidth() / 2 - getStringWidth(s) / 2, ypos, renderer);
 }
 
 void
-Pen::draw_string_centered_x(std::string const& s,
+Pen::drawStringCenteredInX(std::string const& s,
                             i32 ypos,
                             SDLW::Renderer& renderer,
                             const color& render_color)
 {
-  draw_string(s,
-              Game::get_width() / 2 - get_string_width(s) / 2,
+  drawString(s,
+              Game::getWidth() / 2 - getStringWidth(s) / 2,
               ypos,
               renderer,
               render_color);
 }
 
 void
-Pen::draw_string_centered_x(std::string const& s,
+Pen::drawStringCenteredInX(std::string const& s,
                             i32 ypos,
                             SDLW::Renderer& renderer,
                             f32 size)
 {
-  draw_string(s,
-              Game::get_width() / 2 - get_string_width(s, size) / 2,
+  drawString(s,
+              Game::getWidth() / 2 - getStringWidth(s, size) / 2,
               ypos,
               renderer,
               size);
 }
 
 void
-Pen::draw_string_centered_x(std::string const& s,
+Pen::drawStringCenteredInX(std::string const& s,
                             i32 ypos,
                             SDLW::Renderer& renderer,
                             f32 size,
                             const color& render_color)
 {
-  draw_string(s,
-              Game::get_width() / 2 - get_string_width(s, size) / 2,
+  drawString(s,
+              Game::getWidth() / 2 - getStringWidth(s, size) / 2,
               ypos,
               renderer,
               size,
@@ -162,21 +162,21 @@ Pen::draw_string_centered_x(std::string const& s,
 }
 
 i32
-Pen::get_string_width(std::string const& s)
+Pen::getStringWidth(std::string const& s)
 {
   i32 total_width = 0;
   for (auto& c : s) {
-    total_width += Pen::hershey_table[Pen::index_of_ascii(c)][1];
+    total_width += Pen::hershey_table[Pen::indexOfAscii(c)][1];
   }
   return total_width + (s.size() - 1) * Pen::space_size;
 }
 
 i32
-Pen::get_string_width(std::string const& s, f32 size)
+Pen::getStringWidth(std::string const& s, f32 size)
 {
   i32 total_width = 0;
   for (auto& c : s) {
-    total_width += size * Pen::hershey_table[Pen::index_of_ascii(c)][1];
+    total_width += size * Pen::hershey_table[Pen::indexOfAscii(c)][1];
   }
   return total_width + (s.size() - 1) * Pen::space_size;
 }

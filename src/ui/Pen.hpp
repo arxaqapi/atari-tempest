@@ -18,7 +18,7 @@ public:
    * @param ypos position en y du début de la chaîne de caractères
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    */
-  static void draw_string(std::string const& s,
+  static void drawString(std::string const& s,
                           i32 xpos,
                           i32 ypos,
                           SDLW::Renderer& renderer);
@@ -33,7 +33,7 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    * @param render_color la couleur du caractère
    */
-  static void draw_string(std::string const& s,
+  static void drawString(std::string const& s,
                           i32 xpos,
                           i32 ypos,
                           SDLW::Renderer& renderer,
@@ -50,7 +50,7 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    */
-  static void draw_string(std::string const& s,
+  static void drawString(std::string const& s,
                           i32 xpos,
                           i32 ypos,
                           SDLW::Renderer& renderer,
@@ -68,7 +68,7 @@ public:
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    * @param render_color la couleur du caractère
    */
-  static void draw_string(std::string const& s,
+  static void drawString(std::string const& s,
                           i32 xpos,
                           i32 ypos,
                           SDLW::Renderer& renderer,
@@ -84,7 +84,7 @@ public:
    * @param ypos position en y du début de la chaîne de caractères
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    */
-  static void draw_string_centered_x(std::string const& s,
+  static void drawStringCenteredInX(std::string const& s,
                                      i32 ypos,
                                      SDLW::Renderer& renderer);
 
@@ -98,7 +98,7 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    * @param render_color la couleur du caractère
    */
-  static void draw_string_centered_x(std::string const& s,
+  static void drawStringCenteredInX(std::string const& s,
                                      i32 ypos,
                                      SDLW::Renderer& renderer,
                                      const color& render_color);
@@ -113,7 +113,7 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    */
-  static void draw_string_centered_x(std::string const& s,
+  static void drawStringCenteredInX(std::string const& s,
                                      i32 ypos,
                                      SDLW::Renderer& renderer,
                                      f32 size);
@@ -129,7 +129,7 @@ public:
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    * @param render_color la couleur du caractère
    */
-  static void draw_string_centered_x(std::string const& s,
+  static void drawStringCenteredInX(std::string const& s,
                                      i32 ypos,
                                      SDLW::Renderer& renderer,
                                      f32 size,
@@ -142,7 +142,7 @@ public:
    * @param s la chaîne de caractère
    * @return i32: taille de la chaîne de caractères
    */
-  static i32 get_string_width(std::string const& s);
+  static i32 getStringWidth(std::string const& s);
 
   /**
    * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
@@ -153,7 +153,7 @@ public:
    * taille des caractères
    * @return i32: taille de la chaîne de caractères
    */
-  static i32 get_string_width(std::string const& s, f32 size);
+  static i32 getStringWidth(std::string const& s, f32 size);
 
 private:
   Pen() = delete;
@@ -166,7 +166,7 @@ private:
    * @param c le caractère dont on veut récupérer l'indice
    * @return i32: l'indice cible
    */
-  static i32 index_of_ascii(const u8 c);
+  static i32 indexOfAscii(const u8 c);
 
   /**
    * \~french @brief Désigne une arête sur le \b renderer fournis en paramètre,
@@ -181,7 +181,7 @@ private:
    * @param yoffset la position en y du caractère
    * @param render_color la couleur du caractère
    */
-  static void draw_edge(SDLW::Renderer& renderer,
+  static void drawEdge(SDLW::Renderer& renderer,
                         const f32 x1,
                         const f32 y1,
                         const f32 x2,
@@ -219,7 +219,7 @@ private:
    * \~french @return i32: largeur du caractère rendu
    * \~french @param render_color la couleur du caractère
    */
-  static i32 draw_character(SDLW::Renderer& renderer,
+  static i32 drawCharacter(SDLW::Renderer& renderer,
                             const u8 c,
                             const i32 xoffset,
                             const i32 yoffset,

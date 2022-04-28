@@ -1,41 +1,41 @@
 #include "Errors.hpp"
 
 const char*
-errors::not_implemented::what() const throw()
+errors::NotImplemented::what() const throw()
 {
   return "Not implemented yet";
 }
 
 const char*
-errors::not_tested::what() const throw()
+errors::NotTested::what() const throw()
 {
   return "Not tested yet";
 }
 
 const char*
-errors::non_valid_state_switch::what() const throw()
+errors::NonValidStateSwitch::what() const throw()
 {
   return "The requested state switch is not valid";
 }
 
 const char*
-errors::file_not_opened::what() const throw()
+errors::FileNotOpened::what() const throw()
 {
   return "Unable to open file";
 }
 
 const char*
-errors::non_valid_character_requested::what() const throw()
+errors::NonValidCharacterRequested::what() const throw()
 {
   return "Requested character not supported";
 }
 
-errors::sdl_error::sdl_error(const std::string& msg)
+errors::SdlError::SdlError(const std::string& msg)
   : msg_{ msg }
 {}
 
 const char*
-errors::sdl_error::what() const throw()
+errors::SdlError::what() const throw()
 {
   return msg_.c_str();
 }

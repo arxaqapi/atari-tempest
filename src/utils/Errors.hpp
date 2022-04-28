@@ -24,7 +24,7 @@ namespace errors {
  * @brief A utiliser dans le cas ou la méthode n'a pas encore été implémentée
  *
  */
-struct not_implemented : public std::exception
+struct NotImplemented : public std::exception
 {
   const char* what() const throw();
 };
@@ -34,7 +34,7 @@ struct not_implemented : public std::exception
  * n'a pas encore été testée
  *
  */
-struct not_tested : public std::exception
+struct NotTested : public std::exception
 {
   const char* what() const throw();
 };
@@ -44,7 +44,7 @@ struct not_tested : public std::exception
  * n'est pas autorisée par la machine à état
  *
  */
-struct non_valid_state_switch : public std::exception
+struct NonValidStateSwitch : public std::exception
 {
   const char* what() const throw();
 };
@@ -53,7 +53,7 @@ struct non_valid_state_switch : public std::exception
  * @brief A utiliser dans le cas ou le fichier n'a pas pu ou n'a pas été ouvert
  *
  */
-struct file_not_opened : public std::exception
+struct FileNotOpened : public std::exception
 {
   const char* what() const throw();
 };
@@ -63,7 +63,7 @@ struct file_not_opened : public std::exception
  * n'est pas supporté par la police d'écriture actuelle
  *
  */
-struct non_valid_character_requested : public std::exception
+struct NonValidCharacterRequested : public std::exception
 {
   const char* what() const throw();
 };
@@ -73,10 +73,10 @@ struct non_valid_character_requested : public std::exception
  * ou pour exprimer une erreur propre à la SDL
  *
  */
-struct sdl_error : public std::exception
+struct SdlError : public std::exception
 {
   std::string msg_;
-  sdl_error(const std::string& msg);
+  SdlError(const std::string& msg);
   const char* what() const throw();
 };
 

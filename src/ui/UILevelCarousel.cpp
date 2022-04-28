@@ -76,7 +76,7 @@ UILevelCarousel::go_left()
 void
 UILevelCarousel::select(SceneManager& sm)
 {
-  sm.set_next_state(STATE_GAME_SCENE, selected_level_);
+  sm.setNextState(STATE_GAME_SCENE, selected_level_);
 }
 
 void

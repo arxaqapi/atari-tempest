@@ -75,7 +75,7 @@ public:
    * prioritaires sur tout le reste
    *
    */
-  void process_events();
+  void processEvents();
   /**
    * \~french @brief Avance la simulation du jeu d'un point en appelant la
    * fonction de mise à jour de la scène courante
@@ -101,33 +101,33 @@ public:
    * @return true: le jeu est en train de tourner
    * @return false: le jeu à été arréter
    */
-  bool is_running() { return run_; };
+  bool isRunning() { return run_; };
 
   /**
    * @brief Retourne la largeur de la fenêtre ouverte lors de l'initialisation
    *
    * @return u16 largeur de la fenêtre
    */
-  static u16 get_width();
+  static u16 getWidth();
   /**
    * @brief Retourne la hauteur de la fenêtre ouverte lors de l'initialisation
    *
    * @return u16 hauteur de la fenêtre
    */
-  static u16 get_height();
+  static u16 getHeight();
 
   /**
    * @brief met à jour la variable contenant le délai inter image
    *
    * @param inter_frame_delay le délais inter image
    */
-  void debug_set_interframe_delay(f64 inter_frame_delay);
+  void debugSetInterframeDelay(f64 inter_frame_delay);
   /**
    * @brief met à jour la valeur des fps (images par secondes)
    *
    * @param fps le nombre de fps (images par secondes)
    */
-  void debug_set_fps(f64 fps);
+  void debugSetFPS(f64 fps);
 };
 
 #endif
