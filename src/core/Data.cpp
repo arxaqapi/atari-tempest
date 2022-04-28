@@ -16,8 +16,8 @@ Data::Data()
   f32 buf;
 
   if (!file.is_open()) {
-    // todo : handle error
-    return;
+    std::cerr << "Error opening level data file" << std::endl;
+    exit(EXIT_FAILURE);
   }
 
   // Is continuous parsing
