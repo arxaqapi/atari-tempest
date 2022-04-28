@@ -56,69 +56,25 @@ GameScene::update(f64 delta, SceneManager& sm)
   map_.select(player_.getBandNum());
   spawn_manager_.update(delta, map_, getCurrentLevelNum());
 
-  for (auto& flipper : spawn_manager_.getFlippers()) {
-    if (!flipper.isActive())
-      continue;
+  handleCollisions(spawn_manager_.getFlippers(), 200);
 
-    if (flipper.isColliding(player_)) {
-      flipper.deactivate();
-      player_.hit();
-      spawn_manager_.clear();
-    }
+  handleCollisions(spawn_manager_.getSpikers(), 50);
 
-    // chasing player
-    if (flipper.getFrontProgression() == 0 &&
-        flipper.getBandNum() < player_.getBandNum())
-      flipper.setBandChangeDirection(RIGHT);
-    else if (flipper.getFrontProgression() == 0 &&
-             flipper.getBandNum() > player_.getBandNum())
-      flipper.setBandChangeDirection(LEFT);
+  auto f = [this](Bullet& bullet, Tanker& tanker) {
+    spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
+                                tanker.getFrontProgression(),
+                                LEFT);
+    spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
+                                tanker.getFrontProgression(),
+                                RIGHT);
+  };
+  handleCollisions(spawn_manager_.getTankers(), 150, f);
 
-    if (player_.getHealth() == 0) {
-      // player is dead, go to menu
-      sm.set_next_state(STATE_DEATH_SCREEN);
-    }
+  // player is dead, go to menu
+  if (player_.getHealth() == 0)
+    sm.set_next_state(STATE_DEATH_SCREEN);
 
-    //    handleBulletsCollision(bullets, flippers, score, []);
-    for (auto& bullet : player_.getBullets()) {
-      if (bullet.isActive() && bullet.isColliding(flipper)) {
-        flipper.deactivate();
-        bullet.deactivate();
-        player_.addScore(200);
-      }
-    }
-  }
-
-  for (auto& tanker : spawn_manager_.getTankers()) {
-    if (!tanker.isActive())
-      continue;
-    for (auto& bullet : player_.getBullets()) {
-      if (bullet.isActive() && bullet.isColliding(tanker)) {
-        bullet.deactivate();
-        tanker.deactivate();
-        spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
-                                    tanker.getFrontProgression(),
-                                    LEFT);
-        spawn_manager_.spawnFlipper(map_.getRightBandNum(tanker.getBandNum()),
-                                    tanker.getFrontProgression(),
-                                    RIGHT);
-        player_.addScore(150);
-      }
-    }
-  }
-
-  for (auto& spiker : spawn_manager_.getSpikers()) {
-    if (!spiker.isActive())
-      continue;
-    for (auto& bullet : player_.getBullets()) {
-      if (bullet.isActive() && bullet.isColliding(spiker)) {
-        bullet.deactivate();
-        spiker.hit();
-        player_.addScore(50);
-      }
-    }
-  }
-
+  // player finished the level
   if (player_.getScore() >= getCurrentLevelMaxScore()) {
     if (gameOver()) // if no more level, go to win screen
       sm.set_next_state(STATE_WIN_SCREEN);

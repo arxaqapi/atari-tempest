@@ -14,6 +14,7 @@
 #include "../core/SpawnManager.hpp"
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -78,6 +79,15 @@ public:
    */
   u8 getCurrentLevelNum() const;
 
+  template<class GameObjectType>
+  void handleCollisions(std::vector<GameObjectType>& enemies,
+                        u32 associated_score);
+
+  template<class GameObjectType, typename Func>
+  void handleCollisions(std::vector<GameObjectType>& enemies,
+                        u32 associated_score,
+                        Func& on_bullet_collision);
+
   /**
    * @brief Fonction permettant la gestion des évènemment spécifique à la scène
    *
@@ -101,5 +111,41 @@ public:
    */
   void render(SDLW::Renderer& renderer) const override;
 };
+
+template<class GameObjectType>
+void
+GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
+                            u32 associated_score)
+{
+  auto f = [](Bullet& bullet, GameObjectType& enemy) {return;};
+  handleCollisions(enemies, associated_score, f);
+}
+
+template<class GameObjectType, typename Func>
+void
+GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
+                            u32 associated_score,
+                            Func& on_bullet_collision)
+{
+  for (auto& enemy : enemies) {
+    if (!enemy.isActive())
+      continue;
+
+    if (enemy.isColliding(player_)) {
+      enemy.deactivate();
+      player_.hit();
+      spawn_manager_.clear();
+    }
+
+    for (auto& bullet : player_.getBullets()) {
+      if (bullet.isActive() && bullet.isColliding(enemy)) {
+        bullet.deactivate();
+        enemy.hit();
+        player_.addScore(associated_score);
+        on_bullet_collision(bullet, enemy);
+      }
+    }
+  }
+}
 
 #endif // TEMPEST_ATARI_GAMESCENE_HPP

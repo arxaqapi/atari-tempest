@@ -70,12 +70,17 @@ Flipper::update(f64 delta, const Map& map)
   if (!active_)
     return;
 
-  // if stuck at the end of the map, change direction
+  // stuck at the end of the map, change direction
   if (band_change_direction_ == LEFT &&
       map.getLeftBandNum(band_num_) == band_num_)
     setBandChangeDirection(RIGHT);
   else if (band_change_direction_ == RIGHT &&
            map.getRightBandNum(band_num_) == band_num_)
+    setBandChangeDirection(LEFT);
+  // chasing player
+  else if (front_progression_ == 0 && band_num_ < map.getSelectedBandNum())
+    setBandChangeDirection(RIGHT);
+  else if (front_progression_ == 0 && band_num_ > map.getSelectedBandNum())
     setBandChangeDirection(LEFT);
 
   setMovingDirection(band_change_direction_);
