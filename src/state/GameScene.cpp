@@ -60,7 +60,7 @@ GameScene::update(f64 delta, SceneManager& sm)
 
   handleCollisions(spawn_manager_.getSpikers(), 50);
 
-  auto f = [this](Bullet& bullet, Tanker& tanker) {
+  auto f = [this](Tanker& tanker) {
     spawn_manager_.spawnFlipper(map_.getLeftBandNum(tanker.getBandNum()),
                                 tanker.getFrontProgression(),
                                 LEFT);
@@ -210,7 +210,9 @@ void
 GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
                             u32 associated_score)
 {
-  auto f = [](Bullet& bullet, GameObjectType& enemy) {return;};
+  auto f = [](GameObjectType& enemy) {
+    (void)enemy;
+  };
   handleCollisions(enemies, associated_score, f);
 }
 
@@ -235,7 +237,7 @@ GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
         bullet.deactivate();
         enemy.hit();
         player_.addScore(associated_score);
-        on_bullet_collision(bullet, enemy);
+        on_bullet_collision(enemy);
       }
     }
   }

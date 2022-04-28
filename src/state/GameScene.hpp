@@ -83,7 +83,7 @@ public:
    * @brief Gère la collision entre le joueur et les ennemis, ainsi qu'entre les
    * balles du joueur et les ennemis. Attribue au joueur le score associé à la
    * destruction d'un ennemi. Appelle la fonction de même nom sans instructions
-   * supplémentaire lors de la collision entre une balle et un ennemi.
+   * supplémentaires lors de la collision entre d'un ennemi avec une balle
    * @tparam GameObjectType Type enfant de GameObject. Type des ennemis dont il
    * faut gérer les collisions
    * @param enemies Ennemis dont il faut gérer la collision
@@ -98,18 +98,18 @@ public:
    * @brief Gère la collision entre le joueur et les ennemis, ainsi qu'entre les
    * balles du joueur et les ennemis. Attribue au joueur le score associé à la
    * destruction d'un ennemi. Laisse la possibilité de fournir des instructions
-   * supplémentaires en cas de collision entre une balle et un ennemi.
+   * supplémentaires en cas de collision d'un ennemi avec une balle
    * @tparam GameObjectType Type enfant de GameObject. Type des ennemis dont il
    * faut gérer les collisions
    * @tparam Func Type de la fonction utilisée pour fournir les instructions
-   * supplémentaires en cas de collision entre une balle et un ennemi. De la
-   * forme `void f(Bullet &b, GameObjectType &go)`
+   * supplémentaires en cas de collision d'un ennemi avec une balle. De la
+   * forme `void f(GameObjectType &go)`
    * @param enemies Ennemis dont il faut gérer la collision
    * @param associated_score Score à attribuer au joueur s'il a touché un ennemi
    * avec une balle
-   * @param on_bullet_collision Fonction de la forme `void f(Bullet &b,
-   * GameObjectType &go)`. Instructions à exécuter en cas de collision entre une
-   * balle et un ennemi
+   * @param on_bullet_collision Fonction de la forme
+   * `void f(GameObjectType &go)`. Instructions à exécuter en cas de collision
+   * d'un ennemi avec une balle
    */
   template<class GameObjectType, typename Func>
   void handleCollisions(std::vector<GameObjectType>& enemies,
