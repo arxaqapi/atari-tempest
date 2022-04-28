@@ -11,12 +11,9 @@
 
 #include "RenderHandler.hpp"
 #include "../utils/Errors.hpp"
-#include <iostream>
 
 RenderHandler::RenderHandler(u16 w_width, u16 w_height)
 {
-  std::cout << "rend constr" << std::endl;
-
   SDLW::Init(SDL_INIT_VIDEO);
 
   w_ = std::make_unique<SDLW::Window>(
@@ -44,9 +41,7 @@ RenderHandler::draw()
 
 RenderHandler::~RenderHandler()
 {
-  std::cout << "rend destr" << std::endl;
   SDLW::Quit();
-  SDL_Quit();
 }
 
 SDLW::Renderer&
