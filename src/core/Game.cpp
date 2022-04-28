@@ -41,7 +41,7 @@ void
 Game::processEvents()
 {
   SDLW::Event event;
-  while ( SDLW::PollEvent(event) ) {
+  while (SDLW::PollEvent(event)) {
     switch (event.getType()) {
       case SDL_QUIT:
         this->stop_();
@@ -72,15 +72,15 @@ Game::render()
   sm_.getCurrentScene().render(r_.get_renderer());
   if (debug_flag_) {
     Pen::drawString("IFD: "s + std::to_string(debug_val_.inter_frame_delay_),
-                     763 - 300,
-                     30,
-                     r_.get_renderer(),
-                     color{ 0xFF, 0, 0 });
+                    763 - 300,
+                    30,
+                    r_.get_renderer(),
+                    color{ 0xFF, 0, 0 });
     Pen::drawString("FPS: "s + std::to_string(debug_val_.fps_),
-                     763 - 300,
-                     60,
-                     r_.get_renderer(),
-                     color{ 0xFF, 0, 0 });
+                    763 - 300,
+                    60,
+                    r_.get_renderer(),
+                    color{ 0xFF, 0, 0 });
   }
   r_.draw();
 }

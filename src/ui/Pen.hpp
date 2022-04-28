@@ -19,9 +19,9 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    */
   static void drawString(std::string const& s,
-                          i32 xpos,
-                          i32 ypos,
-                          SDLW::Renderer& renderer);
+                         i32 xpos,
+                         i32 ypos,
+                         SDLW::Renderer& renderer);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position cible
@@ -34,10 +34,10 @@ public:
    * @param render_color la couleur du caractère
    */
   static void drawString(std::string const& s,
-                          i32 xpos,
-                          i32 ypos,
-                          SDLW::Renderer& renderer,
-                          const color& render_color);
+                         i32 xpos,
+                         i32 ypos,
+                         SDLW::Renderer& renderer,
+                         const color& render_color);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -51,10 +51,10 @@ public:
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    */
   static void drawString(std::string const& s,
-                          i32 xpos,
-                          i32 ypos,
-                          SDLW::Renderer& renderer,
-                          f32 size);
+                         i32 xpos,
+                         i32 ypos,
+                         SDLW::Renderer& renderer,
+                         f32 size);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -69,11 +69,11 @@ public:
    * @param render_color la couleur du caractère
    */
   static void drawString(std::string const& s,
-                          i32 xpos,
-                          i32 ypos,
-                          SDLW::Renderer& renderer,
-                          f32 size,
-                          const color& render_color);
+                         i32 xpos,
+                         i32 ypos,
+                         SDLW::Renderer& renderer,
+                         f32 size,
+                         const color& render_color);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -85,8 +85,8 @@ public:
    * @param renderer l'object Renderer sur lequel rendre la chaîne de caractères
    */
   static void drawStringCenteredInX(std::string const& s,
-                                     i32 ypos,
-                                     SDLW::Renderer& renderer);
+                                    i32 ypos,
+                                    SDLW::Renderer& renderer);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -99,9 +99,9 @@ public:
    * @param render_color la couleur du caractère
    */
   static void drawStringCenteredInX(std::string const& s,
-                                     i32 ypos,
-                                     SDLW::Renderer& renderer,
-                                     const color& render_color);
+                                    i32 ypos,
+                                    SDLW::Renderer& renderer,
+                                    const color& render_color);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -114,9 +114,9 @@ public:
    * @param size le facteur d'agrandissement (la valeur de base est 1)
    */
   static void drawStringCenteredInX(std::string const& s,
-                                     i32 ypos,
-                                     SDLW::Renderer& renderer,
-                                     f32 size);
+                                    i32 ypos,
+                                    SDLW::Renderer& renderer,
+                                    f32 size);
 
   /**
    * @brief Rend la chaîne de caractères passé en paramètre à la position y
@@ -130,10 +130,10 @@ public:
    * @param render_color la couleur du caractère
    */
   static void drawStringCenteredInX(std::string const& s,
-                                     i32 ypos,
-                                     SDLW::Renderer& renderer,
-                                     f32 size,
-                                     const color& render_color);
+                                    i32 ypos,
+                                    SDLW::Renderer& renderer,
+                                    f32 size,
+                                    const color& render_color);
 
   /**
    * @brief Calcule la largeur, en pixels, de la chaîne de caractères passé en
@@ -182,13 +182,13 @@ private:
    * @param render_color la couleur du caractère
    */
   static void drawEdge(SDLW::Renderer& renderer,
-                        const f32 x1,
-                        const f32 y1,
-                        const f32 x2,
-                        const f32 y2,
-                        const i32 xoffset,
-                        const i32 yoffset,
-                        const color& render_color);
+                       const f32 x1,
+                       const f32 y1,
+                       const f32 x2,
+                       const f32 y2,
+                       const i32 xoffset,
+                       const i32 yoffset,
+                       const color& render_color);
 
   /**
    * \~english @brief Draws a single character on the renderer at a specific
@@ -220,11 +220,11 @@ private:
    * \~french @param render_color la couleur du caractère
    */
   static i32 drawCharacter(SDLW::Renderer& renderer,
-                            const u8 c,
-                            const i32 xoffset,
-                            const i32 yoffset,
-                            const f32 multiplier,
-                            const color& render_color);
+                           const u8 c,
+                           const i32 xoffset,
+                           const i32 yoffset,
+                           const f32 multiplier,
+                           const color& render_color);
 
   /**
    * \~english @brief Amount of space (in pixels) between two characters

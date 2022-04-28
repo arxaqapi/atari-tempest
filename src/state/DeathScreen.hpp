@@ -12,8 +12,8 @@
 #ifndef H_TEMPEST_GAME_DEATHSCREEN_TITLESCREEN_
 #define H_TEMPEST_GAME_DEATHSCREEN_TITLESCREEN_
 
-#include "Scene.hpp"
 #include "../sdlw/SDLW.hpp"
+#include "Scene.hpp"
 
 class SceneManager;
 

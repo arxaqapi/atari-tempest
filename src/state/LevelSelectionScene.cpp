@@ -32,10 +32,10 @@ LevelSelectionScene::render(SDLW::Renderer& renderer) const
 
   Pen::drawStringCenteredInX("Joueur I", 150, renderer, 1.6);
   Pen::drawStringCenteredInX("Fleches directionnelles pour le choix du niveau",
-                              230,
-                              renderer,
-                              0.90,
-                              color{ 0x00, 0xFF, 0xFF });
+                             230,
+                             renderer,
+                             0.90,
+                             color{ 0x00, 0xFF, 0xFF });
   Pen::drawStringCenteredInX(
     "[Espace] pour jouer", 275, renderer, color{ 0xF8, 0xEA, 0x8C });
 }

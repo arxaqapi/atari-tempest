@@ -43,8 +43,7 @@ GameScene::processEvent(const SDLW::Event& event, SceneManager& sm)
       break;
 
     case SDL_KEYUP:
-      if (event.getKeycode() == SDLK_LEFT ||
-          event.getKeycode() == SDLK_RIGHT)
+      if (event.getKeycode() == SDLK_LEFT || event.getKeycode() == SDLK_RIGHT)
         player_.setMovingDirection(NONE);
       else if (event.getKeycode() == SDLK_SPACE)
         player_.stopShooting();
@@ -116,16 +115,16 @@ GameScene::render(SDLW::Renderer& renderer) const
 
   // Draw text
   Pen::drawString(std::to_string(player_.getScore()),
-                   20,
-                   46,
-                   renderer,
-                   1.7,
-                   color_handler_.getScoreColor(current_cycle_));
+                  20,
+                  46,
+                  renderer,
+                  1.7,
+                  color_handler_.getScoreColor(current_cycle_));
   Pen::drawString(std::to_string(getCurrentLevelNum()),
-                   280,
-                   32,
-                   renderer,
-                   color_handler_.getMapStandardColor(current_cycle_));
+                  280,
+                  32,
+                  renderer,
+                  color_handler_.getMapStandardColor(current_cycle_));
 
   // Render life points
   auto health_color = color_handler_.getBlasterColor(current_cycle_);
