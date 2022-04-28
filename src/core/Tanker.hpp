@@ -25,7 +25,7 @@ private:
   bool split_ = false;
 
 public:
-  Tanker();
+  Tanker() { deactivate(); }
   Tanker(const Tanker& tanker) = default;
   ~Tanker() override = default;
 

@@ -3,12 +3,6 @@
 //
 
 #include "Tanker.hpp"
-#include <iostream>
-
-Tanker::Tanker()
-{
-  deactivate();
-}
 
 void
 Tanker::render(SDLW::Renderer& renderer,

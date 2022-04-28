@@ -18,7 +18,7 @@
 class Spiker : public GameObject
 {
 public:
-  Spiker();
+  Spiker() { deactivate(); }
   Spiker(const Spiker& spiker) = default;
   ~Spiker() override = default;
 

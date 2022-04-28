@@ -59,7 +59,11 @@ public:
    * @brief Teste si le jeu est terminé, ie il n'y a plus d'autres niveaux
    * @return Vrai si le jeu est terminé, faux sinon
    */
-  bool gameOver() const;
+  inline bool gameOver() const
+  {
+    return current_cycle_ == Data::N_CYCLES_ &&
+           current_figure_ == Data::N_FIGURES_ - 1;
+  }
 
   /**
    * @brief Renvoie le score maximal du niveau, ie le score nécessaire pour
@@ -68,21 +72,31 @@ public:
    * @param figure Numéro de figure correspondant au niveau
    * @return Le score maximal du niveau
    */
-  static u32 getLevelMaxScore(u8 cycle, u8 figure);
+  inline static u32 getLevelMaxScore(u8 cycle, u8 figure)
+  {
+    return 1000 + (cycle + 1) * std::pow(figure + 1, 2) * 600 +
+           cycle * Data::N_FIGURES_ * Data::N_FIGURES_ * 600;
+  }
 
   /**
    * @brief Renvoie le score maxial du niveau courant, ie le score nécessaire
    * pour terminer le niveau courant
    * @return Le score maximal du niveau courant
    */
-  u32 getCurrentLevelMaxScore() const;
+  inline u32 getCurrentLevelMaxScore() const
+  {
+    return getLevelMaxScore(current_cycle_, current_figure_);
+  }
 
   /**
    * @brief Renvoie le numéro du niveau courant à partir des membres `cycle_` et
    * `figure_` de la classe
    * @return Le numéro du niveau courant
    */
-  u8 getCurrentLevelNum() const;
+  inline u8 getCurrentLevelNum() const
+  {
+    return current_figure_ + (Data::N_FIGURES_ - 1) * current_cycle_;
+  }
 
   /**
    * @brief Gère la collision entre le joueur et les ennemis, ainsi qu'entre les
@@ -96,8 +110,12 @@ public:
    * avec une balle
    */
   template<class GameObjectType>
-  void handleCollisions(std::vector<GameObjectType>& enemies,
-                        u32 associated_score);
+  inline void handleCollisions(std::vector<GameObjectType>& enemies,
+                               u32 associated_score)
+  {
+    auto f = [](GameObjectType& enemy) { (void)enemy; };
+    handleCollisions(enemies, associated_score, f);
+  }
 
   /**
    * @brief Gère la collision entre le joueur et les ennemis, ainsi qu'entre les

@@ -94,13 +94,6 @@ Blaster::render(SDLW::Renderer& renderer,
 }
 
 void
-Blaster::hit()
-{
-  health_ = std::max(health_ - 1, 0);
-  clear();
-}
-
-void
 Blaster::clear()
 {
   band_num_ = 0;

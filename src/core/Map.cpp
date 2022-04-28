@@ -9,7 +9,6 @@
  * @brief
  */
 #include "Map.hpp"
-#include <cassert>
 #include <numeric>
 
 Map::Map(const std::vector<Vector2D>& exterior,
@@ -46,20 +45,6 @@ Map::getRightBandNum(u8 num_band) const
     right_band_num =
       std::min(right_band_num, static_cast<int>(bands_.size() - 1));
   return right_band_num;
-}
-
-const Band&
-Map::getBand(u8 num_band) const
-{
-  assert(num_band < bands_.size());
-  return bands_[num_band];
-}
-
-void
-Map::select(u8 num_band)
-{
-  assert(num_band < bands_.size());
-  selected_band_num_ = num_band;
 }
 
 void

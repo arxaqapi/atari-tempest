@@ -5,7 +5,6 @@
 #include "GameScene.hpp"
 #include "../ui/Pen.hpp"
 #include "SceneManager.hpp"
-#include <cassert>
 
 using namespace std::string_literals;
 
@@ -163,18 +162,6 @@ GameScene::render(SDLW::Renderer& renderer) const
   }
 }
 
-u32
-GameScene::getCurrentLevelMaxScore() const
-{
-  return getLevelMaxScore(current_cycle_, current_figure_);
-}
-
-u8
-GameScene::getCurrentLevelNum() const
-{
-  return current_figure_ + (Data::N_FIGURES_ - 1) * current_cycle_;
-}
-
 void
 GameScene::loadNextLevel()
 {
@@ -191,29 +178,6 @@ GameScene::loadNextLevel()
   spawn_manager_.load(map_.size(), getCurrentLevelNum());
 
   player_.clear();
-}
-
-bool
-GameScene::gameOver() const
-{
-  return current_cycle_ == Data::N_CYCLES_ &&
-         current_figure_ == Data::N_FIGURES_ - 1;
-}
-
-u32
-GameScene::getLevelMaxScore(u8 cycle, u8 figure)
-{
-  return 1000 + (cycle + 1) * std::pow(figure + 1, 2) * 600 +
-         cycle * Data::N_FIGURES_ * Data::N_FIGURES_ * 600;
-}
-
-template<class GameObjectType>
-void
-GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
-                            u32 associated_score)
-{
-  auto f = [](GameObjectType& enemy) { (void)enemy; };
-  handleCollisions(enemies, associated_score, f);
 }
 
 template<class GameObjectType, typename Func>

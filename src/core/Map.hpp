@@ -11,6 +11,7 @@
 #define TEMPEST_ATARI_MAP_HPP
 
 #include "Band.hpp"
+#include <cassert>
 #include <vector>
 
 /**
@@ -47,11 +48,7 @@ public:
    * Renvoie le nombre de bandes de la carte
    * @return Le nombre de bandes de la carte
    */
-  inline u8 size() const { return bands_.size(); };
-
-  u8 getLeftBandNum(u8 num_band) const;
-  u8 getRightBandNum(u8 num_band) const;
-  const Band& getBand(u8 num_band) const;
+  inline u8 size() const { return bands_.size(); }
 
   /**
    * @brief Réalise le rendu de la carte. Appelle la fonction `render` sur
@@ -63,12 +60,6 @@ public:
   void render(SDLW::Renderer& renderer,
               const color& standard_color,
               const color& accent_color) const;
-
-  /**
-   * @brief Appelle la fonction `select` sur la bande
-   * @param num_band Numéro de la bande à sélectionner
-   */
-  void select(u8 num_band);
 
   /**
    * @brief Charge une carte. Les anciennes valeurs des membres de la classe
@@ -85,12 +76,28 @@ public:
             Vector2D origin);
 
   /**
+   * Setters
+   */
+  inline void select(u8 num_band)
+  {
+    assert(num_band < bands_.size());
+    selected_band_num_ = num_band;
+  }
+
+  /**
    * Getters
    */
-  inline const Vector2D& getOrigin() const { return origin_; };
+  inline const Vector2D& getOrigin() const { return origin_; }
   inline f32 getFocal() const { return focal_; }
   inline f32 getAvgBandWith() const { return avg_band_with_; }
-  inline u8 getSelectedBandNum() const { return selected_band_num_; };
+  inline u8 getSelectedBandNum() const { return selected_band_num_; }
+  inline const Band& getBand(u8 num_band) const
+  {
+    assert(num_band < bands_.size());
+    return bands_[num_band];
+  }
+  u8 getLeftBandNum(u8 num_band) const;
+  u8 getRightBandNum(u8 num_band) const;
 };
 
 #endif // TEMPEST_ATARI_MAP_HPP

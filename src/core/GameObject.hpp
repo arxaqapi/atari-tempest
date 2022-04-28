@@ -82,7 +82,7 @@ public:
    * @brief Action à réaliser lorsque l'objet est rentré en collision avec un
    * autre. Désactive l'objet par défaut
    */
-  inline virtual void hit() { deactivate(); };
+  inline virtual void hit() { deactivate(); }
 
   /**
    * @brief Appelée à chaque pas de temps pour mettre à jour l'objet
@@ -104,8 +104,8 @@ public:
   /**
    * Getters
    */
-  inline bool isActive() const { return active_; };
-  inline u8 getBandNum() const { return band_num_; };
+  inline bool isActive() const { return active_; }
+  inline u8 getBandNum() const { return band_num_; }
   inline f32 getFrontProgression() const { return front_progression_; }
 
   /**
@@ -114,8 +114,8 @@ public:
   void setMovingDirection(e_direction moving_direction)
   {
     moving_direction_ = moving_direction;
-  };
-  inline void deactivate() { active_ = false; };
+  }
+  inline void deactivate() { active_ = false; }
 };
 
 #endif // TEMPEST_ATARI_GAMEOBJECT_HPP

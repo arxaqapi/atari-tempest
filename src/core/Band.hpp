@@ -45,15 +45,15 @@ public:
   inline std::pair<Vector2D, Vector2D> getExterior() const
   {
     return { exter_a_, exter_b_ };
-  };
+  }
   inline std::pair<Vector2D, Vector2D> getInterior() const
   {
     return { inter_a_, inter_b_ };
   }
   inline const Vector2D& getUnitVector() const { return unit_vector_; }
   inline const Vector2D& getAxis() const { return axis_; }
-  inline const Vector2D& getInterCenter() const { return inter_center_; };
-  inline const Vector2D& getExterCenter() const { return exter_center_; };
+  inline const Vector2D& getInterCenter() const { return inter_center_; }
+  inline const Vector2D& getExterCenter() const { return exter_center_; }
 };
 
 #endif // TEMPEST_ATARI_BAND_HPP

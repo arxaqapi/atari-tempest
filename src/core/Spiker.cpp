@@ -1,12 +1,4 @@
-//
-// Created by massimo on 16/04/2022.
-//
-
 #include "Spiker.hpp"
-Spiker::Spiker()
-{
-  deactivate();
-}
 
 void
 Spiker::render(SDLW::Renderer& renderer,

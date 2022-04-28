@@ -36,12 +36,6 @@ public:
   Blaster(const Blaster& blaster) = default;
   ~Blaster() override = default;
 
-  void hit() override;
-  void render(SDLW::Renderer& renderer,
-              const Map& map,
-              const color& render_color) const override;
-  void update(f64 delta, const Map& map) override;
-
   /**
    * @brief Réinitialise les attributs de classe
    */
@@ -51,20 +45,31 @@ public:
    * @brief Ajoute le score au score courant
    * @param score Score à ajouter
    */
-  inline void addScore(u32 score) { score_ += score; };
+  inline void addScore(u32 score) { score_ += score; }
+
+  void render(SDLW::Renderer& renderer,
+              const Map& map,
+              const color& render_color) const override;
+  void update(f64 delta, const Map& map) override;
+
+  inline void hit() override
+  {
+    health_ = std::max(health_ - 1, 0);
+    clear();
+  }
 
   /**
    * Setters
    */
-  inline void shoot() { is_shooting_ = true; };
-  inline void stopShooting() { is_shooting_ = false; };
+  inline void shoot() { is_shooting_ = true; }
+  inline void stopShooting() { is_shooting_ = false; }
 
   /**
    * Getters
    */
-  inline std::vector<Bullet>& getBullets() { return bullets_.getPool(); };
-  inline u8 getHealth() const { return health_; };
-  inline u32 getScore() const { return score_; };
+  inline std::vector<Bullet>& getBullets() { return bullets_.getPool(); }
+  inline u8 getHealth() const { return health_; }
+  inline u32 getScore() const { return score_; }
 };
 
 #endif // TEMPEST_ATARI_BLASTER_HPP
