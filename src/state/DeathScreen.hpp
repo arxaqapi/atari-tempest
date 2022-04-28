@@ -13,6 +13,7 @@
 #define H_TEMPEST_GAME_DEATHSCREEN_TITLESCREEN_
 
 #include "Scene.hpp"
+#include "../sdlw/SDLW.hpp"
 
 class SceneManager;
 
@@ -35,7 +36,7 @@ public:
    * @param sm référence sur le gestionnaire de scène, permettant de
    * demander un changement d'état
    */
-  void processEvent(SDL_Event* event, SceneManager& sm) override;
+  void processEvent(const SDLW::Event& event, SceneManager& sm) override;
   /**
    * @brief Fonction permettant la mise à jour de l'état interne de la scène
    *

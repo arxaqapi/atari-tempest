@@ -151,3 +151,33 @@ SDLW::GetPerformanceFrequency()
 {
   return SDL_GetPerformanceFrequency();
 }
+
+// Events
+
+SDLW::Event::Event() {}
+
+SDLW::Event::~Event() {}
+
+u32
+SDLW::Event::getType() const
+{
+  return event_.type;
+}
+
+SDL_Keycode
+SDLW::Event::getKeycode() const
+{
+  return event_.key.keysym.sym;
+}
+
+i32
+SDLW::PollEvent(SDLW::Event& e)
+{
+  return SDL_PollEvent(&e.event_);
+}
+
+i32
+SDLW::PollEvent()
+{
+  return SDL_PollEvent(nullptr);
+}

@@ -7,9 +7,9 @@ WinScreen::WinScreen() {}
 WinScreen::~WinScreen() {}
 
 void
-WinScreen::processEvent(SDL_Event* event, SceneManager& sm)
+WinScreen::processEvent(const SDLW::Event& event, SceneManager& sm)
 {
-  if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_SPACE) {
+  if (event.getType() == SDL_KEYDOWN && event.getKeycode() == SDLK_SPACE) {
     std::cout << "[Space] pressed" << std::endl;
     sm.setNextState(STATE_LEVEL_SELECT);
   }

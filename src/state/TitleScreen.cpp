@@ -35,10 +35,9 @@ TitleScreen::render(SDLW::Renderer& renderer) const
 }
 
 void
-TitleScreen::processEvent(SDL_Event* event, SceneManager& sm)
+TitleScreen::processEvent(const SDLW::Event& event, SceneManager& sm)
 {
-  // setNextState
-  if (event->key.keysym.sym == SDLK_SPACE) {
+  if (event.getKeycode() == SDLK_SPACE) {
     std::cout << "[Debug]: SPACE pressed while at TitleScreen" << std::endl;
     sm.setNextState(STATE_LEVEL_SELECT);
   }

@@ -7,12 +7,12 @@ DeathScreen::DeathScreen() {}
 DeathScreen::~DeathScreen() {}
 
 void
-DeathScreen::processEvent(SDL_Event* event, SceneManager& sm)
+DeathScreen::processEvent(const SDLW::Event& event, SceneManager& sm)
 {
-  if (event->type == SDL_KEYDOWN) {
-    if (event->key.keysym.sym == SDLK_SPACE) {
+  if (event.getType() == SDL_KEYDOWN) {
+    if (event.getKeycode() == SDLK_SPACE) {
       sm.setNextState(STATE_GAME_SCENE);
-    } else if (event->key.keysym.sym == SDLK_RETURN) {
+    } else if (event.getKeycode() == SDLK_RETURN) {
       sm.setNextState(STATE_LEVEL_SELECT);
     }
   }

@@ -41,10 +41,10 @@ LevelSelectionScene::render(SDLW::Renderer& renderer) const
 }
 
 void
-LevelSelectionScene::processEvent(SDL_Event* event, SceneManager& sm)
+LevelSelectionScene::processEvent(const SDLW::Event& event, SceneManager& sm)
 {
-  if (event->type == SDL_KEYDOWN) {
-    switch (event->key.keysym.sym) {
+  if (event.getType() == SDL_KEYDOWN) {
+    switch (event.getKeycode()) {
       case SDLK_SPACE:
         ui_level_carousel_.select(sm);
         break;

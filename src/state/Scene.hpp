@@ -40,7 +40,7 @@ public:
    * \~french @param sm référence sur le gestionnaire de scène, permettant de
    * demander un changement d'état
    */
-  virtual void processEvent(SDL_Event* event, SceneManager& sm) = 0;
+  virtual void processEvent(const SDLW::Event& event, SceneManager& sm) = 0;
   /**
    * \~french @brief Fonction purement virtuelle permettant la mise à jour de
    * l'état interne de la scène

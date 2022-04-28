@@ -40,14 +40,14 @@ Game::clear()
 void
 Game::processEvents()
 {
-  SDL_Event event;
-  while (SDL_PollEvent(&event)) {
-    switch (event.type) {
+  SDLW::Event event;
+  while ( SDLW::PollEvent(event) ) {
+    switch (event.getType()) {
       case SDL_QUIT:
         this->stop_();
         break;
       case SDL_KEYDOWN: {
-        if (event.key.keysym.sym == SDLK_d) {
+        if (event.getKeycode() == SDLK_d) {
           std::cout << "[Log] - Debug overlay activated" << std::endl;
           debug_flag_ = !debug_flag_;
         }
@@ -56,7 +56,7 @@ Game::processEvents()
       default:
         break;
     }
-    sm_.getCurrentScene().processEvent(&event, sm_);
+    sm_.getCurrentScene().processEvent(event, sm_);
   }
 }
 

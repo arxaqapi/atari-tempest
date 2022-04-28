@@ -28,25 +28,25 @@ GameScene::GameScene(u8 level)
 }
 
 void
-GameScene::processEvent(SDL_Event* event, SceneManager& sm)
+GameScene::processEvent(const SDLW::Event& event, SceneManager& sm)
 {
-  switch (event->type) {
+  switch (event.getType()) {
     case SDL_KEYDOWN:
-      if (event->key.keysym.sym == SDLK_LEFT)
+      if (event.getKeycode() == SDLK_LEFT)
         player_.setMovingDirection(LEFT);
-      else if (event->key.keysym.sym == SDLK_RIGHT)
+      else if (event.getKeycode() == SDLK_RIGHT)
         player_.setMovingDirection(RIGHT);
-      else if (event->key.keysym.sym == SDLK_SPACE)
+      else if (event.getKeycode() == SDLK_SPACE)
         player_.shoot();
-      else if (event->key.keysym.sym == SDLK_ESCAPE)
+      else if (event.getKeycode() == SDLK_ESCAPE)
         sm.setNextState(STATE_LEVEL_SELECT);
       break;
 
     case SDL_KEYUP:
-      if (event->key.keysym.sym == SDLK_LEFT ||
-          event->key.keysym.sym == SDLK_RIGHT)
+      if (event.getKeycode() == SDLK_LEFT ||
+          event.getKeycode() == SDLK_RIGHT)
         player_.setMovingDirection(NONE);
-      else if (event->key.keysym.sym == SDLK_SPACE)
+      else if (event.getKeycode() == SDLK_SPACE)
         player_.stopShooting();
       break;
 

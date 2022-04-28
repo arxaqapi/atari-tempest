@@ -362,6 +362,26 @@ Delay(u32 ms);
 u64
 GetPerformanceFrequency();
 
+class Event
+{
+  friend i32 PollEvent(SDLW::Event& e);
+
+private:
+  SDL_Event event_;
+
+public:
+  Event();
+  ~Event();
+
+  u32 getType() const;
+  SDL_Keycode getKeycode() const;
+};
+
+i32
+PollEvent(SDLW::Event& e);
+i32
+PollEvent();
+
 } // namespace SDLW
 
 #endif
