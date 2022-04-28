@@ -26,7 +26,7 @@ private:
   e_direction band_change_direction_ = RIGHT;
 
 public:
-  Flipper();
+  Flipper() { deactivate(); }
   Flipper(const Flipper& flipper) = default;
   ~Flipper() override = default;
 

@@ -19,7 +19,7 @@
 class Bullet : public GameObject
 {
 public:
-  Bullet();
+  Bullet() { deactivate(); }
   Bullet(const Bullet& bullet) = default;
   ~Bullet() override = default;
 

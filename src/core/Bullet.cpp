@@ -9,11 +9,6 @@
 
 #include "Bullet.hpp"
 
-Bullet::Bullet()
-{
-  deactivate();
-}
-
 void
 Bullet::update(f64 delta, const Map& map)
 {

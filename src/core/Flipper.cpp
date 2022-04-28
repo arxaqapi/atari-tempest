@@ -9,11 +9,6 @@
 
 #include "Flipper.hpp"
 
-Flipper::Flipper()
-{
-  deactivate();
-}
-
 void
 Flipper::render(SDLW::Renderer& renderer,
                 const Map& map,
