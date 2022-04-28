@@ -9,8 +9,7 @@ set(SOURCES
       src/main.cpp 
       src/utils/Timer.hpp
       src/utils/Errors.cpp
-      src/utils/Vector2D.cpp
-      src/core/Game.cpp
+        src/core/Game.cpp
       src/core/RenderHandler.cpp
       src/state/SceneManager.cpp
       src/state/TitleScreen.cpp

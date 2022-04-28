@@ -1,6 +1,11 @@
-//
-// Created by massimo on 16/04/2022.
-//
+/**
+ * @file Tanker.hpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-04-16
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #ifndef TEMPEST_ATARI_TANKER_HPP
 #define TEMPEST_ATARI_TANKER_HPP

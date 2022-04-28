@@ -1,6 +1,11 @@
-//
-// Created by massimo on 16/03/2022.
-//
+/**
+ * @file Data.hpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-03-16
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #ifndef TEMPEST_ATARI_DATA_HPP
 #define TEMPEST_ATARI_DATA_HPP

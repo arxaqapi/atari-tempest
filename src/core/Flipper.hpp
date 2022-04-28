@@ -1,6 +1,11 @@
-//
-// Created by massimo on 23/03/2022.
-//
+/**
+ * @file Flipper.hpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-03-23
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #ifndef TEMPEST_ATARI_FLIPPER_HPP
 #define TEMPEST_ATARI_FLIPPER_HPP

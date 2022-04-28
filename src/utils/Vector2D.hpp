@@ -13,6 +13,7 @@
 #define H_TEMPEST_GAME_INC_VECTOR_2D_
 
 #include "types.hpp"
+#include <cmath>
 #include <utility>
 
 class Vector2D
@@ -25,41 +26,87 @@ private:
 public:
   Vector2D() = default;
   Vector2D(const Vector2D& vector) = default;
-  Vector2D(f32 x, f32 y);
+  Vector2D(f32 x, f32 y)
+    : x_(x)
+    , y_(y){};
   ~Vector2D() = default;
 
-  void set(f32 x, f32 y);
-  f32 getX() const;
-  f32 getY() const;
-
-  f32 magnitude() const;
-  Vector2D vec_to(const Vector2D& point) const;
   /**
-   * @brief Computes the unit vector from the actual position
-   * to the position of the parameter point
-   *
-   * @param point the point to reach
-   * @return Vector2D The direction vector
+   * @brief Calcule la magnitude du vecteur
+   * @return Magnitude du vecteur
    */
-  Vector2D unit_vector_to(const Vector2D& point) const;
+  inline f32 magnitude() const { return sqrtf32(x_ * x_ + y_ * y_); };
 
-  Vector2D unit() const;
+  /**
+   * @brief Renvoie le vecteur depuis la position courante vers la position du
+   * point en paramètre
+   * @param point Le point à atteindre
+   * @return Le vecteur directeur
+   */
+  inline Vector2D vec_to(const Vector2D& point) const
+  {
+    return { point.x_ - x_, point.y_ - y_ };
+  };
 
+  /**
+   * @brief Renvoie le point médian pondéré depuis la position courante vers la
+   * position du point en paramètre
+   * @param point Le point à atteindre
+   * @param weight La pondération
+   * @return Le point médian pondéré
+   */
   inline Vector2D weightedMidPointTo(const Vector2D& point, f32 weight) const
   {
     return { (1 - weight) * x_ + weight * point.x_,
              (1 - weight) * y_ + weight * point.y_ };
   }
 
+  /**
+   * @brief Renvoie le vecteur unitaire du vecteur
+   * @return Le vecteur unitaire du vecteur
+   */
+  inline Vector2D unit() const
+  {
+    return { x_ / magnitude(), y_ / magnitude() };
+  };
+
+  /**
+   * @brief Retourne un vecteur orthogonal au vecteur
+   * @return Vecteur orthogonal au vecteur
+   */
   inline Vector2D orthogonalVector() const { return { y_, -x_ }; }
 
-  inline void setX(f32 x) { x_ = x; }
+  /**
+   * @brief Addition avec un vecteur composante par composante
+   * @param vector Vecteur avec lequel faire l'addition
+   * @return Vecteur résultant
+   */
+  inline Vector2D operator+(const Vector2D& vector) const
+  {
+    return { x_ + vector.x_, y_ + vector.y_ };
+  };
 
+  /**
+   * @brief Multiplication des composantes du vecteur par un scalaire
+   * @param lambda Scalaire avec lequel faire la multiplication
+   * @return Vecteur résultant
+   */
+  inline Vector2D operator*(f32 lambda) const
+  {
+    return { x_ * lambda, y_ * lambda };
+  };
+
+  /**
+   * Setters
+   */
+  inline void setX(f32 x) { x_ = x; }
   inline void setY(f32 y) { y_ = y; };
 
-  Vector2D operator+(const Vector2D& vector) const;
-
-  Vector2D operator*(f32 lambda) const;
+  /**
+   * Getters
+   */
+  inline f32 getX() const { return x_; };
+  inline f32 getY() const { return y_; };
 };
 
 #endif

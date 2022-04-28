@@ -5,8 +5,6 @@
  * @date 2022-03-15
  *
  * @copyright Copyright (c) 2022
- *
- * @brief
  */
 
 #ifndef TEMPEST_ATARI_BAND_HPP
