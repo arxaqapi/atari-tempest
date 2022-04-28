@@ -17,6 +17,7 @@
 #include "../core/GameObjectPool.hpp"
 #include "../core/Map.hpp"
 #include "../core/SpawnManager.hpp"
+#include "../ui/ColorHandler.hpp"
 #include "../utils/Vector2D.hpp"
 #include "Scene.hpp"
 #include <functional>
@@ -33,6 +34,7 @@ class SceneManager;
 class GameScene : public Scene
 {
 private:
+  ColorHandler color_handler_;
   Data level_data;
   /**
    * @brief Le numéro de la figure et le cycle courants définissent le niveau

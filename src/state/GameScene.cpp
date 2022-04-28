@@ -92,32 +92,6 @@ GameScene::update(f64 delta, SceneManager& sm)
 void
 GameScene::render(SDLW::Renderer& renderer) const
 {
-  // todo : ne pas stocker en dur ici
-  std::vector<std::tuple<int, int, int>> map_standard_colors = {
-    { 0, 0, 255 }, { 255, 0, 0 }, { 255, 255, 0 }, { 0, 255, 255 }, { 0, 0, 0 }
-  };
-  std::vector<std::tuple<int, int, int>> map_selected_colors = {
-    { 255, 255, 0 }, { 0, 255, 0 }, { 0, 0, 255 }, { 0, 0, 255 }, { 0, 0, 0 }
-  };
-  std::vector<std::tuple<int, int, int>> blaster_colors = { { 255, 255, 0 },
-                                                            { 0, 255, 0 },
-                                                            { 0, 0, 255 },
-                                                            { 0, 0, 255 },
-                                                            { 255, 255, 0 } };
-  std::vector<std::tuple<int, int, int>> flipper_colors = { { 255, 0, 0 },
-                                                            { 238, 130, 238 },
-                                                            { 0, 255, 0 },
-                                                            { 0, 255, 0 },
-                                                            { 255, 0, 0 } };
-  std::vector<std::tuple<int, int, int>> tanker_colors = { { 238, 130, 238 },
-                                                           { 127, 0, 255 },
-                                                           { 0, 255, 255 },
-                                                           { 238, 130, 238 },
-                                                           { 238, 130, 238 } };
-  std::vector<std::tuple<int, int, int>> spiker_colors = {
-    { 0, 255, 0 }, { 0, 255, 255 }, { 255, 0, 0 }, { 255, 0, 0 }, { 0, 255, 0 }
-  };
-
   // Select the color for drawing. It is set to black here.
   renderer.SetRenderDrawColor(0, 0, 0, 255);
 
@@ -126,29 +100,39 @@ GameScene::render(SDLW::Renderer& renderer) const
 
   // Render map
   map_.render(renderer,
-              map_standard_colors[current_cycle_],
-              map_selected_colors[current_cycle_]);
+              color_handler_.get_map_standard_colors(current_cycle_),
+              color_handler_.get_map_standard_colors(current_cycle_));
 
   // Render player
-  player_.render(renderer, map_, blaster_colors[current_cycle_]);
+  player_.render(
+    renderer, map_, color_handler_.get_blaster_colors(current_cycle_));
 
   // Render enemies
   spawn_manager_.render(renderer,
                         map_,
-                        flipper_colors[current_cycle_],
-                        tanker_colors[current_cycle_],
-                        spiker_colors[current_cycle_]);
+                        color_handler_.get_flipper_colors(current_cycle_),
+                        color_handler_.get_tanker_colors(current_cycle_),
+                        color_handler_.get_spiker_colors(current_cycle_));
 
   // Draw text
-  Pen::draw_string(std::to_string(player_.getScore()), 20, 46, renderer, 1.7);
+  Pen::draw_string(std::to_string(player_.getScore()),
+                   20,
+                   46,
+                   renderer,
+                   1.7,
+                   color_handler_.get_score_colors(current_cycle_));
   Pen::draw_string(std::to_string(getCurrentLevelNum()),
                    280,
                    32,
                    renderer,
-                   color{ 0x00, 0xFF, 0x00 });
+                   color_handler_.get_map_standard_colors(current_cycle_));
 
   // Render life points
-  renderer.SetRenderDrawColor(0xFF, 0, 0, SDL_ALPHA_OPAQUE);
+  auto health_color = color_handler_.get_blaster_colors(current_cycle_);
+  renderer.SetRenderDrawColor(std::get<0>(health_color),
+                              std::get<1>(health_color),
+                              std::get<2>(health_color),
+                              SDL_ALPHA_OPAQUE);
   u8 ymid = 80;
 
   for (u8 i = 0; i < player_.getHealth(); ++i) {
