@@ -85,7 +85,8 @@ SceneManager::set_next_state(State next_requested_state)
     case STATE_GAME_SCENE: {
       std::vector<State> valid_states{ STATE_TITLE_SCREEN,
                                        STATE_WIN_SCREEN,
-                                       STATE_DEATH_SCREEN };
+                                       STATE_DEATH_SCREEN,
+                                       STATE_LEVEL_SELECT };
       if (!contains(valid_states, next_requested_state)) {
         throw errors::non_valid_state_switch();
         return;

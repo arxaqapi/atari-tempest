@@ -24,7 +24,7 @@ GameScene::GameScene(u8 level)
 }
 
 void
-GameScene::processEvent(SDL_Event* event, SceneManager&)
+GameScene::processEvent(SDL_Event* event, SceneManager& sm)
 {
   switch (event->type) {
     case SDL_KEYDOWN:
@@ -34,6 +34,8 @@ GameScene::processEvent(SDL_Event* event, SceneManager&)
         player_.setMovingDirection(RIGHT);
       else if (event->key.keysym.sym == SDLK_SPACE)
         player_.shoot();
+      else if (event->key.keysym.sym == SDLK_ESCAPE)
+        sm.set_next_state(STATE_LEVEL_SELECT);
       break;
 
     case SDL_KEYUP:
@@ -210,9 +212,7 @@ void
 GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
                             u32 associated_score)
 {
-  auto f = [](GameObjectType& enemy) {
-    (void)enemy;
-  };
+  auto f = [](GameObjectType& enemy) { (void)enemy; };
   handleCollisions(enemies, associated_score, f);
 }
 

@@ -58,14 +58,6 @@ Game::process_events()
       default:
         break;
     }
-    switch (event.key.keysym.sym) {
-      case SDLK_ESCAPE:
-        this->stop_();
-        break;
-
-      default:
-        break;
-    }
     sm_.get_current_scene().processEvent(&event, sm_);
   }
 }
