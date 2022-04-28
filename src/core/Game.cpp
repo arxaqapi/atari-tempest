@@ -5,8 +5,6 @@
  * @date 2022-01-30
  *
  * @copyright Copyright (c) 2022
- *
- * @brief
  */
 
 #include "Game.hpp"

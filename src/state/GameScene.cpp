@@ -1,6 +1,11 @@
-//
-// Created by massimo on 16/03/2022.
-//
+/**
+ * @file GameScene.cpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-03-16
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include "GameScene.hpp"
 #include "../ui/Pen.hpp"

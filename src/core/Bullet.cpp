@@ -1,10 +1,13 @@
-//
-// Created by massimo on 24/03/2022.
-//
+/**
+ * @file Bullet.cpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-03-24
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include "Bullet.hpp"
-#include "../utils/Utils.hpp"
-#include <iostream>
 
 Bullet::Bullet()
 {

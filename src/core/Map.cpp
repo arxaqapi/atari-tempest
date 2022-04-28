@@ -5,9 +5,8 @@
  * @date 2022-03-15
  *
  * @copyright Copyright (c) 2022
- *
- * @brief
  */
+
 #include "Map.hpp"
 #include <numeric>
 

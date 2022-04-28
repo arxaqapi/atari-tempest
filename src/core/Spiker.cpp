@@ -1,3 +1,12 @@
+/**
+ * @file Spiker.cpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-04-16
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "Spiker.hpp"
 
 void

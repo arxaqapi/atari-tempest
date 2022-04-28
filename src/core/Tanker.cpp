@@ -1,6 +1,11 @@
-//
-// Created by massimo on 16/04/2022.
-//
+/**
+ * @file Tanker.cpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-04-16
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include "Tanker.hpp"
 

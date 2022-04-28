@@ -1,6 +1,11 @@
-//
-// Created by massimo on 23/03/2022.
-//
+/**
+ * @file GameObject.cpp
+ * @author massimo
+ * @version 0.1
+ * @date 2022-03-23
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include "GameObject.hpp"
 #include <iostream>
