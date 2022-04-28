@@ -55,7 +55,7 @@ public:
   inline const Vector2D& getUnitVector() const { return unit_vector_; }
   inline const Vector2D& getAxis() const { return axis_; }
   inline const Vector2D& getInterCenter() const { return inter_center_; };
-  const Vector2D& getExterCenter() const;
+  inline const Vector2D& getExterCenter() const { return exter_center_; };
 };
 
 #endif // TEMPEST_ATARI_BAND_HPP

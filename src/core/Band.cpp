@@ -39,9 +39,3 @@ Band::render(SDLW::Renderer& renderer, const color& render_color) const
   renderer.RenderDrawLineF(
     inter_a_.getX(), inter_a_.getY(), exter_a_.getX(), exter_a_.getY());
 }
-
-const Vector2D&
-Band::getExterCenter() const
-{
-  return exter_center_;
-}

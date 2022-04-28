@@ -130,9 +130,9 @@ public:
   /**
    * Getters
    */
-  std::vector<Flipper>& getFlippers();
-  std::vector<Tanker>& getTankers();
-  std::vector<Spiker>& getSpikers();
+  inline std::vector<Flipper>& getFlippers() { return flippers_.getPool(); };
+  inline std::vector<Tanker>& getTankers() { return tankers_.getPool(); };
+  inline std::vector<Spiker>& getSpikers() { return spikers_.getPool(); };
 };
 
 #endif // TEMPEST_ATARI_SPAWNMANAGER_HPP

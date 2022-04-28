@@ -9,7 +9,7 @@
  * @brief
  */
 #include "Map.hpp"
-#include "assert.h"
+#include <cassert>
 #include <numeric>
 
 Map::Map(const std::vector<Vector2D>& exterior,

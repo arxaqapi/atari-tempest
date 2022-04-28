@@ -46,12 +46,6 @@ SpawnManager::render(SDLW::Renderer& renderer,
   spikers_.render(renderer, map, spiker_color);
 }
 
-std::vector<Flipper>&
-SpawnManager::getFlippers()
-{
-  return flippers_.getPool();
-}
-
 void
 SpawnManager::clear()
 {
@@ -59,18 +53,6 @@ SpawnManager::clear()
   spikers_.clear();
   tankers_.clear();
   spawn_delay_.reset();
-}
-
-std::vector<Tanker>&
-SpawnManager::getTankers()
-{
-  return tankers_.getPool();
-}
-
-std::vector<Spiker>&
-SpawnManager::getSpikers()
-{
-  return spikers_.getPool();
 }
 
 std::vector<Flipper>::iterator

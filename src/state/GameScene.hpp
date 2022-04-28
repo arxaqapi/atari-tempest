@@ -79,10 +79,38 @@ public:
    */
   u8 getCurrentLevelNum() const;
 
+  /**
+   * @brief Gère la collision entre le joueur et les ennemis, ainsi qu'entre les
+   * balles du joueur et les ennemis. Attribue au joueur le score associé à la
+   * destruction d'un ennemi. Appelle la fonction de même nom sans instructions
+   * supplémentaire lors de la collision entre une balle et un ennemi.
+   * @tparam GameObjectType Type enfant de GameObject. Type des ennemis dont il
+   * faut gérer les collisions
+   * @param enemies Ennemis dont il faut gérer la collision
+   * @param associated_score Score à attribuer au joueur s'il a touché un ennemi
+   * avec une balle
+   */
   template<class GameObjectType>
   void handleCollisions(std::vector<GameObjectType>& enemies,
                         u32 associated_score);
 
+  /**
+   * @brief Gère la collision entre le joueur et les ennemis, ainsi qu'entre les
+   * balles du joueur et les ennemis. Attribue au joueur le score associé à la
+   * destruction d'un ennemi. Laisse la possibilité de fournir des instructions
+   * supplémentaires en cas de collision entre une balle et un ennemi.
+   * @tparam GameObjectType Type enfant de GameObject. Type des ennemis dont il
+   * faut gérer les collisions
+   * @tparam Func Type de la fonction utilisée pour fournir les instructions
+   * supplémentaires en cas de collision entre une balle et un ennemi. De la
+   * forme `void f(Bullet &b, GameObjectType &go)`
+   * @param enemies Ennemis dont il faut gérer la collision
+   * @param associated_score Score à attribuer au joueur s'il a touché un ennemi
+   * avec une balle
+   * @param on_bullet_collision Fonction de la forme `void f(Bullet &b,
+   * GameObjectType &go)`. Instructions à exécuter en cas de collision entre une
+   * balle et un ennemi
+   */
   template<class GameObjectType, typename Func>
   void handleCollisions(std::vector<GameObjectType>& enemies,
                         u32 associated_score,
@@ -111,41 +139,5 @@ public:
    */
   void render(SDLW::Renderer& renderer) const override;
 };
-
-template<class GameObjectType>
-void
-GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
-                            u32 associated_score)
-{
-  auto f = [](Bullet& bullet, GameObjectType& enemy) {return;};
-  handleCollisions(enemies, associated_score, f);
-}
-
-template<class GameObjectType, typename Func>
-void
-GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
-                            u32 associated_score,
-                            Func& on_bullet_collision)
-{
-  for (auto& enemy : enemies) {
-    if (!enemy.isActive())
-      continue;
-
-    if (enemy.isColliding(player_)) {
-      enemy.deactivate();
-      player_.hit();
-      spawn_manager_.clear();
-    }
-
-    for (auto& bullet : player_.getBullets()) {
-      if (bullet.isActive() && bullet.isColliding(enemy)) {
-        bullet.deactivate();
-        enemy.hit();
-        player_.addScore(associated_score);
-        on_bullet_collision(bullet, enemy);
-      }
-    }
-  }
-}
 
 #endif // TEMPEST_ATARI_GAMESCENE_HPP

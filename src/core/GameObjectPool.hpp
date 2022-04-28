@@ -20,7 +20,6 @@ template<typename GameObjectType>
 class GameObjectPool
 {
 private:
-  u8 pool_size_ = 0;
   std::vector<GameObjectType> pool_;
 
   /**
@@ -52,12 +51,12 @@ public:
     e_direction moving_direction);
 
   /**
-   * @brief Appelle la fonction `update` sur tous les objets de la pool.
+   * @brief Appelle la fonction `update` sur tous les objets de la pool
    */
   void update(f64 delta, const Map& map);
 
   /**
-   * @brief Appelle la fonction `render` sur tous les objets de la pool.
+   * @brief Appelle la fonction `render` sur tous les objets de la pool
    */
   void render(SDLW::Renderer& renderer,
               const Map& map,
@@ -71,13 +70,12 @@ public:
   /**
    * Getters
    */
-  std::vector<GameObjectType>& getPool();
+  inline std::vector<GameObjectType>& getPool() { return pool_; };
 };
 
 template<typename GameObjectType>
 GameObjectPool<GameObjectType>::GameObjectPool(u8 pool_size)
-  : pool_size_{ pool_size }
-  , pool_(pool_size)
+  : pool_(pool_size)
 {}
 
 template<typename GameObjectType>
@@ -125,13 +123,6 @@ GameObjectPool<GameObjectType>::render(SDLW::Renderer& renderer,
 {
   for (auto& go : pool_)
     go.render(renderer, map, render_color);
-}
-
-template<typename GameObjectType>
-std::vector<GameObjectType>&
-GameObjectPool<GameObjectType>::getPool()
-{
-  return pool_;
 }
 
 template<typename GameObjectType>

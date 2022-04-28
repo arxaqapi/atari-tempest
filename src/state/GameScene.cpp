@@ -204,3 +204,39 @@ GameScene::getLevelMaxScore(u8 cycle, u8 figure)
   return 1000 + (cycle + 1) * std::pow(figure + 1, 2) * 600 +
          cycle * Data::N_FIGURES_ * Data::N_FIGURES_ * 600;
 }
+
+template<class GameObjectType>
+void
+GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
+                            u32 associated_score)
+{
+  auto f = [](Bullet& bullet, GameObjectType& enemy) {return;};
+  handleCollisions(enemies, associated_score, f);
+}
+
+template<class GameObjectType, typename Func>
+void
+GameScene::handleCollisions(std::vector<GameObjectType>& enemies,
+                            u32 associated_score,
+                            Func& on_bullet_collision)
+{
+  for (auto& enemy : enemies) {
+    if (!enemy.isActive())
+      continue;
+
+    if (enemy.isColliding(player_)) {
+      enemy.deactivate();
+      player_.hit();
+      spawn_manager_.clear();
+    }
+
+    for (auto& bullet : player_.getBullets()) {
+      if (bullet.isActive() && bullet.isColliding(enemy)) {
+        bullet.deactivate();
+        enemy.hit();
+        player_.addScore(associated_score);
+        on_bullet_collision(bullet, enemy);
+      }
+    }
+  }
+}
