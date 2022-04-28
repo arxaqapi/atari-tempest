@@ -60,7 +60,6 @@ GameObject::activate(u8 band_num,
 bool
 GameObject::isColliding(const GameObject& go) const
 {
-  // todo: améliorer la gestion des collisions
   return band_num_ == go.band_num_ &&
          std::abs(go.front_progression_ - front_progression_) <
            30 * (front_velocity_ + go.front_velocity_);
