@@ -21,7 +21,7 @@ errors::non_valid_state_switch::what() const throw()
 const char*
 errors::file_not_opened::what() const throw()
 {
-  return "Unable to open levels data file";
+  return "Unable to open file";
 }
 
 const char*

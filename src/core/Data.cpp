@@ -15,10 +15,8 @@ Data::Data()
   std::ifstream file{ DATA_PATH_, std::ios::in };
   f32 buf;
 
-  if (!file.is_open()) {
-    std::cerr << "Error opening level data file" << std::endl;
-    exit(EXIT_FAILURE);
-  }
+  if (!file.is_open())
+    throw errors::file_not_opened();
 
   // Is continuous parsing
   for (u8 i = 0; i < N_FIGURES_; ++i) {
