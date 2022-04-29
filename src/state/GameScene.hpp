@@ -63,8 +63,8 @@ public:
    */
   inline bool gameOver() const
   {
-    return current_cycle_ == Data::N_CYCLES_ &&
-           current_figure_ == Data::N_FIGURES_ - 1;
+    return current_cycle_ >= Data::N_CYCLES_ - 1 &&
+           current_figure_ >= Data::N_FIGURES_ - 1;
   }
 
   /**
