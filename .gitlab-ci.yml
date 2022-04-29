@@ -18,6 +18,7 @@ build:
     - make
     - make zip
   artifacts:
-    - Kunze_Venuti_atari_tempest.zip
+    paths:
+      - Kunze_Venuti_atari_tempest.zip
 
     
