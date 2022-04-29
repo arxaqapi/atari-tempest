@@ -1,6 +1,6 @@
 /**
  * @file Utils.hpp
- * @author arxaqapi (https://github.com/arxaqapi)
+ * @author Tarek Kunze(https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-02-02
  *
@@ -12,17 +12,14 @@
 #ifndef H_TEMPEST_GAME_INC_UTILS_
 #define H_TEMPEST_GAME_INC_UTILS_
 
-#include <stdexcept>
+#include "types.hpp"
 
 namespace utils {
-struct not_implemented : public std::exception
+inline f32
+easeOutQuad(f32 x, f32 frac)
 {
-  const char* what() const throw();
-};
-struct not_tested : public std::exception
-{
-  const char* what() const throw();
-};
+  return 1 - frac * (1 - x) * (1 - x);
+}
 }
 
 #endif

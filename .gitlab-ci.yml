@@ -12,9 +12,13 @@ build:
       - ln -snf /usr/share/zoneinfo/Europe/Paris /etc/localtime
       - dpkg-reconfigure -f noninteractive tzdata
       - apt-get clean
-      - apt update -y && apt install -y build-essential gcc g++ make cmake libsdl2-dev
+      - apt update -y && apt install -y build-essential gcc g++ make cmake libsdl2-dev zip unzip
   script:
     - echo "Compiling the code..."
     - make
+    - make zip
+  artifacts:
+    paths:
+      - Kunze_Venuti_atari_tempest.zip
 
     

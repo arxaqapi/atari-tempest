@@ -1,82 +1,71 @@
 /**
  * @file GameObject.cpp
- * @author arxaqapi (https://github.com/arxaqapi)
+ * @author massimo
  * @version 0.1
- * @date 2022-01-30
+ * @date 2022-03-23
  *
  * @copyright Copyright (c) 2022
- *
- * @brief
  */
 
 #include "GameObject.hpp"
-#include "../utils/types.hpp"
-#include <cassert>
 #include <iostream>
 
-#include "TitleScreen.hpp"
-
-
-GameObject::GameObject()
-  : active_scene_{ new TitleScreen() }
-{}
-
-GameObject::~GameObject()
-{
-  std::cout << "GO destr" << std::endl;
-}
-
 void
-GameObject::init()
+GameObject::move(f64 delta, const Map& map)
 {
-  assert(SDL_Init(SDL_INIT_VIDEO) == 0 && SDL_GetError());
-  assert(SDL_WasInit(SDL_INIT_VIDEO) != 0 && SDL_GetError());
-
-  std::cout << "GO init" << std::endl;
-  run_ = true;
-}
-
-void
-GameObject::clear()
-{
-  r_.clear();
-}
-
-void
-GameObject::process_events()
-{
-  SDL_Event event;
-  while (SDL_PollEvent(&event)) {
-    switch (event.type) {
-      case SDL_QUIT:
-        this->stop_();
-        break;
-
-      default:
-        break;
-    }
-    switch (event.key.keysym.sym) {
-      case SDLK_ESCAPE:
-        this->stop_();
-        break;
-
-      default:
-        break;
-    }
+  switch (moving_direction_) {
+    case LEFT:
+      lateral_progression_ =
+        std::max(0.0, lateral_progression_ - delta * lateral_velocity_);
+      if (lateral_progression_ == 0 &&
+          map.getLeftBandNum(band_num_) != band_num_) {
+        band_num_ = map.getLeftBandNum(band_num_);
+        lateral_progression_ = 1;
+      }
+      break;
+    case RIGHT:
+      lateral_progression_ =
+        std::min(1.0, lateral_progression_ + delta * lateral_velocity_);
+      if (lateral_progression_ == 1 &&
+          map.getRightBandNum(band_num_) != band_num_) {
+        band_num_ = map.getRightBandNum(band_num_);
+        lateral_progression_ = 0;
+      }
+      break;
+    case FORWARD:
+      front_progression_ =
+        std::max(0.0, front_progression_ - delta * front_velocity_);
+      break;
+    case BACKWARD:
+      front_progression_ =
+        std::min(1.0, front_progression_ + delta * front_velocity_);
+      break;
+    default:
+      break;
   }
-  // const u8* keyboardState = SDL_GetKeyboardState(NULL);
-  // if (keyboardState[SDL_SCANCODE_SPACE]) {
 }
 
 void
-GameObject::update_state(f64 delta)
+GameObject::activate(u8 band_num,
+                     f32 front_progression,
+                     f32 lateral_progression,
+                     f32 front_velocity,
+                     f32 lateral_velocity,
+                     e_direction moving_direction)
 {
-  active_scene_->update(delta);
+  active_ = true;
+  band_num_ = band_num;
+  front_progression_ = front_progression;
+  lateral_progression_ = lateral_progression;
+  front_velocity_ = front_velocity;
+  lateral_velocity_ = lateral_velocity;
+  moving_direction_ = moving_direction;
 }
 
-void
-GameObject::render()
+bool
+GameObject::isColliding(const GameObject& go) const
 {
-  active_scene_->render(r_.get_renderer());
-  r_.draw();
+  return band_num_ == go.band_num_ &&
+         std::abs(go.front_progression_ - front_progression_) <
+           30 * (front_velocity_ + go.front_velocity_);
 }
