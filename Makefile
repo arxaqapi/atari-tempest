@@ -28,3 +28,6 @@ f format: .clang-format
 .clang-format:
 	@echo "Dumping mozilla config into .clang-format file"
 	@clang-format -style=mozilla -dump-config > .clang-format
+
+zip: clean main
+	zip -r Kunze_Venuti_atari_tempest.zip tempest data/
