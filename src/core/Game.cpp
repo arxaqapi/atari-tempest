@@ -1,6 +1,6 @@
 /**
  * @file Game.cpp
- * @author arxaqapi (https://github.com/arxaqapi)
+ * @author Tarek Kunze(https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-01-30
  *
@@ -50,6 +50,8 @@ Game::processEvents()
         if (event.getKeycode() == SDLK_d) {
           std::cout << "[Log] - Debug overlay activated" << std::endl;
           debug_flag_ = !debug_flag_;
+        } else if (event.getKeycode() == SDLK_q) {
+          this->stop_();
         }
         break;
       }

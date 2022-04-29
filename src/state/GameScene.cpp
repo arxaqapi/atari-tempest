@@ -1,6 +1,6 @@
 /**
  * @file GameScene.cpp
- * @author massimo
+ * @author massimo, Tarek Kunze
  * @version 0.1
  * @date 2022-03-16
  *
@@ -124,7 +124,9 @@ GameScene::render(SDLW::Renderer& renderer) const
                   280,
                   32,
                   renderer,
-                  (current_cycle_ < 4? color_handler_.getMapStandardColor(current_cycle_) : color {0, 0, 255} ) );
+                  (current_cycle_ < 4
+                     ? color_handler_.getMapStandardColor(current_cycle_)
+                     : color{ 0, 0, 255 }));
 
   // Render life points
   auto health_color = color_handler_.getBlasterColor(current_cycle_);

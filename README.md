@@ -35,4 +35,10 @@ Pour naviguer dans la sélection de niveau, il suffit d'utiliser les flèches di
 
 Les touches ainsi que leurs actions spécifiques à chaque scène sont précisés dans ceux-ci.
 
+En appuyant sur la touche `q`, il est possible de quitter complètement le jeu, depuis **n'importe quelle scène**. 
+
 Un menu de debug est disponible, afin de présenter diverses informations au joueur. Pour y accéder il suffit d'appuyer sur la touche `d` depuis n'importe quelle scène.
+
+## Auteurs
+- Massimo Venuti
+- Tarek Kunze

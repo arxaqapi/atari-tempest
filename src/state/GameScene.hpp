@@ -1,6 +1,6 @@
 /**
  * @file GameScene.hpp
- * @author massimo
+ * @author massimo, Tarek Kunze
  * @version 0.1
  * @date 2022-03-16
  *

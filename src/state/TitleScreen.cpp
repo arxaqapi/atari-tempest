@@ -1,6 +1,6 @@
 /**
  * @file TitleScreen.cpp
- * @author arxaqapi (https://github.com/arxaqapi)
+ * @author Tarek Kunze(https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-02-10
  *

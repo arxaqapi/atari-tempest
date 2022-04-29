@@ -1,3 +1,13 @@
+/**
+ * @file SceneManager.hpp
+ * @author Tarek Kunze (https://github.com/arxaqapi)
+ * @version 0.1
+ * @date 2022-04-29
+ *
+ * @copyright Copyright (c) 2022
+ *
+ * @brief
+ */
 #ifndef H_TEMPEST_GAME_INC_SCENEMANAGER_
 #define H_TEMPEST_GAME_INC_SCENEMANAGER_
 

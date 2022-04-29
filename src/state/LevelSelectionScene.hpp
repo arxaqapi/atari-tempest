@@ -1,3 +1,13 @@
+/**
+ * @file LevelSelectionScene.hpp
+ * @author Massimo, Tarek Kunze (https://github.com/arxaqapi)
+ * @version 0.1
+ * @date 2022-04-29
+ *
+ * @copyright Copyright (c) 2022
+ *
+ * @brief
+ */
 
 #ifndef H_TEMPEST_GAME_INC_SCENE_LEVEL_SELECT_
 #define H_TEMPEST_GAME_INC_SCENE_LEVEL_SELECT_

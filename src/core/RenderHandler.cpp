@@ -1,6 +1,6 @@
 /**
  * @file Renderer.cpp
- * @author arxaqapi (https://github.com/arxaqapi)
+ * @author Tarek Kunze(https://github.com/arxaqapi)
  * @version 0.1
  * @date 2022-01-30
  *
@@ -17,7 +17,7 @@ RenderHandler::RenderHandler(u16 w_width, u16 w_height)
   SDLW::Init(SDL_INIT_VIDEO);
 
   w_ = std::make_unique<SDLW::Window>(
-    "Atari Tempest - VENUTI Massimo, Kunze Tarek",
+    "Atari Tempest - Venuti Massimo, Kunze Tarek",
     SDL_WINDOWPOS_CENTERED,
     SDL_WINDOWPOS_CENTERED,
     w_width,

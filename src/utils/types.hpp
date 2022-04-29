@@ -1,6 +1,6 @@
 /**
  * @file types.hpp
- * @author arxaqapi (https://github.com/arxaqapi)
+ * @author Tarek Kunze(https://github.com/arxaqapi)
  * @brief
  * @version 0.1
  * @date 2022-01-27
