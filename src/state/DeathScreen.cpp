@@ -29,8 +29,10 @@ DeathScreen::render(SDLW::Renderer& renderer) const
   renderer.RenderClear();
 
   // Draw text
-  Pen::drawStringCenteredInX("Game Over ...", 200, renderer);
-  Pen::drawStringCenteredInX("[Space] to restart game", 400, renderer);
   Pen::drawStringCenteredInX(
-    "[Enter] to go back to level select", 500, renderer);
+    "Vous etes mort ...", 200, renderer, 2, color{ 255, 0, 0 });
+  Pen::drawStringCenteredInX(
+    "[Espace] pour relancer depuis le debut", 400, renderer);
+  Pen::drawStringCenteredInX("[Entrez] Pour revenir", 500, renderer);
+  Pen::drawStringCenteredInX("a la selection de niveau", 538, renderer);
 }

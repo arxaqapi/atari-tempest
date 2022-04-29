@@ -10,7 +10,6 @@ void
 WinScreen::processEvent(const SDLW::Event& event, SceneManager& sm)
 {
   if (event.getType() == SDL_KEYDOWN && event.getKeycode() == SDLK_SPACE) {
-    std::cout << "[Space] pressed" << std::endl;
     sm.setNextState(STATE_LEVEL_SELECT);
   }
 }
@@ -26,7 +25,8 @@ WinScreen::render(SDLW::Renderer& renderer) const
   renderer.RenderClear();
 
   // Draw text
-  Pen::drawStringCenteredInX("You won!", 200, renderer);
   Pen::drawStringCenteredInX(
-    "Press space to go back to Level selection screen", 400, renderer);
+    "Vous avez Gagne!", 200, renderer, 2, color{ 0, 255, 0 });
+  Pen::drawStringCenteredInX("[Espace] Pour revenir", 400, renderer);
+  Pen::drawStringCenteredInX("a la selection de niveau", 438, renderer);
 }
