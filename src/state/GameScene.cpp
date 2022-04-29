@@ -124,7 +124,7 @@ GameScene::render(SDLW::Renderer& renderer) const
                   280,
                   32,
                   renderer,
-                  color_handler_.getMapStandardColor(current_cycle_));
+                  (current_cycle_ < 4? color_handler_.getMapStandardColor(current_cycle_) : color {0, 0, 255} ) );
 
   // Render life points
   auto health_color = color_handler_.getBlasterColor(current_cycle_);
